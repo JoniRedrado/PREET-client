@@ -1,11 +1,24 @@
-import { NEXT_PAGE, PREV_PAGE, SPECIFIC_PAGE, SET_CURRENT_PAGE } from "./actions-types";
+import { NEXT_PAGE, PREV_PAGE, SPECIFIC_PAGE, SET_CURRENT_PAGE, GET_ALL_HOTELS, GET_HOTEL_BY_NAME } from "./actions-types";
 
 let initialState = {
-  currentPage: 1
+  allHotels: [],
+  filteredHotels: [],
+  currentPage: 1,
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+    case GET_ALL_HOTELS:
+      return {
+        ...state,
+        allHotels: action.payload,
+      };
+    case GET_HOTEL_BY_NAME:
+      return {
+        ...state,
+        allHotels: action.payload,
+        currentPage: 1,
+      };
     case NEXT_PAGE:
       return {
         ...state,

@@ -1,8 +1,7 @@
-import React from "react";
 // import { Link } from "react-router-dom";
 import template from "../../assets/file.jpg";
-
 import style from "./NavBar.module.css";
+import SearchBar from "../SearchBar/SearchBar";
 
 function NavBar() {
   return (
@@ -11,6 +10,7 @@ function NavBar() {
       {/* <Link> */}
       <button>Crear Hotel</button>
       {/* </Link> */}
+      <SearchBar/>
     </div>
   );
 }
