@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import './Card.style.css';
 
 const Card = (props) => {
+
   const { id, name, image, country, address_url, price, email } = props;
 
   return (
