@@ -1,0 +1,14 @@
+.search {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.search input {
+  border-radius: 5px;
+  border-color: transparent;
+}
+
+.search button {
+  cursor: pointer;
+}
