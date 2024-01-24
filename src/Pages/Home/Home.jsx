@@ -1,23 +1,23 @@
-// import "./Home.module.css"
-import { useDispatch, useSelector } from "react-redux";
-import Cards from "../../components/Cards/Cards";
-import { useEffect } from "react";
-import { getAllHotels } from "../../redux/actions";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getHotels } from '../../redux/actions';
+import Cards from '../../Components/Cards/Cards'; 
+
 function Home() {
-  
-  const dispatch = useDispatch()
-  const hotels = useSelector((state) => state.allHotels)
+  const dispatch = useDispatch();
+  const allHotels = useSelector((state) => state.allHotels);
 
   useEffect(() => {
-    dispatch(getAllHotels());
+    dispatch(getHotels());
   }, [dispatch]);
+
+  console.log('Información de hoteles:', allHotels);
 
   return (
     <div>
-      <h1>estamos en el home</h1>
-      <Cards allHotels={hotels} />
+      <Cards allHotels={allHotels} />
     </div>
-  )
+  );
 }
 
 export default Home;

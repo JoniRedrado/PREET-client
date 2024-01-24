@@ -1,5 +1,6 @@
-import { NEXT_PAGE, PREV_PAGE, SPECIFIC_PAGE, SET_CURRENT_PAGE, GET_ALL_HOTELS, GET_HOTEL_BY_NAME } from "./actions-types";
 import axios from "axios";
+
+import { NEXT_PAGE, PREV_PAGE, SPECIFIC_PAGE, SET_CURRENT_PAGE, GET_ALL_HOTELS, GET_HOTEL_BY_NAME, GET_DETAIL } from "./actions-types";
 export const getAllHotels = () => {
   return async (dispatch) => {
     try {
@@ -28,6 +29,24 @@ export const getHotelByName = (name) => {
     }
   };
 };
+export const getDetail = (id) => {
+    
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/hotels/${id}`
+      );
+
+      return dispatch ({
+        type: GET_DETAIL,
+        payload: response.data
+      })
+      }
+      catch(error) {
+        window.alert("Error fetching hotels details");
+      }
+  }
+}
 export function setCurrentPage() {
   return {
     type: SET_CURRENT_PAGE,
@@ -60,3 +79,4 @@ export const specificPage = (page) => {
     });
   };
 };
+

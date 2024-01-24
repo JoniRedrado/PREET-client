@@ -1,9 +1,10 @@
-import { NEXT_PAGE, PREV_PAGE, SPECIFIC_PAGE, SET_CURRENT_PAGE, GET_ALL_HOTELS, GET_HOTEL_BY_NAME } from "./actions-types";
+import { NEXT_PAGE, PREV_PAGE, SPECIFIC_PAGE, SET_CURRENT_PAGE, GET_ALL_HOTELS, GET_HOTEL_BY_NAME, GET_DETAIL } from "./actions-types";
 
 let initialState = {
   allHotels: [],
   filteredHotels: [],
   currentPage: 1,
+  hotelDetail: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -13,6 +14,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         allHotels: action.payload,
       };
+      
     case GET_HOTEL_BY_NAME:
       return {
         ...state,
@@ -39,6 +41,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         currentPage: action.payload,
       };
+      case GET_DETAIL:
+        return {
+          ...state,
+          hotelDetail: action.payload
+        }
     default:
       return state;
   }
