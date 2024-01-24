@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styles from "./createForm.module.css";
+import validation from "../../helpers/validation";
 
 const CreateForm = () => {
     const [hotelData, setHotelData] = useState({
@@ -16,18 +17,18 @@ const CreateForm = () => {
     const [errors, setErrors] = useState({});
     const [countries, setCountries] = useState([]);
 
-    // useEffect(() => {
-    //     const fetchCountries = async () => {
-    //         try {
-    //             const response = await axios.get("url");
-    //             setCountries(response.data);
-    //         } catch (error) {
-    //             console.error("Error fetching countries:", error);
-    //         }
-    //     };
+    useEffect(() => {
+        const fetchCountries = async () => {
+            try {
+                const response = await axios.get("http://localhost:3001/countries");
+                setCountries(response.data);
+            } catch (error) {
+                console.error("Error fetching countries:", error);
+            }
+        };
 
-    //     fetchCountries();
-    // }, []);
+        fetchCountries();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
