@@ -20,7 +20,8 @@ let initialState = {
   currentPage: 1,
   hotelDetail: {},
   countries: [],
-  newHotel: {}
+  newHotel: {},
+  searched: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -77,41 +78,47 @@ function rootReducer(state = initialState, action) {
           (hotel) => hotel.countryId == action.payload
         );
       }
-      console.log (countryFilter)
+
       return {
         ...state,
         filteredHotels: countryFilter,
         currentPage: 1,
+        searched: true,
       };
 
     case SORT_BY_PRICE:
-      let priceOrder = state.filteredHotels;
-     /*  console.log(priceOrder); */
-      priceOrder.sort((a, b) => {
-        if (a.price < b.price) {
-          return action.payload === ASCENDING ? -1 : 1;
-        }
-        if (a.price > b.price) {
-          return action.payload === DESCENDING ? 1 : -1;
-        }
-        return 0;
-      });
-      
+      let priceOrder = [];
+      if (action.payload === "moreRelevant") {
+        priceOrder = [...state.allHotels];
+      } else if (action.payload === "lowest") {
+        priceOrder = [...state.allHotels].sort(
+          (hotelA, hotelB) => hotelA.price - hotelB.price
+        );
+      } else if (action.payload === "highest") {
+        priceOrder = [...state.allHotels].sort(
+          (hotelA, hotelB) => hotelB.price - hotelA.price
+        );
+      }
+
+      console.log(priceOrder);
+
       return {
         ...state,
         filteredHotels: priceOrder,
         currentPage: 1,
+        searched: true,
       };
-      // case POST_HOTEL:
-      //   return{ 
-      //       ...state,
-      //       newHotel: action.payload         
-      //   }
-      //   case GET_COUNTRIES:
-      //     return{
-      //         ...state,
-      //         countries: action.payload
-      //     }
+
+    // case POST_HOTEL:
+    //   return{
+    //       ...state,
+    //       newHotel: action.payload
+    //   }
+    //   case GET_COUNTRIES:
+    //     return{
+    //         ...state,
+    //         countries: action.payload
+    //     }
 
     default:
       return state;
