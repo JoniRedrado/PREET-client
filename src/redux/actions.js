@@ -102,21 +102,21 @@ export const deleteHotel = (id) => {
 };
 
 export function filterByCountry(country) {
-  try {
-    return async function (dispatch) {
+  return async function (dispatch) {
+    try {
       dispatch({ type: FILTER_BY_COUNTRY, payload: country });
-    };
-  } catch (error) {
-    console.log(error.message);
-  }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 }
 
 export function sortByPrice(order) {
-  try {
-    return async function (dispatch) {
+  return async function (dispatch) {
+    try {
       dispatch({ type: SORT_BY_PRICE, payload: order });
-    };
-  } catch (error) {
-    console.log(error.message);
-  }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 }

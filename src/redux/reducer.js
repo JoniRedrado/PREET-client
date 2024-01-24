@@ -66,11 +66,13 @@ function rootReducer(state = initialState, action) {
 
     case FILTER_BY_COUNTRY:
       let countryFilter = [];
-      action.payload === "allCountries"
-        ? (countryFilter = [...state.allHotels])
-        : (countryFilter = [...state.allHotels].filter((hotel) =>
-            hotel.address.split("-").pop().includes(action.payload)
-          ));
+      if (action.payload === "allCountries") {
+        countryFilter = state.allHotels;
+      } else {
+        countryFilter = state.allHotels.filter(
+          (hotel) => hotel.countryId == action.payload
+        );
+      }
       return {
         ...state,
         filteredHotels: countryFilter,
@@ -78,7 +80,7 @@ function rootReducer(state = initialState, action) {
       };
 
     case SORT_BY_PRICE:
-      let priceOrder = [...state.filteredHotels];
+      let priceOrder = state.filteredHotels;
       priceOrder.sort((a, b) => {
         if (a.price < b.price) {
           return action.payload === ASCENDING ? -1 : 1;
