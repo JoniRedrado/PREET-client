@@ -1,7 +1,11 @@
-export default function Card() {
+/* eslint-disable react/prop-types */
+export default function Card({ hotel }) {
+  
+  const { name } = hotel;
+
   return (
     <div>
-      <p>This is a Card</p>
+      <p>{name}</p>
     </div>
   )
 }
