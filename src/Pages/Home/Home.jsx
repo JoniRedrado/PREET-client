@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getHotels } from '../../redux/actions';
+import { getAllHotels } from '../../redux/actions';
 import Cards from '../../Components/Cards/Cards'; 
 
 function Home() {
@@ -8,7 +8,7 @@ function Home() {
   const allHotels = useSelector((state) => state.allHotels);
 
   useEffect(() => {
-    dispatch(getHotels());
+    dispatch(getAllHotels());
   }, [dispatch]);
 
   console.log('Información de hoteles:', allHotels);
