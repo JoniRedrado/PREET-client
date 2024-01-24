@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  color: ivory;
+}
+
+.countFilter {
+  display: flex;
+  padding-right: 12px;
+}
+
+.countFilter select {
+  align-self: center;
+  padding: 5px;
+  margin-left: 5px;
+  color: white;
+  background-color: #b0a8bf;
+  border-color: transparent;
+  border-radius: 5px;
+}
+
+.priceSort {
+  display: flex;
+  padding-left: 12px;
+}
+
+.priceSort select {
+  align-self: center;
+  padding: 5px;
+  margin-left: 5px;
+  color: white;
+  background-color: #b0a8bf;
+  border-color: transparent;
+  border-radius: 5px;
+}

@@ -1,4 +1,16 @@
-import { NEXT_PAGE, PREV_PAGE, SPECIFIC_PAGE, SET_CURRENT_PAGE, GET_ALL_HOTELS, GET_HOTEL_BY_NAME, GET_DETAIL, DELETE_HOTEL } from "./actions-types";
+import {
+  NEXT_PAGE,
+  PREV_PAGE,
+  SPECIFIC_PAGE,
+  SET_CURRENT_PAGE,
+  GET_ALL_HOTELS,
+  GET_HOTEL_BY_NAME,
+  GET_DETAIL,
+  DELETE_HOTEL,
+  FILTER_BY_COUNTRY,
+  SORT_BY_PRICE,
+} from "./actions-types";
+import { ASCENDING, DESCENDING } from "./sortConsts/sortConsts";
 
 let initialState = {
   allHotels: [],
@@ -14,7 +26,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         allHotels: action.payload,
       };
-      
+
     case GET_HOTEL_BY_NAME:
       return {
         ...state,
@@ -41,16 +53,47 @@ function rootReducer(state = initialState, action) {
         ...state,
         currentPage: action.payload,
       };
-      case GET_DETAIL:
-        return {
-          ...state,
-          hotelDetail: action.payload
+    case GET_DETAIL:
+      return {
+        ...state,
+        hotelDetail: action.payload,
+      };
+    case DELETE_HOTEL:
+      return {
+        ...state,
+        allHotels: action.payload,
+      };
+
+    case FILTER_BY_COUNTRY:
+      let countryFilter = [];
+      action.payload === "allCountries"
+        ? (countryFilter = [...state.allHotels])
+        : (countryFilter = [...state.allHotels].filter((hotel) =>
+            hotel.address.split("-").pop().includes(action.payload)
+          ));
+      return {
+        ...state,
+        filteredHotels: countryFilter,
+        currentPage: 1,
+      };
+
+    case SORT_BY_PRICE:
+      let priceOrder = [...state.filteredHotels];
+      priceOrder.sort((a, b) => {
+        if (a.price < b.price) {
+          return action.payload === ASCENDING ? -1 : 1;
         }
-      case DELETE_HOTEL:
-        return{
-          ...state,
-          allHotels: action.payload
+        if (a.price > b.price) {
+          return action.payload === DESCENDING ? 1 : -1;
         }
+        return 0;
+      });
+      return {
+        ...state,
+        filteredHotels: priceOrder,
+        currentPage: 1,
+      };
+
     default:
       return state;
   }
