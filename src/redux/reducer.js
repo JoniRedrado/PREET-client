@@ -9,6 +9,8 @@ import {
   DELETE_HOTEL,
   FILTER_BY_COUNTRY,
   SORT_BY_PRICE,
+  // POST_HOTEL,
+  // GET_COUNTRIES
 } from "./actions-types";
 import { ASCENDING, DESCENDING } from "./sortConsts/sortConsts";
 
@@ -17,6 +19,8 @@ let initialState = {
   filteredHotels: [],
   currentPage: 1,
   hotelDetail: {},
+  countries: [],
+  newHotel: {}
 };
 
 function rootReducer(state = initialState, action) {
@@ -98,6 +102,16 @@ function rootReducer(state = initialState, action) {
         filteredHotels: priceOrder,
         currentPage: 1,
       };
+      // case POST_HOTEL:
+      //   return{ 
+      //       ...state,
+      //       newHotel: action.payload         
+      //   }
+      //   case GET_COUNTRIES:
+      //     return{
+      //         ...state,
+      //         countries: action.payload
+      //     }
 
     default:
       return state;

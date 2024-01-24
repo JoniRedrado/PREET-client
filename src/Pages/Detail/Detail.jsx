@@ -48,6 +48,11 @@ const Detail = () =>{
           <button> Return home</button>
         </Link>
       </div>
+      <div>
+        <Link to="/update">
+          <button>Update</button>
+        </Link>
+      </div>
     </div>
   )
 

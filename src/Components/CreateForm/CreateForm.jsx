@@ -11,7 +11,7 @@ const CreateForm = () => {
         price: "",
         email: "",
         image: "",
-        country: "",
+        countryId: "",
     });
 
     const [errors, setErrors] = useState({});
@@ -21,7 +21,9 @@ const CreateForm = () => {
         const fetchCountries = async () => {
             try {
                 const response = await axios.get("http://localhost:3001/countries");
+                console.log(response.data);
                 setCountries(response.data);
+                setHotelData({...hotelData, countryId: response.data[0]})
             } catch (error) {
                 console.error("Error fetching countries:", error);
             }
@@ -50,7 +52,8 @@ const CreateForm = () => {
 
         if (Object.keys(validationErrors).length === 0) {
             try {
-                const response = await axios.post("url", hotelData);
+                console.log(hotelData);
+                const response = await axios.post("http://localhost:3001/hotels", hotelData);
 
                 if (response.data.name) {
                     window.alert("¡Hotel successfully posted!");
@@ -61,7 +64,7 @@ const CreateForm = () => {
                         price: "",
                         email: "",
                         image: "",
-                        country: "",
+                        countryId: "",
                     });
                 } else {
                     console.error("Error Posting Hotel:", response.data.message);
@@ -78,7 +81,7 @@ const CreateForm = () => {
         <div className={styles.formContainer}>
             <form onSubmit={handleSubmit}>
                 <h2>Post Your Hotel</h2>
-                {["name", "address", "address_url", "price", "email"].map((field) => (
+                {["name", "address", "address_url", "price", "email", "image"].map((field) => (
                     <div key={field} className={styles.fieldContainer}>
                         <label>
                             <input
@@ -102,12 +105,9 @@ const CreateForm = () => {
                             value={hotelData.country}
                             onChange={handleChange}
                         >
-                            <option value="" disabled>
-                                Select a Country
-                            </option>
                             {countries.map((country) => (
-                                <option key={country.id} value={country.name}>
-                                    {country.name}
+                                <option key={country} value={country}>
+                                    {country}
                                 </option>
                             ))}
                         </select>

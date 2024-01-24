@@ -11,6 +11,8 @@ import {
   DELETE_HOTEL,
   FILTER_BY_COUNTRY,
   SORT_BY_PRICE,
+  // POST_HOTEL,
+  // GET_COUNTRIES
 } from "./actions-types";
 
 export const getAllHotels = () => {
@@ -120,3 +122,31 @@ export function sortByPrice(order) {
     }
   };
 }
+
+// export const postHotel = (payload) => async dispatch => {
+//   try {
+//       const response = await axios.post('http://localhost:3001/hotels', payload);
+      
+//       dispatch({
+//           type: POST_HOTEL,
+//           payload: response.data
+//       });
+//   } catch (error) {
+//       window.alert("Error adding new hotel", error.message)
+//   }
+// };
+
+// export function getCountries() {
+//   return async function (dispatch) {
+//       try {
+//           const response = await axios.get(`http://localhost:3001/countries`);
+          
+//           dispatch({
+//               type: GET_COUNTRIES,
+//               payload: response.data
+//           });
+//       } catch (error) {
+//           console.error("Error fetching countries:", error);
+//       }
+//   };
+// }

@@ -12,7 +12,7 @@ function NavBar() {
       <SearchBar/>
       <Filters/>
       <Link to="/create">
-      <button>Crear Hotel</button>
+      <button>Create Hotel</button>
       </Link>
     </div>
   );
