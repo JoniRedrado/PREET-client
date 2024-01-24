@@ -1,13 +1,21 @@
 .container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #022840;
+  height: 80px;
+  padding: 0 20px 0 20px;
+  margin: -10px
 }
 
 .container img {
-    border-radius: 33px;
+  width: 100px;
+  height: 80px;
 }
-
 .container button {
   align-self: center;
-  padding: 5mm;
+  padding: 5px;
+  background-color: #B0A8BF;
+  border-color: transparent;
+  border-radius: 5px;
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getHotelByName } from "../../redux/actions";
 import { useDispatch } from "react-redux";
+import s from "../SearchBar/SearchBar.module.css"
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const SearchBar = () => {
 
   return (
     <div>
-      <div>
+      <div className={s.search}>
         <input
           type="text"
           placeholder="Ingresa un nombre"
