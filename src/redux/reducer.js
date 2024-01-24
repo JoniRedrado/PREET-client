@@ -1,4 +1,4 @@
-import { NEXT_PAGE, PREV_PAGE, SPECIFIC_PAGE, SET_CURRENT_PAGE, GET_ALL_HOTELS, GET_HOTEL_BY_NAME, GET_DETAIL } from "./actions-types";
+import { NEXT_PAGE, PREV_PAGE, SPECIFIC_PAGE, SET_CURRENT_PAGE, GET_ALL_HOTELS, GET_HOTEL_BY_NAME, GET_DETAIL, DELETE_HOTEL } from "./actions-types";
 
 let initialState = {
   allHotels: [],
@@ -45,6 +45,11 @@ function rootReducer(state = initialState, action) {
         return {
           ...state,
           hotelDetail: action.payload
+        }
+      case DELETE_HOTEL:
+        return{
+          ...state,
+          allHotels: action.payload
         }
     default:
       return state;

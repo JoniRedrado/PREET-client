@@ -1,15 +1,23 @@
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch , useSelector } from "react-redux";
-import { getDetail } from "../../redux/actions";
+import { getDetail, deleteHotel } from "../../redux/actions";
 import "./detail.styles.css"
 
 const Detail = () =>{
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {id} = useParams();
+
+  const handleDelete = (id) => {
+    dispatch(deleteHotel(id))
+    window.alert('The card has been successfully deleted');
+    navigate('/');
+    window.location.reload();
+  }
 
   useEffect(() =>{
     if(id){
@@ -21,6 +29,9 @@ const Detail = () =>{
 
   return(
     <div className="container">
+      
+        <button onClick={() => handleDelete(id)}>Delete</button>
+      
       {hotel ? (
         <div>
       <h1>{hotel.name}</h1>

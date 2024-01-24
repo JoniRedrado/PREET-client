@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { NEXT_PAGE, PREV_PAGE, SPECIFIC_PAGE, SET_CURRENT_PAGE, GET_ALL_HOTELS, GET_HOTEL_BY_NAME, GET_DETAIL } from "./actions-types";
+import { NEXT_PAGE, PREV_PAGE, SPECIFIC_PAGE, SET_CURRENT_PAGE, GET_ALL_HOTELS, GET_HOTEL_BY_NAME, GET_DETAIL, DELETE_HOTEL } from "./actions-types";
 export const getAllHotels = () => {
   return async (dispatch) => {
     try {
@@ -36,7 +36,6 @@ export const getDetail = (id) => {
       const response = await axios.get(
         `http://localhost:3001/hotels/${id}`
       );
-
       return dispatch ({
         type: GET_DETAIL,
         payload: response.data
@@ -79,4 +78,22 @@ export const specificPage = (page) => {
     });
   };
 };
+
+export const deleteHotel = (id) =>{
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/hotels/${id}`
+      );
+      return dispatch ({
+        type: DELETE_HOTEL,
+        payload: response.data
+      })
+      }
+      catch(error) {
+        window.alert("Error");
+      }
+  }
+}
+
 
