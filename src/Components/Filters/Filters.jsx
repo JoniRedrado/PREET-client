@@ -40,7 +40,7 @@ function Filters() {
           defaultValue="all"
           onChange={handleCountryFilter}
         >
-          <option value="allCountries">All Countries</option>
+          <option value="all">All Countries</option>
           <option value="1">Argentina</option>
           <option value="2">Bolivia</option>
           <option value="3">Brazil</option>
