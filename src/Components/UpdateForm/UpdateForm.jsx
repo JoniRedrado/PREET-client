@@ -32,7 +32,7 @@ const UpdateForm = ({ initialData, onSubmit, countries }) => {
 
         if (Object.keys(validationErrors).length === 0) {
             try {
-                const response = await axios.put(`url/${hotelData.id}`, hotelData);
+                const response = await axios.put(`http://localhost:3001/hotels/${hotelData.id}`, hotelData);
                 console.log("Hotel actualizado:", response.data);
                 onSubmit(hotelData);
             } catch (error) {
@@ -53,7 +53,7 @@ const UpdateForm = ({ initialData, onSubmit, countries }) => {
                                 type="text"
                                 name={field}
                                 placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-                                value={hotelData[field] || ""}  {/* Cambio aquí */}
+                                value={hotelData[field] || ""} 
                                 onChange={handleChange}
                                 className={`${styles.input} ${errors[field] && styles.error}`}
                             />
@@ -67,7 +67,7 @@ const UpdateForm = ({ initialData, onSubmit, countries }) => {
                         <select
                             className={styles.countrySelect}
                             name="country"
-                            value={hotelData.country || ""}  {/* Cambio aquí */}
+                            value={hotelData.country || ""} 
                             onChange={handleChange}
                         >
                             <option value="" disabled>
