@@ -5,7 +5,7 @@ import {
   filterByCountry,
   sortByPrice,
 } from "../../redux/actions";
-import { ASCENDING, DESCENDING } from "../../redux/sortConsts/sortConsts";
+// import { ASCENDING, DESCENDING } from "../../redux/sortConsts/sortConsts";
 
 import style from "./Filters.module.css";
 
@@ -22,13 +22,7 @@ function Filters() {
 
   const handleSortPrices = (e) => {
     const selection = e.target.value;
-    if (selection === "all") {
-      dispatch(getAllHotels());
-    } else if (selection === "lowest") {
-      dispatch(sortByPrice(ASCENDING));
-    } else {
-      dispatch(sortByPrice(DESCENDING));
-    }
+    dispatch(sortByPrice(selection));
   };
 
   return (
@@ -60,11 +54,7 @@ function Filters() {
 
       <div className={style.priceSort}>
         <p>Order by </p>
-        <select
-          name="selectPrice"
-          defaultValue="All"
-          onChange={handleSortPrices}
-        >
+        <select name="selectPrice" onChange={handleSortPrices}>
           <option value="moreRelevant">More relevant</option>
           <option value="lowest">Price (lowest first)</option>
           <option value="highest">Price (highest first)</option>

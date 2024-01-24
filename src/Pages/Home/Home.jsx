@@ -7,6 +7,7 @@ function Home() {
   const dispatch = useDispatch();
   const allHotels = useSelector((state) => state.allHotels);
   const filteredHotels = useSelector((state) => state.filteredHotels);
+  const searched = useSelector((state) => state.searched);
 
   useEffect(() => {
     dispatch(getAllHotels());
@@ -16,7 +17,7 @@ function Home() {
 
   return (
     <div>
-      <Cards allHotels={allHotels} />
+      <Cards allHotels={searched ? filteredHotels : allHotels} />
     </div>
   );
 }
