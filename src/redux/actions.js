@@ -1,6 +1,18 @@
 import axios from "axios";
 
-import { NEXT_PAGE, PREV_PAGE, SPECIFIC_PAGE, SET_CURRENT_PAGE, GET_ALL_HOTELS, GET_HOTEL_BY_NAME, GET_DETAIL, DELETE_HOTEL } from "./actions-types";
+import {
+  NEXT_PAGE,
+  PREV_PAGE,
+  SPECIFIC_PAGE,
+  SET_CURRENT_PAGE,
+  GET_ALL_HOTELS,
+  GET_HOTEL_BY_NAME,
+  GET_DETAIL,
+  DELETE_HOTEL,
+  FILTER_BY_COUNTRY,
+  SORT_BY_PRICE,
+} from "./actions-types";
+
 export const getAllHotels = () => {
   return async (dispatch) => {
     try {
@@ -30,22 +42,18 @@ export const getHotelByName = (name) => {
   };
 };
 export const getDetail = (id) => {
-    
   return async function (dispatch) {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/hotels/${id}`
-      );
-      return dispatch ({
+      const response = await axios.get(`http://localhost:3001/hotels/${id}`);
+      return dispatch({
         type: GET_DETAIL,
-        payload: response.data
-      })
-      }
-      catch(error) {
-        window.alert("Error fetching hotels details");
-      }
-  }
-}
+        payload: response.data,
+      });
+    } catch (error) {
+      window.alert("Error fetching hotels details");
+    }
+  };
+};
 export function setCurrentPage() {
   return {
     type: SET_CURRENT_PAGE,
@@ -79,21 +87,36 @@ export const specificPage = (page) => {
   };
 };
 
-export const deleteHotel = (id) =>{
+export const deleteHotel = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(
-        `http://localhost:3001/hotels/${id}`
-      );
-      return dispatch ({
+      const response = await axios.delete(`http://localhost:3001/hotels/${id}`);
+      return dispatch({
         type: DELETE_HOTEL,
-        payload: response.data
-      })
-      }
-      catch(error) {
-        window.alert("Error");
-      }
+        payload: response.data,
+      });
+    } catch (error) {
+      window.alert("Error");
+    }
+  };
+};
+
+export function filterByCountry(country) {
+  try {
+    return async function (dispatch) {
+      dispatch({ type: FILTER_BY_COUNTRY, payload: country });
+    };
+  } catch (error) {
+    console.log(error.message);
   }
 }
 
-
+export function sortByPrice(order) {
+  try {
+    return async function (dispatch) {
+      dispatch({ type: SORT_BY_PRICE, payload: order });
+    };
+  } catch (error) {
+    console.log(error.message);
+  }
+}

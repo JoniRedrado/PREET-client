@@ -34,13 +34,13 @@ const SearchBar = () => {
       <div className={s.search}>
         <input
           type="text"
-          placeholder="Ingresa un nombre"
+          placeholder="Enter a name"
           onChange={handleInputChange}
           onKeyPress={handleKeyPress}
           value={name}
         />
         <button type="submit" onClick={handleSubmit}>
-          Buscar
+          Search
         </button>
       </div>
     </div>
