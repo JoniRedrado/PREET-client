@@ -1,0 +1,34 @@
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-link {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .card-image {
+    overflow: hidden;
+    border-radius: 8px;
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  }
+  
+  .card-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-details h1{
+    margin-bottom: 8px;
+  }

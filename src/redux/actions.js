@@ -1,13 +1,41 @@
+import axios from "axios";
+
 import {
-  COUNTER,
+  GET_HOTELS,
+  GET_DETAIL,
 } from "./actions-types";
 
-export const contador = () => {
-  return function (dispatch, getStage) {
-    const { counter } = getStage()
-    dispatch({
-      type: COUNTER,
-      payload: counter + 1,
-    })
+export const getHotels = () => {
+  return async function(dispacth){
+      try {
+          const response = await axios(`http://localhost:3001/hotels`)
+
+          return dispacth({
+              type: GET_HOTELS,
+              payload:response.data
+          })
+      } catch (error) {
+          window.alert("Error getting hotels")
+      }
   }
-};
+      
+}
+
+export const getDetail = (id) => {
+    
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/hotels/${id}`
+      );
+
+      return dispatch ({
+        type: GET_DETAIL,
+        payload: response.data
+      })
+      }
+      catch(error) {
+        window.alert("Error fetching hotels details");
+      }
+  }
+}
