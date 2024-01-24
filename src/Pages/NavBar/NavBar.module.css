@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.container img {
+    border-radius: 33px;
+}
+
+.container button {
+  align-self: center;
+  padding: 5mm;
+}
