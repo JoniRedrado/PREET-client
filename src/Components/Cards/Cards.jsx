@@ -15,20 +15,22 @@ const Cards = ({ allHotels }) => {
     const hotelList = allHotels
 
   return (
-    <div className="cards-container">
-      {hotelList.map((hotel) => {
-        return <Card 
-          key={hotel.id}
-          id={hotel.id}
-          name={hotel.name} 
-          address={hotel.address}
-          country={hotel.country.name} 
-          address_url={hotel.address_url} 
-          price={hotel.price} 
-          email={hotel.email} 
-          image={hotel.image} 
-        />;
-}).slice(firstIndex, lastIndex)}
+    <div className="main-container">
+      <div className="cards-container">
+        {hotelList.map((hotel) => {
+          return <Card 
+            key={hotel.id}
+            id={hotel.id}
+            name={hotel.name} 
+            address={hotel.address}
+            country={hotel.country.name} 
+            address_url={hotel.address_url} 
+            price={hotel.price} 
+            email={hotel.email} 
+            image={hotel.image} 
+          />;
+        }).slice(firstIndex, lastIndex)}
+      </div>
       <Pagination hotelsPerPage={hotelsPerPage} hotels={hotelList} />
     </div>
   );
