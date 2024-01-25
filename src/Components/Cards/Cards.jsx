@@ -1,16 +1,16 @@
 import Card from "../Card/Card";
-import Pagination from "../../components/Pagination/Pagination";
-import { useSelector } from "react-redux";
+import Pagination from "../Pagination/Pagination";
+// import { useSelector } from "react-redux";
 import './Cards.style.css'
 
 // eslint-disable-next-line react/prop-types
 const Cards = ({ allHotels }) => {  
-    const hotelsPerPage = 8
+    // const hotelsPerPage = 8
 
-    const currentPage = useSelector((state) => state.currentPage)
+    // const currentPage = useSelector((state) => state.currentPage)
   
-    const lastIndex = currentPage * hotelsPerPage
-    const firstIndex = lastIndex - hotelsPerPage
+    // const lastIndex = currentPage * hotelsPerPage
+    // const firstIndex = lastIndex - hotelsPerPage
 
     const hotelList = allHotels
 
@@ -28,8 +28,12 @@ const Cards = ({ allHotels }) => {
           email={hotel.email} 
           image={hotel.image} 
         />;
-}).slice(firstIndex, lastIndex)}
-      <Pagination hotelsPerPage={hotelsPerPage} hotels={hotelList} />
+})
+// .slice(firstIndex, lastIndex)
+}
+      {/* <Pagination hotelsPerPage={hotelsPerPage} hotels={hotelList} /> */}
+      <Pagination/>
+
     </div>
   );
 };

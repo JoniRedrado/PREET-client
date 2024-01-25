@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllHotels } from "../../redux/actions";
 import Cards from "../../Components/Cards/Cards";
+// import Pagination from "../../Components/Pagination/Pagination";
 
 function Home() {
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-ul {
+/* ul {
   z-index: 1;
 }
 
@@ -72,4 +72,49 @@ span {
 
 
 
+ */
 
+ /* .pagination-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pagination-container ul li {
+  margin-bottom: 5px; 
+}
+
+.pagination-container button {
+  margin: 0 10px;
+} */
+
+
+.pagination-container {
+  position: fixed;
+  bottom: 20px; /* Puedes ajustar la distancia desde el borde inferior según tu preferencia */
+  left: 0;
+  right: 0;
+  text-align: center; /* Para centrar horizontalmente los elementos */
+}
+
+.pagination-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pagination-container ul li {
+  margin-bottom: 5px; /* Espacio entre elementos de la lista */
+}
+
+.pagination-container button {
+  margin: 0 10px; /* Espacio entre botones y elementos de la lista */
+}
