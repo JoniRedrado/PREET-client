@@ -5,14 +5,8 @@ import './Cards.style.css'
 
 // eslint-disable-next-line react/prop-types
 const Cards = ({ allHotels }) => {  
-    // const hotelsPerPage = 8
-
-    // const currentPage = useSelector((state) => state.currentPage)
-  
-    // const lastIndex = currentPage * hotelsPerPage
-    // const firstIndex = lastIndex - hotelsPerPage
-
-    const hotelList = allHotels
+    
+  const hotelList = allHotels
 
   return (
     <div className="cards-container">
@@ -29,12 +23,9 @@ const Cards = ({ allHotels }) => {
           image={hotel.image} 
         />;
 })
-// .slice(firstIndex, lastIndex)
 }
-      {/* <Pagination hotelsPerPage={hotelsPerPage} hotels={hotelList} /> */}
-      <Pagination/>
-
-    </div>
+      <Pagination allHotels={allHotels} />
+   </div>
   );
 };
 

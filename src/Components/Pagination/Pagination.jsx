@@ -81,45 +81,21 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { axItems } from "../../redux/actions";
-import { SET_CURRENT_PAGE } from "../../redux/actions-types";
+import { SET_CURRENT_PAGE, SET_ITEMS } from "../../redux/actions-types";
 //!PRUEBA
 // import { useState } from "react";
 
 
 
-const Pagination = () =>{
-  //!PRUEBA
-  // const [items, setItems] = useState([]);
-  //   const [currentPage, setCurrentPage] = useState(1);
-  //   const [totalPages, setTotalPages] = useState(1);
-
-  //   useEffect(() => {
-  //       // Simulando la obtención de datos del servidor
-  //       const simulatedItems = Array.from({ length: 10 }, (_, index) => ({
-  //           id: index + 1,
-  //           name: `Item ${index + 1}`
-  //       }));
-
-  //       setItems(simulatedItems);
-  //       setTotalPages(10); // Simulando 2 páginas de resultados
-    // }, [currentPage]);
-
-    // const handlePrevClick = () => {
-    //     if (currentPage > 1) {
-    //         setCurrentPage(currentPage - 1);
-    //     }
-    // };
-
-    // const handleNextClick = () => {
-    //     if (currentPage < totalPages) {
-    //         setCurrentPage(currentPage + 1);
-    //     }
-    // };
+const Pagination = ({ allHotels }) =>{
   //*CODIGO DE VERDAD 
   const dispatch = useDispatch();
-  const items = useSelector(state => state.items);
   const currentPage = useSelector(state => state.currentPage);
   const totalPages = useSelector(state => state.totalPages);
+
+  useEffect(() => {
+    dispatch({ type: SET_ITEMS, payload: allHotels });
+  }, [allHotels, dispatch]);
 
   useEffect(() => {
     dispatch(axItems(currentPage, 8))
@@ -137,14 +113,14 @@ const Pagination = () =>{
     }
   }
 
-  if(!Array.isArray(items) || items.length === 0) {
+  if(!Array.isArray(allHotels) || allHotels.length === 0) {
     return <div> Not elements </div>
   }
 
   return(
     <div className="pagination-container">
       <ul>
-        {items.map(item =>(
+        {allHotels.map(item =>(
           <li key={item.id}>{item.name}</li>
         ))}
       </ul>
