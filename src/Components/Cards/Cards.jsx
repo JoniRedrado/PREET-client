@@ -3,7 +3,6 @@ import Card from "../Card/Card";
 import './Cards.style.css'
 
 const Cards = ({ allHotels }) => {  
-    console.log(allHotels)
     const hotelList = allHotels
 
   return (

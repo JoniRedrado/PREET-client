@@ -10,12 +10,13 @@ import {
   DELETE_HOTEL,
   FILTER_BY_COUNTRY,
   SORT_BY_PRICE,
- FETCH_ITEMS_SUCCESS
+ FETCH_ITEMS_SUCCESS,
+ FILTER_HOTELS
 } from "./actions-types";
 
 let initialState = {
   allHotels: [],
-  filteredHotels: [],
+  filteredHotels: {},
   currentPage: 1,
   hotelDetail: {},
   countries: [],
@@ -120,13 +121,16 @@ function rootReducer(state = initialState, action) {
     //         countries: action.payload
     //     }
     case FETCH_ITEMS_SUCCESS:
-      console.log("reducer", action.payload);
       return {
         ...state,
         filteredHotels: action.payload,
         totalHotels: action.payload.total,
       };
-      
+    case FILTER_HOTELS:
+      return {
+        ...state,
+        filteredHotels:action.payload
+      }
     default:
       return state;
   }

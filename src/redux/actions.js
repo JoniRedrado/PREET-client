@@ -13,8 +13,11 @@ import {
   SORT_BY_PRICE,
   // POST_HOTEL,
   // GET_COUNTRIES,
-  FETCH_ITEMS_SUCCESS
+  FETCH_ITEMS_SUCCESS,
+  FILTER_HOTELS,
+  
 } from "./actions-types";
+import { useDispatch } from "react-redux";
 
 export const getAllHotels = () => {
   return async (dispatch) => {
@@ -156,13 +159,44 @@ export const pagination = (page) => {
   return async function (dispatch){
     try {
       const response = await axios.get(`http://localhost:3001/hotels?page=${page}`);
-      console.log("actions", response);
       return dispatch({ 
         type: FETCH_ITEMS_SUCCESS, 
         payload: response.data 
       });
     } catch (error) {
       console.error('Error fetching data:', error);
+    }
+  }
+}
+
+
+// const handleChange = (e) => {
+//   const { name, value } = e.target;
+//   setFilters((prevFilters) => ({
+//     ...prevFilters,
+//     [name]: value,
+//   }));
+// };
+
+// const handleSubmit = (e) => {
+//   e.preventDefault();
+//   dispatch(fetchHotels(filters));
+// };
+
+
+
+export const filterHotels = (params) =>{
+  return async (dispatch) =>{
+    console.log(params);
+    try {
+      const response = await axios.get(`http://localhost:3001/hotels`, {params})
+      dispatch({
+        type:FILTER_HOTELS,
+        payload:response.data
+      })
+      console.log('Respuesta del backend:', response.data);
+    } catch (error) {
+      console.error('Error al filtrar hoteles:', error);
     }
   }
 }
