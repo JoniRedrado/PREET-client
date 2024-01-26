@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import {
   NEXT_PAGE,
   PREV_PAGE,
@@ -9,10 +10,8 @@ import {
   DELETE_HOTEL,
   FILTER_BY_COUNTRY,
   SORT_BY_PRICE,
-  // POST_HOTEL,
-  // GET_COUNTRIES
+ FETCH_ITEMS_SUCCESS
 } from "./actions-types";
-import { ASCENDING, DESCENDING } from "./sortConsts/sortConsts";
 
 let initialState = {
   allHotels: [],
@@ -22,6 +21,7 @@ let initialState = {
   countries: [],
   newHotel: {},
   searched: false,
+  totalHotels: ""
 };
 
 function rootReducer(state = initialState, action) {
@@ -119,7 +119,14 @@ function rootReducer(state = initialState, action) {
     //         ...state,
     //         countries: action.payload
     //     }
-
+    case FETCH_ITEMS_SUCCESS:
+      console.log("reducer", action.payload);
+      return {
+        ...state,
+        filteredHotels: action.payload,
+        totalHotels: action.payload.total,
+      };
+      
     default:
       return state;
   }
