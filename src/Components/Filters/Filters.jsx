@@ -80,32 +80,35 @@
 
 import { useDispatch } from "react-redux"
 import { filterHotels } from "../../redux/actions"
-import { useState } from "react";
 import s from "../Filters/Filters.module.css"
 
 
 
 const Filters = () => {
   
-  const [filters, setFilters] = useState({});
   const dispatch = useDispatch();
 
+  let filtros = {}
+
   const handleFilters = (e) =>{
+    console.log(e);
+    const newFilter = e.target.name
     const selection = e.target.value;
-    setFilters({...filters, selection})
-    dispatch(filterHotels(filters))
-  }
-  
+    filtros[newFilter] = selection
+    
+    dispatch(filterHotels(filtros))
+  } 
+
   return (
     <div className={s.container}>
       <div>
         <p>Countries</p>
         <select
-          name="selectCountry"
-          defaultValue="all"
+          name="country"
+          defaultValue=""
           onChange={handleFilters}
         >
-          <option value="all">All Countries</option>
+          <option value="">All Countries</option>
           <option value="1">Argentina</option>
           <option value="2">Bolivia</option>
           <option value="3">Brazil</option>
@@ -130,6 +133,43 @@ const Filters = () => {
             <option value="highest">Price (highest first)</option>
           </select>
         </div>
+      <div>
+        <p>Stars</p>
+        <select name="stars" onChange={handleFilters}>
+          <option value="">Cualquiera</option>
+          <option value="1">⭐</option>
+          <option value="2">⭐⭐</option>
+          <option value="3">⭐⭐⭐</option>
+          <option value="4">⭐⭐⭐⭐</option>
+          <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
+      </div>
+      <div>
+        <div>
+            <label >Price range</label>
+            <input
+              type="number"
+              id="minPrice"
+              name="minPrice"
+              placeholder="min"
+              step="10"
+              min="0"
+              max="10000"
+              onChange={handleFilters}
+            />
+            <label >Price range</label>
+            <input
+              type="number"
+              id="maxPrice"
+              name="maxPrice"
+              placeholder="max"
+              step="10"
+              min="0"
+              max="10000"
+              onChange={handleFilters}
+            />
+        </div>
+      </div>
     </div>
   );
 }

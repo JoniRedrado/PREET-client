@@ -187,7 +187,7 @@ export const pagination = (page) => {
 
 export const filterHotels = (params) =>{
   return async (dispatch) =>{
-    
+    console.log(params);
     try {
       const response = await axios.get(`http://localhost:3001/hotels`, {params})
       dispatch({
