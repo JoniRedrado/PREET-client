@@ -13,7 +13,9 @@ import {
   SORT_BY_PRICE,
   // POST_HOTEL,
   // GET_COUNTRIES,
-  FETCH_ITEMS_SUCCESS
+  FETCH_ITEMS_SUCCESS,
+  FILTER_HOTELS,
+  
 } from "./actions-types";
 
 export const getAllHotels = () => {
@@ -156,13 +158,28 @@ export const pagination = (page) => {
   return async function (dispatch){
     try {
       const response = await axios.get(`http://localhost:3001/hotels?page=${page}`);
-      console.log("actions", response);
       return dispatch({ 
         type: FETCH_ITEMS_SUCCESS, 
         payload: response.data 
       });
     } catch (error) {
       console.error('Error fetching data:', error);
+    }
+  }
+}
+
+export const filterHotels = (country) =>{
+  return async (dispatch) =>{
+    
+    try {
+      const response = await axios.post(`http://localhost:3001/hotels`, {country})
+      dispatch({
+        type:FILTER_HOTELS,
+        payload:response.data
+      })
+      console.log('Respuesta del backend:', response.data);
+    } catch (error) {
+      console.error('Error al filtrar hoteles:', error);
     }
   }
 }
