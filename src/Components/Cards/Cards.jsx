@@ -1,15 +1,12 @@
+/* eslint-disable react/prop-types */
 import Card from "../Card/Card";
-// import Pagination from "../Pagination/Pagination";
-// import { useSelector } from "react-redux";
 import './Cards.style.css'
 
-// eslint-disable-next-line react/prop-types
 const Cards = ({ allHotels }) => {  
     console.log(allHotels)
     const hotelList = allHotels
-    // console.log("esta es la vista de cards" ,  hotelList);
-  return (
 
+  return (
     <div className="cards-container">
       {hotelList.Hotel?.map((hotel) => {
         return <Card 

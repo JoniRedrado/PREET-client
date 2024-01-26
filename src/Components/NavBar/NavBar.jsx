@@ -8,11 +8,13 @@ import style from "./NavBar.module.css";
 function NavBar() {
   return (
     <div className={style.container}>
-      <img src={template} width="18%" />
+      <Link to="/">
+        <img src={template} width="18%" />
+      </Link>
       <SearchBar/>
       <Filters/>
       <Link to="/create">
-      <button>Create Hotel</button>
+        <button>Create Hotel</button>
       </Link>
     </div>
   );

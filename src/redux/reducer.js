@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import {
   NEXT_PAGE,
   PREV_PAGE,
@@ -11,7 +12,6 @@ import {
   SORT_BY_PRICE,
  FETCH_ITEMS_SUCCESS
 } from "./actions-types";
-import { ASCENDING, DESCENDING } from "./sortConsts/sortConsts";
 
 let initialState = {
   allHotels: [],
@@ -125,8 +125,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         filteredHotels: action.payload,
         totalHotels: action.payload.total,
-        // currentPage: action.payload,
-        
       };
       
     default:

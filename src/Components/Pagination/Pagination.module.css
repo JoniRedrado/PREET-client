@@ -1,120 +1,19 @@
-/* ul {
-  z-index: 1;
-}
-
-span {
-  background-color: transparent !important;
-}
-.pagination {
-  display: flex;
-  justify-content: space-around;
-  width: 50%;
-}
-
-.pagination a {
-  color: white;
-  float: left;
-  padding: 8px 10px;
-  text-decoration: none;
-  background-color: #4e4e4e;
-  border-radius: 5px;
-  width: 20px;
-}
-
-.pagination a:hover {
-  color: white;
-  float: left;
-  padding: 8px 10px;
-  text-decoration: none;
-  background-color: rgb(167,16,16);
-  border-radius: 5px;
-  width: 20px;
-}
-
-.pagination a.activePage {
-  color: white;
-  float: left;
-  padding: 8px 10px;
-  text-decoration: none;
-  background-color: rgb(167,16,16);
-  border-radius: 5px;
-  width: 20px;
-}
-
-.pagination li {
-  list-style: none;
-  display: inline-block;
-  margin-left: 2px;
-  margin-right: 2px;
-  text-decoration: none;
-  width: 40px;
-}
-
-.paginationPages {
-  display: flex;
-  align-items: center;
-}
-
-.pagination button {
-  border: none;
-  width: 10px;
-  background-color: transparent;
-}
-
-.leftArrow {
-  width: 30px;
-  transform:scale(-1)
-}
-.rightArrow {
-  width: 30px;
-  margin-left: -22px;
-}
-
-
-
- */
-
- /* .pagination-container {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.pagination-container ul {
-  list-style: none;
-  padding: 0;
-}
-
-.pagination-container ul li {
-  margin-bottom: 5px; 
-}
-
-.pagination-container button {
-  margin: 0 10px;
-} */
-
-
-.pagination-container {
-  position: fixed;
+.paginationContainer {
   bottom: 20px; /* Puedes ajustar la distancia desde el borde inferior según tu preferencia */
   left: 0;
   right: 0;
   text-align: center; /* Para centrar horizontalmente los elementos */
 }
 
-.pagination-container ul {
+.paginationContainer ul {
   list-style: none;
   padding: 0;
 }
 
-.pagination-container ul li {
+.paginationContainer ul li {
   margin-bottom: 5px; /* Espacio entre elementos de la lista */
 }
 
-.pagination-container button {
+.paginationContainer button {
   margin: 0 10px; /* Espacio entre botones y elementos de la lista */
 }

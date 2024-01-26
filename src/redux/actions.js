@@ -155,7 +155,7 @@ export function sortByPrice(order) {
 export const pagination = (page) => {
   return async function (dispatch){
     try {
-      const response = await axios.get(`http://localhost:3001/pagination?page=${page}`);
+      const response = await axios.get(`http://localhost:3001/hotels?page=${page}`);
       console.log("actions", response);
       return dispatch({ 
         type: FETCH_ITEMS_SUCCESS, 
