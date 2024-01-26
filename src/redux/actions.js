@@ -13,8 +13,7 @@ import {
   SORT_BY_PRICE,
   // POST_HOTEL,
   // GET_COUNTRIES,
-  SET_ITEMS,
-  SET_TOTAL_PAGES,
+  FETCH_ITEMS_SUCCESS
 } from "./actions-types";
 
 export const getAllHotels = () => {
@@ -153,25 +152,17 @@ export function sortByPrice(order) {
 //   };
 // }
 
-export const axItems = (page, limit) => {
-  return async dispatch =>{
+export const pagination = () => {
+  return async function (dispatch){
     try {
-      const response = await axios.get(`/items?page=${page}&limit=${limit}`);
-      const { items, totalPages } = response.data;
-      dispatch(setItems(items));
-      dispatch(setTotalPages(totalPages));
+      const response = await axios.get(`/pagination`);
+      console.log("actions", response);
+      return dispatch({ 
+        type: FETCH_ITEMS_SUCCESS, 
+        payload: response.data 
+      });
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   }
 }
-
-const setItems = items => ({
-  type: SET_ITEMS,
-  payload:items
-})
-
-const setTotalPages = totalPages => ({
-  type: SET_TOTAL_PAGES,
-  payload:totalPages
-})

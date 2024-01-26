@@ -9,10 +9,7 @@ import {
   DELETE_HOTEL,
   FILTER_BY_COUNTRY,
   SORT_BY_PRICE,
-  SET_ITEMS,
-  SET_TOTAL_PAGES,
-  // POST_HOTEL,
-  // GET_COUNTRIES
+ FETCH_ITEMS_SUCCESS
 } from "./actions-types";
 import { ASCENDING, DESCENDING } from "./sortConsts/sortConsts";
 
@@ -24,7 +21,6 @@ let initialState = {
   countries: [],
   newHotel: {},
   searched: false,
-  items:[],
   totalPages:1
 };
 
@@ -123,16 +119,16 @@ function rootReducer(state = initialState, action) {
     //         ...state,
     //         countries: action.payload
     //     }
-      case SET_ITEMS:
-        return{
-          ...state,
-          items: action.payload
-        }
-      case SET_TOTAL_PAGES:
-        return{
-          ...state,
-          totalPages: action.payload
-        }
+    case FETCH_ITEMS_SUCCESS:
+      console.log("reducer", action.payload);
+      return {
+        ...state,
+        filteredHotels: action.payload,
+        // currentPage: action.payload,
+        // totalPages: action.payload,
+        
+      };
+      
     default:
       return state;
   }

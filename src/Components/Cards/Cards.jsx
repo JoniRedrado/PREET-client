@@ -1,13 +1,13 @@
 import Card from "../Card/Card";
-import Pagination from "../Pagination/Pagination";
+// import Pagination from "../Pagination/Pagination";
 // import { useSelector } from "react-redux";
 import './Cards.style.css'
 
 // eslint-disable-next-line react/prop-types
 const Cards = ({ allHotels }) => {  
-    
-  const hotelList = allHotels
-
+    console.log(allHotels)
+    const hotelList = allHotels
+    // console.log("esta es la vista de cards" ,  hotelList);
   return (
     <div className="cards-container">
       {hotelList.map((hotel) => {
@@ -22,11 +22,11 @@ const Cards = ({ allHotels }) => {
           email={hotel.email} 
           image={hotel.image} 
         />;
-})
+      })
 }
-      <Pagination allHotels={allHotels} />
-   </div>
+    </div>
   );
+  
 };
 
 export default Cards;

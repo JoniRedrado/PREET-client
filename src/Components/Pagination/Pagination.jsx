@@ -78,57 +78,42 @@
 
 // export default Pagination;
 
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { axItems } from "../../redux/actions";
-import { SET_CURRENT_PAGE, SET_ITEMS } from "../../redux/actions-types";
-//!PRUEBA
-// import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { pagination } from '../../redux/actions';
+import { useEffect } from 'react';
 
-
-
-const Pagination = ({ allHotels }) =>{
-  //*CODIGO DE VERDAD 
+const Pagination = () => {
   const dispatch = useDispatch();
-  const currentPage = useSelector(state => state.currentPage);
-  const totalPages = useSelector(state => state.totalPages);
-
-  useEffect(() => {
-    dispatch({ type: SET_ITEMS, payload: allHotels });
-  }, [allHotels, dispatch]);
-
-  useEffect(() => {
-    dispatch(axItems(currentPage, 8))
-  }, [currentPage, dispatch]);
+  const currentPage = useSelector((state) => state.currentPage);
+  const totalPages = useSelector((state) => state.totalPages);
 
   const handlePrevClick = () => {
-    if(currentPage > 1) {
-      dispatch({ type: SET_CURRENT_PAGE, payload: currentPage +1})
+    if (currentPage > 1) {
+      dispatch(pagination(currentPage - 1));
     }
-  }
+  };
 
   const handleNextClick = () => {
-    if(currentPage < totalPages){
-      dispatch({ type : SET_CURRENT_PAGE, payload: currentPage + 1})
+    if (currentPage < totalPages) {
+      dispatch(pagination(currentPage + 1));
     }
-  }
+  };
 
-  if(!Array.isArray(allHotels) || allHotels.length === 0) {
-    return <div> Not elements </div>
-  }
+//   useEffect(() => {
+//     dispatch(pagination(currentPage, 9)); 
+// }, [currentPage, dispatch]);
 
-  return(
-    <div className="pagination-container">
-      <ul>
-        {allHotels.map(item =>(
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
-      <button onClick={handlePrevClick} disabled={currentPage === 1}>Prev</button>
-      <span>Page {currentPage}/{totalPages}</span>
-      <button onClick={handleNextClick} disabled={currentPage === totalPages}>Next</button>
+  return (
+    <div>
+      <button onClick={handlePrevClick} disabled={currentPage === 1}>
+        Prev
+      </button>
+      <span>Page {currentPage} of {totalPages}</span>
+      <button onClick={handleNextClick} disabled={currentPage === totalPages}>
+        Next
+      </button>
     </div>
-  )
-}
+  );
+};
 
 export default Pagination;
