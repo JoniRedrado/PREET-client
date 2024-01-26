@@ -4,8 +4,8 @@ import './Card.style.css';
 
 const Card = (props) => {
 
-  const { id, name, image, country, address_url, price, email } = props;
-  // console.log("este es log de cards", props)
+  const { id, name, image, country, price, stars } = props;
+  console.log("este es log de cards", props)
   return (
     <div className="card">
       <Link to={`/${id}`} className="card-link">
@@ -15,8 +15,10 @@ const Card = (props) => {
         <div className="card-details">
             <h1>{name ? name : "N/A"}</h1>
             <h1>{country ? country : "N/A"}</h1>
-            <h1>{address_url ? address_url : "N/A"}</h1>
-             <h1>{price ? price : "N/A"}$</h1>
+            {/* <h1>{address_url ? address_url : "N/A"}</h1> */}
+            <h1>{price ? price : "N/A"}$</h1>
+            <h1>{stars ? stars : "N/A"}⭐</h1>
+
         </div>
       </Link>
     </div>
