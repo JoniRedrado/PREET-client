@@ -21,7 +21,7 @@ let initialState = {
   countries: [],
   newHotel: {},
   searched: false,
-  totalPages:1
+  totalHotels: ""
 };
 
 function rootReducer(state = initialState, action) {
@@ -124,8 +124,8 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         filteredHotels: action.payload,
+        totalHotels: action.payload.total,
         // currentPage: action.payload,
-        // totalPages: action.payload,
         
       };
       

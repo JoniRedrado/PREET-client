@@ -79,24 +79,22 @@
 // export default Pagination;
 
 import { useDispatch, useSelector } from 'react-redux';
-import { pagination } from '../../redux/actions';
+import { nextPage, pagination, prevPage } from '../../redux/actions';
 import { useEffect } from 'react';
 
 const Pagination = () => {
   const dispatch = useDispatch();
   const currentPage = useSelector((state) => state.currentPage);
-  const totalPages = useSelector((state) => state.totalPages);
+  const totalHotels = useSelector((state) => state.totalHotels);
 
   const handlePrevClick = () => {
-    if (currentPage > 1) {
-      dispatch(pagination(currentPage - 1));
-    }
+      dispatch(prevPage());
+      dispatch(pagination(currentPage));
   };
 
   const handleNextClick = () => {
-    if (currentPage < totalPages) {
-      dispatch(pagination(currentPage + 1));
-    }
+      dispatch(nextPage());
+      dispatch(pagination(currentPage));
   };
 
 //   useEffect(() => {
@@ -108,8 +106,8 @@ const Pagination = () => {
       <button onClick={handlePrevClick} disabled={currentPage === 1}>
         Prev
       </button>
-      <span>Page {currentPage} of {totalPages}</span>
-      <button onClick={handleNextClick} disabled={currentPage === totalPages}>
+      <span>Page {currentPage} of {Math.round(totalHotels / 2)}</span>
+      <button onClick={handleNextClick} disabled={currentPage === totalHotels}>
         Next
       </button>
     </div>

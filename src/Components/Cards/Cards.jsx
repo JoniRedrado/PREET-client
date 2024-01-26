@@ -10,13 +10,13 @@ const Cards = ({ allHotels }) => {
     // console.log("esta es la vista de cards" ,  hotelList);
   return (
     <div className="cards-container">
-      {hotelList.map((hotel) => {
+      {hotelList.Hotel?.map((hotel) => {
         return <Card 
           key={hotel.id}
           id={hotel.id}
           name={hotel.name} 
           address={hotel.address}
-          country={hotel.country.name} 
+          country={hotel.countryId} 
           address_url={hotel.address_url} 
           price={hotel.price} 
           email={hotel.email} 

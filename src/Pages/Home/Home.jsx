@@ -11,11 +11,11 @@ function Home() {
   const allHotels = useSelector((state) => state.allHotels);
   const filteredHotels = useSelector((state) => state.filteredHotels);
   // const searched = useSelector((state) => state.searched);
-  // const currentPage = useSelector((state) => state.currentPage);
+  const currentPage = useSelector((state) => state.currentPage);
 
   useEffect(() => {
-    dispatch(getAllHotels());
-  }, [dispatch]);
+    dispatch(pagination(currentPage));
+  }, [currentPage]);
 
   const handleClick = () => {
     dispatch(pagination())
@@ -26,7 +26,7 @@ function Home() {
   return (
     <div>
       <button onClick={() => handleClick()}>boton</button>
-      <Cards allHotels={allHotels} />
+      <Cards allHotels={filteredHotels} />
       <Pagination/>
     </div>
   );
