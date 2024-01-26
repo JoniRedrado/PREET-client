@@ -17,6 +17,7 @@ import {
   FILTER_HOTELS,
   
 } from "./actions-types";
+import { useDispatch } from "react-redux";
 
 export const getAllHotels = () => {
   return async (dispatch) => {
@@ -168,11 +169,27 @@ export const pagination = (page) => {
   }
 }
 
-export const filterHotels = (country) =>{
+
+// const handleChange = (e) => {
+//   const { name, value } = e.target;
+//   setFilters((prevFilters) => ({
+//     ...prevFilters,
+//     [name]: value,
+//   }));
+// };
+
+// const handleSubmit = (e) => {
+//   e.preventDefault();
+//   dispatch(fetchHotels(filters));
+// };
+
+
+
+export const filterHotels = (params) =>{
   return async (dispatch) =>{
     
     try {
-      const response = await axios.post(`http://localhost:3001/hotels`, {country})
+      const response = await axios.get(`http://localhost:3001/hotels`, {params})
       dispatch({
         type:FILTER_HOTELS,
         payload:response.data
