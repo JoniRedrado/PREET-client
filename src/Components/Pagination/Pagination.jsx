@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 // import { useDispatch, useSelector } from "react-redux";
 // import { nextPage, prevPage, specificPage } from "../../redux/actions";
-
-// import s from "./pagination.module.css";
+import s from "../Pagination/Pagination.module.css";
 
 // function Pagination({hotels, hotelsPerPage}) {
 
@@ -80,7 +79,6 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { nextPage, pagination, prevPage } from '../../redux/actions';
-import { useEffect } from 'react';
 
 const Pagination = () => {
   const dispatch = useDispatch();

@@ -9,6 +9,7 @@ const Cards = ({ allHotels }) => {
     const hotelList = allHotels
     // console.log("esta es la vista de cards" ,  hotelList);
   return (
+
     <div className="cards-container">
       {hotelList.Hotel?.map((hotel) => {
         return <Card 
@@ -23,7 +24,7 @@ const Cards = ({ allHotels }) => {
           image={hotel.image} 
         />;
       })
-}
+      }
     </div>
   );
   
