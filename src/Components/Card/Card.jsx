@@ -4,7 +4,7 @@ import './Card.style.css';
 
 const Card = (props) => {
 
-  const { id, name, image, country, address_url, price, email, stars } = props;
+  const { id, name, image, country, price, stars } = props;
   console.log("este es log de cards", props)
   return (
     <div className="card">

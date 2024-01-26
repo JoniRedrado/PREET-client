@@ -29,7 +29,11 @@ const Detail = () =>{
 
   return(
     <div className="container">
-      
+        <div>
+          <Link to="/update">
+            <button>Update</button>
+          </Link>
+        </div>
         <button onClick={() => handleDelete(id)}>Delete</button>
       
       {hotel ? (
@@ -40,6 +44,7 @@ const Detail = () =>{
       <h2>Ubication {hotel.address_url}</h2>
       {/* <h2>{hotel.countryId}</h2> */}
       <h2>Contact {hotel.email}</h2>
+      <h2>{hotel.stars}⭐</h2>
       </div> ) : (
         <p>cargando...</p>
       )}
@@ -48,11 +53,7 @@ const Detail = () =>{
           <button> Return home</button>
         </Link>
       </div>
-      <div>
-        <Link to="/update">
-          <button>Update</button>
-        </Link>
-      </div>
+      
     </div>
   )
 

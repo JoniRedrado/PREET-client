@@ -17,7 +17,7 @@ import {
   FILTER_HOTELS,
   
 } from "./actions-types";
-import { useDispatch } from "react-redux";
+
 
 export const getAllHotels = () => {
   return async (dispatch) => {
