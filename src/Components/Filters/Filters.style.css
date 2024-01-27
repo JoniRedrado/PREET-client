@@ -1,0 +1,86 @@
+/* .container {
+  background-color: blue;
+  display: flex;
+  flex-direction: row;
+  color:white;
+  justify-content: center;
+  height: 80px;
+  margin: -10px
+  background-color: blue;
+  margin-top: 50px;
+}
+
+.countFilter {
+  display: flex;
+  padding-right: 12px;
+}
+
+.countFilter select {
+  align-self: center;
+  padding: 5px;
+  margin-left: 5px;
+  color: white;
+  background-color: #b0a8bf;
+  border-color: transparent;
+  border-radius: 5px;
+}
+
+.priceSort {
+  display: flex;
+  padding-left: 12px;
+}
+
+.priceSort select {
+  align-self: center;
+  padding: 5px;
+  margin-left: 5px;
+  color: white;
+  background-color: #b0a8bf;
+  border-color: transparent;
+  border-radius: 5px;
+}
+
+.order{
+  display: flex;
+}
+
+.order div{
+  flex:1;
+}
+
+.container button{
+  right:10px;
+} */
+
+.container-filtros {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%; 
+}
+
+.container-filtros > div {
+  margin-right: 20px;
+}
+
+.order {
+  display: flex;
+}
+
+.order > div {
+  margin-right: 20px;
+}
+
+button {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

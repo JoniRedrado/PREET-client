@@ -80,27 +80,65 @@
 
 import { useDispatch } from "react-redux"
 import { filterHotels } from "../../redux/actions"
-import s from "../Filters/Filters.module.css"
-
+// import s from "../Filters/Filters.module.css"
+//*PRUEBA
+import { useState } from "react"
+import './Filters.style.css'
 
 
 const Filters = () => {
   
   const dispatch = useDispatch();
 
-  let filtros = {}
+  //*PRUEBA
+  const [filters, setFilters] = useState({});
 
-  const handleFilters = (e) =>{
-    console.log(e);
-    const newFilter = e.target.name
-    const selection = e.target.value;
-    filtros[newFilter] = selection
+  const handleFilters = (e) => {
+    const { name, value } = e.target;
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: value
+    }));
     
-    dispatch(filterHotels(filtros))
-  } 
+    //console.log(filters);
+    //setFilters({...filters, [name]: value});
+  };
+
+ 
+  const applyFilters = () => {
+    /*if (!filters.orderBy) {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        orderBy: "name", 
+        direction: "ASC" 
+      }));
+    } else if (!filters.direction) {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        direction: "ASC" 
+      }));
+    }*/
+    console.log(filters);
+  
+    dispatch(filterHotels(filters));
+  };
+ 
+
+  //*
+  // let filtros = {}
+
+  // const handleFilters = (e) =>{
+  //   console.log(e);
+  //   const newFilter = e.target.name
+  //   const selection = e.target.value;
+  //   filtros[newFilter] = selection
+    
+  //   dispatch(filterHotels(filtros))
+  // } 
 
   return (
-    <div className={s.container}>
+    <div>
+      <div className="container-filtros">
       <div>
         <p>Countries</p>
         <select
@@ -125,14 +163,6 @@ const Filters = () => {
           <option value="14">Venezuela</option>
         </select>
       </div>
-        <div>
-          <p>Order by </p>
-          <select name="selectPrice" onChange={handleFilters}>
-            <option value="moreRelevant">More relevant</option>
-            <option value="lowest">Price (lowest first)</option>
-            <option value="highest">Price (highest first)</option>
-          </select>
-        </div>
       <div>
         <p>Stars</p>
         <select name="stars" onChange={handleFilters}>
@@ -157,6 +187,9 @@ const Filters = () => {
               max="10000"
               onChange={handleFilters}
             />
+          </div>
+           
+          <div> 
             <label >Price range</label>
             <input
               type="number"
@@ -169,6 +202,27 @@ const Filters = () => {
               onChange={handleFilters}
             />
         </div>
+      </div>
+      <div className="order">
+      <div>
+          <p>Order For </p>
+          <select name="orderBy" onChange={handleFilters}>
+            <option value="">Order For</option>
+            <option value="countryId">Country</option>
+            <option value="stars">Stars</option>
+            <option value="price">Price</option>
+          </select>
+        </div>
+        <div>
+        <p>Direction </p>
+        <select name="direction" onChange={handleFilters}>
+          <option value="">Direction</option>
+          <option value="ASC">ASC</option>
+          <option value="DESC">DESC</option>
+        </select>
+        </div>
+      </div>
+      <button onClick={applyFilters}>Apply Filters</button>
       </div>
     </div>
   );
