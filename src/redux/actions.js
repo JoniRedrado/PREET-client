@@ -5,7 +5,7 @@ import {
   PREV_PAGE,
   SPECIFIC_PAGE,
   GET_ALL_HOTELS,
-  CLEAR_HOTELS_FILTERS,
+  // CLEAR_HOTELS_FILTERS,
   GET_HOTEL_BY_NAME,
   GET_DETAIL,
   DELETE_HOTEL,
@@ -15,7 +15,8 @@ import {
   // GET_COUNTRIES,
   FETCH_ITEMS_SUCCESS,
   FILTER_HOTELS,
-  RESET_CURRENT_PAGE
+  RESET_CURRENT_PAGE,
+  HANDLE_FILTERS,
   
 } from "./actions-types";
 
@@ -36,20 +37,21 @@ export const getAllHotels = () => {
   };
 };
 
-export const clearHotelsFilter = () => {
-  return async (dispatch) => {
-    try {
-      const endpoint = `http://localhost:3001/hotels`;
-      const response = await axios.get(endpoint);
-      dispatch({
-        type: CLEAR_HOTELS_FILTERS,
-        payload: response.data,
-      });
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-};
+//* Pendiente lógica para limpiar los filtros
+// export const clearHotelsFilter = () => {
+//   return async (dispatch) => {
+//     try {
+//       const endpoint = `http://localhost:3001/hotels`;
+//       const response = await axios.get(endpoint);
+//       dispatch({
+//         type: CLEAR_HOTELS_FILTERS,
+//         payload: response.data,
+//       });
+//     } catch (error) {
+//       console.error(error.message);
+//     }
+//   };
+// };
 export const getHotelByName = (name) => {
   return async (dispatch, getStage) => {
     const {currentPage} = getStage()
@@ -201,34 +203,35 @@ export const pagination = (page) => {
 //   }));
 // };
 
-// const handleSubmit = (e) => {
-//   e.preventDefault();
-//   dispatch(fetchHotels(filters));
-// };
 
-
+export const filterParams = (params) => {
+  console.log(params);  
+  return function (dispatch) {
+    dispatch({
+      type: HANDLE_FILTERS,
+      payload: params
+    }
+    )
+  }
+};
 
 export const filterHotels = (params) =>{
   return async (dispatch, getStage) =>{
-    console.log(params);
     const {currentPage} = getStage()
     try {
-      // const{ country, stars, minPrice, maxPrice, orderBy, direction} = params
-      
       const queryParams = {
         page: currentPage,
-        //size: 2,
         stars:params.stars,
         minPrice:params.minPrice,
         maxPrice:params.maxPrice,
         country:params.country,
         orderBy:params.orderBy,
-        direction:params.direction /*=== 'asc' ? 'ASC' : 'DESC'*/
+        direction:params.direction
       };
-      console.log(currentPage);
 
       const response = await axios.get(`http://localhost:3001/hotels`, {params: queryParams})
       
+      console.log(response.data);
       dispatch({
         type:FILTER_HOTELS,
         payload:response.data

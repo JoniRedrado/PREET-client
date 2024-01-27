@@ -6,7 +6,7 @@ import SearchBar from "../SearchBar/SearchBar";
 
 import style from "./NavBar.module.css";
 import { useDispatch } from "react-redux";
-import { clearHotelsFilter, resetCurrentPage } from "../../redux/actions";
+import { getAllHotels, resetCurrentPage } from "../../redux/actions";
 
 function NavBar() {
 
@@ -14,7 +14,7 @@ function NavBar() {
 
   const handleHomeButton = () => {
     dispatch(resetCurrentPage())
-    dispatch(clearHotelsFilter())
+    dispatch(getAllHotels())
   }
 
   return (
