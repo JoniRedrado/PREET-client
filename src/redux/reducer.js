@@ -3,15 +3,16 @@ import {
   NEXT_PAGE,
   PREV_PAGE,
   SPECIFIC_PAGE,
-  SET_CURRENT_PAGE,
   GET_ALL_HOTELS,
+  CLEAR_HOTELS_FILTERS,
   GET_HOTEL_BY_NAME,
   GET_DETAIL,
   DELETE_HOTEL,
   FILTER_BY_COUNTRY,
   SORT_BY_PRICE,
- FETCH_ITEMS_SUCCESS,
- FILTER_HOTELS
+  FETCH_ITEMS_SUCCESS,
+  FILTER_HOTELS,
+  RESET_CURRENT_PAGE,
 } from "./actions-types";
 
 let initialState = {
@@ -30,13 +31,21 @@ function rootReducer(state = initialState, action) {
     case GET_ALL_HOTELS:
       return {
         ...state,
-        allHotels: action.payload,
+        filteredHotels: action.payload,
+        totalHotels: action.payload.total,
+      };
+    case CLEAR_HOTELS_FILTERS:
+      return {
+        ...state,
+        filteredHotels: action.payload,
+        totalHotels: action.payload.total,
       };
 
     case GET_HOTEL_BY_NAME:
       return {
         ...state,
-        allHotels: action.payload,
+        filteredHotels: action.payload,
+        totalHotels: action.payload.total,
         currentPage: 1,
       };
     case NEXT_PAGE:
@@ -54,7 +63,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         currentPage: action.payload,
       };
-    case SET_CURRENT_PAGE:
+    case RESET_CURRENT_PAGE:
       return {
         ...state,
         currentPage: action.payload,
@@ -129,8 +138,8 @@ function rootReducer(state = initialState, action) {
     case FILTER_HOTELS:
       return {
         ...state,
-        filteredHotels:action.payload
-      }
+        filteredHotels: action.payload,
+      };
     default:
       return state;
   }

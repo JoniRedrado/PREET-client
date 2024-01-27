@@ -3,12 +3,23 @@ import template from "../../assets/Logo-White.svg";
 import SearchBar from "../SearchBar/SearchBar";
 import Filters from "../Filters/Filters";
 
+
 import style from "./NavBar.module.css";
+import { useDispatch } from "react-redux";
+import { clearHotelsFilter, resetCurrentPage } from "../../redux/actions";
 
 function NavBar() {
+
+  const dispatch = useDispatch()
+
+  const handleHomeButton = () => {
+    dispatch(resetCurrentPage())
+    dispatch(clearHotelsFilter())
+  }
+
   return (
     <div className={style.container}>
-      <Link to="/">
+      <Link to="/" onClick={handleHomeButton}>
         <img src={template} width="18%" />
       </Link>
       <SearchBar/>
