@@ -4,8 +4,8 @@ import {
   NEXT_PAGE,
   PREV_PAGE,
   SPECIFIC_PAGE,
-  SET_CURRENT_PAGE,
   GET_ALL_HOTELS,
+  CLEAR_HOTELS_FILTERS,
   GET_HOTEL_BY_NAME,
   GET_DETAIL,
   DELETE_HOTEL,
@@ -15,14 +15,16 @@ import {
   // GET_COUNTRIES,
   FETCH_ITEMS_SUCCESS,
   FILTER_HOTELS,
+  RESET_CURRENT_PAGE
   
 } from "./actions-types";
 
 
 export const getAllHotels = () => {
-  return async (dispatch) => {
+  return async (dispatch, getStage) => {
+    const { currentPage } = getStage();
     try {
-      const endpoint = `http://localhost:3001/hotels`;
+      const endpoint = `http://localhost:3001/hotels?page=${currentPage}`;
       const response = await axios.get(endpoint);
       dispatch({
         type: GET_ALL_HOTELS,
@@ -33,11 +35,28 @@ export const getAllHotels = () => {
     }
   };
 };
-export const getHotelByName = (name) => {
+
+export const clearHotelsFilter = () => {
   return async (dispatch) => {
     try {
-      const endpoint = `http://localhost:3001/hotels?name=${name}`;
+      const endpoint = `http://localhost:3001/hotels`;
       const response = await axios.get(endpoint);
+      dispatch({
+        type: CLEAR_HOTELS_FILTERS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+};
+export const getHotelByName = (name) => {
+  return async (dispatch, getStage) => {
+    const {currentPage} = getStage()
+    try {
+      const endpoint = `http://localhost:3001/hotels?name=${name}&page=${currentPage}`;
+      const response = await axios.get(endpoint);
+
       dispatch({
         type: GET_HOTEL_BY_NAME,
         payload: response.data,
@@ -60,12 +79,7 @@ export const getDetail = (id) => {
     }
   };
 };
-export function setCurrentPage() {
-  return {
-    type: SET_CURRENT_PAGE,
-    payload: 1,
-  };
-}
+
 export const nextPage = () => {
   return function (dispatch, getStage) {
     const { currentPage } = getStage();
@@ -89,6 +103,15 @@ export const specificPage = (page) => {
     dispatch({
       type: SPECIFIC_PAGE,
       payload: page,
+    });
+  };
+};
+
+export const resetCurrentPage = () => {
+  return function (dispatch) {
+    dispatch({
+      type: RESET_CURRENT_PAGE,
+      payload: 1
     });
   };
 };

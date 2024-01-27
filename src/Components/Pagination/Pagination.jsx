@@ -7,7 +7,7 @@ const Pagination = () => {
   const currentPage = useSelector((state) => state.currentPage);
   const totalHotels = useSelector((state) => state.totalHotels);
 
-  const totalPages = Math.round(totalHotels / 6)
+  const totalPages = Math.ceil(totalHotels / 6)
 
   const handlePrevClick = () => {
       dispatch(prevPage());

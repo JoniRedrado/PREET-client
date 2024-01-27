@@ -7,20 +7,18 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
 
-  const onSearch = (name) => {
-    dispatch(getHotelByName(name));
-  }
-
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      onSearch(name);
-      setName("");
+      let name = e.target.value;
+      setName(name);
+      dispatch(getHotelByName(name));
     }
   };
 
-  const handleSubmit = () => {
-    onSearch(name);
-    setName("");
+  const handleSubmit = async (e) => {
+    let name = e.target.value;
+    setName(name);
+    dispatch(getHotelByName(name));
   };
 
   const handleInputChange = async (e) => {
