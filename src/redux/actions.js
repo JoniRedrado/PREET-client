@@ -209,14 +209,15 @@ export const pagination = (page) => {
 
 
 export const filterHotels = (params) =>{
-  return async (dispatch) =>{
+  return async (dispatch, getStage) =>{
     console.log(params);
+    const {currentPage} = getStage()
     try {
       // const{ country, stars, minPrice, maxPrice, orderBy, direction} = params
       
       const queryParams = {
-        page: 1,
-        //size: 6,
+        page: currentPage,
+        //size: 2,
         stars:params.stars,
         minPrice:params.minPrice,
         maxPrice:params.maxPrice,
@@ -224,7 +225,7 @@ export const filterHotels = (params) =>{
         orderBy:params.orderBy,
         direction:params.direction /*=== 'asc' ? 'ASC' : 'DESC'*/
       };
-      console.log(queryParams);
+      console.log(currentPage);
 
       const response = await axios.get(`http://localhost:3001/hotels`, {params: queryParams})
       

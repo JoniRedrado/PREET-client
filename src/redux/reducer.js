@@ -138,6 +138,7 @@ function rootReducer(state = initialState, action) {
     case FILTER_HOTELS:
       return {
         ...state,
+        totalHotels: action.payload.total,
         filteredHotels: action.payload,
       };
     default:
