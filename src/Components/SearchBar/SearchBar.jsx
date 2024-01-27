@@ -15,12 +15,6 @@ const SearchBar = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    let name = e.target.value;
-    setName(name);
-    dispatch(getHotelByName(name));
-  };
-
   const handleInputChange = async (e) => {
     let name = e.target.value;
     setName(name)
@@ -37,9 +31,6 @@ const SearchBar = () => {
           onKeyPress={handleKeyPress}
           value={name}
         />
-        <button type="submit" onClick={handleSubmit}>
-          Search
-        </button>
       </div>
     </div>
   );

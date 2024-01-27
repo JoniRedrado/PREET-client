@@ -4,7 +4,7 @@ import {
   PREV_PAGE,
   SPECIFIC_PAGE,
   GET_ALL_HOTELS,
-  CLEAR_HOTELS_FILTERS,
+  // CLEAR_HOTELS_FILTERS,
   GET_HOTEL_BY_NAME,
   GET_DETAIL,
   DELETE_HOTEL,
@@ -13,11 +13,12 @@ import {
   FETCH_ITEMS_SUCCESS,
   FILTER_HOTELS,
   RESET_CURRENT_PAGE,
+  HANDLE_FILTERS,
 } from "./actions-types";
 
 let initialState = {
-  allHotels: [],
   filteredHotels: {},
+  submitFilters: {},
   currentPage: 1,
   hotelDetail: {},
   countries: [],
@@ -34,12 +35,14 @@ function rootReducer(state = initialState, action) {
         filteredHotels: action.payload,
         totalHotels: action.payload.total,
       };
-    case CLEAR_HOTELS_FILTERS:
-      return {
-        ...state,
-        filteredHotels: action.payload,
-        totalHotels: action.payload.total,
-      };
+    
+    //* Pendiente de lógica para limpiar los filtros.
+    // case CLEAR_HOTELS_FILTERS:
+    //   return {
+    //     ...state,
+    //     filteredHotels: action.payload,
+    //     totalHotels: action.payload.total,
+    //   };
 
     case GET_HOTEL_BY_NAME:
       return {
@@ -140,6 +143,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         totalHotels: action.payload.total,
         filteredHotels: action.payload,
+      };
+    case HANDLE_FILTERS:
+      return {
+        ...state,
+        submitFilters: action.payload,
       };
     default:
       return state;

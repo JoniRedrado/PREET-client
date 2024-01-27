@@ -78,48 +78,27 @@
 
 // export default Filters;
 
-import { useDispatch } from "react-redux"
-import { filterHotels } from "../../redux/actions"
+import { useDispatch, useSelector } from "react-redux"
+import { filterHotels, filterParams } from "../../redux/actions"
 // import s from "../Filters/Filters.module.css"
 //*PRUEBA
-import { useState } from "react"
+// import { useState } from "react"
 import './Filters.style.css'
 
 
 const Filters = () => {
   
   const dispatch = useDispatch();
+  const filters = useSelector((state) => state.submitFilters)
 
   //*PRUEBA
-  const [filters, setFilters] = useState({});
 
   const handleFilters = (e) => {
     const { name, value } = e.target;
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value
-    }));
-    
-    //console.log(filters);
-    //setFilters({...filters, [name]: value});
+    dispatch(filterParams({...filters, [name]:value}));
   };
 
- 
   const applyFilters = () => {
-    /*if (!filters.orderBy) {
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        orderBy: "name", 
-        direction: "ASC" 
-      }));
-    } else if (!filters.direction) {
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        direction: "ASC" 
-      }));
-    }*/
-    console.log(filters);
-  
     dispatch(filterHotels(filters));
   };
  
@@ -139,44 +118,40 @@ const Filters = () => {
   return (
     <div>
       <div className="container-filtros">
-      <div>
-        <p>Countries</p>
-        <select
-          name="country"
-          defaultValue=""
-          onChange={handleFilters}
-        >
-          <option value="">All Countries</option>
-          <option value="1">Argentina</option>
-          <option value="2">Bolivia</option>
-          <option value="3">Brazil</option>
-          <option value="4">Chile</option>
-          <option value="5">Colombia</option>
-          <option value="6">Ecuador</option>
-          <option value="7">French Guiana</option>
-          <option value="8">Guyana</option>
-          <option value="9">Malvinas</option>
-          <option value="10">Paraguay</option>
-          <option value="11">Peru</option>
-          <option value="12">Surinam</option>
-          <option value="13">Uruguay</option>
-          <option value="14">Venezuela</option>
-        </select>
-      </div>
-      <div>
-        <p>Stars</p>
-        <select name="stars" onChange={handleFilters}>
-          <option value="">Cualquiera</option>
-          <option value="1">⭐</option>
-          <option value="2">⭐⭐</option>
-          <option value="3">⭐⭐⭐</option>
-          <option value="4">⭐⭐⭐⭐</option>
-          <option value="5">⭐⭐⭐⭐⭐</option>
-        </select>
-      </div>
-      <div>
         <div>
-            <label >Price range</label>
+          <p>Countries</p>
+          <select name="country" defaultValue="" onChange={handleFilters}>
+            <option value="">All Countries</option>
+            <option value="1">Argentina</option>
+            <option value="2">Bolivia</option>
+            <option value="3">Brazil</option>
+            <option value="4">Chile</option>
+            <option value="5">Colombia</option>
+            <option value="6">Ecuador</option>
+            <option value="7">French Guiana</option>
+            <option value="8">Guyana</option>
+            <option value="9">Malvinas</option>
+            <option value="10">Paraguay</option>
+            <option value="11">Peru</option>
+            <option value="12">Surinam</option>
+            <option value="13">Uruguay</option>
+            <option value="14">Venezuela</option>
+          </select>
+        </div>
+        <div>
+          <p>Stars</p>
+          <select name="stars" onChange={handleFilters}>
+            <option value="">Cualquiera</option>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+          </select>
+        </div>
+        <div>
+          <div>
+            <label>Price range</label>
             <input
               type="number"
               id="minPrice"
@@ -188,9 +163,9 @@ const Filters = () => {
               onChange={handleFilters}
             />
           </div>
-           
-          <div> 
-            <label >Price range</label>
+
+          <div>
+            <label>Price range</label>
             <input
               type="number"
               id="maxPrice"
@@ -201,28 +176,28 @@ const Filters = () => {
               max="10000"
               onChange={handleFilters}
             />
+          </div>
         </div>
-      </div>
-      <div className="order">
-      <div>
-          <p>Order For </p>
-          <select name="orderBy" onChange={handleFilters}>
-            <option value="">Order For</option>
-            <option value="countryId">Country</option>
-            <option value="stars">Stars</option>
-            <option value="price">Price</option>
-          </select>
+        <div className="order">
+          <div>
+            <p>Order For </p>
+            <select name="orderBy" onChange={handleFilters}>
+              <option value="">Order For</option>
+              <option value="countryId">Country</option>
+              <option value="stars">Stars</option>
+              <option value="price">Price</option>
+            </select>
+          </div>
+          <div>
+            <p>Direction </p>
+            <select name="direction" onChange={handleFilters}>
+              <option value="">Direction</option>
+              <option value="ASC">↓</option>
+              <option value="DESC">↑</option>
+            </select>
+          </div>
         </div>
-        <div>
-        <p>Direction </p>
-        <select name="direction" onChange={handleFilters}>
-          <option value="">Direction</option>
-          <option value="ASC">ASC</option>
-          <option value="DESC">DESC</option>
-        </select>
-        </div>
-      </div>
-      <button onClick={applyFilters}>Apply Filters</button>
+        <button onClick={applyFilters}>Apply Filters</button>
       </div>
     </div>
   );
