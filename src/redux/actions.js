@@ -216,14 +216,15 @@ export const filterHotels = (params) =>{
       
       const queryParams = {
         page: 1,
-        size: 5,
+        //size: 6,
         stars:params.stars,
         minPrice:params.minPrice,
         maxPrice:params.maxPrice,
         country:params.country,
         orderBy:params.orderBy,
-        direction:params.orderBy === 'asc' ? 'ASC' : 'DESC'
+        direction:params.direction /*=== 'asc' ? 'ASC' : 'DESC'*/
       };
+      console.log(queryParams);
 
       const response = await axios.get(`http://localhost:3001/hotels`, {params: queryParams})
       

@@ -99,11 +99,14 @@ const Filters = () => {
       ...prevFilters,
       [name]: value
     }));
+    
+    //console.log(filters);
+    //setFilters({...filters, [name]: value});
   };
 
  
   const applyFilters = () => {
-    if (!filters.orderBy) {
+    /*if (!filters.orderBy) {
       setFilters((prevFilters) => ({
         ...prevFilters,
         orderBy: "name", 
@@ -114,7 +117,8 @@ const Filters = () => {
         ...prevFilters,
         direction: "ASC" 
       }));
-    }
+    }*/
+    console.log(filters);
   
     dispatch(filterHotels(filters));
   };
@@ -204,7 +208,7 @@ const Filters = () => {
           <p>Order For </p>
           <select name="orderBy" onChange={handleFilters}>
             <option value="">Order For</option>
-            <option value="country">Country</option>
+            <option value="countryId">Country</option>
             <option value="stars">Stars</option>
             <option value="price">Price</option>
           </select>
