@@ -11,19 +11,19 @@ const Pagination = () => {
 
   const handlePrevClick = () => {
       dispatch(prevPage());
-      dispatch(pagination(currentPage));
+      //dispatch(pagination(currentPage));
 
-      dispatch(filterHotels({
+      /*dispatch(filterHotels({
         page:currentPage -1,
-      }))
+      }))*/
   };
 
   const handleNextClick = () => {
       dispatch(nextPage());
-      dispatch(pagination(currentPage));
-      dispatch(filterHotels({
+      //dispatch(filterHotels(currentPage));
+      /*dispatch(filterHotels({
         page:currentPage +1,
-      }))
+      }))*/
   };
 
   return (
