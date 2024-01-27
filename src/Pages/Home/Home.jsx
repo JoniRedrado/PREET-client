@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Cards from "../../Components/Cards/Cards";
 import Pagination from "../../Components/Pagination/Pagination";
 import { getAllHotels } from "../../redux/actions";
+import Filters from "../../Components/Filters/Filters";
 
 function Home() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function Home() {
 
   return (
     <div>
+      <Filters/>
       <Cards allHotels={filteredHotels} />
       <Pagination/>
     </div>

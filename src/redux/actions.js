@@ -212,11 +212,26 @@ export const filterHotels = (params) =>{
   return async (dispatch) =>{
     console.log(params);
     try {
-      const response = await axios.get(`http://localhost:3001/hotels`, {params})
+      // const{ country, stars, minPrice, maxPrice, orderBy, direction} = params
+      
+      const queryParams = {
+        page: 1,
+        size: 5,
+        stars:params.stars,
+        minPrice:params.minPrice,
+        maxPrice:params.maxPrice,
+        country:params.country,
+        orderBy:params.orderBy,
+        direction:params.orderBy === 'asc' ? 'ASC' : 'DESC'
+      };
+
+      const response = await axios.get(`http://localhost:3001/hotels`, {params: queryParams})
+      
       dispatch({
         type:FILTER_HOTELS,
         payload:response.data
       })
+
       console.log('Respuesta del backend:', response.data);
     } catch (error) {
       console.error('Error al filtrar hoteles:', error);

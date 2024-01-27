@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { nextPage, pagination, prevPage } from '../../redux/actions';
+import { nextPage, pagination, prevPage, filterHotels } from '../../redux/actions';
 import s from "../Pagination/Pagination.module.css";
 
 const Pagination = () => {
@@ -12,11 +12,18 @@ const Pagination = () => {
   const handlePrevClick = () => {
       dispatch(prevPage());
       dispatch(pagination(currentPage));
+
+      dispatch(filterHotels({
+        page:currentPage -1,
+      }))
   };
 
   const handleNextClick = () => {
       dispatch(nextPage());
       dispatch(pagination(currentPage));
+      dispatch(filterHotels({
+        page:currentPage +1,
+      }))
   };
 
   return (
