@@ -13,12 +13,8 @@ const SORT_BY_PRICE = "SORT_BY_PRICE";
 const FETCH_ITEMS_SUCCESS = "FETCH_ITEMS_SUCCESS";
 const FILTER_HOTELS = "FILTER_HOTELS";
 const RESET_CURRENT_PAGE = "RESET_CURRENT_PAGE";
-<<<<<<< Updated upstream
-const HANDLE_FILTERS= "HANDLE_FILTERS"
-
-=======
+const HANDLE_FILTERS = "HANDLE_FILTERS";
 const GET_ALL_COUNTRIES = "GET_ALL_COUNTRIES";
->>>>>>> Stashed changes
 
 export {
   NEXT_PAGE,
@@ -36,9 +32,6 @@ export {
   FETCH_ITEMS_SUCCESS,
   FILTER_HOTELS,
   RESET_CURRENT_PAGE,
-<<<<<<< Updated upstream
-  HANDLE_FILTERS
-=======
+  HANDLE_FILTERS,
   GET_ALL_COUNTRIES,
->>>>>>> Stashed changes
 };
