@@ -3,7 +3,8 @@ import Home from "./Pages/Home/Home";
 import Detail from "./Pages/Detail/Detail";
 import NavBar from "./Components/NavBar/NavBar";
 import CreatePage from "./Pages/Create/CreatePage";
-import UpdatePage from "./Pages/Update/UpdatePage"
+import UpdatePage from "./Pages/Update/UpdatePage";
+import Register from "./Pages/Register/Register";
 
 // import './App.css'
 
@@ -14,8 +15,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:id" element={<Detail />} />
-        <Route path='/create' element={<CreatePage/>}/>
-        <Route path='/update' element={<UpdatePage/>}/>
+        <Route path="/create" element={<CreatePage />} />
+        <Route path="/update" element={<UpdatePage />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

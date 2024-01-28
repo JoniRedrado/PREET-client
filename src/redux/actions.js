@@ -16,10 +16,13 @@ import {
   FETCH_ITEMS_SUCCESS,
   FILTER_HOTELS,
   RESET_CURRENT_PAGE,
+<<<<<<< Updated upstream
   HANDLE_FILTERS,
   
+=======
+  GET_ALL_COUNTRIES,
+>>>>>>> Stashed changes
 } from "./actions-types";
-
 
 export const getAllHotels = () => {
   return async (dispatch, getStage) => {
@@ -37,6 +40,7 @@ export const getAllHotels = () => {
   };
 };
 
+<<<<<<< Updated upstream
 //* Pendiente lógica para limpiar los filtros
 // export const clearHotelsFilter = () => {
 //   return async (dispatch) => {
@@ -52,9 +56,39 @@ export const getAllHotels = () => {
 //     }
 //   };
 // };
+=======
+export const getAllCountries = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get("http://localhost:3001/countries");
+      dispatch({
+        type: GET_ALL_COUNTRIES,
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+};
+
+export const clearHotelsFilter = () => {
+  return async (dispatch) => {
+    try {
+      const endpoint = `http://localhost:3001/hotels`;
+      const response = await axios.get(endpoint);
+      dispatch({
+        type: CLEAR_HOTELS_FILTERS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+};
+>>>>>>> Stashed changes
 export const getHotelByName = (name) => {
   return async (dispatch, getStage) => {
-    const {currentPage} = getStage()
+    const { currentPage } = getStage();
     try {
       const endpoint = `http://localhost:3001/hotels?name=${name}&page=${currentPage}`;
       const response = await axios.get(endpoint);
@@ -113,7 +147,7 @@ export const resetCurrentPage = () => {
   return function (dispatch) {
     dispatch({
       type: RESET_CURRENT_PAGE,
-      payload: 1
+      payload: 1,
     });
   };
 };
@@ -155,7 +189,7 @@ export function sortByPrice(order) {
 // export const postHotel = (payload) => async dispatch => {
 //   try {
 //       const response = await axios.post('http://localhost:3001/hotels', payload);
-      
+
 //       dispatch({
 //           type: POST_HOTEL,
 //           payload: response.data
@@ -169,7 +203,7 @@ export function sortByPrice(order) {
 //   return async function (dispatch) {
 //       try {
 //           const response = await axios.get(`http://localhost:3001/countries`);
-          
+
 //           dispatch({
 //               type: GET_COUNTRIES,
 //               payload: response.data
@@ -181,19 +215,20 @@ export function sortByPrice(order) {
 // }
 
 export const pagination = (page) => {
-  return async function (dispatch){
+  return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/hotels?page=${page}`);
-      return dispatch({ 
-        type: FETCH_ITEMS_SUCCESS, 
-        payload: response.data 
+      const response = await axios.get(
+        `http://localhost:3001/hotels?page=${page}`
+      );
+      return dispatch({
+        type: FETCH_ITEMS_SUCCESS,
+        payload: response.data,
       });
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
-  }
-}
-
+  };
+};
 
 // const handleChange = (e) => {
 //   const { name, value } = e.target;
@@ -203,6 +238,7 @@ export const pagination = (page) => {
 //   }));
 // };
 
+<<<<<<< Updated upstream
 
 export const filterParams = (params) => {
   console.log(params);  
@@ -227,8 +263,31 @@ export const filterHotels = (params) =>{
         country:params.country,
         orderBy:params.orderBy,
         direction:params.direction
+=======
+// const handleSubmit = (e) => {
+//   e.preventDefault();
+//   dispatch(fetchHotels(filters));
+// };
+
+export const filterHotels = (params) => {
+  return async (dispatch) => {
+    console.log(params);
+    try {
+      // const{ country, stars, minPrice, maxPrice, orderBy, direction} = params
+
+      const queryParams = {
+        page: 1,
+        //size: 6,
+        stars: params.stars,
+        minPrice: params.minPrice,
+        maxPrice: params.maxPrice,
+        country: params.country,
+        orderBy: params.orderBy,
+        direction: params.direction /*=== 'asc' ? 'ASC' : 'DESC'*/,
+>>>>>>> Stashed changes
       };
 
+<<<<<<< Updated upstream
       const response = await axios.get(`http://localhost:3001/hotels`, {params: queryParams})
       
       console.log(response.data);
@@ -236,10 +295,25 @@ export const filterHotels = (params) =>{
         type:FILTER_HOTELS,
         payload:response.data
       })
+=======
+      const response = await axios.get(`http://localhost:3001/hotels`, {
+        params: queryParams,
+      });
+>>>>>>> Stashed changes
 
-      console.log('Respuesta del backend:', response.data);
+      dispatch({
+        type: FILTER_HOTELS,
+        payload: response.data,
+      });
+
+      console.log("Respuesta del backend:", response.data);
     } catch (error) {
-      console.error('Error al filtrar hoteles:', error);
+      console.error("Error al filtrar hoteles:", error);
     }
+<<<<<<< Updated upstream
   }
 }
+=======
+  };
+};
+>>>>>>> Stashed changes
