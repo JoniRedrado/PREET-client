@@ -78,80 +78,30 @@
 
 // export default Filters;
 
-<<<<<<< Updated upstream
-import { useDispatch, useSelector } from "react-redux"
-import { filterHotels, filterParams } from "../../redux/actions"
+import { useDispatch, useSelector } from "react-redux";
+import { filterHotels, filterParams } from "../../redux/actions";
 // import s from "../Filters/Filters.module.css"
 //*PRUEBA
 // import { useState } from "react"
-import './Filters.style.css'
-
-=======
-import { useDispatch, useSelector } from "react-redux";
-import { filterHotels } from "../../redux/actions";
-// import s from "../Filters/Filters.module.css"
-//*PRUEBA
-import { useState } from "react";
 import "./Filters.style.css";
->>>>>>> Stashed changes
 
 const Filters = () => {
   const dispatch = useDispatch();
-<<<<<<< Updated upstream
-  const filters = useSelector((state) => state.submitFilters)
-=======
+
+  const filters = useSelector((state) => state.submitFilters);
+
   const allCountries = useSelector((state) => state.countries);
->>>>>>> Stashed changes
 
   //*PRUEBA
 
   const handleFilters = (e) => {
     const { name, value } = e.target;
-<<<<<<< Updated upstream
-    dispatch(filterParams({...filters, [name]:value}));
+    dispatch(filterParams({ ...filters, [name]: value }));
   };
 
   const applyFilters = () => {
-=======
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value,
-    }));
-
-    //console.log(filters);
-    //setFilters({...filters, [name]: value});
-  };
-
-  const applyFilters = () => {
-    /*if (!filters.orderBy) {
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        orderBy: "name", 
-        direction: "ASC" 
-      }));
-    } else if (!filters.direction) {
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        direction: "ASC" 
-      }));
-    }*/
-    console.log(filters);
-
->>>>>>> Stashed changes
     dispatch(filterHotels(filters));
   };
-
-  //*
-  // let filtros = {}
-
-  // const handleFilters = (e) =>{
-  //   console.log(e);
-  //   const newFilter = e.target.name
-  //   const selection = e.target.value;
-  //   filtros[newFilter] = selection
-
-  //   dispatch(filterHotels(filtros))
-  // }
 
   return (
     <div>
@@ -160,36 +110,15 @@ const Filters = () => {
           <p>Countries</p>
           <select name="country" defaultValue="" onChange={handleFilters}>
             <option value="">All Countries</option>
-<<<<<<< Updated upstream
-            <option value="1">Argentina</option>
-=======
             {allCountries &&
               allCountries.map((count) => (
                 <option value={count.id} key={count.id}>
                   {count.name}
                 </option>
               ))}
-            {/* <option value="1">Argentina</option>
->>>>>>> Stashed changes
-            <option value="2">Bolivia</option>
-            <option value="3">Brazil</option>
-            <option value="4">Chile</option>
-            <option value="5">Colombia</option>
-            <option value="6">Ecuador</option>
-            <option value="7">French Guiana</option>
-            <option value="8">Guyana</option>
-            <option value="9">Malvinas</option>
-            <option value="10">Paraguay</option>
-            <option value="11">Peru</option>
-            <option value="12">Surinam</option>
-            <option value="13">Uruguay</option>
-<<<<<<< Updated upstream
-            <option value="14">Venezuela</option>
-=======
-            <option value="14">Venezuela</option> */}
->>>>>>> Stashed changes
           </select>
         </div>
+
         <div>
           <p>Stars</p>
           <select name="stars" onChange={handleFilters}>
@@ -201,6 +130,7 @@ const Filters = () => {
             <option value="5">⭐⭐⭐⭐⭐</option>
           </select>
         </div>
+
         <div>
           <div>
             <label>Price range</label>
@@ -230,6 +160,7 @@ const Filters = () => {
             />
           </div>
         </div>
+
         <div className="order">
           <div>
             <p>Order For </p>
@@ -240,20 +171,17 @@ const Filters = () => {
               <option value="price">Price</option>
             </select>
           </div>
+
           <div>
             <p>Direction </p>
             <select name="direction" onChange={handleFilters}>
               <option value="">Direction</option>
-<<<<<<< Updated upstream
               <option value="ASC">↓</option>
               <option value="DESC">↑</option>
-=======
-              <option value="ASC">ASC</option>
-              <option value="DESC">DESC</option>
->>>>>>> Stashed changes
             </select>
           </div>
         </div>
+
         <button onClick={applyFilters}>Apply Filters</button>
       </div>
     </div>

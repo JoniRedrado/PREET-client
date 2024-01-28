@@ -13,11 +13,8 @@ import {
   FETCH_ITEMS_SUCCESS,
   FILTER_HOTELS,
   RESET_CURRENT_PAGE,
-<<<<<<< Updated upstream
   HANDLE_FILTERS,
-=======
   GET_ALL_COUNTRIES,
->>>>>>> Stashed changes
 } from "./actions-types";
 
 let initialState = {
@@ -39,7 +36,7 @@ function rootReducer(state = initialState, action) {
         filteredHotels: action.payload,
         totalHotels: action.payload.total,
       };
-    
+
     //* Pendiente de lógica para limpiar los filtros.
     // case CLEAR_HOTELS_FILTERS:
     //   return {
@@ -148,13 +145,12 @@ function rootReducer(state = initialState, action) {
         totalHotels: action.payload.total,
         filteredHotels: action.payload,
       };
-<<<<<<< Updated upstream
+
     case HANDLE_FILTERS:
       return {
         ...state,
         submitFilters: action.payload,
       };
-=======
 
     case GET_ALL_COUNTRIES:
       return {
@@ -162,7 +158,6 @@ function rootReducer(state = initialState, action) {
         countries: action.payload,
       };
 
->>>>>>> Stashed changes
     default:
       return state;
   }
