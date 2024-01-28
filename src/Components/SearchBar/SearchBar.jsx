@@ -23,8 +23,9 @@ const SearchBar = () => {
 
   return (
     <div>
-      <div className={s.search}>
+      <div className={s.searchBar}>
         <input
+          className={s.searchInput}
           type="text"
           placeholder="Enter a name"
           onChange={handleInputChange}

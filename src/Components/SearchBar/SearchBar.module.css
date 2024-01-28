@@ -1,14 +1,11 @@
-.search {
+.searchBar {
   display: flex;
   justify-content: space-around;
   gap: 10px;
 }
 
-.search input {
+.searchInput {
   border-radius: 5px;
   border-color: transparent;
-}
-
-.search button {
-  cursor: pointer;
+  width: 200px;
 }
