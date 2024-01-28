@@ -49,7 +49,7 @@ const Detail = () =>{
         <p>cargando...</p>
       )}
       <div>
-        <Link to="/">
+        <Link to="/home">
           <button> Return home</button>
         </Link>
       </div>
