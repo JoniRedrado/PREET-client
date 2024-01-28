@@ -19,13 +19,16 @@ function NavBar() {
 
   return (
     <div className={style.container}>
-      <Link to="/" onClick={handleHomeButton}>
+      <Link to="/home" onClick={handleHomeButton}>
         <img src={template} width="18%" />
       </Link>
-      <SearchBar/>
+      <SearchBar />
       {/* <Filters/> */}
       <Link to="/create">
         <button>Create Hotel</button>
+      </Link>
+      <Link to="/">
+        <button>Login</button>
       </Link>
     </div>
   );

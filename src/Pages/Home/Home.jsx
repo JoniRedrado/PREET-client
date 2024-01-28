@@ -4,6 +4,8 @@ import Cards from "../../Components/Cards/Cards";
 import Pagination from "../../Components/Pagination/Pagination";
 import { filterHotels, getAllCountries } from "../../redux/actions";
 import Filters from "../../Components/Filters/Filters";
+import Login from "../Login/Login"
+// import { decodeToken } from "../../utils/decodeToken";
 
 function Home() {
   const dispatch = useDispatch();
@@ -14,14 +16,23 @@ function Home() {
   useEffect(() => {
     dispatch(filterHotels(filters));
     dispatch(getAllCountries());
-  }, [currentPage, dispatch]);
+}, [currentPage, filters, dispatch]);
+
+  // let tokenExistsAndStillValide = (decodeToken(localStorage.getItem('token').exp * 1000 > Date.now()))
+
+  let tokenExistsAndStillValide = true
 
   return (
-    <div>
-      <Filters />
-      <Cards allHotels={filteredHotels} />
-      <Pagination />
-    </div>
+    <>
+      {tokenExistsAndStillValide
+        ? (<div>
+          <Filters />
+          <Cards allHotels={filteredHotels} />
+          <Pagination />
+        </div>)
+        : <Login />
+      }
+    </>
   );
 }
 
