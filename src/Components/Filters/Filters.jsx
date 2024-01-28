@@ -92,7 +92,7 @@ const Filters = () => {
 
   const allCountries = useSelector((state) => state.countries);
 
-  //*PRUEBA
+  console.log('Array con todos los países', allCountries);
 
   const handleFilters = (e) => {
     const { name, value } = e.target;
@@ -111,9 +111,9 @@ const Filters = () => {
           <select name="country" defaultValue="" onChange={handleFilters}>
             <option value="">All Countries</option>
             {allCountries &&
-              allCountries.map((count) => (
-                <option value={count.id} key={count.id}>
-                  {count.name}
+              allCountries.map((country, index) => (
+                <option value={index + 1} key={index}>
+                  {country}
                 </option>
               ))}
           </select>

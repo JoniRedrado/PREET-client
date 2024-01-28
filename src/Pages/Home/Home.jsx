@@ -16,7 +16,7 @@ function Home() {
   useEffect(() => {
     dispatch(filterHotels(filters));
     dispatch(getAllCountries());
-}, [currentPage, filters, dispatch]);
+}, [currentPage]);
 
   // let tokenExistsAndStillValide = (decodeToken(localStorage.getItem('token').exp * 1000 > Date.now()))
 

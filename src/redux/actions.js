@@ -85,7 +85,7 @@ export const getHotelByName = (name) => {
 export const getDetail = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/hotels/${id}`);
+      const response = await axios.get(`http://localhost:3001/hotels/detail/${id}`);
       return dispatch({
         type: GET_DETAIL,
         payload: response.data,
