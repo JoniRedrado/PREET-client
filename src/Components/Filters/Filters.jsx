@@ -64,20 +64,21 @@
 //         </select>
 //       </div>
 
-      // <div className={style.priceSort}>
-      //   <p>Order by </p>
-      //   <select name="selectPrice" onChange={handleSortPrices}>
-      //     <option value="moreRelevant">More relevant</option>
-      //     <option value="lowest">Price (lowest first)</option>
-      //     <option value="highest">Price (highest first)</option>
-      //   </select>
-      // </div>
+// <div className={style.priceSort}>
+//   <p>Order by </p>
+//   <select name="selectPrice" onChange={handleSortPrices}>
+//     <option value="moreRelevant">More relevant</option>
+//     <option value="lowest">Price (lowest first)</option>
+//     <option value="highest">Price (highest first)</option>
+//   </select>
+// </div>
 //     </div>
 //   );
 // }
 
 // export default Filters;
 
+<<<<<<< Updated upstream
 import { useDispatch, useSelector } from "react-redux"
 import { filterHotels, filterParams } from "../../redux/actions"
 // import s from "../Filters/Filters.module.css"
@@ -85,23 +86,60 @@ import { filterHotels, filterParams } from "../../redux/actions"
 // import { useState } from "react"
 import './Filters.style.css'
 
+=======
+import { useDispatch, useSelector } from "react-redux";
+import { filterHotels } from "../../redux/actions";
+// import s from "../Filters/Filters.module.css"
+//*PRUEBA
+import { useState } from "react";
+import "./Filters.style.css";
+>>>>>>> Stashed changes
 
 const Filters = () => {
-  
   const dispatch = useDispatch();
+<<<<<<< Updated upstream
   const filters = useSelector((state) => state.submitFilters)
+=======
+  const allCountries = useSelector((state) => state.countries);
+>>>>>>> Stashed changes
 
   //*PRUEBA
 
   const handleFilters = (e) => {
     const { name, value } = e.target;
+<<<<<<< Updated upstream
     dispatch(filterParams({...filters, [name]:value}));
   };
 
   const applyFilters = () => {
+=======
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: value,
+    }));
+
+    //console.log(filters);
+    //setFilters({...filters, [name]: value});
+  };
+
+  const applyFilters = () => {
+    /*if (!filters.orderBy) {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        orderBy: "name", 
+        direction: "ASC" 
+      }));
+    } else if (!filters.direction) {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        direction: "ASC" 
+      }));
+    }*/
+    console.log(filters);
+
+>>>>>>> Stashed changes
     dispatch(filterHotels(filters));
   };
- 
 
   //*
   // let filtros = {}
@@ -111,9 +149,9 @@ const Filters = () => {
   //   const newFilter = e.target.name
   //   const selection = e.target.value;
   //   filtros[newFilter] = selection
-    
+
   //   dispatch(filterHotels(filtros))
-  // } 
+  // }
 
   return (
     <div>
@@ -122,7 +160,17 @@ const Filters = () => {
           <p>Countries</p>
           <select name="country" defaultValue="" onChange={handleFilters}>
             <option value="">All Countries</option>
+<<<<<<< Updated upstream
             <option value="1">Argentina</option>
+=======
+            {allCountries &&
+              allCountries.map((count) => (
+                <option value={count.id} key={count.id}>
+                  {count.name}
+                </option>
+              ))}
+            {/* <option value="1">Argentina</option>
+>>>>>>> Stashed changes
             <option value="2">Bolivia</option>
             <option value="3">Brazil</option>
             <option value="4">Chile</option>
@@ -135,7 +183,11 @@ const Filters = () => {
             <option value="11">Peru</option>
             <option value="12">Surinam</option>
             <option value="13">Uruguay</option>
+<<<<<<< Updated upstream
             <option value="14">Venezuela</option>
+=======
+            <option value="14">Venezuela</option> */}
+>>>>>>> Stashed changes
           </select>
         </div>
         <div>
@@ -192,8 +244,13 @@ const Filters = () => {
             <p>Direction </p>
             <select name="direction" onChange={handleFilters}>
               <option value="">Direction</option>
+<<<<<<< Updated upstream
               <option value="ASC">↓</option>
               <option value="DESC">↑</option>
+=======
+              <option value="ASC">ASC</option>
+              <option value="DESC">DESC</option>
+>>>>>>> Stashed changes
             </select>
           </div>
         </div>
@@ -201,6 +258,6 @@ const Filters = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Filters;
