@@ -1,151 +1,38 @@
-import React from "react";
-import validate from "../../helpers/registerValidation";
-import axios from "axios";
+import { useState } from 'react';
+import { register } from '../../Components/Auth/Auth';
+import { useNavigate } from 'react-router-dom';
 
-import style from "./Register.module.css";
 
-function Register() {
-  const [input, setInput] = React.useState({
-    name: "",
-    surname: "",
-    username: "",
-    email: "",
-    password: "",
-    confirmation: "",
-  });
+function RegisterUser() {
+    const [name, setName] = useState('');
+    const [last_name, setLast_name] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-  const [error, setError] = React.useState({});
+    const handleRegister = async () => {
+        try {
+            const data = await register(name, last_name, email, password);
+            navigate('/',data)
+        } catch (error) {
+            setError(error.message);
+        }
+    };
 
-  /* const auth = useAuth();
-
-  if (auth.isAuthenticated) {
-    return <Navigate to="/home" />;
-  } */
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInput({
-      ...input,
-      [name]: value,
-    });
-    setError(
-      validate({
-        ...input,
-        [name]: value,
-      })
+    return (
+        <div>
+            <h2>Register User</h2>
+            <form>
+                <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                <input type="text" placeholder="Last Name" value={last_name} onChange={(e) => setLast_name(e.target.value)} />
+                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <button type="button" onClick={handleRegister}>Register</button>
+            </form>
+            {error && <p>{error}</p>}
+        </div>
     );
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const url = "http://localhost:3001/signup";
-    const data = { input };
-    try {
-      const response = await axios.post(url, data, {
-        headers: { "Content-Type": "application/json" },
-      });
-      console.log("Respuesta del servidor:", response.data);
-    } catch (error) {
-      console.error("Error al realizar la solicitud:", error.message);
-    }
-  };
-
-  return (
-    <div /* className={style.container} */>
-      <form onSubmit={handleSubmit}>
-        <h1>Create Account</h1>
-
-        <div /* className={style.name} */>
-          <label>Name </label>
-          <input
-            name="name"
-            type="name"
-            placeholder="E.g. John"
-            value={input.name}
-            onChange={handleChange}
-          />
-          <span>{error.name}</span>
-        </div>
-
-        <div /* className={style.surname} */>
-          <label>Surname </label>
-          <input
-            name="surname"
-            type="surname"
-            placeholder="E.g. Malkovich"
-            value={input.surname}
-            onChange={handleChange}
-          />
-          <span>{error.surname}</span>
-        </div>
-
-        <div /* className={style.username} */>
-          <label>Username </label>
-          <input
-            name="username"
-            type="username"
-            placeholder="E.g. Johny22"
-            value={input.username}
-            onChange={handleChange}
-          />
-          <span>{error.username}</span>
-        </div>
-
-        <div /* className={style.email} */>
-          <label>Email </label>
-          <input
-            name="email"
-            type="email"
-            placeholder="Email address"
-            value={input.email}
-            onChange={handleChange}
-          />
-          <span>{error.email}</span>
-        </div>
-
-        <div /* className={style.password} */>
-          <label>Password </label>
-          <input
-            name="password"
-            type="password"
-            id="password"
-            placeholder="Create password"
-            value={input.password}
-            onChange={handleChange}
-          />
-          <span>{error.password}</span>
-        </div>
-
-        <div /* className={style.confirmation} */>
-          <label>Repeat your password </label>
-          <input
-            name="confirmation"
-            type="password"
-            id="confirmation"
-            placeholder="Confirm your password"
-            value={input.confirmation}
-            onChange={handleChange}
-          />
-          <span>{error.confirmation}</span>
-        </div>
-
-        {Object.keys(error).length || !input.name.length ? (
-          <>
-            <br />
-            <button className={style.BtnDisabled} disabled>
-              Register
-            </button>
-          </>
-        ) : (
-          <>
-            <br />
-            <button /* className={style.registerButton} */>Register</button>
-          </>
-        )}
-      </form>
-    </div>
-  );
 }
 
-export default Register;
+export default RegisterUser;
