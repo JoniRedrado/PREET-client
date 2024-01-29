@@ -1,19 +1,26 @@
 import React from "react";
 import validate from "../../helpers/registerValidation";
+import axios from "axios";
 
-// import styles from "./Register.module.css";
+import style from "./Register.module.css";
 
 function Register() {
   const [input, setInput] = React.useState({
     name: "",
     surname: "",
-    alias: "",
+    username: "",
     email: "",
     password: "",
     confirmation: "",
   });
 
   const [error, setError] = React.useState({});
+
+  /* const auth = useAuth();
+
+  if (auth.isAuthenticated) {
+    return <Navigate to="/home" />;
+  } */
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,9 +36,24 @@ function Register() {
     );
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const url = "http://localhost:3001/signup";
+    const data = { input };
+    try {
+      const response = await axios.post(url, data, {
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log("Respuesta del servidor:", response.data);
+    } catch (error) {
+      console.error("Error al realizar la solicitud:", error.message);
+    }
+  };
+
   return (
     <div /* className={style.container} */>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h1>Create Account</h1>
 
         <div /* className={style.name} */>
@@ -58,16 +80,16 @@ function Register() {
           <span>{error.surname}</span>
         </div>
 
-        <div /* className={style.alias} */>
-          <label>Alias </label>
+        <div /* className={style.username} */>
+          <label>Username </label>
           <input
-            name="alias"
-            type="alias"
+            name="username"
+            type="username"
             placeholder="E.g. Johny22"
-            value={input.alias}
+            value={input.username}
             onChange={handleChange}
           />
-          <span>{error.alias}</span>
+          <span>{error.username}</span>
         </div>
 
         <div /* className={style.email} */>
@@ -108,10 +130,19 @@ function Register() {
           <span>{error.confirmation}</span>
         </div>
 
-        <button /* className={style.registerButton} */ /* onClick={handleSubmit} */
-        >
-          Register
-        </button>
+        {Object.keys(error).length || !input.name.length ? (
+          <>
+            <br />
+            <button className={style.BtnDisabled} disabled>
+              Register
+            </button>
+          </>
+        ) : (
+          <>
+            <br />
+            <button /* className={style.registerButton} */>Register</button>
+          </>
+        )}
       </form>
     </div>
   );
