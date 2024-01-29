@@ -35,9 +35,14 @@ function NavBar() {
     navigate("/")
   }
 
+  function logout() {
+    localStorage.removeItem('token')
+    navigate("/")
+  }
+
   return (
     <div className={style.container}>
-      <Link to="/home" onClick={handleHomeButton}>
+      <Link to="/" onClick={handleHomeButton}>
         <img src={template} width="18%" />
       </Link>
       <SearchBar />
@@ -45,8 +50,9 @@ function NavBar() {
         {token ? (
           <>
             <Link to="/create">
-              <button>Create Hotel</button>
+              <button className={style.blueButton}>Create Hotel</button>
             </Link>
+            <button onClick={logout}>Cerrar sesión</button>
           </>
         ) : (
           ""
@@ -56,7 +62,7 @@ function NavBar() {
         ) : (
           <>
             <button
-              className={style.registerButton}
+              className={style.blueButton}
               onClick={() => openModal("register")}
             >
               Register

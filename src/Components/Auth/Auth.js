@@ -24,8 +24,9 @@ export  async function login(email, password) {
 export  async function register(name, last_name, email, password) {
     try {
         const response = await axios.post('http://localhost:3001/auth/register', { name, last_name, email, password });
-        if (response.status === 200) {
-            return response.data;
+      if (response.status === 200) {
+          window.alert("Usuario creado con éxito")
+          return response.data;
         } else {
             throw new Error(response.data.error || 'Error al registrar usuario');
         }
