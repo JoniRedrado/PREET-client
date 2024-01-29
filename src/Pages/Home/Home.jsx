@@ -18,20 +18,19 @@ function Home() {
     dispatch(getAllCountries());
 }, [currentPage]);
 
-  // let tokenExistsAndStillValide = (decodeToken(localStorage.getItem('token').exp * 1000 > Date.now()))
-
-  let tokenExistsAndStillValide = true
+  //const storedToken = localStorage.getItem('token');
+  // let tokenExistsAndStillValid = storedToken && decodeToken(storedToken).exp * 1000 > Date.now();
+  //let tokenExistsAndStillValide = true
 
   return (
     <>
-      {tokenExistsAndStillValide
-        ? (<div>
+        <div>
           <Filters />
           <Cards allHotels={filteredHotels} />
           <Pagination />
-        </div>)
-        : <Login />
-      }
+        </div>
+        <Login />
+      
     </>
   );
 }
