@@ -53,7 +53,11 @@ const Detail = () =>{
           <button> Return home</button>
         </Link>
       </div>
-      
+      <div>
+        <Link to= {`/update/${hotel.id}`}>
+          <button>Update</button>
+        </Link>
+      </div>
     </div>
   )
 
