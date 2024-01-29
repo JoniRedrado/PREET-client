@@ -18,20 +18,20 @@ export  async function login(email, password) {
     }
 }
 
-// Función para registrar un usuario
-// export  async function register(name, lastName, email, password) {
-//     try {
-//         const response = await axios.post('/api/register', { name, lastName, email, password });
-//         if (response.status === 200) {
-//             return response.data;
-//         } else {
-//             throw new Error(response.data.error || 'Error al registrar usuario');
-//         }
-//     } catch (error) {
-//         console.error('Error al registrar usuario:', error.message);
-//         throw error;
-//     }
-// }
+//Función para registrar un usuario
+export  async function register(name, last_name, email, password) {
+    try {
+        const response = await axios.post('http://localhost:3001/auth/register', { name, last_name, email, password });
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            throw new Error(response.data.error || 'Error al registrar usuario');
+        }
+    } catch (error) {
+        console.error('Error al registrar usuario:', error.message);
+        throw error;
+    }
+}
 
 // Función para cerrar sesión
 // function logout() {

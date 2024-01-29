@@ -4,23 +4,21 @@ import Cards from "../../Components/Cards/Cards";
 import Pagination from "../../Components/Pagination/Pagination";
 import { filterHotels, getAllCountries } from "../../redux/actions";
 import Filters from "../../Components/Filters/Filters";
-import Login from "../Login/Login"
-// import { decodeToken } from "../../utils/decodeToken";
+// import { useNavigate } from 'react-router-dom';
+
 
 function Home() {
   const dispatch = useDispatch();
   const filteredHotels = useSelector((state) => state.filteredHotels);
   const currentPage = useSelector((state) => state.currentPage);
   const filters = useSelector((state) => state.submitFilters);
+  // const navigate = useNavigate();
+
 
   useEffect(() => {
     dispatch(filterHotels(filters));
     dispatch(getAllCountries());
 }, [currentPage]);
-
-  //const storedToken = localStorage.getItem('token');
-  // let tokenExistsAndStillValid = storedToken && decodeToken(storedToken).exp * 1000 > Date.now();
-  //let tokenExistsAndStillValide = true
 
   return (
     <>
@@ -29,8 +27,6 @@ function Home() {
           <Cards allHotels={filteredHotels} />
           <Pagination />
         </div>
-        <Login />
-      
     </>
   );
 }
