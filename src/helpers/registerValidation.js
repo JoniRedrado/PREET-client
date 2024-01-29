@@ -25,14 +25,14 @@ function registerValidation(input) {
     errors.surname = "";
   }
 
-  if (!input.alias) {
-    errors.alias = "Alias is required";
-  } else if (input.alias.length > 22) {
-    errors.alias = "22 characters max";
-  } else if (input.alias.length < 5) {
-    errors.alias = "5 characters minimum";
+  if (!input.username) {
+    errors.username = "Username is required";
+  } else if (input.username.length > 22) {
+    errors.username = "22 characters max";
+  } else if (input.username.length < 5) {
+    errors.username = "5 characters minimum";
   } else {
-    errors.alias = "";
+    errors.username = "";
   }
 
   if (!input.email) {
