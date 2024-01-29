@@ -6,7 +6,9 @@ export  async function login(email, password) {
         const response = await axios.post('http://localhost:3001/auth/login', { email, password });
         if (response.status === 200) {
             // Almacenar el token JWT en el almacenamiento local
-            localStorage.setItem('token', response.data.token);
+          
+          console.log('Token que se va a almacenar', response.data);
+          localStorage.setItem('token', response.data);
             console.log('Token almacenado correctamente:', response.data.token);
             return response.data;
         } else {

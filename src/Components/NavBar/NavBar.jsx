@@ -1,20 +1,38 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import template from "../../assets/Logo-White.svg";
 import SearchBar from "../SearchBar/SearchBar";
-// import Filters from "../Filters/Filters";
-
-
+import Modal from "react-modal";
+import RegisterUser from "../../Pages/Register/Register";
+import LoginForm from "../../Pages/Login/Login";
 import style from "./NavBar.module.css";
-import { useDispatch } from "react-redux";
-import { getAllHotels, resetCurrentPage } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllHotels, resetCurrentPage, showModal } from "../../redux/actions"
+
 
 function NavBar() {
+  const token = localStorage.getItem('token')
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const modalRegister = useSelector((state) => state.showModal.register)
+  const modalLogin = useSelector((state) => state.showModal.login)
+
+  console.log(modalRegister);
+  console.log(modalLogin);
 
   const handleHomeButton = () => {
     dispatch(resetCurrentPage())
     dispatch(getAllHotels())
+  }
+
+  function openModal(option) {
+    dispatch(showModal(option, true))
+  }
+
+  function closeModal(option) {
+    dispatch(showModal(option, false))
+    navigate("/")
   }
 
   return (
@@ -23,13 +41,66 @@ function NavBar() {
         <img src={template} width="18%" />
       </Link>
       <SearchBar />
-      {/* <Filters/> */}
-      <Link to="/create">
-        <button>Create Hotel</button>
-      </Link>
-      <Link to="/">
-        <button>Login</button>
-      </Link>
+      <div className={style.userButtons}>
+        {token ? (
+          <>
+            <Link to="/create">
+              <button>Create Hotel</button>
+            </Link>
+          </>
+        ) : (
+          ""
+        )}
+        {token ? (
+          ""
+        ) : (
+          <>
+            <button
+              className={style.registerButton}
+              onClick={() => openModal("register")}
+            >
+              Register
+            </button>
+            <div className={style.overlayModal}>
+              <Modal
+                isOpen={modalRegister}
+                onAfterOpen={undefined}
+                onRequestClose={() => closeModal("register")}
+                onAfterClose={() => closeModal("register")}
+                className={style.modalContent}
+                style={{
+                  overlay: {
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  },
+                }}
+                contentLabel="Login Modal"
+              >
+                <RegisterUser />
+              </Modal>
+            </div>
+            <button onClick={() => openModal("login")} name="login">
+              Login
+            </button>
+            <div className={style.overlayModal}>
+              <Modal
+                isOpen={modalLogin}
+                onAfterOpen={undefined}
+                onRequestClose={() => closeModal("login")}
+                onAfterClose={() => closeModal("login")}
+                className={style.modalContent}
+                style={{
+                  overlay: {
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  },
+                }}
+                contentLabel="Login Modal"
+              >
+                <LoginForm />
+              </Modal>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

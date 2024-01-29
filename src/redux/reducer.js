@@ -15,6 +15,7 @@ import {
   RESET_CURRENT_PAGE,
   HANDLE_FILTERS,
   GET_ALL_COUNTRIES,
+  SHOW_MODAL,
 } from "./actions-types";
 
 let initialState = {
@@ -26,6 +27,10 @@ let initialState = {
   newHotel: {},
   searched: false,
   totalHotels: "",
+  showModal: {
+    register: false,
+    login: false,
+  },
 };
 
 function rootReducer(state = initialState, action) {
@@ -157,7 +162,14 @@ function rootReducer(state = initialState, action) {
         ...state,
         countries: action.payload,
       };
-
+    case SHOW_MODAL:
+      return {
+        ...state,
+        showModal: {
+          ...state.showModal,
+          [action.payload.option]: action.payload.boolean
+        },
+      };
     default:
       return state;
   }
