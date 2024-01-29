@@ -92,8 +92,6 @@ const Filters = () => {
 
   const allCountries = useSelector((state) => state.countries);
 
-  console.log('Array con todos los países', allCountries);
-
   const handleFilters = (e) => {
     const { name, value } = e.target;
     dispatch(filterParams({ ...filters, [name]: value }));

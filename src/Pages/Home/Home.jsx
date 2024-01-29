@@ -12,8 +12,6 @@ function Home() {
   const filteredHotels = useSelector((state) => state.filteredHotels);
   const currentPage = useSelector((state) => state.currentPage);
   const filters = useSelector((state) => state.submitFilters);
-  // const navigate = useNavigate();
-
 
   useEffect(() => {
     dispatch(filterHotels(filters));

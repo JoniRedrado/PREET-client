@@ -18,6 +18,7 @@ import {
   RESET_CURRENT_PAGE,
   HANDLE_FILTERS,
   GET_ALL_COUNTRIES,
+  SHOW_MODAL,
 } from "./actions-types";
 
 export const getAllHotels = () => {
@@ -255,5 +256,12 @@ export const filterHotels = (params) => {
     } catch (error) {
       console.error("Error al filtrar hoteles:", error);
     }
+  };
+};
+
+export const showModal = (option, boolean) => {
+  return {
+      type: SHOW_MODAL,
+      payload: {option, boolean}
   };
 };

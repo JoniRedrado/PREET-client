@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { login } from '../../Components/Auth/Auth';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import style from "../Login/Login.module.css"
 
 function LoginForm() {
     const [email, setEmail] = useState('');
@@ -11,8 +11,9 @@ function LoginForm() {
 
     const handleLogin = async () => {
         try {
-            const data = await login(email, password);
-            navigate('/home',data)
+          const data = await login(email, password);
+          
+          navigate('/home', data)
         } catch (error) {
             setError(error.message); 
         }
@@ -20,16 +21,13 @@ function LoginForm() {
 
     return (
         <div>
+          <form className={style.loginContainer}>
             <h2>Login</h2>
-            <form>
-                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button type="button" onClick={handleLogin}>Login</button>
-            </form>
-            {error && <p>{error}</p>}
-            <Link to="/register">
-              <button>Register User</button>
-            </Link>
+            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <button type="button" onClick={handleLogin}>Login</button>
+          </form>
+          {error && <p>{error}</p>}
         </div>
     );
 }

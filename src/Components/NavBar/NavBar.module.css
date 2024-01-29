@@ -19,3 +19,25 @@
   border-color: transparent;
   border-radius: 5px;
 }
+
+.modalContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 500px;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.userButtons {
+  display: flex;
+  gap: 5px;
+}
+
+.registerButton {
+  background-color: #009dff !important
+}
