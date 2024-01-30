@@ -1,37 +1,65 @@
-.container {
-    max-width: 400px;
+  .container {
+    width: 50%;
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .container > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .container > div:first-child button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .container > div:first-child button:hover {
+    background-color: #0056b3;
   }
   
   .container img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     margin-bottom: 10px;
   }
   
-  .container h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
+  .container h1,
+  .container h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
   }
   
   .container h2 {
-    font-size: 18px;
-    margin-bottom: 8px;
+    font-weight: normal;
   }
   
-  button {
-    background-color: #3498db;
+  .container p {
+    margin-top: 10px;
+  }
+  
+  .container button {
+    margin-top: 20px;
+    background-color: #007bff;
     color: #fff;
-    padding: 10px 15px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
+    padding: 8px 16px;
     cursor: pointer;
   }
   
-  button:hover {
-    background-color: #2e86de;
+  .container button:hover {
+    background-color: #0056b3;
   }
+  

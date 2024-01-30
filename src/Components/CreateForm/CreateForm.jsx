@@ -140,12 +140,21 @@ const CreateForm = () => {
       setErrors(validationErrors);
     }
   };
+const fieldLabels = {
+  name: "Name",
+  address: "Address",
+  address_url: "Address URL",
+  price: "Price",
+  email: "Email"
+}
+
   return (
     <div className={styles.formContainer}>
       <form onSubmit={handleSubmit}>
-        {["name", "address", "address_url", "price", "email"].map((field) => (
+        {Object.keys(fieldLabels).map((field) => (
           <div key={field} className={styles.fieldContainer}>
-            <label>
+            <label> 
+              {fieldLabels[field]}
               <input
                 type="text"
                 name={field}
@@ -162,7 +171,7 @@ const CreateForm = () => {
         ))}
 
         <div className={styles.fieldContainer}>
-          <label>
+          <label>Stars
             <select
               className={styles.starsSelect}
               name="stars"
@@ -171,7 +180,7 @@ const CreateForm = () => {
             >
               {[1, 2, 3, 4, 5].map((star) => (
                 <option key={star} value={star}>
-                  {star}
+                {star}
                 </option>
               ))}
             </select>
@@ -179,7 +188,7 @@ const CreateForm = () => {
         </div>
 
         <div className={styles.fieldContainer}>
-          <label>
+          <label> Country
             <select
               className={styles.countrySelect}
               name="countryId"

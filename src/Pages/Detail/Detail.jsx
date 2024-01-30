@@ -26,33 +26,33 @@ const Detail = () =>{
   }, [dispatch,id])
 
   const hotel = useSelector((state) => state.hotelDetail)
-
+  console.log(hotel.country)
   return(
     <div className="container">
-        <button onClick={() => handleDelete(id)}>Delete</button>
-      
+        <div>
+          <button onClick={() => handleDelete(id)}>Delete</button>
+          <Link to= {`/update/${hotel.id}`}>
+            <button>Update</button>
+          </Link>
+        </div>
       {hotel ? (
         <div>
       <h1>{hotel.name}</h1>
       <img src={hotel.image} alt={hotel.name}/>
-      <h2>Price per night {hotel.price}$</h2>
-      <h2>Ubication {hotel.address_url}</h2>
-      {/* <h2>{hotel.countryId}</h2> */}
-      <h2>Contact {hotel.email}</h2>
       <h2>{hotel.stars}⭐</h2>
+      <h2>Price per night {hotel.price} $</h2>
+      <h2>Country {hotel.country && hotel.country.name}</h2>
+      <h2>Ubication {hotel.address_url}</h2>
+      <h2>Contact {hotel.email}</h2>
       </div> ) : (
         <p>cargando...</p>
       )}
       <div>
-        <Link to="/home">
+        <Link to="/">
           <button> Return home</button>
         </Link>
       </div>
-      <div>
-        <Link to= {`/update/${hotel.id}`}>
-          <button>Update</button>
-        </Link>
-      </div>
+     
     </div>
   )
 
