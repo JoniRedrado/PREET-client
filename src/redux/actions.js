@@ -130,7 +130,6 @@ export const resetCurrentPage = () => {
   return function (dispatch) {
     dispatch({
       type: RESET_CURRENT_PAGE,
-      payload: 1,
     });
   };
 };

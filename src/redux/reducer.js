@@ -77,7 +77,7 @@ function rootReducer(state = initialState, action) {
     case RESET_CURRENT_PAGE:
       return {
         ...state,
-        currentPage: action.payload,
+        currentPage: 1,
       };
     case GET_DETAIL:
       return {
