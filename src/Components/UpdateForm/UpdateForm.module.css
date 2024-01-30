@@ -1,0 +1,63 @@
+.formContainer {
+    width: 50%;
+    margin: 0 auto; /* Para centrar horizontalmente */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+  
+  .fieldContainer {
+    margin-bottom: 15px;
+  }
+  
+  .input {
+    width: 40%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .starsSelect,
+  .countrySelect {
+    width: 40%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .imageContainer {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100%; /* Establecer un ancho máximo */
+  }
+  
+  .imageContainer label {
+    flex: 1; /* Para que el botón de "Upload Image" tenga el mismo ancho que el campo de entrada de archivo */
+  }
+  
+  .imagePreview {
+    width: 300px; /* Ancho de la imagen */
+    height: 300px; /* Alto de la imagen */
+    margin-top: 10px;
+    max-width: 50%; /* Establecer un ancho máximo para la imagen */
+  }
+  
+  .formButton {
+    display: block;
+    width: 25%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .formButton:hover {
+    background-color: #0056b3;
+  }

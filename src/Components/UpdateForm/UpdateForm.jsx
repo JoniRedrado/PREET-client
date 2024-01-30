@@ -137,13 +137,21 @@ const UpdateForm = ({ match }) => {
       setErrors(validationErrors);
     }
   };
+  const fieldLabels = {
+    name: "Nombre",
+    address: "Dirección",
+    address_url: "URL de la Dirección",
+    price: "Precio",
+    email: "Correo Electrónico"
+  }
 
   return (
     <div className={styles.formContainer}>
       <form onSubmit={handleSubmit}>
-        {["name", "address", "address_url", "price", "email"].map((field) => (
+        {Object.keys(fieldLabels).map((field) => (
           <div key={field} className={styles.fieldContainer}>
             <label>
+              {fieldLabels[field]}
               <input
                 type="text"
                 name={field}
@@ -161,6 +169,7 @@ const UpdateForm = ({ match }) => {
 
         <div className={styles.fieldContainer}>
           <label>
+            Stars
             <select
               className={styles.starsSelect}
               name="stars"
@@ -178,6 +187,7 @@ const UpdateForm = ({ match }) => {
 
         <div className={styles.fieldContainer}>
           <label>
+            Country
             <select
               className={styles.countrySelect}
               name="countryId"
