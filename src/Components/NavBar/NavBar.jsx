@@ -6,7 +6,7 @@ import RegisterUser from "../../Pages/Register/Register";
 import LoginForm from "../../Pages/Login/Login";
 import style from "./NavBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllHotels, resetCurrentPage, showModal } from "../../redux/actions"
+import { getAllHotels, resetCurrentPage, showModal, userLog } from "../../redux/actions"
 
 
 function NavBar() {
@@ -17,9 +17,6 @@ function NavBar() {
 
   const modalRegister = useSelector((state) => state.showModal.register)
   const modalLogin = useSelector((state) => state.showModal.login)
-
-  console.log(modalRegister);
-  console.log(modalLogin);
 
   const handleHomeButton = () => {
     dispatch(resetCurrentPage())
@@ -32,11 +29,13 @@ function NavBar() {
 
   function closeModal(option) {
     dispatch(showModal(option, false))
-    navigate("/")
+    navigate('/')
   }
 
-  function logout() {
+  function logout(option) {
     localStorage.removeItem('token')
+    dispatch(showModal(option, false))
+    dispatch(userLog())
     navigate("/")
   }
 
@@ -45,20 +44,15 @@ function NavBar() {
       <Link to="/" onClick={handleHomeButton}>
         <img src={template} width="18%" />
       </Link>
-      <SearchBar />
       <div className={style.userButtons}>
         {token ? (
           <>
+            <SearchBar />
             <Link to="/create">
               <button className={style.blueButton}>Create Hotel</button>
             </Link>
-            <button onClick={logout}>Cerrar sesión</button>
+            <button onClick={() => logout("login")}>Cerrar sesión</button>
           </>
-        ) : (
-          ""
-        )}
-        {token ? (
-          ""
         ) : (
           <>
             <button

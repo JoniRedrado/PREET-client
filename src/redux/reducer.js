@@ -16,6 +16,7 @@ import {
   HANDLE_FILTERS,
   GET_ALL_COUNTRIES,
   SHOW_MODAL,
+  USER_LOG,
 } from "./actions-types";
 
 let initialState = {
@@ -31,6 +32,7 @@ let initialState = {
     register: false,
     login: false,
   },
+  userChanged: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -167,8 +169,13 @@ function rootReducer(state = initialState, action) {
         ...state,
         showModal: {
           ...state.showModal,
-          [action.payload.option]: action.payload.boolean
+          [action.payload.option]: action.payload.boolean,
         },
+      };
+    case USER_LOG:
+      return {
+        ...state,
+        userChanged: !state.userChanged
       };
     default:
       return state;
