@@ -26,7 +26,7 @@ const UpdateForm = ({ match }) => {
   useEffect(() => {
     const fetchHotelData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/hotels/${id}`);
+        const response = await axios.get(`http://localhost:3001/hotels/detail/${id}`);
         setHotelData(response.data);
       } catch (error) {
         console.error("Error fetching hotel data:", error);
