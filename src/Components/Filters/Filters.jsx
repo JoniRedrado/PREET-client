@@ -92,6 +92,7 @@ const Filters = () => {
 
   const allCountries = useSelector((state) => state.countries);
 
+
   const handleFilters = (e) => {
     const { name, value } = e.target;
     dispatch(filterParams({ ...filters, [name]: value }));
