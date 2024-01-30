@@ -19,6 +19,7 @@ import {
   HANDLE_FILTERS,
   GET_ALL_COUNTRIES,
   SHOW_MODAL,
+  USER_LOG
 } from "./actions-types";
 
 export const getAllHotels = () => {
@@ -27,6 +28,7 @@ export const getAllHotels = () => {
     try {
       const endpoint = `http://localhost:3001/hotels?page=${currentPage}`;
       const response = await axios.get(endpoint);
+
       dispatch({
         type: GET_ALL_HOTELS,
         payload: response.data,
@@ -263,5 +265,11 @@ export const showModal = (option, boolean) => {
   return {
       type: SHOW_MODAL,
       payload: {option, boolean}
+  };
+};
+
+export const userLog = () => {
+  return {
+      type: USER_LOG,
   };
 };
