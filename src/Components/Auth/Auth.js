@@ -13,7 +13,7 @@ export  async function login(email, password) {
             throw new Error(response.data.message || 'Error de inicio de sesión');
         }
     } catch (error) {
-        console.error('Error de inicio de sesión:', error.message);
+        console.error('Error de inicio de sesión:', error);
         throw error;
     }
 }
@@ -29,7 +29,7 @@ export  async function register(name, last_name, email, password) {
             throw new Error(response.data.error || 'Error al registrar usuario');
         }
     } catch (error) {
-        console.error('Error al registrar usuario:', error.message);
+        console.error('Error al registrar usuario:', error);
         throw error;
     }
 }

@@ -29,11 +29,6 @@ const Detail = () =>{
 
   return(
     <div className="container">
-        <div>
-          <Link to="/update">
-            <button>Update</button>
-          </Link>
-        </div>
         <button onClick={() => handleDelete(id)}>Delete</button>
       
       {hotel ? (

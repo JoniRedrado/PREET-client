@@ -88,15 +88,20 @@ const CreateForm = () => {
           formData.append("file", e.target.querySelector('input[type="file"]').files[0]);
           formData.append("upload_preset", "PREET2024");
   
-          const responseCloudinary = await axios.post(
+          const responseCloudinary = await fetch(
             "https://api.cloudinary.com/v1_1/drntvj4ut/image/upload",
-            formData
+            {
+              method: "POST",
+              body: formData,
+            }
           );
   
-          if (responseCloudinary.data.secure_url) {
+          const cloudinaryData = await responseCloudinary.json();
+  
+          if (cloudinaryData.secure_url) {
             const updatedData = {
               ...hotelData,
-              image: responseCloudinary.data.secure_url,
+              image: cloudinaryData.secure_url,
             };
   
             const responseBackend = await axios.post(
