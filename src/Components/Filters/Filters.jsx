@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { filterHotels, filterParams } from "../../redux/actions";
+import { filterHotels, filterParams, resetCurrentPage } from "../../redux/actions";
 import "./Filters.style.css";
 
 const Filters = () => {
@@ -17,6 +17,7 @@ const Filters = () => {
 
   const applyFilters = () => {
     dispatch(filterHotels(filters));
+    dispatch(resetCurrentPage())
   };
 
   // const resetFilter = () => {
