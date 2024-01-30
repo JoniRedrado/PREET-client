@@ -4,9 +4,9 @@ import styles from "./updateForm.module.css";
 import validation from "../../helpers/validation";
 import { useParams, useNavigate } from "react-router-dom"
 
-const UpdateForm = ({ match }) => {
+const UpdateForm = () => {
   const navigate = useNavigate()
-  const {id} = useParams();
+  const { id } = useParams();
 
   const [hotelData, setHotelData] = useState({
     name: "",
@@ -87,11 +87,14 @@ const UpdateForm = ({ match }) => {
     e.preventDefault();
     const validationErrors = validation(hotelData);
     setErrors(validationErrors);
-
+  
     if (Object.keys(validationErrors).length === 0) {
       try {
+        setLoading(true);
+  
+        let imageUpdate = hotelData.image;
+  
         if (hotelData.image && hotelData.image.startsWith("blob:")) {
-          setLoading(true);
           const formData = new FormData();
           formData.append("file", e.target.querySelector('input[type="file"]').files[0]);
           formData.append("upload_preset", "PREET2024");
@@ -107,28 +110,30 @@ const UpdateForm = ({ match }) => {
           const cloudinaryData = await responseCloudinary.json();
   
           if (cloudinaryData.secure_url) {
-            const updatedData = {
-              ...hotelData,
-              image: cloudinaryData.secure_url,
-            };
-
-            const responseBackend = await axios.put(
-              `http://localhost:3001/hotels/${id}`,
-              updatedData
-            );
-
-            if (responseBackend.data.name) {
-              window.alert("Hotel successfully updated!");
-              navigate(`/detail/${id}`)
-            } else {
-              console.error("Error updating hotel:", responseBackend.data.message);
-            }
+            imageUpdate = cloudinaryData.secure_url;
           } else {
             console.error("Error: No 'secure_url' found in Cloudinary response");
           }
-
-          setLoading(false);
         }
+  
+        const updatedData = {
+          ...hotelData,
+          image: imageUpdate,
+        };
+  
+        const responseBackend = await axios.put(
+          `http://localhost:3001/hotels/${id}`,
+          updatedData
+        );
+  
+        if (responseBackend.data.name) {
+          window.alert("Hotel successfully updated!");
+          navigate(`/detail/${id}`)
+        } else {
+          console.error("Error updating hotel:", responseBackend.data.message);
+        }
+  
+        setLoading(false);
       } catch (error) {
         console.error("Error:", error);
         setLoading(false);
@@ -137,6 +142,7 @@ const UpdateForm = ({ match }) => {
       setErrors(validationErrors);
     }
   };
+
   const fieldLabels = {
     name: "Nombre",
     address: "Dirección",
