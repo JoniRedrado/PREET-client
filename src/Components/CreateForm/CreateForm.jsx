@@ -13,7 +13,7 @@ const CreateForm = () => {
     address_url: "",
     price: "",
     email: "",
-    image: null, // Cambiado a null para manejar la previsualización
+    image: null, 
     countryId: "",
     stars: 1,
   });
