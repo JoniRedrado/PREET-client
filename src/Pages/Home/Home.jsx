@@ -19,10 +19,10 @@ function Home() {
   console.log(filteredHotels);
   
   useEffect(() => {
+    dispatch(filterHotels(filters));
+    dispatch(getAllCountries());
     if (userChanged) {
       dispatch(userLog())
-      dispatch(filterHotels(filters));
-      dispatch(getAllCountries());
     }
 }, [currentPage, userLog]);
 
