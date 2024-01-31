@@ -1,46 +1,50 @@
 .card {
   border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  margin: 16px auto; 
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px auto; 
   max-width: 600px; 
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-size: 10px;
   overflow: hidden;
 }
-  
-  .card-link {
-    text-decoration: none;
-    color: #333;
+ 
+.card-link {
+  text-decoration: none;
+  color: #333;
+}
+
+.card-image {
+  overflow: hidden;
+  border-radius: 10px;
+  margin:-10px;
+  img{
+    width: 100%;
+    height: 200px;
+    margin-bottom: 5px;
   }
+}
+
+.card-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 10px; 
+}
+
+.card-details h1 {
+  margin-bottom: 2px;
+  overflow: hidden;
+  font-weight: none;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+} 
   
-  .card-image {
-    overflow: hidden;
-    border-radius: 8px;
-    
-    img {
-      width: 100%;
-      height: 120px;
-      border-radius: 8px;
-    }
-  }
   
-  .card-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 10px; 
-  }
   
-  .card-details h1 {
-    margin-bottom: 8px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }

@@ -55,7 +55,7 @@ const Filters = () => {
         </div>
 
         <div>
-          <h1 className="price">Price</h1>
+          <p>Price</p>
           <div>
             <input
               type="number"

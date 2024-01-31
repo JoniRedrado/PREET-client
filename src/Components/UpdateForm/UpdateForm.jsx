@@ -144,11 +144,11 @@ const UpdateForm = () => {
   };
 
   const fieldLabels = {
-    name: "Nombre",
-    address: "Dirección",
-    address_url: "URL de la Dirección",
-    price: "Precio",
-    email: "Correo Electrónico"
+    name: "Name ",
+    address: "Address ",
+    address_url: "Address URL ",
+    price: "Price ",
+    email: "Email "
   }
 
   return (
@@ -175,7 +175,7 @@ const UpdateForm = () => {
 
         <div className={styles.fieldContainer}>
           <label>
-            Stars
+            Stars 
             <select
               className={styles.starsSelect}
               name="stars"
@@ -193,7 +193,7 @@ const UpdateForm = () => {
 
         <div className={styles.fieldContainer}>
           <label>
-            Country
+            Country 
             <select
               className={styles.countrySelect}
               name="countryId"
