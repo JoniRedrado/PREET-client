@@ -8,6 +8,8 @@ import "./detail.styles.css"
 
 const Detail = () =>{
 
+  const token = localStorage.getItem('token')
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,33 +30,41 @@ const Detail = () =>{
 
   const hotel = useSelector((state) => state.hotelDetail)
   console.log(hotel.country)
-  return(
-    <div className="container">
-      <div>
-        <Link to="/">
-        <i className="bi bi-arrow-left-circle" title="Return home "></i>
-        </Link>
-        <Link to= {`/update/${hotel.id}`}>
-            <i class="bi bi-pencil-square" title="Update"></i>
-        </Link>
-        <i class="bi bi-trash" onClick={() => handleDelete(id)} title="Delete"></i>  
-      </div>
-       
-      {hotel ? (
+  return (
+    <>
+      <div className="container">
         <div>
-      <h1>{hotel.name}</h1>
-      <img src={hotel.image} alt={hotel.name}/>
-      <h2>{hotel.stars}⭐</h2>
-      <h2>Price per night {hotel.price} $</h2>
-      <h2>Address {hotel.address}</h2>
-      <h2>Country {hotel.country && hotel.country.name}</h2>
-      <h2>Ubication {hotel.address_url}</h2>
-      <h2>Contact {hotel.email}</h2>
-      </div> ) : (
-        <p>cargando...</p>
-      )}
-       
-    </div>
+          <Link to="/">
+          <i className="bi bi-arrow-left-circle" title="Return home "></i>
+          </Link>
+        { token ?
+            (
+              <>
+          <Link to= {`/update/${hotel.id}`}>
+              <i class="bi bi-pencil-square" title="Update"></i>
+          </Link>
+          <i class="bi bi-trash" onClick={() => handleDelete(id)} title="Delete"></i>  
+              </>    
+          ) :
+              ""
+        }
+        </div>
+         
+        {hotel ? (
+          <div>
+        <h1>{hotel.name}</h1>
+        <img src={hotel.image} alt={hotel.name}/>
+        <h2>{hotel.stars}⭐</h2>
+        <h2>Price per night {hotel.price} $</h2>
+        <h2>Address {hotel.address}</h2>
+        <h2>Country {hotel.country && hotel.country.name}</h2>
+        <h2>Ubication {hotel.address_url}</h2>
+        <h2>Contact {hotel.email}</h2>
+        </div> ) : (
+          <p>cargando...</p>
+        )}
+      </div>
+    </>
 
   )
 
