@@ -147,6 +147,7 @@ const UpdateForm = () => {
 
   return (
     <div className={styles.formContainer}>
+      <h1>Update Hotel</h1>
       <form onSubmit={handleSubmit}>
         {Object.keys(fieldLabels).map((field) => (
           <div key={field} className={styles.fieldContainer}>

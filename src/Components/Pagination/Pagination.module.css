@@ -3,6 +3,7 @@
   left: 0;
   right: 0;
   text-align: center; /* Para centrar horizontalmente los elementos */
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .paginationContainer ul {
@@ -16,4 +17,5 @@
 
 .paginationContainer button {
   margin: 0 10px; /* Espacio entre botones y elementos de la lista */
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

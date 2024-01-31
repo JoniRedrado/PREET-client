@@ -7,6 +7,7 @@
   width: 100%; 
   padding: 10px;
   background-color: #DCF2F1;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .container-filtros > div {
@@ -28,6 +29,7 @@ button {
   color: #fff;
   border: none;
   border-radius: 5px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 button:hover {
@@ -47,6 +49,7 @@ select, input{
   align-items: center;
   font-size: 15px;
   border-radius: 5px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .price{

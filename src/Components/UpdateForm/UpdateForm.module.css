@@ -1,6 +1,3 @@
-body {
-  font-family: 'Arial', sans-serif;
-}
 
 .formContainer {
   width: 40%;
@@ -11,21 +8,19 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .fieldContainer {
   margin-bottom: 20px;
 }
 
-label {
+.fieldContainer label {
   display: block;
   margin-bottom: 5px;
-  font-weight: bold;
 }
 
-.input,
-.starsSelect,
-.countrySelect {
+.input {
   width: 80%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -34,15 +29,19 @@ label {
   transition: border-color 0.3s;
   margin: 0 auto;
   margin-top: 8px;
-  font-family: 'Arial', sans-serif;
 }
 
 .input:focus {
   border-color: #007bff;
 }
 
-.countrySelect.error,
-.starsSelect.error,
+.countrySelect.error{
+  border-color: #dc3545;
+}
+
+.starsSelect.error{
+  border-color: #dc3545;
+}
 .error {
   border-color: #dc3545;
 }
@@ -54,6 +53,17 @@ label {
   display: block;
 }
 
+.starsSelect,
+.countrySelect {
+  width: 80%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 .formButton {
   background-color: #007bff;
   color: #fff;
@@ -62,36 +72,39 @@ label {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 10px;
-  font-family: 'Arial', sans-serif;
-}
-
-.removeButton{
-  background-color: red;
-  color: #fff;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .formButton:hover {
   background-color: #0056b3;
 }
 
-.removeButton:hover {
-  background-color: rgb(127, 0, 0);
-}
-
 .imageContainer {
   margin-bottom: 20px;
 }
 
+.imageContainer label {
+  display: block;
+  margin-bottom: 5px;
+}
 .imagePreview {
   max-width: 100%;
   margin-top: 10px;
+}
+
+.removeButton{
+  background-color: red;
+  color: #fff;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 10px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.removeButton:hover {
+  background-color: rgb(127, 0, 0);
 }
 
 .sendContainer{
@@ -103,4 +116,5 @@ label {
 
 .loading{
   width: 30px;
+  margin-top: 15px;
 }

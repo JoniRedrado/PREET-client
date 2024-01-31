@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-//import styles from "./createForm.module.css";
+import styles from "./createForm.module.css";
 import validation from "../../helpers/validation";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -150,7 +150,7 @@ const fieldLabels = {
 
   return (
     <div className={styles.formContainer}>
-       <h2 className={styles.title}>Post Your Hotel</h2>
+       <h1 className={styles.title}>Post Your Hotel</h1>
       <form onSubmit={handleSubmit}>
         {Object.keys(fieldLabels).map((field) => (
           <div key={field} className={styles.fieldContainer}>
@@ -235,7 +235,7 @@ const fieldLabels = {
             <>
               <img src={hotelData.image} alt="Preview" className={styles.imagePreview} />
               <button type="button" onClick={handleImageRemove} className={styles.removeButton}>
-                Remove
+                REMOVE
               </button>
             </>
           )}
