@@ -26,7 +26,7 @@ const UpdateForm = () => {
   useEffect(() => {
     const fetchHotelData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/hotels/detail/${id}`);
+        const response = await axios.get(`https://preet-production.up.railway.app/hotels/detail/${id}`);
         setHotelData(response.data);
       } catch (error) {
         console.error("Error fetching hotel data:", error);
@@ -35,7 +35,7 @@ const UpdateForm = () => {
 
     const fetchCountries = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/countries");
+        const response = await axios.get("https://preet-production.up.railway.app/countries");
         setCountries(response.data);
       } catch (error) {
         console.error("Error fetching countries:", error);
@@ -122,7 +122,7 @@ const UpdateForm = () => {
         };
   
         const responseBackend = await axios.put(
-          `http://localhost:3001/hotels/${id}`,
+          `https://preet-production.up.railway.app/hotels/${id}`,
           updatedData
         );
   
