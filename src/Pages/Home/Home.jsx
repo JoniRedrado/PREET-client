@@ -17,8 +17,6 @@ function Home() {
   const userChanged = useSelector((state) => state.userChanged)
   const [noResults, setNoResults] = useState(false);
 
-  const token = localStorage.getItem("token");
-
   console.log(filteredHotels);
   
   useEffect(() => {
@@ -38,25 +36,18 @@ useEffect(() => {
 }, [filteredHotels]);
 
   return (
-    <>
-      {token? (
-        <div>
-          <Filters />
-            {noResults ? (
-              <TryAgain />
-                ):(
-              <>
-                <Cards allHotels={filteredHotels} />
-                <Pagination />
-              </>
-              )}
-        </div>
-      ):(
-        ""
-      )
-    }
-  </>
-);
+      <div>
+        <Filters />
+          {noResults ? (
+            <TryAgain />
+              ):(
+            <>
+              <Cards allHotels={filteredHotels} />
+              <Pagination />
+            </>
+            )}
+      </div>
+    )
 }
 
 export default Home;
