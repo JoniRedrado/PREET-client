@@ -3,10 +3,14 @@ import axios from "axios";
 import styles from "./createForm.module.css";
 import validation from "../../helpers/validation";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllCountries } from "../../redux/actions";
 
 const CreateForm = () => {
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const [hotelData, setHotelData] = useState({
     name: "",
     address: "",
@@ -14,27 +18,16 @@ const CreateForm = () => {
     price: "",
     email: "",
     image: null, 
+    country: "",
     countryId: "",
-    stars: 1,
+    stars: "",
   });
-
   const [errors, setErrors] = useState({});
-  const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const response = await axios.get("http://localhost:3001/countries");
-        setCountries(response.data);
-        setHotelData({ ...hotelData, countryId: response.data[0] });
-      } catch (error) {
-        console.error("Error fetching countries:", error);
-      }
-    };
-
-    fetchCountries();
-  }, []);
+  useEffect(() =>{
+    dispatch(getAllCountries())
+  }, [dispatch])
+  const countries = useSelector((state) => state.countries)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -61,6 +54,11 @@ const CreateForm = () => {
           ...prevData,
           image: imagePreviewURL,
         }));
+
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          image:""
+        }))
       } catch (error) {
         console.error("Error creating object URL for image:", error);
       }
@@ -120,7 +118,8 @@ const CreateForm = () => {
                 price: "",
                 email: "",
                 image: null,
-                countryId: "",
+                country: "",
+                countryId: null,
                 stars: 1,
               });
             } else {
@@ -150,6 +149,7 @@ const fieldLabels = {
 
   return (
     <div className={styles.formContainer}>
+       <h2 className={styles.title}>Post Your Hotel</h2>
       <form onSubmit={handleSubmit}>
         {Object.keys(fieldLabels).map((field) => (
           <div key={field} className={styles.fieldContainer}>
@@ -158,7 +158,7 @@ const fieldLabels = {
               <input
                 type="text"
                 name={field}
-                placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                placeholder={field === "address_url" ? "Adress Url" :field.charAt(0).toUpperCase() + field.slice(1)}
                 value={hotelData[field] || ""}
                 onChange={handleChange}
                 className={`${styles.input} ${errors[field] && styles.error}`}
@@ -173,30 +173,37 @@ const fieldLabels = {
         <div className={styles.fieldContainer}>
           <label>Stars
             <select
-              className={styles.starsSelect}
+              className={`${styles.starsSelect} ${errors.stars && styles.error}`}
               name="stars"
               value={hotelData.stars}
               onChange={handleChange}
             >
+              <option value="" disabled>
+                Select one...
+              </option>
               {[1, 2, 3, 4, 5].map((star) => (
                 <option key={star} value={star}>
                 {star}
                 </option>
               ))}
             </select>
+
+            {errors.stars && (
+              <span className={styles.errors}>{errors.stars}</span>
+            )}
           </label>
         </div>
 
         <div className={styles.fieldContainer}>
           <label> Country
             <select
-              className={styles.countrySelect}
+              className={`${styles.countrySelect} ${errors.countryId && styles.error}`}
               name="countryId"
               value={hotelData.countryId}
               onChange={handleChange}
             >
               <option value="" disabled>
-                Country
+                Select one...
               </option>
               {countries.map((country) => (
                 <option key={country} value={country}>
@@ -204,27 +211,30 @@ const fieldLabels = {
                 </option>
               ))}
             </select>
-            {errors.country && (
-              <span className={styles.errors}>{errors.country}</span>
+            {errors.countryId && (
+              <span className={styles.errors}>{errors.countryId}</span>
             )}
           </label>
         </div>
 
         <div className={styles.imageContainer}>
           <label>
-            Upload Image
+            Main Image
             <input
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className={styles.input}
+              className={`${styles.input} ${errors.image && styles.error}`}
             />
+             {errors.image && (
+              <span className={styles.errors}>{errors.image}</span>
+            )}
           </label>
           {loading && <p>Loading...</p>}
           {hotelData.image && (
             <>
               <img src={hotelData.image} alt="Preview" className={styles.imagePreview} />
-              <button type="button" onClick={handleImageRemove}>
+              <button type="button" onClick={handleImageRemove} className={styles.removeButton}>
                 Remove
               </button>
             </>

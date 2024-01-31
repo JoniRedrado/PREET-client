@@ -3,10 +3,13 @@ import axios from "axios";
 import styles from "./updateForm.module.css"; 
 import validation from "../../helpers/validation";
 import { useParams, useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux";
 
 const UpdateForm = () => {
   const navigate = useNavigate()
   const { id } = useParams();
+
+  const countries = useSelector((state) => state.countries)
 
   const [hotelData, setHotelData] = useState({
     name: "",
@@ -15,12 +18,12 @@ const UpdateForm = () => {
     price: "",
     email: "",
     image: null,
-    countryId: "",
+    country: "",
+    countryId: null,
     stars: 1,
   });
 
   const [errors, setErrors] = useState({});
-  const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -33,17 +36,7 @@ const UpdateForm = () => {
       }
     };
 
-    const fetchCountries = async () => {
-      try {
-        const response = await axios.get("http://localhost:3001/countries");
-        setCountries(response.data);
-      } catch (error) {
-        console.error("Error fetching countries:", error);
-      }
-    };
-
     fetchHotelData();
-    fetchCountries();
   }, [id]);
 
   const handleChange = (e) => {
@@ -200,8 +193,8 @@ const UpdateForm = () => {
               value={hotelData.countryId}
               onChange={handleChange}
             >
-              <option value="" disabled>
-                Country
+              <option value={hotelData.country} >
+                {`País actual: ${hotelData.country.name}`}
               </option>
               {countries.map((country) => (
                 <option key={country} value={country}>
