@@ -1,0 +1,10 @@
+.conLoa{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:50px;
+}
+
+.icon-mesagge{
+    font-size: 200px;
+}
