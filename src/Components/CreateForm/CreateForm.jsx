@@ -5,6 +5,7 @@ import validation from "../../helpers/validation";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCountries } from "../../redux/actions";
+import Loading from "../../assets/Loading.gif"
 
 const CreateForm = () => {
 
@@ -230,7 +231,6 @@ const fieldLabels = {
               <span className={styles.errors}>{errors.image}</span>
             )}
           </label>
-          {loading && <p>Loading...</p>}
           {hotelData.image && (
             <>
               <img src={hotelData.image} alt="Preview" className={styles.imagePreview} />
@@ -240,10 +240,13 @@ const fieldLabels = {
             </>
           )}
         </div>
-
+        <div className={styles.sendContainer}>
         <button className={styles.formButton} type="submit">
           POST
         </button>
+        {loading && <img src={Loading} alt="Loading" className={styles.loading}/>}
+        </div>
+       
       </form>
     </div>
   );

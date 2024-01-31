@@ -1,5 +1,5 @@
 body {
-  font-family: 'Arial', sans-serif; /* Cambia 'Arial' por la fuente que prefieras */
+  font-family: 'Arial', sans-serif; 
 }
 
 .formContainer {
@@ -103,4 +103,16 @@ label {
 
 .removeButton:hover {
   background-color: rgb(127, 0, 0);
+}
+
+.sendContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading{
+  width: 30px;
+  margin-top: 15px;
 }

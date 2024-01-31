@@ -4,6 +4,7 @@ import styles from "./updateForm.module.css";
 import validation from "../../helpers/validation";
 import { useParams, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux";
+import Loading from "../../assets/Loading.gif"
 
 const UpdateForm = () => {
   const navigate = useNavigate()
@@ -215,23 +216,29 @@ const UpdateForm = () => {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className={styles.input}
+              className={`${styles.input} ${errors.image && styles.error}`}
             />
+
+            {errors.image && (
+              <span className={styles.errors}>{errors.image}</span>
+            )}
           </label>
-          {loading && <p>Loading...</p>}
           {hotelData.image && (
             <>
               <img src={hotelData.image} alt="Preview" className={styles.imagePreview} />
-              <button type="button" onClick={handleImageRemove}>
+              <button type="button" onClick={handleImageRemove} className={styles.removeButton}>
                 Remove
               </button>
             </>
           )}
         </div>
 
+        <div className={styles.sendContainer}>
         <button className={styles.formButton} type="submit">
-          UPDATE
+          POST
         </button>
+        {loading && <img src={Loading} alt="Loading" className={styles.loading}/>}
+        </div>
       </form>
     </div>
   );
