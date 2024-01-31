@@ -6,37 +6,52 @@ import RegisterUser from "../../Pages/Register/Register";
 import LoginForm from "../../Pages/Login/Login";
 import style from "./NavBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllHotels, resetCurrentPage, showModal, userLog } from "../../redux/actions"
-
+import {
+  getAllHotels,
+  resetCurrentPage,
+  showModal,
+  userLog,
+  filterParams,
+} from "../../redux/actions";
 
 function NavBar() {
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem("token");
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const modalRegister = useSelector((state) => state.showModal.register)
-  const modalLogin = useSelector((state) => state.showModal.login)
+  const modalRegister = useSelector((state) => state.showModal.register);
+  const modalLogin = useSelector((state) => state.showModal.login);
+
+  const initialFilters = {
+    country: "",
+    stars: "",
+    minPrice: "",
+    maxPrice: "",
+    orderBy: "",
+    direction: "",
+  };
 
   const handleHomeButton = () => {
-    dispatch(resetCurrentPage())
-    dispatch(getAllHotels())
-  }
+    dispatch(filterParams(initialFilters));
+    dispatch(resetCurrentPage());
+    dispatch(getAllHotels());
+  };
 
   function openModal(option) {
-    dispatch(showModal(option, true))
+    dispatch(showModal(option, true));
   }
 
   function closeModal(option) {
-    dispatch(showModal(option, false))
-    navigate('/')
+    dispatch(showModal(option, false));
+    navigate("/");
   }
 
   function logout(option) {
-    localStorage.removeItem('token')
-    dispatch(showModal(option, false))
-    dispatch(userLog())
-    navigate("/")
+    localStorage.removeItem("token");
+    dispatch(showModal(option, false));
+    dispatch(userLog());
+    navigate("/");
   }
 
   return (
