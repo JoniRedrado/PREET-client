@@ -25,7 +25,7 @@ const CreateForm = () => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/countries");
+        const response = await axios.get("https://preet-production.up.railway.app/countries");
         setCountries(response.data);
         setHotelData({ ...hotelData, countryId: response.data[0] });
       } catch (error) {
@@ -105,7 +105,7 @@ const CreateForm = () => {
             };
   
             const responseBackend = await axios.post(
-              "http://localhost:3001/hotels",
+              "https://preet-production.up.railway.app/hotels",
               updatedData
             );
   

@@ -3,7 +3,7 @@ import axios from "axios"
 // Función para iniciar sesión
 export  async function login(email, password) {
     try {
-        const response = await axios.post('http://localhost:3001/auth/login', { email, password });
+        const response = await axios.post('https://preet-production.up.railway.app/auth/login', { email, password });
         if (response.status === 200) {
             // Almacenar el token JWT en el almacenamiento local
           localStorage.setItem('token', response.data.token);
@@ -21,7 +21,7 @@ export  async function login(email, password) {
 //Función para registrar un usuario
 export  async function register(name, last_name, email, password) {
     try {
-        const response = await axios.post('http://localhost:3001/auth/register', { name, last_name, email, password });
+        const response = await axios.post('https://preet-production.up.railway.app/auth/register', { name, last_name, email, password });
       if (response.status === 200) {
           window.alert("Usuario creado con éxito")
           return response.data.token;

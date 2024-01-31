@@ -26,7 +26,7 @@ export const getAllHotels = () => {
   return async (dispatch, getStage) => {
     const { currentPage } = getStage();
     try {
-      const endpoint = `http://localhost:3001/hotels?page=${currentPage}`;
+      const endpoint = `https://preet-production.up.railway.app/hotels?page=${currentPage}`;
       const response = await axios.get(endpoint);
 
       dispatch({
@@ -43,7 +43,7 @@ export const getAllHotels = () => {
 // export const clearHotelsFilter = () => {
 //   return async (dispatch) => {
 //     try {
-//       const endpoint = `http://localhost:3001/hotels`;
+//       const endpoint = `https://preet-production.up.railway.app/hotels`;
 //       const response = await axios.get(endpoint);
 //       dispatch({
 //         type: CLEAR_HOTELS_FILTERS,
@@ -58,7 +58,7 @@ export const getAllHotels = () => {
 export const getAllCountries = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/countries");
+      const { data } = await axios.get("https://preet-production.up.railway.app/countries");
       dispatch({
         type: GET_ALL_COUNTRIES,
         payload: data,
@@ -73,7 +73,7 @@ export const getHotelByName = (name) => {
   return async (dispatch, getStage) => {
     const { currentPage } = getStage();
     try {
-      const endpoint = `http://localhost:3001/hotels?name=${name}&page=${currentPage}`;
+      const endpoint = `https://preet-production.up.railway.app/hotels?name=${name}&page=${currentPage}`;
       const response = await axios.get(endpoint);
 
       dispatch({
@@ -88,7 +88,7 @@ export const getHotelByName = (name) => {
 export const getDetail = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/hotels/detail/${id}`);
+      const response = await axios.get(`https://preet-production.up.railway.app/hotels/detail/${id}`);
       return dispatch({
         type: GET_DETAIL,
         payload: response.data,
@@ -137,7 +137,7 @@ export const resetCurrentPage = () => {
 export const deleteHotel = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(`http://localhost:3001/hotels/${id}`);
+      const response = await axios.delete(`https://preet-production.up.railway.app/hotels/${id}`);
       return dispatch({
         type: DELETE_HOTEL,
         payload: response.data,
@@ -170,7 +170,7 @@ export function sortByPrice(order) {
 
 // export const postHotel = (payload) => async dispatch => {
 //   try {
-//       const response = await axios.post('http://localhost:3001/hotels', payload);
+//       const response = await axios.post('https://preet-production.up.railway.app/hotels', payload);
 
 //       dispatch({
 //           type: POST_HOTEL,
@@ -184,7 +184,7 @@ export function sortByPrice(order) {
 // export function getCountries() {
 //   return async function (dispatch) {
 //       try {
-//           const response = await axios.get(`http://localhost:3001/countries`);
+//           const response = await axios.get(`https://preet-production.up.railway.app/countries`);
 
 //           dispatch({
 //               type: GET_COUNTRIES,
@@ -200,7 +200,7 @@ export const pagination = (page) => {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/hotels?page=${page}`
+        `https://preet-production.up.railway.app/hotels?page=${page}`
       );
       return dispatch({
         type: FETCH_ITEMS_SUCCESS,
@@ -244,7 +244,7 @@ export const filterHotels = (params) => {
         direction: params.direction,
       };
 
-      const response = await axios.get(`http://localhost:3001/hotels`, {
+      const response = await axios.get(`https://preet-production.up.railway.app/hotels`, {
         params: queryParams,
       });
 
