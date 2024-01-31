@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #022840;
+  height: 80px;
+  padding: 0 20px 0 20px;
+  margin: -10px
+}
+
+.container img {
+  width: 100px;
+  height: 80px;
+}
+.container button {
+  align-self: center;
+  padding: 5px;
+  background-color: #B0A8BF;
+  border-color: transparent;
+  border-radius: 5px;
+}
+
+.modalContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 500px;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.userButtons {
+  display: flex;
+  gap: 5px;
+}
+
+.blueButton {
+  background-color: #009dff !important
+}

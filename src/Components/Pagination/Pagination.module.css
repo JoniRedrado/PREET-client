@@ -1,0 +1,19 @@
+.paginationContainer {
+  bottom: 20px; /* Puedes ajustar la distancia desde el borde inferior según tu preferencia */
+  left: 0;
+  right: 0;
+  text-align: center; /* Para centrar horizontalmente los elementos */
+}
+
+.paginationContainer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.paginationContainer ul li {
+  margin-bottom: 5px; /* Espacio entre elementos de la lista */
+}
+
+.paginationContainer button {
+  margin: 0 10px; /* Espacio entre botones y elementos de la lista */
+}

@@ -1,0 +1,11 @@
+.searchBar {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.searchInput {
+  border-radius: 5px;
+  border-color: transparent;
+  width: 200px;
+}

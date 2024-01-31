@@ -1,0 +1,43 @@
+.container-filtros {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 122px;
+  width: 80%; 
+  padding: 10px;
+}
+
+.container-filtros > div {
+  margin-right: 20px;
+}
+
+.order {
+  display: flex;
+}
+
+.order > div {
+  margin-right: 20px;
+}
+
+button {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+select, input{
+  border-radius: 10px;
+}
+
+.price{
+  font-size: 15px;
+  font-weight: normal;
+}
