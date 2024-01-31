@@ -3,10 +3,14 @@ import axios from "axios";
 import styles from "./UpdateForm.module.css"; 
 import validation from "../../helpers/validation";
 import { useParams, useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux";
+import Loading from "../../assets/Loading.gif"
 
 const UpdateForm = () => {
   const navigate = useNavigate()
   const { id } = useParams();
+
+  const countries = useSelector((state) => state.countries)
 
   const [hotelData, setHotelData] = useState({
     name: "",
@@ -15,12 +19,12 @@ const UpdateForm = () => {
     price: "",
     email: "",
     image: null,
-    countryId: "",
+    country: "",
+    countryId: null,
     stars: 1,
   });
 
   const [errors, setErrors] = useState({});
-  const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -33,17 +37,7 @@ const UpdateForm = () => {
       }
     };
 
-    const fetchCountries = async () => {
-      try {
-        const response = await axios.get("http://localhost:3001/countries");
-        setCountries(response.data);
-      } catch (error) {
-        console.error("Error fetching countries:", error);
-      }
-    };
-
     fetchHotelData();
-    fetchCountries();
   }, [id]);
 
   const handleChange = (e) => {
@@ -144,11 +138,11 @@ const UpdateForm = () => {
   };
 
   const fieldLabels = {
-    name: "Nombre",
-    address: "Dirección",
-    address_url: "URL de la Dirección",
-    price: "Precio",
-    email: "Correo Electrónico"
+    name: "Name ",
+    address: "Address ",
+    address_url: "Address URL ",
+    price: "Price ",
+    email: "Email "
   }
 
   return (
@@ -175,7 +169,7 @@ const UpdateForm = () => {
 
         <div className={styles.fieldContainer}>
           <label>
-            Stars
+            Stars 
             <select
               className={styles.starsSelect}
               name="stars"
@@ -193,15 +187,15 @@ const UpdateForm = () => {
 
         <div className={styles.fieldContainer}>
           <label>
-            Country
+            Country 
             <select
               className={styles.countrySelect}
               name="countryId"
               value={hotelData.countryId}
               onChange={handleChange}
             >
-              <option value="" disabled>
-                Country
+              <option value={hotelData.country} >
+                {`País actual: ${hotelData.country.name}`}
               </option>
               {countries.map((country) => (
                 <option key={country} value={country}>
@@ -222,23 +216,29 @@ const UpdateForm = () => {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className={styles.input}
+              className={`${styles.input} ${errors.image && styles.error}`}
             />
+
+            {errors.image && (
+              <span className={styles.errors}>{errors.image}</span>
+            )}
           </label>
-          {loading && <p>Loading...</p>}
           {hotelData.image && (
             <>
               <img src={hotelData.image} alt="Preview" className={styles.imagePreview} />
-              <button type="button" onClick={handleImageRemove}>
+              <button type="button" onClick={handleImageRemove} className={styles.removeButton}>
                 Remove
               </button>
             </>
           )}
         </div>
 
+        <div className={styles.sendContainer}>
         <button className={styles.formButton} type="submit">
-          UPDATE
+          POST
         </button>
+        {loading && <img src={Loading} alt="Loading" className={styles.loading}/>}
+        </div>
       </form>
     </div>
   );

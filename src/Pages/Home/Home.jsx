@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../../Components/Cards/Cards";
 import Pagination from "../../Components/Pagination/Pagination";
 import { filterHotels, getAllCountries, userLog } from "../../redux/actions";
 import Filters from "../../Components/Filters/Filters";
+import TryAgain from "../../Components/Try again/TryAgain"
+
 // import { useNavigate } from 'react-router-dom';
 
 
@@ -13,8 +15,7 @@ function Home() {
   const currentPage = useSelector((state) => state.currentPage);
   const filters = useSelector((state) => state.submitFilters);
   const userChanged = useSelector((state) => state.userChanged)
-
-  const token = localStorage.getItem("token");
+  const [noResults, setNoResults] = useState(false);
 
   console.log(filteredHotels);
   
@@ -26,18 +27,27 @@ function Home() {
     }
 }, [currentPage, userLog]);
 
+useEffect(() => {
+  if (filteredHotels.total === 0) {
+    setNoResults(true);
+  } else {
+    setNoResults(false);
+  }
+}, [filteredHotels]);
+
   return (
-    <>
-      {token
-        ? (<div>
-            <Filters />
-            <Cards allHotels={filteredHotels} />
-            <Pagination />
-          </div>)
-        : ""
-    }
-    </>
-  );
+      <div>
+        <Filters />
+          {noResults ? (
+            <TryAgain />
+              ):(
+            <>
+              <Cards allHotels={filteredHotels} />
+              <Pagination />
+            </>
+            )}
+      </div>
+    )
 }
 
 export default Home;

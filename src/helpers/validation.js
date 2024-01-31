@@ -1,7 +1,7 @@
 const validation = (data) => {
     const errors = {};
 
-    const requiredFields = ["name", "address", "address_url", "price", "email", "countryId"];
+    const requiredFields = ["name", "address", "address_url", "price", "email", "stars", "countryId", "image"];
 
     requiredFields.forEach((field) => {
         const value = data[field];
