@@ -12,8 +12,11 @@ function LoginForm() {
     const handleLogin = async () => {
         try {
           const data = await login(email, password);
-          
-          navigate('/home', data)
+          if (data.token) {
+            navigate('/home', data.token)
+          } else if (data.message) {
+            setError(data.message);
+          }
         } catch (error) {
             setError(error.message); 
         }

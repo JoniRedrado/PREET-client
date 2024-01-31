@@ -4,12 +4,15 @@ import axios from "axios"
 export  async function login(email, password) {
     try {
         const response = await axios.post('http://localhost:3001/auth/login', { email, password });
-        if (response.status === 200) {
+        if (response.status === 200 && response.data.token) {
             // Almacenar el token JWT en el almacenamiento local
-          localStorage.setItem('token', response.data.token);
+            localStorage.setItem('token', response.data.token);
 
-            return response.data.token;
-        } else {
+            return {token: response.data.token};
+        } else if (response.status === 200 && response.data.message) {
+            return {message: response.data.message};
+        }
+         else {
             throw new Error(response.data.message || 'Error de inicio de sesión');
         }
     } catch (error) {
