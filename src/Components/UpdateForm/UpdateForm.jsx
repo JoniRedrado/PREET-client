@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styles from "./updateForm.module.css"; 
+import styles from "./UpdateForm.module.css"; 
 import validation from "../../helpers/validation";
 import { useParams, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux";
