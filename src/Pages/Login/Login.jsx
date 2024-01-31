@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { login } from '../../Components/Auth/Auth';
 import { useNavigate } from 'react-router-dom';
-import style from "../Login/Login.module.css"
+import styles from "../Login/Login.module.css"
 
 function LoginForm() {
     const [email, setEmail] = useState('');
@@ -15,22 +15,24 @@ function LoginForm() {
           if (data.token) {
             navigate('/home', data.token)
           } else if (data.message) {
-            setError(data.message);
+            setError("Invalid Email or Password");
           }
         } catch (error) {
-            setError(error.message); 
+            setError("Invalid Email or Password"); 
         }
     };
 
     return (
         <div>
-          <form className={style.loginContainer}>
+          <form className={styles.loginContainer}>
             <h2>Login</h2>
-            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className={`${styles.input} ${error && styles.error}`}/>
+            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className={`${styles.input} ${error && styles.error}`}/>
             <button type="button" onClick={handleLogin}>Login</button>
           </form>
-          {error && <p>{error}</p>}
+          {error && (
+                <span className={styles.error}>{error}</span>
+              )}
         </div>
     );
 }
