@@ -1,5 +1,5 @@
   .container {
-    width: 50%;
+    width: 40%;
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -30,14 +30,16 @@
   
   .container img {
     width: 100%;
-    height: auto;
+    height: 350px;
     margin-bottom: 10px;
   }
   
-  .container h1,
+  .container h1{
+
+  }
+
   .container h2 {
     font-size: 20px;
-    font-weight: bold;
     margin-bottom: 5px;
   }
   
@@ -61,4 +63,10 @@
   
   .container button:hover {
     background-color: #0056b3;
+  }
+
+ i{
+  font-size: 40px;
+  color:#007bff;
+  cursor: pointer;
   }

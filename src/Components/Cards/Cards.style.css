@@ -8,10 +8,10 @@
     display: flex;
     flex-wrap: wrap;
     justify-content:center;
-    width: 70%;
+    width: 80%;
     margin: auto;
 }
 .card {
-    width: 200px;
-    margin: 16px;
+    width: 240px;
+    margin: 15px;
   }
