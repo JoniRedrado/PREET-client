@@ -3,13 +3,23 @@ import {
   filterHotels,
   filterParams,
   resetCurrentPage,
+  getAllHotels,
 } from "../../redux/actions";
 import "./Filters.style.css";
 
 const Filters = () => {
   const dispatch = useDispatch();
 
-  const filters = useSelector((state) => state.submitFilters);
+  const defaultFilters = {
+    country: "",
+    stars: "",
+    minPrice: "",
+    maxPrice: "",
+    orderBy: "",
+    direction: "",
+  };
+
+  const filters = useSelector((state) => state.submitFilters) || defaultFilters;
 
   const allCountries = useSelector((state) => state.countries);
 
@@ -18,16 +28,17 @@ const Filters = () => {
     dispatch(filterParams({ ...filters, [name]: value }));
   };
 
+  const handleReset = () => {
+    dispatch(filterParams(defaultFilters));
+    dispatch(resetCurrentPage());
+    dispatch(getAllHotels());
+    console.log(defaultFilters);
+  };
+
   const applyFilters = () => {
     dispatch(filterHotels(filters));
     dispatch(resetCurrentPage());
   };
-
-  // const resetFilter = () => {
-  //   dispatch(filterHotels());
-  //   // setCurrentPage(1);
-  //   // setSearchString("");
-  // }
 
   return (
     <div>
@@ -37,7 +48,7 @@ const Filters = () => {
           <select
             className="select"
             name="country"
-            defaultValue={filters.country}
+            value={filters.country || ""}
             onChange={handleFilters}
           >
             <option className="option" value="">
@@ -54,7 +65,11 @@ const Filters = () => {
 
         <div>
           <p>Stars</p>
-          <select name="stars" value={filters.stars} onChange={handleFilters}>
+          <select
+            name="stars"
+            value={filters.stars || ""}
+            onChange={handleFilters}
+          >
             <option value="">Cualquiera</option>
             <option value="1">⭐</option>
             <option value="2">⭐⭐</option>
@@ -75,7 +90,7 @@ const Filters = () => {
               step="10"
               min="0"
               max="10000"
-              value={filters.minPrice}
+              value={filters.minPrice || ""}
               onChange={handleFilters}
             />
           </div>
@@ -89,7 +104,7 @@ const Filters = () => {
               step="10"
               min="0"
               max="10000"
-              value={filters.maxPrice}
+              value={filters.maxPrice || ""}
               onChange={handleFilters}
             />
           </div>
@@ -100,7 +115,7 @@ const Filters = () => {
             <p>Order For </p>
             <select
               name="orderBy"
-              value={filters.orderBy}
+              value={filters.orderBy || ""}
               onChange={handleFilters}
             >
               <option value="">Order For</option>
@@ -114,7 +129,7 @@ const Filters = () => {
             <p>Direction </p>
             <select
               name="direction"
-              value={filters.direction}
+              value={filters.direction || ""}
               onChange={handleFilters}
             >
               <option value="">Direction</option>
@@ -125,8 +140,9 @@ const Filters = () => {
         </div>
 
         <button onClick={applyFilters}>Apply Filters</button>
-
-        {/* <button onClick={resetFilter}> Reset filters</button> */}
+        <button onClick={handleReset} className="reset">
+          Reset Filters
+        </button>
       </div>
     </div>
   );

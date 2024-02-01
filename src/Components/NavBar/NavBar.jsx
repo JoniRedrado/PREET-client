@@ -23,7 +23,7 @@ function NavBar() {
   const modalRegister = useSelector((state) => state.showModal.register);
   const modalLogin = useSelector((state) => state.showModal.login);
 
-  const initialFilters = {
+  const defaultFilters = {
     country: "",
     stars: "",
     minPrice: "",
@@ -33,7 +33,7 @@ function NavBar() {
   };
 
   const handleHomeButton = () => {
-    dispatch(filterParams(initialFilters));
+    dispatch(filterParams(defaultFilters));
     dispatch(resetCurrentPage());
     dispatch(getAllHotels());
   };
