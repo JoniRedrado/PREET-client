@@ -221,7 +221,7 @@ export const pagination = (page) => {
 // };
 
 export const filterParams = (params) => {
-  console.log(params);
+  /* console.log(params); */
   return function (dispatch) {
     dispatch({
       type: HANDLE_FILTERS,
@@ -248,12 +248,12 @@ export const filterHotels = (params) => {
         params: queryParams,
       });
 
-      console.log(response.data);
+      /* console.log(response.data); */
       dispatch({
         type: FILTER_HOTELS,
         payload: response.data,
       });
-      console.log("Respuesta del backend:", response.data);
+      /* console.log("Respuesta del backend:", response.data); */
     } catch (error) {
       console.error("Error al filtrar hoteles:", error);
     }

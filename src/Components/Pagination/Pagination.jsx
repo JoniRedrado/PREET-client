@@ -10,7 +10,7 @@ const Pagination = () => {
 
   const totalPages = Math.ceil(totalHotels / 6)
 
-  console.log(filters);
+  /* console.log(filters); */
 
   const handlePrevClick = () => {
     dispatch(prevPage());

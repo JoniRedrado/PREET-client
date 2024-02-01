@@ -17,7 +17,7 @@ function Home() {
   const userChanged = useSelector((state) => state.userChanged)
   const [noResults, setNoResults] = useState(false);
 
-  console.log(filteredHotels);
+  /* console.log(filteredHotels); */
   
   useEffect(() => {
     dispatch(filterHotels(filters));
