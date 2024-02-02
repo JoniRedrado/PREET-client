@@ -6,12 +6,10 @@ import CreatePage from "./Pages/Create/CreatePage";
 import UpdatePage from "./Pages/Update/UpdatePage";
 import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
-import {AuthProvider} from "./context/authContext"
 // import './App.css'
 
 function App() {
   return (
-    <AuthProvider>
     <div>
       <NavBar />
       <Routes>
@@ -23,7 +21,6 @@ function App() {
         <Route path="/login" element={<Login />} />
       </Routes>
     </div>
-    </AuthProvider>
   );
 }
 
