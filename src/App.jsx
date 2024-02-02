@@ -6,6 +6,7 @@ import CreatePage from "./Pages/Create/CreatePage";
 import UpdatePage from "./Pages/Update/UpdatePage";
 import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
+import Dashboard from "./Components/Dashboard/Dashboard"
 
 // import './App.css'
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/update/:id" element={<UpdatePage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </div>
   );
