@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { register } from "../../Components/Auth/Auth";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
 import style from "../Register/Register.module.css";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../redux/actions";
@@ -12,8 +13,9 @@ function RegisterUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  const auth = useAuth();
   const dispatch = useDispatch();
 
   const handleRegister = async (option) => {
@@ -27,6 +29,16 @@ function RegisterUser() {
       }
     }
   };
+
+  const handleGoogleRegister = async () => {
+      try {
+        await auth.loginWithGoogle();
+        navigate("/")
+        dispatch(showModal(option, false))
+      } catch (error) {
+        setError("Error signing in with Google")
+      }
+  }
 
   return (
     <div>
@@ -59,6 +71,7 @@ function RegisterUser() {
         <button type="button" onClick={() => handleRegister("register")}>
           Register
         </button>
+        <button type="button" onClick={handleGoogleRegister}>Register with Google</button>
       </form>
       {error && <p>{error}</p>}
     </div>
