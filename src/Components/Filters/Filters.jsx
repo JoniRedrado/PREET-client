@@ -70,7 +70,7 @@ const Filters = () => {
             value={filters.stars || ""}
             onChange={handleFilters}
           >
-            <option value="">Cualquiera</option>
+            <option value="">All</option>
             <option value="1">⭐</option>
             <option value="2">⭐⭐</option>
             <option value="3">⭐⭐⭐</option>
@@ -118,7 +118,9 @@ const Filters = () => {
               value={filters.orderBy || ""}
               onChange={handleFilters}
             >
-              <option value="">Order For</option>
+              <option value="" disabled hidden>
+                Order by
+              </option>
               <option value="countryId">Country</option>
               <option value="stars">Stars</option>
               <option value="price">Price</option>
@@ -132,7 +134,7 @@ const Filters = () => {
               value={filters.direction || ""}
               onChange={handleFilters}
             >
-              <option value="">Direction</option>
+              <option value="" disabled hidden>Direction</option>
               <option value="ASC">↑</option>
               <option value="DESC">↓</option>
             </select>
