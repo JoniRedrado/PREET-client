@@ -59,10 +59,13 @@ function NavBar() {
       <Link to="/" onClick={handleHomeButton}>
         <img src={template} width="18%" />
       </Link>
+      <SearchBar />
       <div className={style.userButtons}>
         {token ? (
           <>
-            <SearchBar />
+            <Link to="/dashboard">
+              <button className={style.yellowButton}>Dashboard</button>
+            </Link>
             <Link to="/create">
               <button className={style.blueButton}>Create Hotel</button>
             </Link>
