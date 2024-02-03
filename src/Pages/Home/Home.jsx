@@ -43,8 +43,8 @@ function Home() {
       ) : (
         <div>
           <Cards allHotels={filteredHotels} />
-          <Slider />
           <Pagination />
+          <Slider />
         </div>
       )}
     </div>

@@ -112,7 +112,7 @@ const Filters = () => {
 
         <div className="order">
           <div>
-            <p>Order For </p>
+            <p>Order By </p>
             <select
               name="orderBy"
               value={filters.orderBy || ""}
