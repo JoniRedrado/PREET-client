@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import SearchBar from "../SearchBar/SearchBar";
 import {
   filterHotels,
   filterParams,
@@ -41,7 +42,10 @@ const Filters = () => {
   };
 
   return (
-    <div>
+    <div className="main-filters-container container-filtros">
+      <div>
+        <SearchBar />
+      </div>
       <div className="container-filtros">
         <div>
           <p>Countries</p>
@@ -112,7 +116,7 @@ const Filters = () => {
 
         <div className="order">
           <div>
-            <p>Order For </p>
+            <p>Order By </p>
             <select
               name="orderBy"
               value={filters.orderBy || ""}
@@ -134,7 +138,9 @@ const Filters = () => {
               value={filters.direction || ""}
               onChange={handleFilters}
             >
-              <option value="" disabled hidden>Direction</option>
+              <option value="" disabled hidden>
+                Direction
+              </option>
               <option value="ASC">↑</option>
               <option value="DESC">↓</option>
             </select>

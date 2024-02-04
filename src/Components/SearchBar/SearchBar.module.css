@@ -7,5 +7,19 @@
 .searchInput {
   border-radius: 5px;
   border-color: transparent;
-  width: 200px;
+  width: 300px;
+}
+
+.searchButton{
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.searchButton:hover {
+  background-color: #0056b3;
 }

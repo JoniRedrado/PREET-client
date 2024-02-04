@@ -10,8 +10,6 @@ const Pagination = () => {
 
   const totalPages = Math.ceil(totalHotels / 6)
 
-  /* console.log(filters); */
-
   const handlePrevClick = () => {
     dispatch(prevPage());
     dispatch(filterHotels(filters));
@@ -24,11 +22,11 @@ const Pagination = () => {
 
   return (
     <div className={s.paginationContainer}>
-      <button onClick={handlePrevClick} disabled={currentPage === 1}>
+      <button onClick={handlePrevClick} disabled={currentPage === 1} className={currentPage === 1 ? s.paginationButtonOff : s.paginationButton}>
         Prev
       </button>
       <span>Page {currentPage} of {totalPages}</span>
-      <button onClick={handleNextClick} disabled={currentPage === totalPages}>
+      <button onClick={handleNextClick} disabled={currentPage === totalPages} className={currentPage === totalPages ? s.paginationButtonOff : s.paginationButton}  >
         Next
       </button>
     </div>

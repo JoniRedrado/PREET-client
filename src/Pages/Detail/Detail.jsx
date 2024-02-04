@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetail, deleteHotel } from "../../redux/actions";
@@ -8,6 +8,7 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 import "./detail.styles.css";
+import axios from 'axios'
 
 const Detail = () =>{
 
@@ -41,6 +42,13 @@ const Detail = () =>{
 
   const hotel = useSelector((state) => state.hotelDetail);
 
+  const handleBook = () => {
+    axios.post('http://localhost:3001/payment/create-order')
+      .then(res => {
+        window.location.href = res.data.links[1].href
+      })
+  }
+
   return (
     <motion.div
       className="container"
@@ -52,14 +60,20 @@ const Detail = () =>{
         <Link to="/">
           <i className="bi bi-arrow-left-circle" title="Return home"></i>
         </Link>
-        <Link to={`/update/${hotel.id}`}>
-          <i className="bi bi-pencil-square" title="Update"></i>
-        </Link>
-        <i
-          className="bi bi-trash"
-          onClick={() => handleDelete(id)}
-          title="Delete"
-        ></i>
+        {token ?
+          (
+            <>
+              <Link to={`/update/${hotel.id}`}>
+                <i className="bi bi-pencil-square" title="Update"></i>
+              </Link>
+              <i
+                className="bi bi-trash"
+                onClick={() => handleDelete(id)}
+                title="Delete"
+              ></i>
+            </>
+          ) : ""
+        }
       </div>
 
       {hotel ? (
@@ -84,6 +98,7 @@ const Detail = () =>{
             <FaEnvelope className="info-icon" />
             Contact: {hotel.email}
           </h2>
+          <button onClick={handleBook}>Book</button>
         </div>
       ) : (
         <p>cargando...</p>
