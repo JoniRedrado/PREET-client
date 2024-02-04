@@ -21,6 +21,30 @@ export  async function login(email, password) {
     }
 }
 
+export  async function loginFireBase({email, firstName, lastName}) {
+    try {
+        const response = await axios.post(
+            'http://localhost:3001/auth/login', 
+            { email, 
+              fireBaseAuth: {email, name: firstName, last_name: lastName}}
+        );
+
+        if (response.status === 200 && response.data.token) {
+            localStorage.setItem('token', response.data.token);
+
+            return {token: response.data.token};
+        } else if (response.status === 200 && response.data.message) {
+            return {message: response.data.message};
+        }
+         else {
+            throw new Error(response.data.message || 'Error de inicio de sesión');
+        }
+    } catch (error) {
+        console.error('Error de inicio de sesión:', error);
+        throw error;
+    }
+}
+
 //Función para registrar un usuario
 export  async function register({name, last_name, email, password}) {
     try {

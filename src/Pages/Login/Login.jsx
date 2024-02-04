@@ -26,6 +26,20 @@ function LoginForm() {
         }
     };
 
+    const handleGoogleLogin = async () =>{
+      try {
+        const data = await auth.loginWithGoogle();
+        navigate('/', data.token)
+      } catch (error) {
+        setError("Error signing in with Google")
+      }
+    }
+    const handleKeyPress = (e) => {
+      if (e.key === "Enter") {
+        handleLogin()
+      }
+    };
+
     return (
         <div>
           <form className={styles.loginContainer}>
@@ -33,17 +47,11 @@ function LoginForm() {
             <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className={`${styles.input} ${error && styles.error}`}/>
           <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} onKeyPress={ handleKeyPress} className={`${styles.input} ${error && styles.error}`}/>
             <button type="button" onClick={handleLogin}>Login</button>
-<<<<<<< HEAD
-            <button type="button" onClick={handleGoogleLogin}>Login with Google</button>
+            <button type="button" onClick={handleGoogleLogin}>Login with Google </button>
           </form>
           {error && (
-=======
-            {error && (
->>>>>>> 4ec5b991e5bce0802f9f3dd1659ba86d6cbac76a
                 <span className={styles.error}>{error}</span>
               )}
-          </form>
-          
         </div>
     );
 }
