@@ -8,7 +8,7 @@ import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Settings from "./Pages/Settings/Settings";
-
+import BookedSuccesfully from "./Pages/BookedSuccesfully/BookedSuccesfully";
 // import './App.css'
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/settings" element={<Settings/>}/>
+        <Route path="/booked" element={<BookedSuccesfully />} />
       </Routes>
     </div>
   );
