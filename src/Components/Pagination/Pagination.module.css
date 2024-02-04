@@ -17,5 +17,15 @@
 
 .paginationContainer button {
   margin: 0 10px; /* Espacio entre botones y elementos de la lista */
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.paginationContainer button:hover {
+  background-color: #0056b3;
 }

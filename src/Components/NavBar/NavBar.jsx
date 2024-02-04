@@ -1,16 +1,17 @@
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import template from "../../assets/Logo-White.svg";
 import SearchBar from "../SearchBar/SearchBar";
 import Modal from "react-modal";
 import RegisterUser from "../../Pages/Register/Register";
 import LoginForm from "../../Pages/Login/Login";
+import UserBar from "../UserBar/UserBar"; // Importa el UserBar
 import style from "./NavBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllHotels,
   resetCurrentPage,
   showModal,
-  userLog,
   filterParams,
 } from "../../redux/actions";
 
@@ -47,29 +48,18 @@ function NavBar() {
     navigate("/");
   }
 
-  function logout(option) {
-    localStorage.removeItem("token");
-    dispatch(showModal(option, false));
-    dispatch(userLog());
-    navigate("/");
-  }
 
   return (
     <div className={style.container}>
+      <div className={style.items}>
       <Link to="/" onClick={handleHomeButton}>
-        <img src={template} width="18%" />
+        <img src={template} width="18%" alt="Logo" className={style.logo}/>
       </Link>
       <SearchBar />
       <div className={style.userButtons}>
         {token ? (
           <>
-            <Link to="/dashboard">
-              <button className={style.yellowButton}>Dashboard</button>
-            </Link>
-            <Link to="/create">
-              <button className={style.blueButton}>Create Hotel</button>
-            </Link>
-            <button onClick={() => logout("login")}>Cerrar sesión</button>
+            <UserBar />
           </>
         ) : (
           <>
@@ -118,6 +108,7 @@ function NavBar() {
             </div>
           </>
         )}
+      </div>
       </div>
     </div>
   );

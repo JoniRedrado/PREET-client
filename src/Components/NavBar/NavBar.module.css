@@ -1,23 +1,24 @@
 .container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: #022840;
-  height: 80px;
+  height: 300px;
   padding: 0 20px 0 20px;
-  margin: -10px
+  margin: -10px;
 }
 
-.container img {
-  width: 100px;
-  height: 80px;
+.items{
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  width: 100%;
+  margin-bottom: 150px;
+  text-align: center;
 }
-.container button {
-  align-self: center;
-  padding: 5px;
-  background-color: #B0A8BF;
-  border-color: transparent;
-  border-radius: 5px;
+
+.logo {
+  width: 100px;
 }
 
 .modalContent {

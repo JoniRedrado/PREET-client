@@ -16,7 +16,8 @@
 }
 
 .fieldContainer label {
-  display: block;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 5px;
 }
 
@@ -84,7 +85,8 @@
 }
 
 .imageContainer label {
-  display: block;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 5px;
 }
 .imagePreview {

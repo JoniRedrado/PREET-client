@@ -7,24 +7,42 @@ import { showModal } from "../../redux/actions";
 import registerValidation from "../../helpers/registerValidation";
 
 function RegisterUser() {
-  const [name, setName] = useState("");
-  const [last_name, setLast_name] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [registerData, setRegisterData] = useState({
+    name: "",
+    last_name: "",
+    email: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setRegisterData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
+  };
   const handleRegister = async (option) => {
-    if (registerValidation(name, last_name, email, password, setError)) {
+    const validationErrors = registerValidation(registerData);
+  
+    if (Object.keys(validationErrors).length === 0) {
       try {
-        const data = await register(name, last_name, email, password);
+        const data = await register(registerData);
         navigate("/", data);
         dispatch(showModal(option, false));
       } catch (error) {
-        setError(error.message);
+        console.log(error.message);
       }
+    } else {
+      setErrors(validationErrors);
     }
   };
 
@@ -32,37 +50,55 @@ function RegisterUser() {
     <div>
       <form className={style.formContainer}>
         <h2>Register User</h2>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Last Name"
-          value={last_name}
-          onChange={(e) => setLast_name(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className={style.inputContainer}>
+          <input
+            type="text"
+            placeholder="Name"
+            name="name"
+            value={registerData.name}
+            onChange={handleChange}
+          />
+          {errors.name && <p className={style.error}>{errors.name}</p>}
+        </div>
+  
+        <div className={style.inputContainer}>
+          <input
+            type="text"
+            placeholder="Last Name"
+            name="last_name"
+            value={registerData.last_name}
+            onChange={handleChange}
+          />
+          {errors.last_name && <p className={style.error}>{errors.last_name}</p>}
+        </div>
+  
+        <div className={style.inputContainer}>
+          <input
+            type="email"
+            placeholder="Email"
+            name="email"
+            value={registerData.email}
+            onChange={handleChange}
+          />
+          {errors.email && <p className={style.error}>{errors.email}</p>}
+        </div>
+  
+        <div className={style.inputContainer}>
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={registerData.password}
+            onChange={handleChange}
+          />
+          {errors.password && <p className={style.error}>{errors.password}</p>}
+        </div>
+  
         <button type="button" onClick={() => handleRegister("register")}>
           Register
         </button>
       </form>
-      {error && <p>{error}</p>}
     </div>
   );
 }
-
 export default RegisterUser;

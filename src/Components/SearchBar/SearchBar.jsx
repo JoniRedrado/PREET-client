@@ -38,7 +38,7 @@ const SearchBar = () => {
           onKeyPress={handleKeyPress}
           value={name}
         />
-        <button onClick={handleSubmit}>Search</button>
+        <button onClick={handleSubmit} className={s.searchButton}>Search</button>
       </div>
     </div>
   );

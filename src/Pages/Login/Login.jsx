@@ -29,10 +29,11 @@ function LoginForm() {
             <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className={`${styles.input} ${error && styles.error}`}/>
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className={`${styles.input} ${error && styles.error}`}/>
             <button type="button" onClick={handleLogin}>Login</button>
-          </form>
-          {error && (
+            {error && (
                 <span className={styles.error}>{error}</span>
               )}
+          </form>
+          
         </div>
     );
 }

@@ -42,6 +42,7 @@ function Home() {
         <TryAgain />
       ) : (
         <div>
+          <Slider />
           <Cards allHotels={filteredHotels} />
           <Pagination />
           <Slider />
