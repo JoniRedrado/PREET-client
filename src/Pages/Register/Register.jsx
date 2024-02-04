@@ -15,7 +15,11 @@ function RegisterUser() {
     password: "",
   });
   const [errors, setErrors] = useState({});
+<<<<<<< HEAD
 
+=======
+  const [showPassword, setShowPassword] = useState(false);
+>>>>>>> 4ec5b991e5bce0802f9f3dd1659ba86d6cbac76a
   const navigate = useNavigate();
   const auth = useAuth();
   const dispatch = useDispatch();
