@@ -8,7 +8,11 @@ import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Settings from "./Pages/Settings/Settings";
+<<<<<<< HEAD
+
+=======
 import BookedSuccesfully from "./Pages/BookedSuccesfully/BookedSuccesfully";
+>>>>>>> 4ec5b991e5bce0802f9f3dd1659ba86d6cbac76a
 // import './App.css'
 
 function App() {
