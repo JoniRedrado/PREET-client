@@ -4,6 +4,7 @@
   right: 0;
   text-align: center; /* Para centrar horizontalmente los elementos */
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-top: 10px;
 }
 
 .paginationContainer ul {
@@ -15,7 +16,7 @@
   margin-bottom: 5px; /* Espacio entre elementos de la lista */
 }
 
-.paginationContainer button {
+.paginationButton {
   margin: 0 10px; /* Espacio entre botones y elementos de la lista */
   cursor: pointer;
   padding: 10px 20px;
@@ -28,4 +29,17 @@
 
 .paginationContainer button:hover {
   background-color: #0056b3;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.paginationButtonOff {
+    margin: 0 10px; /* Espacio entre botones y elementos de la lista */
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: gray;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: gray !important; 
 }

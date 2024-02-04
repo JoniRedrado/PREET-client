@@ -1,7 +1,5 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import template from "../../assets/Logo-White.svg";
-import SearchBar from "../SearchBar/SearchBar";
 import Modal from "react-modal";
 import RegisterUser from "../../Pages/Register/Register";
 import LoginForm from "../../Pages/Login/Login";
@@ -55,7 +53,6 @@ function NavBar() {
       <Link to="/" onClick={handleHomeButton}>
         <img src={template} width="18%" alt="Logo" className={style.logo}/>
       </Link>
-      <SearchBar />
       <div className={style.userButtons}>
         {token ? (
           <>
@@ -81,6 +78,7 @@ function NavBar() {
                     backgroundColor: "rgba(0, 0, 0, 0.5)",
                   },
                 }}
+                ariaHideApp={false}
                 contentLabel="Login Modal"
               >
                 <RegisterUser />
@@ -101,6 +99,7 @@ function NavBar() {
                     backgroundColor: "rgba(0, 0, 0, 0.5)",
                   },
                 }}
+                ariaHideApp={false}
                 contentLabel="Login Modal"
               >
                 <LoginForm />
