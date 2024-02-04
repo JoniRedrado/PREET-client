@@ -1,5 +1,6 @@
 import "./Dashboard.style.css";
 import { useEffect, useState } from "react";
+import Pagination from "../Pagination/Pagination";
 import axios from "axios";
 
 const Dashboard = () => {
@@ -146,6 +147,7 @@ const Dashboard = () => {
               : hotelsTable()
           }
         </div>
+        <Pagination/>
         {/* <button onClick={applyFilters}>Apply Filters</button>
         <button onClick={handleReset} className="reset">
           Reset Filters

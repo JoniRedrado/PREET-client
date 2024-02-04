@@ -20,6 +20,12 @@ function LoginForm() {
         } catch (error) {
             setError("Invalid Email or Password"); 
         }
+  };
+  
+    const handleKeyPress = (e) => {
+      if (e.key === "Enter") {
+        handleLogin()
+      }
     };
 
     return (
@@ -27,7 +33,7 @@ function LoginForm() {
           <form className={styles.loginContainer}>
             <h2>Login</h2>
             <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className={`${styles.input} ${error && styles.error}`}/>
-            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className={`${styles.input} ${error && styles.error}`}/>
+          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} onKeyPress={ handleKeyPress} className={`${styles.input} ${error && styles.error}`}/>
             <button type="button" onClick={handleLogin}>Login</button>
             {error && (
                 <span className={styles.error}>{error}</span>
