@@ -6,6 +6,9 @@ import CreatePage from "./Pages/Create/CreatePage";
 import UpdatePage from "./Pages/Update/UpdatePage";
 import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import Settings from "./Pages/Settings/Settings";
+
 // import './App.css'
 
 function App() {
@@ -19,6 +22,8 @@ function App() {
         <Route path="/update/:id" element={<UpdatePage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/settings" element={<Settings/>}/>
       </Routes>
     </div>
   );

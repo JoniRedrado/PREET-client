@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetail, deleteHotel } from "../../redux/actions";
@@ -52,14 +52,20 @@ const Detail = () =>{
         <Link to="/">
           <i className="bi bi-arrow-left-circle" title="Return home"></i>
         </Link>
-        <Link to={`/update/${hotel.id}`}>
-          <i className="bi bi-pencil-square" title="Update"></i>
-        </Link>
-        <i
-          className="bi bi-trash"
-          onClick={() => handleDelete(id)}
-          title="Delete"
-        ></i>
+        {token ?
+          (
+            <>
+              <Link to={`/update/${hotel.id}`}>
+                <i className="bi bi-pencil-square" title="Update"></i>
+              </Link>
+              <i
+                className="bi bi-trash"
+                onClick={() => handleDelete(id)}
+                title="Delete"
+              ></i>
+            </>
+          ) : ""
+        }
       </div>
 
       {hotel ? (

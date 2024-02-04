@@ -1,41 +1,38 @@
-const emailRegex =
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-const passRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,10}$/;
+const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const passRegex = /^(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{6,14}$/;
 
-function registerValidation(name, last_name, email, password, setError) {
-  let error = "";
+const registerValidation = (data) => {
+  const errors = {};
 
-  if (!name) {
-    error = "User name required";
-  } else if (name.length > 50) {
-    error = "50 characters max";
-  } else if (!/^[a-zA-Z]+$/.test(name)) {
-    error = "Numbers or special characters are not allowed";
+  const requiredFields = ["name", "last_name", "email", "password"];
+
+  requiredFields.forEach((field) => {
+    const value = data[field];
+
+    if (!value) {
+      const formattedFieldName = field.replace('_', ' ').charAt(0).toUpperCase() + field.replace('_', ' ').slice(1);
+      errors[field] = `${formattedFieldName} is required.`;
+    }
+  });
+
+  if (data.name && (data.name.length > 50 || !/^[a-zA-Z]+$/.test(data.name))) {
+    errors.name = "Name should be a maximum of 50 characters and contain only letters.";
   }
 
-  if (!last_name) {
-    error = "User last name required";
-  } else if (last_name.length > 50) {
-    error = "50 characters max";
-  } else if (!/^[a-zA-Z]+$/.test(last_name)) {
-    error = "Numbers or special characters are not allowed";
+  if (data.last_name && (data.last_name.length > 50 || !/^[a-zA-Z]+$/.test(data.last_name))) {
+    const formattedFieldName = "Last name";
+    errors.last_name = `${formattedFieldName} should be a maximum of 50 characters and contain only letters.`;
   }
 
-  if (!email) {
-    error = "An email is required";
-  } else if (!emailRegex.test(email)) {
-    error = "Please enter a valid email address";
+  if (data.email && !emailRegex.test(data.email)) {
+    errors.email = "Invalid email address.";
   }
 
-  if (!password) {
-    error = "A password is required";
-  } else if (!passRegex.test(password)) {
-    error =
-      "Password should have 6 to 14 characters and at least one number and special character";
+  if (data.password && !passRegex.test(data.password)) {
+    errors.password = "Password should have 6 to 14 characters and include at least one number and one special character.";
   }
 
-  setError(error);
-  return !error;
-}
+  return errors;
+};
 
 export default registerValidation;
