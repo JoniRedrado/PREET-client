@@ -22,7 +22,7 @@ export  async function login(email, password) {
 }
 
 //Función para registrar un usuario
-export  async function register(name, last_name, email, password) {
+export  async function register({name, last_name, email, password}) {
     try {
         const response = await axios.post('http://localhost:3001/auth/register', { name, last_name, email, password });
       if (response.status === 200) {
