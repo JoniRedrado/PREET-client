@@ -41,9 +41,25 @@ const Detail = () =>{
   }, [dispatch, id]);
 
   const hotel = useSelector((state) => state.hotelDetail);
-
+  
+  //Integracion con PayPal
   const handleBook = () => {
-    axios.post('http://localhost:3001/payment/create-order')
+    //Objeto para enviar info de la reserva al backend, crear la orden de y luego guardar la reserva en la DB
+    const bookingInfo = {
+      user: localStorage.getItem('user_id'),
+      name: hotel.name,
+      price: hotel.price,
+      id: hotel.id,
+      initialDate: new Date(),
+      finalDate: new Date(),
+
+    }
+    //Peticion POST para crear la orden, luego redireccionar a la url de PayPal, ahi el usuario ingresa con su cuenta y realiza el pago.
+    //Una vez realizado o cancelado el pago, paypal te devuelve a nuestra app
+    //Cuenta de prueba paypal:
+    //email: sb-ujxlq29504971@personal.example.com
+    //password: /$>7^oW<
+    axios.post('http://localhost:3001/payment/create-order', bookingInfo)
       .then(res => {
         window.location.href = res.data.links[1].href
       })
