@@ -6,9 +6,9 @@ import {
     FaStar, 
     FaSignOutAlt,
     FaUserCog, 
-       } from 'react-icons/fa';
+      } from 'react-icons/fa';
 import { useSpring, animated } from 'react-spring';
-import styles from './userbar.module.css';
+import styles from './UserbarStyles.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { 
