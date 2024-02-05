@@ -8,7 +8,7 @@ import {
     FaUserCog, 
       } from 'react-icons/fa';
 import { useSpring, animated } from 'react-spring';
-import styles from './UserBar.module.css';
+import styles from './Userbar.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { 
