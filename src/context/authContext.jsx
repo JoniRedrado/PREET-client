@@ -1,10 +1,7 @@
 import {auth} from "../firebase/firebase.config";
 import { createContext, useContext, useState, useEffect } from "react";
 import {GoogleAuthProvider,
-        createUserWithEmailAndPassword, 
-        signInWithEmailAndPassword,
         signInWithPopup,
-        signOut,
         onAuthStateChanged
     } from "firebase/auth"
 
@@ -35,24 +32,6 @@ export function AuthProvider({children}){
         return () => unsubscribe()
     },[])
 
-    const register = async (email, password) =>{
-        try {
-            const response = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(response);
-        } catch (error) {
-            console.error("Error registering user:", error);
-        }
-    };
-
-    const login = async( email, password) =>{
-        try {
-            const response = await signInWithEmailAndPassword(auth, email, password);
-            console.log(response);
-        } catch (error) {
-            console.error("Error logging in:", error);
-        }
-    }
-
     const loginWithGoogle = async () =>{
         try {
             const provider = new GoogleAuthProvider();
@@ -68,22 +47,10 @@ export function AuthProvider({children}){
         }
     }
 
-    const logout = async () => {
-        try {
-            if(user === null) return;
-            const response = await signOut(auth);
-        } catch (error) {
-            console.error("Error logging out:", error);
-        }
-    }
-
     return (
         <authContext.Provider 
             value={{
-                register,
-                login,
                 loginWithGoogle,
-                logout,
                 user
             }}
         >
