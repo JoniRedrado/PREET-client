@@ -45,14 +45,14 @@ function LoginForm() {
           <form className={styles.loginContainer}>
             <h2>Login</h2>
             <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className={`${styles.input} ${error && styles.error}`}/>
-          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} onKeyPress={ handleKeyPress} className={`${styles.input} ${error && styles.error}`}/>
+            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} onKeyPress={ handleKeyPress} className={`${styles.input} ${error && styles.error}`}/>
             <button type="button" onClick={handleLogin}>Login</button>
-            <button type="button" onClick={handleGoogleLogin}>Login with Google </button>
+            <button type="button" onClick={handleGoogleLogin}>Login with Google <i className="bi bi-google"></i> </button>
           </form>
           {error && (
                 <span className={styles.error}>{error}</span>
               )}
-        </div>
+        </div> 
     );
 }
 
