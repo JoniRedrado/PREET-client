@@ -45,7 +45,7 @@ const Settings = () => {
       }
     })
     .then(response => {
-      console.log('User information updated successfully');
+      window.alert('User information updated successfully');
     })
     .catch(error => {
       console.error('Error updating user information', error);

@@ -1,19 +1,12 @@
 .container {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #022840;
-  height: 300px;
-  padding: 0 20px 0 20px;
-  margin: -10px;
 }
 
 .items{
   display: flex;
-  justify-content: space-around;
-  align-items: start;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  margin-bottom: 150px;
   text-align: center;
 }
 
@@ -39,10 +32,38 @@
   gap: 5px;
 }
 
-.blueButton {
-  background-color: #009dff !important
+.buttons{
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff; 
+  font-size: 18px;
+  display: flex;
+  padding: 10px 30px 10px 30px;
 }
 
-.yellowButton {
-  background-color: #ffbc00 !important
+.buttons:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.linksContainer{
+  width: 696px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.link{
+  text-decoration: none;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer; 
+  font-size: 20px;
+  padding: 10px 30px 10px 30px;
+  
+}
+.link:hover{
+  background-color: rgba(255, 255, 255, 0.2);
 }

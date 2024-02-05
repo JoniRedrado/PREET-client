@@ -3,9 +3,11 @@ import template from "../../assets/Logo-White.svg";
 import Modal from "react-modal";
 import RegisterUser from "../../Pages/Register/Register";
 import LoginForm from "../../Pages/Login/Login";
-import UserBar from "../UserBar/UserBar"; // Importa el UserBar
+import UserBar from "../UserBar/UserBar"; 
 import style from "./NavBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { FaUserPlus } from 'react-icons/fa';
+import { BsLock } from 'react-icons/bs';
 import {
   getAllHotels,
   resetCurrentPage,
@@ -50,9 +52,17 @@ function NavBar() {
   return (
     <div className={style.container}>
       <div className={style.items}>
-      <Link to="/" onClick={handleHomeButton}>
-        <img src={template} width="18%" alt="Logo" className={style.logo}/>
-      </Link>
+        <div className={style.logo}>
+          <Link to="/" onClick={handleHomeButton}>
+            <img src={template} width="18%" alt="Logo" className={style.logo}/>
+          </Link>
+        </div>
+        <div className={style.linksContainer}>
+          <Link to="/" className={style.link}>Home</Link>
+          <Link className={style.link}>Contact</Link>
+          <Link className={style.link}>About Us</Link>
+        </div>
+     
       <div className={style.userButtons}>
         {token ? (
           <>
@@ -61,10 +71,10 @@ function NavBar() {
         ) : (
           <>
             <button
-              className={style.blueButton}
+              className={style.buttons}
               onClick={() => openModal("register")}
             >
-              Register
+              <FaUserPlus/> Sign Up
             </button>
             <div className={style.overlayModal}>
               <Modal
@@ -84,8 +94,8 @@ function NavBar() {
                 <RegisterUser />
               </Modal>
             </div>
-            <button onClick={() => openModal("login")} name="login">
-              Login
+            <button onClick={() => openModal("login")} name="login" className={style.buttons}>
+              <BsLock/> Login
             </button>
             <div className={style.overlayModal}>
               <Modal

@@ -1,0 +1,59 @@
+.header1 {
+    position: relative;
+    height: 600px;
+    background: url(C:\Users\milla\OneDrive\Documentos\Henry\PF\PREET\PREET-client\src\assets\header-background.jpg) top/cover no-repeat; /* Reemplaza con la ruta correcta de tu imagen */
+    overflow: hidden;
+    color: #fff; 
+    display: flex;
+    justify-content: center;
+  }
+
+  .header2{
+    background-color: #022840;
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .headerContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px; /* Ajusta según tus necesidades */
+    width: 90%;
+  }
+
+  .headerContainer2{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .textContainer {
+    margin-bottom: 20px; /* Ajusta según tus necesidades */
+    width: 1176px;
+    height: 283px;
+    line-height: 109.68px;
+  }
+  
+  .textContainer h1 {
+    font-weight: 400;
+    font-size: 80px;
+  }
+  
+  .searchbarContainer{
+    width: 1176px;
+    height: 120px;
+    border-radius: 16px;
+    background-color: #FFBD00;
+  }
+
+  
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+

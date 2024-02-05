@@ -9,13 +9,15 @@ import Login from "./Pages/Login/Login";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Settings from "./Pages/Settings/Settings";
 import BookedSuccesfully from "./Pages/BookedSuccesfully/BookedSuccesfully";
+import Footer from "./Components/Footer/Footer";
+import Header from "./Components/Header/Header";
 
 // import './App.css'
 
 function App() {
   return (
     <div>
-      <NavBar />
+      <Header/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/detail/:id" element={<Detail />} />
@@ -27,6 +29,7 @@ function App() {
         <Route path="/settings" element={<Settings/>}/>
         <Route path="/booked" element={<BookedSuccesfully />} />
       </Routes>
+      <Footer/>
     </div>
   );
 }
