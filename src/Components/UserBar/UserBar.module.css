@@ -1,72 +1,73 @@
 .userBar {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.menuButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #fff; 
-  font-size: 20px;
-  display: flex;
-  padding: 15px 50px 15px 50px;
-  border-radius: 15px;
-  gap: 10px;
-}
-
-.menuButton:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 10px;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transform-origin: top right;
-  width: 100%;
-}
-
-.menu button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 10px;
-  font-size: 14px;
-  color: #333; 
-  transition: color 0.3s ease; 
-}
-
-
-/* Ajustes de iconos */
-.menu button svg {
-  font-size: 20px;
-}
-
-.link{
-  text-decoration: none;
-  color: inherit;
-}
-
-.link:hover{
-  background-color: #f8f4f4;
-}
-
-.signOut{
-  background-color: red !important;
-}
-.signOut:hover{
-  background-color: #f8f4f4;
-}
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .menuButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #fff; 
+    font-size: 20px;
+    display: flex;
+    padding: 15px 50px 15px 50px;
+    border-radius: 15px;
+    gap: 10px;
+  }
+  
+  .menuButton:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transform-origin: top right;
+    width: 100%;
+  }
+  
+  .menu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    font-size: 14px;
+    color: #333; 
+    transition: color 0.3s ease; 
+  }
+  
+  
+  /* Ajustes de iconos */
+  .menu button svg {
+    font-size: 20px;
+  }
+  
+  .link{
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .link:hover{
+    background-color: #f8f4f4;
+  }
+  
+  .signOut{
+    background-color: red !important;
+  }
+  .signOut:hover{
+    background-color: #f8f4f4;
+  }
+  
