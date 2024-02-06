@@ -1,11 +1,11 @@
 .header1 {
     position: relative;
     height: 600px;
-    background: url(C:\Users\Joni\Desktop\Henry\PF\PREET-client\src\assets\header-background.jpg) top/cover no-repeat; /* Reemplaza con la ruta correcta de tu imagen */
-    overflow: hidden;
+    background: url("../../assets/header-background.jpg") top/cover no-repeat; 
     color: #fff; 
     display: flex;
     justify-content: center;
+    
   }
 
   .header2{
@@ -19,8 +19,9 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 20px; /* Ajusta según tus necesidades */
+    padding: 20px;
     width: 90%;
+    margin-left: 50px;
   }
 
   .headerContainer2{
@@ -32,7 +33,7 @@
   }
   
   .textContainer {
-    margin-bottom: 20px; /* Ajusta según tus necesidades */
+    margin-bottom: 20px;
     width: 1176px;
     height: 283px;
     line-height: 109.68px;

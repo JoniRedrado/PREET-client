@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getHotelByName } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import s from "../SearchBar/SearchBar.module.css"
+import { FaSearch } from "react-icons/fa"
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -28,17 +29,21 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
+    <div className={s.container}>
       <div className={s.searchBar}>
-        <input
-          className={s.searchInput}
-          type="text"
-          placeholder="Enter a name"
-          onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
-          value={name}
-        />
-        <button onClick={handleSubmit} className={s.searchButton}>Search</button>
+      <FaSearch className={s.searchIcon} />
+      <input
+        className={s.searchInput}
+        type="text"
+        placeholder="Explore destination cities or places"
+        onChange={handleInputChange}
+        onKeyPress={handleKeyPress}
+        value={name}
+      />
+
+      </div>
+      <div className={s.filters}>
+      <button onClick={handleSubmit} className={s.searchButton}>Search</button>
       </div>
     </div>
   );
