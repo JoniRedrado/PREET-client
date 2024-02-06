@@ -16,9 +16,10 @@ const Cards = ({ allHotels }) => {
           country={hotel.country.name} 
           // address_url={hotel.address_url}
           stars={hotel.stars}
-          price={hotel.price} 
+          //price={hotel.price} 
           email={hotel.email} 
-          image={hotel.image} 
+          image={hotel.image}
+          rooms={hotel.rooms} 
         />;
       })
       }

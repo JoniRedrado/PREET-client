@@ -10,7 +10,7 @@ import './Card.style.css';
 
 
 const Card = (props) => {
-  const { id, name, image, country, price, stars } = props;
+  const { id, name, image, country, rooms, stars } = props;
 
   const cardVariants = {
     hover: {
@@ -55,7 +55,7 @@ const Card = (props) => {
             {country ? country : "N/A"}
             </p>
           <p className="card-text">
-            Starting from
+            Starting from {rooms.length > 0 ? rooms[0].price : "N/A"}
             <FaDollarSign className="info-icon" />
             {}
           </p>
