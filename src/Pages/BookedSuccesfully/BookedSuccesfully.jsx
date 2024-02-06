@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useLocation } from "react-router-dom";
 import axios from 'axios'
+import './BookedSuccesfully.styles.css'
 
 
 
@@ -19,11 +20,12 @@ const BookedSuccesfully = () => {
     })
 
   return (
-    <div>
-      <h1>Booked Succesfully</h1>
-      <button onClick={() => window.location.href = "/"}>Return Home</button>
+    <div className="main-booked-container">
+      <i className='bi bi-calendar2-check' title='booked-success'></i>
+      <h1>¡Your room has been successfully booked!</h1>
+      <button onClick={() => (window.location.href = "/")}>Return Home</button>
     </div>
-  )
+  );
 }
 
 export default BookedSuccesfully

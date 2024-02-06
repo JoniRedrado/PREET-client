@@ -76,7 +76,7 @@ const Detail = () =>{
     >
       <div className="icons">
         <Link to="/">
-          <i className="bi bi-arrow-left-circle" title="Return home"></i>
+          <i className="bi bi-arrow-left-circle fa-lg" title="Return home"></i>
         </Link>
         {token ?
           (
