@@ -7,6 +7,7 @@ import {
   FaMapMarkerAlt,
   FaEnvelope,
 } from "react-icons/fa";
+import RoomDetail from "../RoomDetail/RoomDetail";
 import "./detail.styles.css";
 import axios from 'axios'
 
@@ -42,29 +43,30 @@ const Detail = () =>{
 
   const hotel = useSelector((state) => state.hotelDetail);
   
-  //Integracion con PayPal
-  const handleBook = () => {
-    //Objeto para enviar info de la reserva al backend, crear la orden de y luego guardar la reserva en la DB
-    const bookingInfo = {
-      user: localStorage.getItem('user_id'),
-      name: hotel.name,
-      price: hotel.price,
-      id: hotel.id,
-      initialDate: new Date(),
-      finalDate: new Date(),
+  // //Integracion con PayPal
+  // const handleBook = () => {
+  //   //Objeto para enviar info de la reserva al backend, crear la orden de y luego guardar la reserva en la DB
+  //   const bookingInfo = {
+  //     user: localStorage.getItem('user_id'),
+  //     name: hotel.name,
+  //     price: hotel.price,
+  //     id: hotel.id,
+  //     initialDate: new Date(),
+  //     finalDate: new Date(),
 
-    }
-    //Peticion POST para crear la orden, luego redireccionar a la url de PayPal, ahi el usuario ingresa con su cuenta y realiza el pago.
-    //Una vez realizado o cancelado el pago, paypal te devuelve a nuestra app
-    //Cuenta de prueba paypal:
-    //email: sb-ujxlq29504971@personal.example.com
-    //password: /$>7^oW<
-    axios.post('http://localhost:3001/payment/create-order', bookingInfo)
-      .then(res => {
-        window.location.href = res.data.links[1].href
-      })
-  }
+  //   }
+  //   //Peticion POST para crear la orden, luego redireccionar a la url de PayPal, ahi el usuario ingresa con su cuenta y realiza el pago.
+  //   //Una vez realizado o cancelado el pago, paypal te devuelve a nuestra app
+  //   //Cuenta de prueba paypal:
+  //   //email: sb-ujxlq29504971@personal.example.com
+  //   //password: /$>7^oW<
+  //   axios.post('http://localhost:3001/payment/create-order', bookingInfo)
+  //     .then(res => {
+  //       window.location.href = res.data.links[1].href
+  //     })
+  // }
 
+  
   return (
     <motion.div
       className="container"
@@ -97,7 +99,7 @@ const Detail = () =>{
           <h1>{hotel.name}</h1>
           <img src={hotel.image} alt={hotel.name} />
           <h2>{renderStars(hotel.stars)}</h2>
-          <h2>Price per night: ${hotel.price}</h2>
+          {/* <h2>Price per night: ${hotel.price}</h2> */}
           <h2>
             <FaMapMarkerAlt className="info-icon" />
             Address: {hotel.address}
@@ -110,11 +112,18 @@ const Detail = () =>{
             <FaMapMarkerAlt className="info-icon" />
             Location: {hotel.address_url}
           </h2>
+          <h2>Available Rooms:</h2>
+            {hotel.rooms && hotel.rooms.length > 0 ? (
+              hotel.rooms.map((room) => (
+                <RoomDetail key={room.id} room={room} price={room.price} />
+              ))
+            ) : (
+              <p>No rooms available</p>
+            )}
           <h2>
             <FaEnvelope className="info-icon" />
             Contact: {hotel.email}
           </h2>
-          <button onClick={handleBook}>Book</button>
         </div>
       ) : (
         <p>cargando...</p>
