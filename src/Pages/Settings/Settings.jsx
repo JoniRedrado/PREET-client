@@ -45,7 +45,6 @@ const Settings = () => {
     .then(response => {
       setUserInfo(response.data);
       setLoading(false);
-      initializeEditableFields(response.data);
     })
     .catch(error => {
       console.error(error);
@@ -53,13 +52,6 @@ const Settings = () => {
     });
   }, [token]);
 
-  const initializeEditableFields = (data) => {
-    const initialFields = {};
-    Object.keys(data).forEach(key => {
-      initialFields[key] = false;
-    });
-    setEditableFields(initialFields);
-  };
 
   const handleEditClick = (field) => {
     setEditableFields({

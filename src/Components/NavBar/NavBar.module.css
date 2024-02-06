@@ -62,8 +62,46 @@
   cursor: pointer; 
   font-size: 20px;
   padding: 10px 30px 10px 30px;
+  border-radius: 5px;
   
 }
 .link:hover{
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Media queries para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+  .logo {
+    width: 60px; /* Reducimos aún más el tamaño del logo para pantallas más pequeñas */
+  }
+
+  .userButtons {
+    display: flex; /* Mostramos los botones de usuario para pantallas más pequeñas */
+    gap: 10px; /* Añadimos un pequeño espacio entre los botones */
+  }
+
+  .linksContainer {
+    display: flex; /* Mostramos los links del navbar para pantallas más pequeñas */
+  }
+
+  .buttons {
+    font-size: 14px; /* Reducimos más el tamaño del texto de los botones para pantallas más pequeñas */
+    padding: 5px 10px; /* Reducimos más el espacio interior de los botones para pantallas más pequeñas */
+  }
+  .link {
+    font-size: 16px; /* Reducimos el tamaño del texto de los enlaces para pantallas más pequeñas */
+    padding: 8px 20px; /* Reducimos el espacio interior de los enlaces para pantallas más pequeñas */
+  }
+}
+
+/* Media queries para pantallas más grandes */
+@media screen and (min-width: 992px) {
+  .logo {
+    width: 120px; /* Aumentamos ligeramente el tamaño del logo para pantallas más grandes */
+  }
+
+  .buttons {
+    font-size: 18px; /* Aumentamos ligeramente el tamaño del texto de los botones para pantallas más grandes */
+    padding: 10px 20px; /* Aumentamos ligeramente el espacio interior de los botones para pantallas más grandes */
+  }
 }

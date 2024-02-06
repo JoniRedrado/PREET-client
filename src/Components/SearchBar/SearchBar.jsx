@@ -3,9 +3,11 @@ import { getHotelByName } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import s from "../SearchBar/SearchBar.module.css"
 import { FaSearch } from "react-icons/fa"
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [name, setName] = useState("");
 
   const handleKeyPress = (e) => {
@@ -21,6 +23,7 @@ const SearchBar = () => {
     e.preventDefault()
     dispatch(getHotelByName(name))
     setName("")
+    navigate(`/search/${encodeURIComponent(name)}`);
   }
 
   const handleInputChange = async (e) => {

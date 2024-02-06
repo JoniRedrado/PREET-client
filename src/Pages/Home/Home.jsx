@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../../Components/Cards/Cards";
-import Pagination from "../../Components/Pagination/Pagination";
 import { filterHotels, getAllCountries, userLog } from "../../redux/actions";
 import Filters from "../../Components/Filters/Filters";
 import TryAgain from "../../Components/Try again/TryAgain";
 import Slider from "../../Components/Slider/Slider";
 
-// import { useNavigate } from 'react-router-dom';
+import styles from "./Home.module.css"
 
 function Home() {
   const dispatch = useDispatch();
@@ -36,17 +35,21 @@ function Home() {
   }, [filteredHotels]);
 
   return (
-    <div>
+    <div className={styles.mainContainer}>
+      <div className={styles.sliderContainer}>
+      <Slider />
+      </div>
+
+      <div className={styles.componentsContainer}>
       <Filters />
-      {noResults ? (
-        <TryAgain />
-      ) : (
+        {noResults ? (
+          <TryAgain />
+        ) : (
         <div>
           <Cards allHotels={filteredHotels} />
-          <Pagination />
-          <Slider />
         </div>
       )}
+      </div>
     </div>
   );
 }

@@ -31,7 +31,6 @@ const UserBar = () => {
 
   const [showMenu, setShowMenu] = useState(false);
   const menuButtonRef = useRef(null);
-  const menuRef = useRef(null);
 
   const menuAnimation = useSpring({
     opacity: showMenu ? 1 : 0,
@@ -44,6 +43,7 @@ const UserBar = () => {
 
   const handleClickOutside = (event) => {
     if (menuButtonRef.current && !menuButtonRef.current.contains(event.target)) {
+      console.log(menuButtonRef.current)
       // Cerrar el menú si se hace clic fuera de él
       closeMenu();
     }
@@ -63,7 +63,7 @@ const UserBar = () => {
         <FaUser /> Bienvenido
       </button>
 
-      <animated.div ref={menuRef} className={styles.menu} style={menuAnimation}>
+      <animated.div className={styles.menu} style={menuAnimation}>
         <Link to="/settings" className={styles.link}>
             <button>
                 <FaUser /> Manage Account

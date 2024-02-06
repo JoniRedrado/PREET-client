@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 import Card from "../Card/Card";
+import Pagination from "../Pagination/Pagination";
 import './Cards.style.css'
 
 const Cards = ({ allHotels }) => {  
     const hotelList = allHotels
 
   return (
-    <div className="cards-container">
+    <div className="main-div">
+        <div className="cards-container">
       {hotelList.Hotel?.map((hotel) => {
         return <Card 
           key={hotel.id}
@@ -23,7 +25,12 @@ const Cards = ({ allHotels }) => {
         />;
       })
       }
+      </div>
+      <div className="pagination">
+      <Pagination />
+      </div>
     </div>
+    
   );
   
 };
