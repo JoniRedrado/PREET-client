@@ -57,6 +57,8 @@
   margin-left: 1.1em;
 }
 
+
+
 .slideBtns {
   display: flex;
   justify-content: center;
@@ -81,6 +83,11 @@
 }
 
 .container button:hover {
+<<<<<<< Updated upstream
   background-color: #6093bf;
 }
 
+=======
+  background-color: #0056b3;
+}
+>>>>>>> Stashed changes

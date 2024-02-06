@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useState, useEffect } from "react";
 import style from "./Slider.module.css";
 
@@ -11,16 +12,43 @@ function Slider() {
   ];
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedHotel, setSelectedHotel] = useState(images[0]);
+=======
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+
+import style from "./Slider.module.css";
+
+function Slider() {
+  const [rankedHotels, setRankedHotels] = useState([]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedHotel, setSelectedHotel] = useState("");
+>>>>>>> Stashed changes
   const [loaded, setLoaded] = useState(false);
-  const autoPlay = true;
+  // const autoPlay = true;
 
   useEffect(() => {
-    if (autoPlay) {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:3001/hotels/range");
+        setRankedHotels(data);
+        setSelectedHotel(data[0]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+
+    /* if (autoPlay) {
       const interval = setInterval(() => {
         next();
       }, 10000);
       return () => clearInterval(interval);
+<<<<<<< Updated upstream
     }
+=======
+    } */
+>>>>>>> Stashed changes
   }, []);
 
   const previous = () => {
@@ -28,6 +56,15 @@ function Slider() {
     setSelectedIndex(newIndex);
     setSelectedHotel(images[newIndex]);
     setLoaded(false);
+<<<<<<< Updated upstream
+=======
+    setTimeout(() => {
+      const condition = selectedIndex > 0;
+      const nextIndex = condition ? selectedIndex - 1 : rankedHotels.length - 1;
+      setSelectedHotel(rankedHotels[nextIndex]);
+      setSelectedIndex(nextIndex);
+    }, 500);
+>>>>>>> Stashed changes
   };
 
   const next = () => {
@@ -35,10 +72,19 @@ function Slider() {
     setSelectedIndex(newIndex);
     setSelectedHotel(images[newIndex]);
     setLoaded(false);
+<<<<<<< Updated upstream
   };
 
   const handleImageLoad = () => {
     setLoaded(true);
+=======
+    setTimeout(() => {
+      const condition = selectedIndex < rankedHotels.length - 1;
+      const nextIndex = condition ? selectedIndex + 1 : 0;
+      setSelectedHotel(rankedHotels[nextIndex]);
+      setSelectedIndex(nextIndex);
+    }, 500);
+>>>>>>> Stashed changes
   };
 
   return (
@@ -49,6 +95,7 @@ function Slider() {
       <div className={style.sliderContainer}>
       <div className={style.imgsContainer}>
         <img
+<<<<<<< Updated upstream
           className={`${style.image} ${loaded ? style.loadedImg : style.notLoadedImg}`}
           src={`../../src/assets/slider_test_images/${selectedHotel.src}`}
           alt={selectedHotel.name}
@@ -61,6 +108,20 @@ function Slider() {
           <p>{selectedHotel.stars}</p>
           
           <p>Ranked by our users</p>
+=======
+          className={loaded ? style.loadedImg : style.notLoadedImg}
+          src={selectedHotel.image}
+          alt="top_hotels"
+          onLoad={() => setLoaded(true)}
+        />
+        <div className={style.text}>
+          <h1>TOP HOTELS OF THE SEASON✨</h1>
+          <h3>Ranked by our users</h3>
+          <h2>{selectedHotel.name}</h2>
+          <Link to={`/detail/${selectedHotel.id}`}>
+            <button>See More</button>
+          </Link>
+>>>>>>> Stashed changes
         </div>
         <div className={style.slideBtns}>
           <button className={style.BtnLeft} onClick={previous}>
