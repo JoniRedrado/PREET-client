@@ -102,16 +102,16 @@ const Detail = () =>{
           {/* <h2>Price per night: ${hotel.price}</h2> */}
           <h2>
             <FaMapMarkerAlt className="info-icon" />
-            Address: {hotel.address}
+             Address: {hotel.address}
           </h2>
           <h2>
             <FaMapMarkerAlt className="info-icon" />
-            Country: {hotel.country && hotel.country.name}
+             {hotel.country && hotel.country.name}
           </h2>
-          <h2>
+          {/* <h2>
             <FaMapMarkerAlt className="info-icon" />
             Location: {hotel.address_url}
-          </h2>
+          </h2> */}
           <h2>Available Rooms:</h2>
             {hotel.rooms && hotel.rooms.length > 0 ? (
               hotel.rooms.map((room) => (
@@ -122,7 +122,7 @@ const Detail = () =>{
             )}
           <h2>
             <FaEnvelope className="info-icon" />
-            Contact: {hotel.email}
+             Contact: {hotel.email}
           </h2>
         </div>
       ) : (

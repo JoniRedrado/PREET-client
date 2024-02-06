@@ -33,26 +33,47 @@ const RoomDetail = ({ room }) => {
       });
   };
 
-  return (
-    <div className="room-table">
-    <div className="room-detail">
-      <h3>Type {room.type}</h3>
-      <h3>Description {room.description}</h3>
-      <p>Price: ${room.price}</p>
-      {/* <label htmlFor="initialDate">Initial Date:</label>
-      <input type="date" id="initialDate" value={initialDate} onChange={(e) => setInitialDate(e.target.value)} />
-      <label htmlFor="finalDate">Final Date:</label>
-      <input type="date" id="finalDate" value={finalDate} onChange={(e) => setFinalDate(e.target.value)} /> */}
-      {!isBooking ? (
-        <button onClick={handleBook}>
-          <i class="bi bi-paypal" onClick={handleBook} ></i> Book Now
-        </button>
-      ) : (
-        <p>Processing payment...</p>
-      )}
-    </div>
-    </div>
-  );
+   return (
+//     <div className="room-table">
+//     <div className="room-detail">
+//         <div> 
+//             <h3>Type </h3>
+//             <h3> {room.type}</h3>
+//         </div>
+//       <h3>Description {room.description}</h3>
+//       <p>Price: ${room.price}</p>
+//       {!isBooking ? (
+//         <button onClick={handleBook}>
+//           <i class="bi bi-paypal" onClick={handleBook} ></i> Book Now
+//         </button>
+//       ) : (
+//         <p>Processing payment...</p>
+//       )}
+    // </div>
+    // </div>
+    <table className="table">
+    <thead>
+      <tr>
+        <th scope="col">Type <i class="bi bi-door-open-fill"></i></th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Pay</th>
+      </tr>
+    </thead>
+    <tbody>
+    {/* {hotel.rooms.map((room) => ( */}
+      <tr key={room.id}>
+        <td style={{ width: '25%' }}>{room.type}</td>
+        <td style={{ width: '50%' }}>{room.description}</td>
+        <td style={{ width: '15%' }}>{room.price} $</td>
+        <td style={{ width: '10%' }}>
+          <i className="bi bi-paypal" onClick={handleBook}></i>
+        </td>
+      </tr>
+    {/* ))} */}
+    </tbody>
+  </table>
+  )
 };
 
 export default RoomDetail;
