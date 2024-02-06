@@ -11,13 +11,14 @@ const RoomDetail = ({ room }) => {
   const handleBook = () => {
     setIsBooking(true);
     const bookingInfo = {
+      roomId: room.id,
       user: localStorage.getItem("token"),
     //   room: room.id,
       price: room.price,
     //   initialDate: initialDate,
     //   finalDate: finalDate,
-      initialDate: new Date(),
-      finalDate: new Date(),
+      dateInit: new Date(),
+      dateFinal: new Date(),
     };
 
 
