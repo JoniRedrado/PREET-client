@@ -55,9 +55,10 @@ const Card = (props) => {
             {country ? country : "N/A"}
             </p>
           <p className="card-text">
-          <FaDollarSign className="info-icon" />
-            {price ? price : "N/A"}
-            </p>
+            Starting from
+            <FaDollarSign className="info-icon" />
+            {}
+          </p>
         </div>
       </Link>
     </motion.div>
