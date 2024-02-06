@@ -1,0 +1,19 @@
+.table {
+  width: 100%; /* Ajustar el ancho de la tabla al contenedor */
+  border-collapse: collapse; /* Colapsar los bordes de la tabla */
+}
+
+.table th,
+.table td {
+  padding: 8px; /* Añadir un espacio alrededor del contenido de las celdas */
+  text-align: left; /* Justificar el contenido a la izquierda */
+  border-bottom: 1px solid #ddd; /* Agregar bordes inferiores a las filas */
+}
+
+.table th {
+  background-color: #f2f2f2; /* Color de fondo para las celdas de encabezado */
+}
+
+.table i{
+  cursor: pointer;
+}
