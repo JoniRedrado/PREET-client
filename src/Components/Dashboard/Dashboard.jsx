@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   const getUsers = async() => {
     try {
-      const { data } = await axios.get("http://localhost:3001/users");
+      const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/users`);
 
       setUsersData(data)
 
@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   const deleteUser = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/users/delete/${id}`);
+      await axios.delete(`${import.meta.env.VITE_BACK_URL}/users/delete/${id}`);
 
       getUsers()
 
@@ -39,7 +39,7 @@ const Dashboard = () => {
   
   const getHotels = async() => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/hotels?size=30`);
+      const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels?size=30`);
       
       setHotelsData(data.Hotel)
       
@@ -50,7 +50,7 @@ const Dashboard = () => {
   
   const deleteHotel = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/hotels/${id}`);
+      await axios.delete(`${import.meta.env.VITE_BACK_URL}/hotels/${id}`);
 
       getHotels()
 

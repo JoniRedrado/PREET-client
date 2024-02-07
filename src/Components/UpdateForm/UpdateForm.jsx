@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./UpdateForm.module.css"; 
 import validation from "../../helpers/validation";
@@ -30,7 +30,7 @@ const UpdateForm = () => {
   useEffect(() => {
     const fetchHotelData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/hotels/detail/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels/detail/${id}`);
         setHotelData(response.data);
       } catch (error) {
         console.error("Error fetching hotel data:", error);
@@ -116,7 +116,7 @@ const UpdateForm = () => {
         };
   
         const responseBackend = await axios.put(
-          `http://localhost:3001/hotels/${id}`,
+          `${import.meta.env.VITE_BACK_URL}/hotels/${id}`,
           updatedData
         );
   

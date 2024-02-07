@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from "./Settings.module.css";
 import { countries } from 'countries-list';
@@ -37,7 +37,7 @@ const Settings = () => {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    axios.get('http://localhost:3001/users/profile', {
+    axios.get(`${import.meta.env.VITE_BACK_URL}/users/profile`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -94,7 +94,7 @@ const Settings = () => {
       updatedUserInfo = userInfo;
     }
 
-    axios.put('http://localhost:3001/users/profile', updatedUserInfo, {
+    axios.put(`${import.meta.env.VITE_BACK_URL}/users/profile`, updatedUserInfo, {
       headers: {
         Authorization: `Bearer ${token}`
       }

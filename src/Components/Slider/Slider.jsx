@@ -55,33 +55,34 @@ function Slider() {
 
   return (
     <div className={style.container}>
-      <div className={style.header}>
-      <h3>TOP HOTELS OF THE SEASON✨</h3>
-      </div>
-      <div className={style.sliderContainer}>
-      <div className={style.imgsContainer}>
-        <img
-          className={loaded ? style.loadedImg : style.notLoadedImg}
-          src={selectedHotel.image}
-          alt="top_hotels"
-          onLoad={() => setLoaded(true)}
-        />
-        <div className={style.text}>
-          <h1>TOP HOTELS OF THE SEASON✨</h1>
-          <h3>Ranked by our users</h3>
-          <h2>{selectedHotel.name}</h2>
-          <Link to={`/detail/${selectedHotel.id}`}>
-            <button>See More</button>
-          </Link>
-        </div>
-        <div className={style.slideBtns}>
-          <button className={style.BtnLeft} onClick={previous}>
-            {"<"}
-          </button>
-          <button onClick={next}>{">"}</button>
+      <h1 className={style.title}>TOP HOTELS OF THE SEASON✨</h1>
+      <div className={style.info}>
+        <div className={style.image}>
+          {selectedHotel && (
+            <img
+              className={loaded ? style.loadedImg : style.notLoadedImg}
+              src={selectedHotel.image}
+              alt="top_hotels"
+              onLoad={() => setLoaded(true)}
+            />
+          )}
         </div>
 
-      </div>
+        <div className={style.text}>
+          <div className={style.hotelText}>
+            <h1>{selectedHotel.name}</h1>
+            <Link to={`/detail/${selectedHotel.id}`}>
+              <button>See More</button>
+            </Link>
+            <p>Ranked by our users</p>
+          </div>
+          <div className={style.slideBtns}>
+            <button className={style.BtnLeft} onClick={previous}>
+              {"<"}
+            </button>
+            <button onClick={next}>{">"}</button>
+          </div>
+        </div>
       </div>
     </div>
   );
