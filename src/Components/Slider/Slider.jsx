@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import style from "./Slider.module.css";
 
@@ -9,49 +9,45 @@ function Slider() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedHotel, setSelectedHotel] = useState("");
   const [loaded, setLoaded] = useState(false);
-  // const autoPlay = true;
+  const autoPlay = true;
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:3001/hotels/range");
-        setRankedHotels(data);
-        setSelectedHotel(data[0]);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
+    axios
+      .get(`${import.meta.env.VITE_BACK_URL}/hotels/range`)
+      .then((response) => {
+        setRankedHotels(response.data);
+        setSelectedHotel(response.data[0]);
+        console.log("Datos de hoteles obtenidos correctamente:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener datos de hoteles:", error);
+      });
+  }, []);
 
-    /* if (autoPlay) {
+  useEffect(() => {
+    if (autoPlay) {
       const interval = setInterval(() => {
         next();
       }, 10000);
       return () => clearInterval(interval);
-    } */
-  }, []);
+    }
+  });
 
   const previous = () => {
-    const newIndex = selectedIndex === 0 ? images.length - 1 : selectedIndex - 1;
-    setSelectedIndex(newIndex);
-    setSelectedHotel(images[newIndex]);
     setLoaded(false);
     setTimeout(() => {
-      const condition = selectedIndex > 0;
-      const nextIndex = condition ? selectedIndex - 1 : rankedHotels.length - 1;
+      const nextIndex =
+        selectedIndex > 0 ? selectedIndex - 1 : rankedHotels.length - 1;
       setSelectedHotel(rankedHotels[nextIndex]);
       setSelectedIndex(nextIndex);
     }, 500);
   };
 
   const next = () => {
-    const newIndex = selectedIndex === images.length - 1 ? 0 : selectedIndex + 1;
-    setSelectedIndex(newIndex);
-    setSelectedHotel(images[newIndex]);
     setLoaded(false);
     setTimeout(() => {
-      const condition = selectedIndex < rankedHotels.length - 1;
-      const nextIndex = condition ? selectedIndex + 1 : 0;
+      const nextIndex =
+        selectedIndex < rankedHotels.length - 1 ? selectedIndex + 1 : 0;
       setSelectedHotel(rankedHotels[nextIndex]);
       setSelectedIndex(nextIndex);
     }, 500);
