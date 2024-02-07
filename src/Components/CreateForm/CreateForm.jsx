@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./CreateForm.module.css";
 import validation from "../../helpers/validation";
@@ -104,7 +104,7 @@ const CreateForm = () => {
             };
   
             const responseBackend = await axios.post(
-              "http://localhost:3001/hotels",
+              `${import.meta.env.VITE_BACK_URL}/hotels`,
               updatedData
             );
   

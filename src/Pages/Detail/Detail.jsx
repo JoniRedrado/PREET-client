@@ -60,7 +60,7 @@ const Detail = () =>{
   //   //Cuenta de prueba paypal:
   //   //email: sb-ujxlq29504971@personal.example.com
   //   //password: /$>7^oW<
-  //   axios.post('http://localhost:3001/payment/create-order', bookingInfo)
+  //   axios.post('${import.meta.env.VITE_BACK_URL}/payment/create-order', bookingInfo)
   //     .then(res => {
   //       window.location.href = res.data.links[1].href
   //     })
@@ -76,7 +76,7 @@ const Detail = () =>{
     >
       <div className="icons">
         <Link to="/">
-          <i className="bi bi-arrow-left-circle fa-lg" title="Return home"></i>
+          <i className="bi bi-arrow-left-circle" title="Return home"></i>
         </Link>
         {token ?
           (
@@ -102,16 +102,16 @@ const Detail = () =>{
           {/* <h2>Price per night: ${hotel.price}</h2> */}
           <h2>
             <FaMapMarkerAlt className="info-icon" />
-             Address: {hotel.address}
+            Address: {hotel.address}
           </h2>
           <h2>
             <FaMapMarkerAlt className="info-icon" />
-             {hotel.country && hotel.country.name}
+            Country: {hotel.country && hotel.country.name}
           </h2>
-          {/* <h2>
+          <h2>
             <FaMapMarkerAlt className="info-icon" />
             Location: {hotel.address_url}
-          </h2> */}
+          </h2>
           <h2>Available Rooms:</h2>
             {hotel.rooms && hotel.rooms.length > 0 ? (
               hotel.rooms.map((room) => (
@@ -122,7 +122,7 @@ const Detail = () =>{
             )}
           <h2>
             <FaEnvelope className="info-icon" />
-             Contact: {hotel.email}
+            Contact: {hotel.email}
           </h2>
         </div>
       ) : (

@@ -13,7 +13,7 @@ function Slider() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/hotels/range")
+      .get(`${import.meta.env.VITE_BACK_URL}/hotels/range`)
       .then((response) => {
         setRankedHotels(response.data);
         setSelectedHotel(response.data[0]);

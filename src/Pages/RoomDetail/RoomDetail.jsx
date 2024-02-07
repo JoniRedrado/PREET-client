@@ -25,7 +25,7 @@ const RoomDetail = ({ room }) => {
 
     console.log(bookingInfo)
 
-    axios.post("http://localhost:3001/payment/create-order", bookingInfo)
+    axios.post(`${import.meta.env.VITE_BACK_URL}/payment/create-order`, bookingInfo)
     .then((res) => {
       window.location.href = res.data.links[1].href;
     })

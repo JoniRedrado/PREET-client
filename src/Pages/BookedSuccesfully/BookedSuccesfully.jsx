@@ -1,4 +1,3 @@
-import React from 'react'
 import { useEffect } from 'react'
 import { useLocation } from "react-router-dom";
 import axios from 'axios'
@@ -13,7 +12,7 @@ const BookedSuccesfully = () => {
     const token = queryParams.get("token");
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/payment/capture-order?token=${token}`)
+        axios.get(`${import.meta.env.VITE_BACK_URL}/payment/capture-order?token=${token}`)
             .then(res=>{
                 console.log(res.data);
             })

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 import {
   NEXT_PAGE,
@@ -20,13 +20,13 @@ import {
   GET_ALL_COUNTRIES,
   SHOW_MODAL,
   USER_LOG
-} from "./actions-types";
+} from './actions-types';
 
 export const getAllHotels = () => {
   return async (dispatch, getStage) => {
     const { currentPage } = getStage();
     try {
-      const endpoint = `http://localhost:3001/hotels?page=${currentPage}`;
+      const endpoint = `${import.meta.env.VITE_BACK_URL}/hotels?page=${currentPage}`;
       const response = await axios.get(endpoint);
 
       dispatch({
@@ -43,7 +43,7 @@ export const getAllHotels = () => {
 // export const clearHotelsFilter = () => {
 //   return async (dispatch) => {
 //     try {
-//       const endpoint = `http://localhost:3001/hotels`;
+//       const endpoint = `${import.meta.env.VITE_BACK_URL}/hotels`;
 //       const response = await axios.get(endpoint);
 //       dispatch({
 //         type: CLEAR_HOTELS_FILTERS,
@@ -58,7 +58,7 @@ export const getAllHotels = () => {
 export const getAllCountries = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/countries");
+      const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/countries`);
       dispatch({
         type: GET_ALL_COUNTRIES,
         payload: data,
@@ -73,7 +73,7 @@ export const getHotelByName = (name) => {
   return async (dispatch, getStage) => {
     const { currentPage } = getStage();
     try {
-      const endpoint = `http://localhost:3001/hotels?name=${name}&page=${currentPage}`;
+      const endpoint = `${import.meta.env.VITE_BACK_URL}/hotels?name=${name}&page=${currentPage}`;
       const response = await axios.get(endpoint);
 
       dispatch({
@@ -88,13 +88,13 @@ export const getHotelByName = (name) => {
 export const getDetail = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/hotels/detail/${id}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels/detail/${id}`);
       return dispatch({
         type: GET_DETAIL,
         payload: response.data,
       });
     } catch (error) {
-      window.alert("Error fetching hotels details");
+      window.alert(`Error fetching hotels details`);
     }
   };
 };
@@ -137,13 +137,13 @@ export const resetCurrentPage = () => {
 export const deleteHotel = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(`http://localhost:3001/hotels/${id}`);
+      const response = await axios.delete(`${import.meta.env.VITE_BACK_URL}/hotels/${id}`);
       return dispatch({
         type: DELETE_HOTEL,
         payload: response.data,
       });
     } catch (error) {
-      window.alert("Error");
+      window.alert(`Error`);
     }
   };
 };
@@ -170,28 +170,28 @@ export function sortByPrice(order) {
 
 // export const postHotel = (payload) => async dispatch => {
 //   try {
-//       const response = await axios.post('http://localhost:3001/hotels', payload);
+//       const response = await axios.post('${import.meta.env.VITE_BACK_URL}/hotels', payload);
 
 //       dispatch({
 //           type: POST_HOTEL,
 //           payload: response.data
 //       });
 //   } catch (error) {
-//       window.alert("Error adding new hotel", error.message)
+//       window.alert(`Error adding new hotel`, error.message)
 //   }
 // };
 
 // export function getCountries() {
 //   return async function (dispatch) {
 //       try {
-//           const response = await axios.get(`http://localhost:3001/countries`);
+//           const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/countries`);
 
 //           dispatch({
 //               type: GET_COUNTRIES,
 //               payload: response.data
 //           });
 //       } catch (error) {
-//           console.error("Error fetching countries:", error);
+//           console.error(`Error fetching countries:`, error);
 //       }
 //   };
 // }
@@ -200,14 +200,14 @@ export const pagination = (page) => {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/hotels?page=${page}`
+        `${import.meta.env.VITE_BACK_URL}/hotels?page=${page}`
       );
       return dispatch({
         type: FETCH_ITEMS_SUCCESS,
         payload: response.data,
       });
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error(`Error fetching data:`, error);
     }
   };
 };
@@ -244,7 +244,7 @@ export const filterHotels = (params) => {
         direction: params.direction,
       };
 
-      const response = await axios.get(`http://localhost:3001/hotels`, {
+      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels`, {
         params: queryParams,
       });
 
@@ -253,9 +253,9 @@ export const filterHotels = (params) => {
         type: FILTER_HOTELS,
         payload: response.data,
       });
-      /* console.log("Respuesta del backend:", response.data); */
+      /* console.log(`Respuesta del backend:`, response.data); */
     } catch (error) {
-      console.error("Error al filtrar hoteles:", error);
+      console.error(`Error al filtrar hoteles:`, error);
     }
   };
 };
