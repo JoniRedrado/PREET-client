@@ -1,6 +1,6 @@
 .header1 {
   position: relative;
-  height: 600px; /* Reducimos la altura para pantallas más pequeñas */
+  height: 700px; /* Reducimos la altura para pantallas más pequeñas */
   background: url("../../assets/header-background.jpg") top/cover no-repeat; 
   color: #fff ;
   display: flex;
@@ -39,7 +39,7 @@
   max-width: 1176px;
   height: 80px; /* Reducimos la altura para pantallas más pequeñas */
   border-radius: 16px;
-  background-color: #FFBD00;
+  background-color: #ffffff63;
 }
 
   

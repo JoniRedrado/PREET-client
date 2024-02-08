@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCountries } from "../../redux/actions";
 import Loading from "../../assets/Loading.gif"
+import swal from "sweetalert";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 
 
@@ -14,6 +15,7 @@ const CreateForm = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { darkMode } = useDarkMode(); 
+
 
   const [hotelData, setHotelData] = useState({
     name: "",
@@ -112,7 +114,12 @@ const CreateForm = () => {
             );
   
             if (responseBackend.data.name) {
-              window.alert("¡Hotel successfully posted!");
+              swal({
+                title: "¡Hotel created succesfully!",
+                text: 'The hotel is ready to start booking',
+                icon: "success",
+                button: null,
+              });
               const createdHotelId = responseBackend.data.id;
               navigate(`/detail/${createdHotelId}`);
               setHotelData({
@@ -136,6 +143,12 @@ const CreateForm = () => {
           setLoading(false);
         }
       } catch (error) {
+        swal({
+          title: "Error creating new Hotel",
+          text: "An error occurred while creating the Hotel. Check the information and try again",
+          icon: "error",
+          button: null,
+        });
         console.error("Error:", error);
         setLoading(false);
       }
@@ -143,6 +156,8 @@ const CreateForm = () => {
       setErrors(validationErrors);
     }
   };
+
+
 const fieldLabels = {
   name: "Name",
   address: "Address",
