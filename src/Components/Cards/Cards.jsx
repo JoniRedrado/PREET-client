@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import './Cards.style.css'
 
 const Cards = ({ allHotels }) => {  
-    const hotelList = allHotels
+  const hotelList = allHotels
+  const { darkMode } = useDarkMode(); 
 
   return (
-    <div className="main-div">
+    <div className={`main-div ${darkMode ? 'dark-mode' : ''}`}>
         <div className="cards-container">
       {hotelList.Hotel?.map((hotel) => {
         return <Card 

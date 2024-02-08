@@ -16,10 +16,13 @@ import {
     userLog
 
     } from '../../redux/actions';
+import { useDarkMode } from '../../DarkModeContext/DarkModeContext';
+
 
 const UserBar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const darkMode = useDarkMode();
     function logout(option) {
         localStorage.removeItem("token");
         dispatch(showModal(option, false));
@@ -58,7 +61,7 @@ const UserBar = () => {
   }, []);
 
   return (
-    <div className={styles.userBar}>
+    <div className={`${styles.userBar} ${darkMode ? styles.darkMode : ''}`}>
       <button ref={menuButtonRef} className={styles.menuButton} onClick={() => setShowMenu(!showMenu)}>
         <FaUser /> Bienvenido
       </button>

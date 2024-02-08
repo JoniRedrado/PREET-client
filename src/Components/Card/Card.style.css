@@ -116,3 +116,8 @@
     font-size: 20px; 
   }
 }
+
+.card.darkMode {
+  background-color: #333; /* Color de fondo oscuro */
+  color: #fff; / /* Color de fondo en modo oscuro */
+}

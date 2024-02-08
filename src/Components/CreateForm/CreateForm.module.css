@@ -120,3 +120,19 @@
   width: 30px;
   margin-top: 15px;
 }
+
+.formContainer.darkMode{
+  background-color: #333; /* Color de fondo oscuro */
+  color: #fff;
+}
+
+.formContainer.darkMode .removeButton, .formContainer.darkMode .formButton{
+  background-color: #022840; /* Color de fondo para los botones */
+  color: #fff
+}
+
+.formContainer.darkMode .removeButton:hover, .formContainer.darkMode .formButton:hover{
+  background-color: #6093bf;
+}
+
+ 

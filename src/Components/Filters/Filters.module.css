@@ -164,3 +164,43 @@
       margin-left: 10px;
     }
   }
+
+  
+/* Estilos para el modo oscuro en el componente Filters */
+.sidebar.darkMode {
+  background-color: #333; /* Color de fondo oscuro */
+  color: #fff; /* Color de texto claro */
+}
+
+/* Estilos para los textos en el modo oscuro */
+.sidebar.darkMode h2 {
+  color: #fff; /* Color de texto claro */
+}
+
+/* Estilos para los selectores en el modo oscuro */
+.sidebar.darkMode .select {
+  background-color: #555; /* Color de fondo oscuro para los selectores */
+  color: #fff; /* Color de texto claro para los selectores */
+}
+
+.sidebar.darkMode .inputContainer .input{
+  background-color: #555; /* Color de fondo oscuro para los selectores */
+  color: #fff; /* Color de texto claro para los selectores */
+}
+.darkMode .orderContainer p,
+.darkMode .orderContainer select,
+.darkMode .orderContainer .option {
+  color: white; /* Color del texto en modo oscuro */
+  background-color: #333; /* Color de fondo en modo oscuro */
+}
+
+/* Estilos para los botones en el modo oscuro */
+.sidebar.darkMode .applyButton, .sidebar.darkMode .clearButton {
+  background-color: #022840; /* Color de fondo para los botones */
+  color: #fff; /* Color de texto para los botones */
+}
+
+/* Estilos para los botones en modo oscuro al pasar el ratón */
+.sidebar.darkMode .applyButton:hover, .sidebar.darkMode .clearButton:hover {
+  background-color: #6093bf; /* Color de fondo al pasar el ratón sobre los botones */
+}

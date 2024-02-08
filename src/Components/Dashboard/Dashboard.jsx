@@ -2,9 +2,12 @@ import "./Dashboard.style.css";
 import { useEffect, useState } from "react";
 import Pagination from "../Pagination/Pagination";
 import axios from "axios";
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+
 
 const Dashboard = () => {
-
+  const { darkMode } = useDarkMode(); 
+  
   const [selectedOptions, setSelectedOption] = useState({
     users: true,
     hotels: false
@@ -74,7 +77,7 @@ const Dashboard = () => {
 
   const usersTable = () => {
     return (
-      <div className="table-container">
+      <div className={`table-container ${darkMode ? 'darkMode' : ''}`}>
         <table>
           <thead>
             <tr>
@@ -107,7 +110,7 @@ const Dashboard = () => {
     return (
     <>
       <table>
-        <thead>
+        <thead className="encabezado">
           <tr>
             <th>Name</th>
             <th>Stars</th>

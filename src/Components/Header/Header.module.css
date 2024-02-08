@@ -2,7 +2,7 @@
   position: relative;
   height: 600px; /* Reducimos la altura para pantallas más pequeñas */
   background: url("../../assets/header-background.jpg") top/cover no-repeat; 
-  color: #fff; 
+  color: #fff ;
   display: flex;
   justify-content: center;
 }
@@ -83,3 +83,7 @@
       height: 135px; /* Restauramos la altura original para pantallas más grandes */
     }
   }
+
+.textContainer.darkMode{
+  color: #333; /* Color de fondo oscuro */
+}

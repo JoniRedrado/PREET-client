@@ -12,12 +12,15 @@ import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
 import styles from "./App.module.css"
 import SearchResult from "./Pages/SearchResult/SearchResult";
-
+import { useDarkMode } from "./DarkModeContext/DarkModeContext";
 // import './App.css'
 
 function App() {
+
+  const { darkMode } = useDarkMode();
+
   return (
-    <div className={styles.mainDiv}>
+    <div className={`${styles.mainDiv} ${darkMode ? styles.darkMode : ''}`}>
       <Header/>
       <Routes>
         <Route path="/" element={<Home />} />
