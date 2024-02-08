@@ -120,10 +120,6 @@ const Detail = () =>{
             ) : (
               <p>No rooms available</p>
             )}
-          <h2>
-            <FaEnvelope className="info-icon" />
-            Contact: {hotel.email}
-          </h2>
         </div>
       ) : (
         <p>cargando...</p>

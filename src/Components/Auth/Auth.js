@@ -1,4 +1,5 @@
 import axios from "axios"
+import swal from "sweetalert";
 
 // Función para iniciar sesión
 export  async function login(email, password) {
@@ -48,16 +49,25 @@ export  async function loginFireBase({email, firstName, lastName}) {
 //Función para registrar un usuario
 export  async function register({name, last_name, email, password}) {
     try {
-        const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/auth/register`, { name, last_name, email, password });
-      if (response.status === 200) {
-          window.alert("Usuario creado con éxito")
-          return response.data.token;
-        } else {
-            throw new Error(response.data.error || `Error al registrar usuario`);
-        }
+      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/auth/register`, { name, last_name, email, password });
+
+      if (response.status === 200) {        
+        swal({
+          title: "¡You are registered!",
+          text: "Now login and book your next PREET",
+          icon: "success",
+          button: null,
+        });
+        return response.data.token;
+      }
     } catch (error) {
-        console.error(`Error al registrar usuario:`, error);
-        throw error;
+      swal({
+        title: "Email already registered",
+        text: "Login and start searching your next hotel",
+        icon: "warning",
+        button: null,
+      });
+      throw error;
     }
 }
 
