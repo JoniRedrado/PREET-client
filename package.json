@@ -28,7 +28,8 @@
     "react-router-dom": "^6.21.3",
     "react-spring": "^9.7.3",
     "redux": "^5.0.1",
-    "redux-thunk": "^3.1.0"
+    "redux-thunk": "^3.1.0",
+    "sweetalert": "^2.1.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
