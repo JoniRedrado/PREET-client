@@ -15,10 +15,11 @@ import {
   showModal,
   filterParams,
 } from "../../redux/actions";
+import { useDarkMode } from '../../DarkModeContext/DarkModeContext';
 
 function NavBar() {
   const token = localStorage.getItem("token");
-
+  const { darkMode, toggleDarkMode } = useDarkMode();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {pathname} = useLocation();
@@ -52,7 +53,7 @@ function NavBar() {
 
 
   return (
-    <div className={style.container}>
+    <div className={`${style.container} ${darkMode ? style.darkMode : ''}`}>
       <div className={style.items}>
         <div className={style.logo}>
           {pathname === '/' 
@@ -74,10 +75,16 @@ function NavBar() {
           <Link className={style.link}>Contact</Link>
           <Link className={style.link}>About Us</Link>
         </div> */}
-     
+      
       <div className={style.userButtons}>
         {token ? (
           <>
+            {/* <button className={style.moon} onClick={toggleDarkMode}>
+              {darkMode ? <i class="bi bi-moon"></i> : <i class="bi bi-sun"></i>}
+            </button> */}
+            <div>
+              <i className={darkMode ? "bi bi-moon" : "bi bi-sun"} onClick={toggleDarkMode}></i>
+            </div>
             <UserBar />
           </>
         ) : (

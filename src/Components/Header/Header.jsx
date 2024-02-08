@@ -2,15 +2,18 @@ import { useLocation } from "react-router-dom"
 import NavBar from "../NavBar/NavBar"
 import SearchBar from "../SearchBar/SearchBar"
 import styles from "./Header.module.css"
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext"
+
 
 const Header = () => {
     const { pathname } = useLocation();
+    const darkMode = useDarkMode();
     const renderHeaderContent = () => {
         if (pathname === "/"){
             return (
-                <header className={styles.header1}>
+                <header className={`${styles.header1} ${darkMode ? styles.darkMode : ''}`}>
                 <div className={styles.headerContainer}>
-                    <div>
+                    <div className={styles.navbarContainer}>
                         <NavBar/>
                     </div>
                     <div className={styles.textContainer}>

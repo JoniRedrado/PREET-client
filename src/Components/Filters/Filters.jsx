@@ -5,10 +5,12 @@ import {
   resetCurrentPage,
   getAllHotels,
 } from "../../redux/actions";
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import styles from "./Filters.module.css";
 
 const Filters = () => {
   const dispatch = useDispatch();
+  const { darkMode } = useDarkMode(); 
 
   const defaultFilters = {
     country: "",
@@ -41,7 +43,7 @@ const Filters = () => {
   };
 
   return (
-    <div className={styles.sidebar}>
+    <div className={`${styles.sidebar} ${darkMode ? styles.darkMode : ''}`}>
       <div className={styles.filterContainer}>
         <h2>Filters</h2>
         <div className={styles.countriesContainer}>

@@ -7,11 +7,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllCountries } from "../../redux/actions";
 import Loading from "../../assets/Loading.gif"
 import swal from "sweetalert";
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+
 
 const CreateForm = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const { darkMode } = useDarkMode(); 
+
 
   const [hotelData, setHotelData] = useState({
     name: "",
@@ -163,7 +167,7 @@ const fieldLabels = {
 }
 
   return (
-    <div className={styles.formContainer}>
+    <div className={`${styles.formContainer} ${darkMode ? styles.darkMode : ''}`}>
        <h1 className={styles.title}>Post Your Hotel</h1>
       <form onSubmit={handleSubmit}>
         {Object.keys(fieldLabels).map((field) => (

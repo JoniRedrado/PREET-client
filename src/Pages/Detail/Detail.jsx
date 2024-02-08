@@ -10,6 +10,8 @@ import {
 import RoomDetail from "../RoomDetail/RoomDetail";
 import "./detail.styles.css";
 import axios from 'axios'
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+
 
 const Detail = () =>{
 
@@ -17,6 +19,8 @@ const Detail = () =>{
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { darkMode } = useDarkMode(); 
+
   const { id } = useParams();
 
   const handleDelete = (id) => {
@@ -68,7 +72,7 @@ const Detail = () =>{
 
   return (
     <motion.div
-      className="container"
+      className={`container ${darkMode ? 'darkMode' : ''}`}
       initial={{ opacity: 0, y: -20 }} // Estado inicial de la animación
       animate={{ opacity: 1, y: 0 }} // Estado final de la animación
       transition={{ duration: 0.5 }} // Duración de la animación

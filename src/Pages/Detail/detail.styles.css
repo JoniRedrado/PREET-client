@@ -71,3 +71,14 @@
     width: 90%;
   }
 }
+
+
+.container.darkMode {
+  background-color: #333; /* Color de fondo oscuro */
+  color: #fff; /
+}
+
+.container.darkMode .icons i, 
+  .container.darkMode .info-icon {
+  color:#fff;
+}

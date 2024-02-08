@@ -5,7 +5,7 @@ import { filterHotels, getAllCountries, userLog } from "../../redux/actions";
 import Filters from "../../Components/Filters/Filters";
 import TryAgain from "../../Components/Try again/TryAgain";
 import Slider from "../../Components/Slider/Slider";
-
+import { useDarkMode } from '../../DarkModeContext/DarkModeContext';
 import styles from "./Home.module.css"
 
 function Home() {
@@ -16,6 +16,7 @@ function Home() {
   const userChanged = useSelector((state) => state.userChanged);
   const [noResults, setNoResults] = useState(false);
 
+  const { darkMode } = useDarkMode();
   /* console.log(filteredHotels); */
 
   useEffect(() => {
@@ -35,7 +36,7 @@ function Home() {
   }, [filteredHotels]);
 
   return (
-    <div className={styles.mainContainer}>
+    <div className={`${styles.mainContainer} ${darkMode ? styles.darkMode : ''}`}>
       <div className={styles.sliderContainer}>
       <Slider />
       </div>

@@ -15,3 +15,11 @@
     display: flex;
     justify-content: center;
 }
+
+.darkMode .mainContainer {
+    background-color: #1a1a1a; /* Color de fondo oscuro */
+  }
+  
+  .darkMode .componentsContainer {
+    color: #ffffff; /* Color del texto en modo oscuro */
+  }

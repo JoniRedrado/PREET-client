@@ -6,11 +6,14 @@ import {
   FaEnvelope,
   FaDollarSign,
 } from "react-icons/fa";
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import './Card.style.css';
 
 
 const Card = (props) => {
   const { id, name, image, country, rooms, stars } = props;
+  const { darkMode } = useDarkMode(); 
+
 
   const cardVariants = {
     hover: {
@@ -32,7 +35,7 @@ const Card = (props) => {
 
   return (
     <motion.div 
-      className="card mb-3"
+      className={`card mb-3 ${darkMode ? 'darkMode' : ''}`}
       variants={cardVariants}
       whileHover="hover"
     >

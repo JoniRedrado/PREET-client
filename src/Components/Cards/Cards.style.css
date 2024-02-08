@@ -14,4 +14,10 @@
 .card {
     width: 240px;
     margin: 15px;
-  }
+}
+
+.main-div.darkMode {
+    background-color: #333333; /* Color de fondo en modo oscuro */
+    color: white; /* Color del texto en modo oscuro */
+}
+  

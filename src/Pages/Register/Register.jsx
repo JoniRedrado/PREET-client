@@ -6,6 +6,7 @@ import style from "../Register/Register.module.css";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../redux/actions";
 import registerValidation from "../../helpers/registerValidation";
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 
 function RegisterUser() {
   const [registerData, setRegisterData] = useState({
@@ -19,6 +20,7 @@ function RegisterUser() {
   const navigate = useNavigate();
   const auth = useAuth();
   const dispatch = useDispatch();
+  const darkMode= useDarkMode();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,7 +60,7 @@ function RegisterUser() {
   // }
 
   return (
-    <div>
+    <div className={`${style.register} ${darkMode ? style.darkMode : ''}`}>
       <form className={style.formContainer}>
         <h2>Register User</h2>
         <div className={style.inputContainer}>

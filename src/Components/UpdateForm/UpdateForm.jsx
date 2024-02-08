@@ -5,10 +5,13 @@ import validation from "../../helpers/validation";
 import { useParams, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux";
 import Loading from "../../assets/Loading.gif"
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+
 
 const UpdateForm = () => {
   const navigate = useNavigate()
   const { id } = useParams();
+  const { darkMode } = useDarkMode(); 
 
   const countries = useSelector((state) => state.countries)
 
@@ -146,7 +149,7 @@ const UpdateForm = () => {
   }
 
   return (
-    <div className={styles.formContainer}>
+    <div className={`${styles.formContainer} ${darkMode ? styles.darkMode : ''}`}>
       <h1>Update Hotel</h1>
       <form onSubmit={handleSubmit}>
         {Object.keys(fieldLabels).map((field) => (
