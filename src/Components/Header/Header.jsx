@@ -10,7 +10,7 @@ const Header = () => {
             return (
                 <header className={styles.header1}>
                 <div className={styles.headerContainer}>
-                    <div className={styles.navbarContainer}>
+                    <div>
                         <NavBar/>
                     </div>
                     <div className={styles.textContainer}>
