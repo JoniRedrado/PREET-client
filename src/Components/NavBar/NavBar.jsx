@@ -1,5 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import template from "../../assets/Logo-White.svg";
+import template2 from "../../assets/Logo.svg";
 import Modal from "react-modal";
 import RegisterUser from "../../Pages/Register/Register";
 import LoginForm from "../../Pages/Login/Login";
@@ -20,6 +21,7 @@ function NavBar() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {pathname} = useLocation();
 
   const modalRegister = useSelector((state) => state.showModal.register);
   const modalLogin = useSelector((state) => state.showModal.login);
@@ -53,15 +55,25 @@ function NavBar() {
     <div className={style.container}>
       <div className={style.items}>
         <div className={style.logo}>
-          <Link to="/" onClick={handleHomeButton}>
-            <img src={template} width="18%" alt="Logo" className={style.logo}/>
-          </Link>
+          {pathname === '/' 
+            ? (
+              <Link to="/" onClick={handleHomeButton}>
+                <img src={template2} width="18%" alt="Logo" className={style.logo}/>
+              </Link>
+            )
+            :
+            (
+              <Link to="/" onClick={handleHomeButton}>
+                <img src={template} width="18%" alt="Logo" className={style.logo}/>
+              </Link>
+            )
+          }
         </div>
-        <div className={style.linksContainer}>
+        {/* <div className={style.linksContainer}>
           <Link to="/" className={style.link}>Home</Link>
           <Link className={style.link}>Contact</Link>
           <Link className={style.link}>About Us</Link>
-        </div>
+        </div> */}
      
       <div className={style.userButtons}>
         {token ? (
