@@ -66,7 +66,6 @@ const Detail = () =>{
   //     })
   // }
 
-  
   return (
     <motion.div
       className="container"
