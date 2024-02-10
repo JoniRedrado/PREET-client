@@ -1,27 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetail, deleteHotel } from "../../redux/actions";
 import { motion } from "framer-motion";
-import {
-  FaMapMarkerAlt,
-  FaEnvelope,
-} from "react-icons/fa";
+import { FaMapMarkerAlt /* , FaEnvelope */ } from "react-icons/fa";
 import RoomDetail from "../RoomDetail/RoomDetail";
+import Modal from "react-modal";
 import "./detail.styles.css";
-import axios from 'axios'
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+// import axios from "axios";
 
-
-const Detail = () =>{
-
-  const token = localStorage.getItem('token')
-
+const Detail = () => {
+  const token = localStorage.getItem("token");
+  // <RoomDetail key={room.id} room={room} price={room.price} />
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { darkMode } = useDarkMode(); 
-
+  const { darkMode } = useDarkMode();
   const { id } = useParams();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState(null);
 
   const handleDelete = (id) => {
     dispatch(deleteHotel(id));
@@ -46,7 +44,18 @@ const Detail = () =>{
   }, [dispatch, id]);
 
   const hotel = useSelector((state) => state.hotelDetail);
-  
+
+  const handleRoomSelect = (roomType) => {
+    const selectedRoom = hotel.rooms.find((room) => room.type === roomType);
+    setSelectedRoom(selectedRoom);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedRoom(null);
+    setIsModalOpen(false);
+  };
+
   // //Integracion con PayPal
   // const handleBook = () => {
   //   //Objeto para enviar info de la reserva al backend, crear la orden de y luego guardar la reserva en la DB
@@ -72,7 +81,7 @@ const Detail = () =>{
 
   return (
     <motion.div
-      className={`container ${darkMode ? 'darkMode' : ''}`}
+      className={`container ${darkMode ? "darkMode" : ""}`}
       initial={{ opacity: 0, y: -20 }} // Estado inicial de la animación
       animate={{ opacity: 1, y: 0 }} // Estado final de la animación
       transition={{ duration: 0.5 }} // Duración de la animación
@@ -81,20 +90,20 @@ const Detail = () =>{
         <Link to="/">
           <i className="bi bi-arrow-left-circle" title="Return home"></i>
         </Link>
-        {token ?
-          (
-            <>
-              <Link to={`/update/${hotel.id}`}>
-                <i className="bi bi-pencil-square" title="Update"></i>
-              </Link>
-              <i
-                className="bi bi-trash"
-                onClick={() => handleDelete(id)}
-                title="Delete"
-              ></i>
-            </>
-          ) : ""
-        }
+        {token ? (
+          <>
+            <Link to={`/update/${hotel.id}`}>
+              <i className="bi bi-pencil-square" title="Update"></i>
+            </Link>
+            <i
+              className="bi bi-trash"
+              onClick={() => handleDelete(id)}
+              title="Delete"
+            ></i>
+          </>
+        ) : (
+          ""
+        )}
       </div>
 
       {hotel ? (
@@ -116,18 +125,40 @@ const Detail = () =>{
             Location: {hotel.address_url}
           </h2>
           <h2>Available Rooms:</h2>
+          <select
+            defaultValue="Select you room"
+            onChange={(e) => handleRoomSelect(e.target.value)}
+          >
+            <option disabled>Select you room</option>
             {hotel.rooms && hotel.rooms.length > 0 ? (
               hotel.rooms.map((room) => (
-                <RoomDetail key={room.id} room={room} price={room.price} />
+                <option key={room.id} value={room.type}>
+                  {room.type}
+                </option>
               ))
             ) : (
-              <p>No rooms available</p>
+              <option disabled>No rooms available</option>
             )}
+          </select>
         </div>
       ) : (
         <p>cargando...</p>
       )}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        className="modal"
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          },
+        }}
+      >
+        <button onClick={closeModal}>X</button>
+        <RoomDetail room={selectedRoom} />
+      </Modal>
     </motion.div>
   );
 };
+
 export default Detail;
