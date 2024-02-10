@@ -17,6 +17,11 @@ import {
   GET_ALL_COUNTRIES,
   SHOW_MODAL,
   USER_LOG,
+  GET_ALL_FAVORITES,
+  USER_FAVORITES,
+  HOTEL_FAVORITES,
+  POST_FAVORITE,
+  REMOVE_FAVORITE,
 } from "./actions-types";
 
 let initialState = {
@@ -33,6 +38,9 @@ let initialState = {
     login: false,
   },
   userChanged: false,
+  allFavorites: {},
+  userFavorites:[],
+  hotelFavorites:[],
 };
 
 function rootReducer(state = initialState, action) {
@@ -176,6 +184,33 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         userChanged: !state.userChanged
+      };
+    case GET_ALL_FAVORITES:
+      return {
+        ...state,
+        allFavorites: action.payload,
+      };
+    case USER_FAVORITES:
+      return {
+        ...state,
+        userFavorites: action.payload,
+      };
+    case HOTEL_FAVORITES:
+      return {
+        ...state,
+        hotelFavorites: action.payload,
+      };
+    case POST_FAVORITE:
+      // Agregar el nuevo favorito a la lista de favoritos del usuario
+      return {
+        ...state,
+        userFavorites: [...state.userFavorites, action.payload],  
+      };
+    case REMOVE_FAVORITE:
+      // Eliminar el favorito de la lista de favoritos del usuario
+      return {
+        ...state,
+        userFavorites: state.userFavorites.filter(favorite => favorite.id !== action.payload),
       };
     default:
       return state;

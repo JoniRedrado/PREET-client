@@ -19,7 +19,12 @@ import {
   HANDLE_FILTERS,
   GET_ALL_COUNTRIES,
   SHOW_MODAL,
-  USER_LOG
+  USER_LOG,
+  GET_ALL_FAVORITES,
+  USER_FAVORITES,
+  HOTEL_FAVORITES,
+  POST_FAVORITE,
+  REMOVE_FAVORITE,
 } from './actions-types';
 
 export const getAllHotels = () => {
@@ -272,3 +277,90 @@ export const userLog = () => {
       type: USER_LOG,
   };
 };
+
+export const getAllFavorites = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/favorites`);
+      console.log(response.data);
+      return dispatch({
+        type: GET_ALL_FAVORITES,
+        payload: response.data,
+      });
+    } catch (error) {
+        console.error(error)
+    }
+  };
+}
+
+export const userFavorites = (token) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/favorites/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return dispatch({
+        type: USER_FAVORITES,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+
+export const hotelFavorites = (hotelId) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/favorites/hotel/${hotelId}`);
+      return dispatch({
+        type: HOTEL_FAVORITES,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+
+export const postFavorite = (hotelId, token) => {
+  return async function(dispatch){
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/favorites/${hotelId}`,{},{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+      })
+      return dispatch({
+        type: POST_FAVORITE,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const removeFavorite = (id, token) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`${import.meta.env.VITE_BACK_URL}/favorites/${id}`
+      , {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+      );
+      return dispatch({
+        type: REMOVE_FAVORITE,
+        payload: id,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+

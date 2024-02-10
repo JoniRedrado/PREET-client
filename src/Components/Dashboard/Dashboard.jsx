@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import Pagination from "../Pagination/Pagination";
 import axios from "axios";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
-
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const { darkMode } = useDarkMode(); 
-  
+  const navigate = useNavigate();
   const [selectedOptions, setSelectedOption] = useState({
     users: true,
     hotels: false
@@ -15,6 +15,11 @@ const Dashboard = () => {
 
   const [usersData, setUsersData] = useState([])
   const [hotelsData, setHotelsData] = useState([])
+  
+  const handleButtonClick = () => {
+    navigate('/favorites');
+  };
+
 
   const getUsers = async() => {
     try {
@@ -140,6 +145,7 @@ const Dashboard = () => {
     <div>
       <div className="container-dashboard">
         <div className="buttons">
+          <button  onClick={handleButtonClick}>Favorites</button>
           <button className="yellowButton" onClick={usersButton}>Users</button>
           <button className="blueButton" onClick={hotelsButton}>Hotels</button>
         </div>

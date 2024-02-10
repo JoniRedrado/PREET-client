@@ -63,7 +63,7 @@ const UserBar = () => {
   return (
     <div className={`${styles.userBar} ${darkMode ? styles.darkMode : ''}`}>
       <button ref={menuButtonRef} className={styles.menuButton} onClick={() => setShowMenu(!showMenu)}>
-        <FaUser /> Bienvenido
+        <FaUser /> Welcome
       </button>
 
       <animated.div className={styles.menu} style={menuAnimation}>
@@ -82,7 +82,7 @@ const UserBar = () => {
                 <FaHistory /> History
             </button>
         </Link>
-        <Link className={styles.link}>
+        <Link to="/userFavorites" className={styles.link}>
             <button>
                 <FaStar /> Favorites
             </button>
