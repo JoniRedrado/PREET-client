@@ -1,4 +1,3 @@
-
 .container {
   max-width: 800px;
   margin: 20px auto;
@@ -10,8 +9,8 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  align-items: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .icons {
@@ -28,7 +27,7 @@
   color: #082c44;
 }
 
-.icons i:hover{
+.icons i:hover {
   color: #0774bd;
 }
 
@@ -40,7 +39,7 @@
 }
 
 .informationContainer h1 {
-  font-size: 28px; 
+  font-size: 28px;
   font-weight: bold;
   margin: 10px 0;
 }
@@ -64,7 +63,6 @@
   font-size: 18px;
 }
 
-
 /* Media Query para pantallas más pequeñas */
 @media (max-width: 600px) {
   .container {
@@ -72,13 +70,33 @@
   }
 }
 
-
 .container.darkMode {
   background-color: #333; /* Color de fondo oscuro */
-  color: #fff; /
+  color: #fff;
 }
 
-.container.darkMode .icons i, 
-  .container.darkMode .info-icon {
-  color:#fff;
+.container.darkMode .icons i,
+.container.darkMode .info-icon {
+  color: #fff;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+.modal button {
+  cursor: pointer;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #082c44;
 }
