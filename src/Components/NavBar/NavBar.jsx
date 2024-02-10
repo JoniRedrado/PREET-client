@@ -82,10 +82,10 @@ function NavBar() {
             {/* <button className={style.moon} onClick={toggleDarkMode}>
               {darkMode ? <i class="bi bi-moon"></i> : <i class="bi bi-sun"></i>}
             </button> */}
-            <div>
-              <i className={darkMode ? "bi bi-moon" : "bi bi-sun"} onClick={toggleDarkMode}></i>
-            </div>
             <UserBar />
+            <div>
+              <i className={darkMode ? "bi bi-sun" : "bi bi-moon"} onClick={toggleDarkMode}></i>
+            </div>
           </>
         ) : (
           <>

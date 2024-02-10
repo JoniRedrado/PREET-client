@@ -10,6 +10,8 @@ import Settings from "./Pages/Settings/Settings";
 import BookedSuccesfully from "./Pages/BookedSuccesfully/BookedSuccesfully";
 import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
+import Favorites from "./Pages/Favorites/Favorites";
+import UserFavorites from "./Pages/Favorites/userFavorites/userFavorites";
 import styles from "./App.module.css"
 import SearchResult from "./Pages/SearchResult/SearchResult";
 import { useDarkMode } from "./DarkModeContext/DarkModeContext";
@@ -33,6 +35,8 @@ function App() {
         <Route path="/settings" element={<Settings/>}/>
         <Route path="/booked" element={<BookedSuccesfully />} />
         <Route path="/search/:nombreHotel" element={<SearchResult />} />
+        <Route path="/favorites" element={<Favorites/>} />
+        <Route path="/userFavorites" element={<UserFavorites/>} />
       </Routes>
       <Footer/>
     </div>
