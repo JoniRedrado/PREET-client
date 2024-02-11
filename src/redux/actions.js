@@ -326,10 +326,10 @@ export const hotelFavorites = (hotelId) => {
 };
 
 
-export const postFavorite = (hotelId, token) => {
+export const postFavorite = (id, token) => {
   return async function(dispatch){
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/favorites/${hotelId}`,{},{
+      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/favorites/${id}`,{},{
       headers: {
         Authorization: `Bearer ${token}`
       }
