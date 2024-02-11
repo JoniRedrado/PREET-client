@@ -27,6 +27,7 @@ import {
   REMOVE_FAVORITE,
 } from './actions-types';
 
+
 export const getAllHotels = () => {
   return async (dispatch, getStage) => {
     const { currentPage } = getStage();
@@ -326,10 +327,10 @@ export const hotelFavorites = (hotelId) => {
 };
 
 
-export const postFavorite = (hotelId, token) => {
+export const postFavorite = (id, token) => {
   return async function(dispatch){
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/favorites/${hotelId}`,{},{
+      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/favorites/${id}`,{},{
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -344,19 +345,19 @@ export const postFavorite = (hotelId, token) => {
   }
 }
 
-export const removeFavorite = (id, token) => {
+export const removeFavorite = (id) => {
   return async function (dispatch) {
     try {
       const response = await axios.delete(`${import.meta.env.VITE_BACK_URL}/favorites/${id}`
-      , {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
+      // , {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`
+      //   }
+      // }
       );
       return dispatch({
         type: REMOVE_FAVORITE,
-        payload: id,
+        payload: response.data,
       });
     } catch (error) {
       console.error(error);

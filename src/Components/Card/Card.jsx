@@ -14,10 +14,10 @@ import { useState } from "react";
 
 
 const Card = (props) => {
-  const { id, name, image, country, rooms, stars, hotelId, token } = props;
+  const { id, name, image, country, rooms, stars, token } = props;
   const { darkMode } = useDarkMode(); 
   const dispatch = useDispatch();
-  const [isFavorite, setIsFavorite] = useState(localStorage.getItem(`favorite_${id}`) === "true");
+  const [isFavorite, setIsFavorite] = useState(false);
   const cardVariants = {
     hover: {
       scale: 1.05,
@@ -37,9 +37,9 @@ const Card = (props) => {
   };
 
   const handleAddToFavorites = () => {
-    dispatch(postFavorite(hotelId, token));
+    dispatch(postFavorite(id));
     setIsFavorite(!isFavorite);
-    localStorage.setItem(`favorite_${id}`, "true");
+    // localStorage.setItem(`favorite_${id}`, "true");
   };
 
   return (
