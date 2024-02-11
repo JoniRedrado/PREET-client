@@ -17,7 +17,6 @@ function Slider() {
       .then((response) => {
         setRankedHotels(response.data);
         setSelectedHotel(response.data[0]);
-        console.log("Datos de hoteles obtenidos correctamente:", response.data);
       })
       .catch((error) => {
         console.error("Error al obtener datos de hoteles:", error);

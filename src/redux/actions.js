@@ -13,7 +13,7 @@ import {
   SORT_BY_PRICE,
   // POST_HOTEL,
   // GET_COUNTRIES,
-  FETCH_ITEMS_SUCCESS,
+  // FETCH_ITEMS_SUCCESS,
   FILTER_HOTELS,
   RESET_CURRENT_PAGE,
   HANDLE_FILTERS,
@@ -39,22 +39,6 @@ export const getAllHotels = () => {
   };
 };
 
-//* Pendiente lógica para limpiar los filtros
-// export const clearHotelsFilter = () => {
-//   return async (dispatch) => {
-//     try {
-//       const endpoint = `${import.meta.env.VITE_BACK_URL}/hotels`;
-//       const response = await axios.get(endpoint);
-//       dispatch({
-//         type: CLEAR_HOTELS_FILTERS,
-//         payload: response.data,
-//       });
-//     } catch (error) {
-//       console.error(error.message);
-//     }
-//   };
-// };
-
 export const getAllCountries = () => {
   return async (dispatch) => {
     try {
@@ -73,12 +57,20 @@ export const getHotelByName = (name) => {
   return async (dispatch, getStage) => {
     const { currentPage } = getStage();
     try {
-      const endpoint = `${import.meta.env.VITE_BACK_URL}/hotels?name=${name}&page=${currentPage}`;
-      const response = await axios.get(endpoint);
+      const responseHotels = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels?name=${name}&page=${currentPage}`);
+
+      console.log(responseHotels.data);
+
+      const responseCountries = await axios.get(
+        `${import.meta.env.VITE_BACK_URL}/countries/${name}`);
+      
+      const bothResponse = [...responseHotels.data, ...responseCountries.data]
+
+      console.log(bothResponse);
 
       dispatch({
         type: GET_HOTEL_BY_NAME,
-        payload: response.data,
+        payload: bothResponse,
       });
     } catch (error) {
       console.error(error.message);
@@ -168,58 +160,6 @@ export function sortByPrice(order) {
   };
 }
 
-// export const postHotel = (payload) => async dispatch => {
-//   try {
-//       const response = await axios.post('${import.meta.env.VITE_BACK_URL}/hotels', payload);
-
-//       dispatch({
-//           type: POST_HOTEL,
-//           payload: response.data
-//       });
-//   } catch (error) {
-//       window.alert(`Error adding new hotel`, error.message)
-//   }
-// };
-
-// export function getCountries() {
-//   return async function (dispatch) {
-//       try {
-//           const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/countries`);
-
-//           dispatch({
-//               type: GET_COUNTRIES,
-//               payload: response.data
-//           });
-//       } catch (error) {
-//           console.error(`Error fetching countries:`, error);
-//       }
-//   };
-// }
-
-export const pagination = (page) => {
-  return async function (dispatch) {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BACK_URL}/hotels?page=${page}`
-      );
-      return dispatch({
-        type: FETCH_ITEMS_SUCCESS,
-        payload: response.data,
-      });
-    } catch (error) {
-      console.error(`Error fetching data:`, error);
-    }
-  };
-};
-
-// const handleChange = (e) => {
-//   const { name, value } = e.target;
-//   setFilters((prevFilters) => ({
-//     ...prevFilters,
-//     [name]: value,
-//   }));
-// };
-
 export const filterParams = (params) => {
   /* console.log(params); */
   return function (dispatch) {
@@ -242,18 +182,31 @@ export const filterHotels = (params) => {
         country: params.country,
         orderBy: params.orderBy,
         direction: params.direction,
+        startDate: params.startDate,
+        endDate: params.endDate,
       };
 
-      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels`, {
+      const responseFilters = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels`, {
         params: queryParams,
       });
 
-      /* console.log(response.data); */
+      // const { startDate, endDate } = queryParams
+      
+      // console.log(startDate, endDate);
+
+      // const responseDates = await axios.get(`${import.meta.env.VITE_BACK_URL}/rooms`, {
+      //   params: {startDate, endDate},
+      // })
+
+      // const bothResponse = [...responseFilters.data, ...responseDates.data]
+
+      console.log(responseFilters.data);
+
       dispatch({
         type: FILTER_HOTELS,
-        payload: response.data,
+        payload: responseFilters.data,
       });
-      /* console.log(`Respuesta del backend:`, response.data); */
+      
     } catch (error) {
       console.error(`Error al filtrar hoteles:`, error);
     }

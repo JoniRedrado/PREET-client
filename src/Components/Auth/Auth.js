@@ -4,7 +4,7 @@ import swal from "sweetalert";
 // Función para iniciar sesión
 export  async function login(email, password) {
     try {
-        const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/auth/login`, { email, password });
+        const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/users/login`, { email, password });
         if (response.status === 200 && response.data.token) {
             // Almacenar el token JWT en el almacenamiento local
             localStorage.setItem(`token`, response.data.token);
@@ -25,7 +25,7 @@ export  async function login(email, password) {
 export  async function loginFireBase({email, firstName, lastName}) {
     try {
         const response = await axios.post(
-            `${import.meta.env.VITE_BACK_URL}/auth/login`, 
+            `${import.meta.env.VITE_BACK_URL}/users/login`, 
             { email, 
               fireBaseAuth: {email, name: firstName, last_name: lastName}}
         );
@@ -49,7 +49,7 @@ export  async function loginFireBase({email, firstName, lastName}) {
 //Función para registrar un usuario
 export  async function register({name, last_name, email, password}) {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/auth/register`, { name, last_name, email, password });
+      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/users/register`, { name, last_name, email, password });
 
       if (response.status === 200) {        
         swal({

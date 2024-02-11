@@ -46,7 +46,6 @@ const UserBar = () => {
 
   const handleClickOutside = (event) => {
     if (menuButtonRef.current && !menuButtonRef.current.contains(event.target)) {
-      console.log(menuButtonRef.current)
       // Cerrar el menú si se hace clic fuera de él
       closeMenu();
     }

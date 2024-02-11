@@ -37,7 +37,6 @@ function NavBar() {
   };
 
   const handleHomeButton = () => {
-    dispatch(filterParams(defaultFilters));
     dispatch(resetCurrentPage());
     dispatch(getAllHotels());
   };
