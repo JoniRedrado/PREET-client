@@ -204,7 +204,7 @@ function rootReducer(state = initialState, action) {
       // Agregar el nuevo favorito a la lista de favoritos del usuario
       return {
         ...state,
-        userFavorites: [...state.userFavorites, action.payload],  
+        userFavorites: action.payload,  
       };
     case REMOVE_FAVORITE:
       // Eliminar el favorito de la lista de favoritos del usuario
