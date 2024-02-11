@@ -52,7 +52,7 @@ const Card = (props) => {
 
         <div className="card-image">
           <div className="favorite-icon" onClick={isFavorite ? null : handleAddToFavorites}>
-            {isFavorite ? <i class="bi bi-heart-fill"></i> : <i class="bi bi-heart"> </i>}
+            {isFavorite ? <i className="bi bi-heart-fill"></i> : <i className="bi bi-heart"> </i>}
           </div>
           <motion.img 
             src={image} 

@@ -44,6 +44,8 @@ const Filters = () => {
     dispatch(resetCurrentPage());
   };
 
+  console.log(filters);
+  
   return (
     <div className={`${styles.sidebar} ${darkMode ? styles.darkMode : ""}`}>
       <div className={styles.filterContainer}>

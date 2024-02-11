@@ -182,6 +182,7 @@ export const filterHotels = (params) => {
     try {
       const queryParams = {
         page: currentPage,
+        name: params.name,
         stars: params.stars,
         minPrice: params.minPrice,
         maxPrice: params.maxPrice,
@@ -192,25 +193,15 @@ export const filterHotels = (params) => {
         endDate: params.endDate,
       };
 
-      const responseFilters = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels`, {
+      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels`, {
         params: queryParams,
       });
 
-      // const { startDate, endDate } = queryParams
-      
-      // console.log(startDate, endDate);
-
-      // const responseDates = await axios.get(`${import.meta.env.VITE_BACK_URL}/rooms`, {
-      //   params: {startDate, endDate},
-      // })
-
-      // const bothResponse = [...responseFilters.data, ...responseDates.data]
-
-      console.log(responseFilters.data);
+      console.log(response.data);
 
       dispatch({
         type: FILTER_HOTELS,
-        payload: responseFilters.data,
+        payload: response.data,
       });
       
     } catch (error) {

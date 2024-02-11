@@ -132,22 +132,13 @@ function rootReducer(state = initialState, action) {
         searched: true,
       };
 
-    // case POST_HOTEL:
-    //   return{
-    //       ...state,
-    //       newHotel: action.payload
-    //   }
-    //   case GET_COUNTRIES:
-    //     return{
-    //         ...state,
-    //         countries: action.payload
-    //     }
     case FETCH_ITEMS_SUCCESS:
       return {
         ...state,
         filteredHotels: action.payload,
         totalHotels: action.payload.total,
       };
+      
     case FILTER_HOTELS:
       return {
         ...state,

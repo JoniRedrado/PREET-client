@@ -1,21 +1,21 @@
 import { useState } from "react";
-import { filterParams, resetCurrentPage, getAllHotels, filterHotels, getHotelByName } from "../../redux/actions";
+import { filterParams, filterHotels } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import s from "../SearchBar/SearchBar.module.css"
 import { FaSearch } from "react-icons/fa"
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState("");
 
   const defaultFilters = {
     name: "",
     country: "",
-    entryDate: "",
-    finishDate: "",
-    persons: 1,
+    startDate: "",
+    endDate: "",
+    // persons: 1,
   };
 
   const filters = useSelector((state) => state.submitFilters || defaultFilters)
@@ -27,20 +27,9 @@ const SearchBar = () => {
     dispatch(filterParams({ ...filters, [name]: value }));
   };
 
-  console.log(searchInput);
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      let name = e.target.value;
-      setSearchInput(name);
-      dispatch(getHotelByName(name));
-      setSearchInput("")
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(getHotelByName(searchInput))
+    dispatch(filterHotels(filters))
     setSearchInput("")
     // navigate(`/search/${encodeURIComponent(searchInput)}`);
   }
@@ -54,21 +43,20 @@ const SearchBar = () => {
           type="text"
           placeholder="Explore hotels or countries"
           onChange={handleFilters}
-          onKeyPress={handleKeyPress}
-          name={filters.name && filters.country}
+          name='name'
           value={searchInput}
         />
       </div>
       <div className={s.filters}>
         <div className={s.date}>
           <p>Check-in</p>
-          <input type="date" name='initialDate' className={ s.dateInput } />
+          <input type="date" name='startDate' onChange={handleFilters} className={ s.dateInput } />
         </div>
         <div className={s.date}>
           <p>Check-out</p>
-          <input type="date" name='finalDate' className={ s.dateInput }/>
+          <input type="date" name='endDate' onChange={handleFilters} className={ s.dateInput }/>
         </div>
-        <div>
+        {/* <div>
           <p>Persons</p>
           <select name="persons">
             <option value="1">1</option>
@@ -76,7 +64,7 @@ const SearchBar = () => {
             <option value="3">3</option>
             <option value="+4">+4</option>
           </select>
-        </div>
+        </div> */}
         <button onClick={handleSubmit} className={s.searchButton}>Search</button>
       </div>
     </div>

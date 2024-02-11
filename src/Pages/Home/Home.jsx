@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../../Components/Cards/Cards";
-import { getAllHotels, filterHotels, getAllCountries, userLog } from "../../redux/actions";
+import { getAllHotels, getAllCountries, userLog } from "../../redux/actions";
 import Filters from "../../Components/Filters/Filters";
 import TryAgain from "../../Components/Try again/TryAgain";
 import Slider from "../../Components/Slider/Slider";
@@ -14,15 +14,17 @@ function Home() {
   const searched = useSelector((state) => state.searched)
   const filteredHotels = useSelector((state) => state.filteredHotels);
   const currentPage = useSelector((state) => state.currentPage);
-  const filters = useSelector((state) => state.submitFilters);
+  // const filters = useSelector((state) => state.submitFilters);hbn    
   const userChanged = useSelector((state) => state.userChanged);
   const [noResults, setNoResults] = useState(false);
 
   const { darkMode } = useDarkMode();
 
-
   useEffect(() => {
-    dispatch(getAllHotels());
+
+    if (!filteredHotels.length) {
+      dispatch(getAllHotels())
+    }
     dispatch(getAllCountries());
     if (userChanged) {
       dispatch(userLog());
