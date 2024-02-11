@@ -6,6 +6,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux";
 import Loading from "../../assets/Loading.gif"
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+import swal from "sweetalert";
 
 
 const UpdateForm = () => {
@@ -124,7 +125,12 @@ const UpdateForm = () => {
         );
   
         if (responseBackend.data.name) {
-          window.alert("Hotel successfully updated!");
+          swal({
+            title: "¡Hotel succesfully updated!",
+            text: "The hotel has been updated and it's ready to start booking",
+            icon: "success",
+            button: null,
+          });
           navigate(`/detail/${id}`)
         } else {
           console.error("Error updating hotel:", responseBackend.data.message);
@@ -132,6 +138,12 @@ const UpdateForm = () => {
   
         setLoading(false);
       } catch (error) {
+        swal({
+          title: "Error updating Hotel",
+          text: "An error occurred while updating the Hotel. Check the information and try again",
+          icon: "error",
+          button: null,
+        });
         console.error("Error:", error);
         setLoading(false);
       }

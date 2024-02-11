@@ -19,6 +19,8 @@ const Filters = () => {
     maxPrice: "",
     orderBy: "",
     direction: "",
+    startDate: "",
+    endDate: ""
   };
 
   const filters = useSelector((state) => state.submitFilters) || defaultFilters;
@@ -42,10 +44,22 @@ const Filters = () => {
     dispatch(resetCurrentPage());
   };
 
+  console.log(filters);
+  
   return (
-    <div className={`${styles.sidebar} ${darkMode ? styles.darkMode : ''}`}>
+    <div className={`${styles.sidebar} ${darkMode ? styles.darkMode : ""}`}>
       <div className={styles.filterContainer}>
         <h2>Filters</h2>
+        <div className={styles.dates}>
+          <div className={styles.date}>
+            <p>Start</p>
+            <input onChange={handleFilters} type="date" name="startDate" value={filters.startDate || ""} className={styles.dateInput} />
+          </div>
+          <div className={styles.date}>
+            <p>End</p>
+            <input onChange={handleFilters} type="date" name="endDate" value={filters.endDate || ""} className={styles.dateInput} />
+          </div>
+        </div>
         <div className={styles.countriesContainer}>
           <p>Countries</p>
           <select
@@ -74,12 +88,24 @@ const Filters = () => {
             onChange={handleFilters}
             className={styles.select}
           >
-            <option value="" className={styles.option}>All</option>
-            <option value="1" className={styles.option}>⭐</option>
-            <option value="2" className={styles.option}>⭐⭐</option>
-            <option value="3" className={styles.option}>⭐⭐⭐</option>
-            <option value="4" className={styles.option}>⭐⭐⭐⭐</option>
-            <option value="5" className={styles.option}>⭐⭐⭐⭐⭐</option>
+            <option value="" className={styles.option}>
+              All
+            </option>
+            <option value="1" className={styles.option}>
+              ⭐
+            </option>
+            <option value="2" className={styles.option}>
+              ⭐⭐
+            </option>
+            <option value="3" className={styles.option}>
+              ⭐⭐⭐
+            </option>
+            <option value="4" className={styles.option}>
+              ⭐⭐⭐⭐
+            </option>
+            <option value="5" className={styles.option}>
+              ⭐⭐⭐⭐⭐
+            </option>
           </select>
         </div>
 
@@ -128,9 +154,15 @@ const Filters = () => {
               <option value="" disabled className={styles.option} hidden>
                 Order by
               </option>
-              <option value="countryId" className={styles.option}>Country</option>
-              <option value="stars" className={styles.option}>Stars</option>
-              <option value="price" className={styles.option}>Price</option>
+              <option value="countryId" className={styles.option}>
+                Country
+              </option>
+              <option value="stars" className={styles.option}>
+                Stars
+              </option>
+              <option value="price" className={styles.option}>
+                Price
+              </option>
             </select>
           </div>
 
@@ -145,18 +177,23 @@ const Filters = () => {
               <option value="" disabled hidden className={styles.option}>
                 Direction
               </option>
-              <option value="ASC" className={styles.option}>↑</option>
-              <option value="DESC" className={styles.option}>↓</option>
+              <option value="ASC" className={styles.option}>
+                ↑
+              </option>
+              <option value="DESC" className={styles.option}>
+                ↓
+              </option>
             </select>
           </div>
         </div>
         <div className={styles.buttonsContainer}>
-        <button onClick={applyFilters} className={styles.applyButton}>Apply Filters</button>
-        <button onClick={handleReset} className={styles.clearButton}>
-          Clear Filters
-        </button>
+          <button onClick={applyFilters} className={styles.applyButton}>
+            Apply Filters
+          </button>
+          <button onClick={handleReset} className={styles.clearButton}>
+            Clear Filters
+          </button>
         </div>
-
       </div>
     </div>
   );

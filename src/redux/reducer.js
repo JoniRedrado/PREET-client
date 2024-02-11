@@ -25,6 +25,7 @@ import {
 } from "./actions-types";
 
 let initialState = {
+  allHotels: {},
   filteredHotels: {},
   submitFilters: {},
   currentPage: 1,
@@ -48,17 +49,10 @@ function rootReducer(state = initialState, action) {
     case GET_ALL_HOTELS:
       return {
         ...state,
-        filteredHotels: action.payload,
+        allHotels: action.payload,
         totalHotels: action.payload.total,
+        searched: false,
       };
-
-    //* Pendiente de lógica para limpiar los filtros.
-    // case CLEAR_HOTELS_FILTERS:
-    //   return {
-    //     ...state,
-    //     filteredHotels: action.payload,
-    //     totalHotels: action.payload.total,
-    //   };
 
     case GET_HOTEL_BY_NAME:
       return {
@@ -138,27 +132,19 @@ function rootReducer(state = initialState, action) {
         searched: true,
       };
 
-    // case POST_HOTEL:
-    //   return{
-    //       ...state,
-    //       newHotel: action.payload
-    //   }
-    //   case GET_COUNTRIES:
-    //     return{
-    //         ...state,
-    //         countries: action.payload
-    //     }
     case FETCH_ITEMS_SUCCESS:
       return {
         ...state,
         filteredHotels: action.payload,
         totalHotels: action.payload.total,
       };
+      
     case FILTER_HOTELS:
       return {
         ...state,
         totalHotels: action.payload.total,
         filteredHotels: action.payload,
+        searched: true,
       };
 
     case HANDLE_FILTERS:

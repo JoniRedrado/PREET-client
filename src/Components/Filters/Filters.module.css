@@ -23,6 +23,12 @@
     font-size: 1.5rem;
     cursor: pointer;
   }
+
+  .dates {
+    display: flex;
+    gap: 10px;
+  }
+
   
   .select {
     width: 100%;

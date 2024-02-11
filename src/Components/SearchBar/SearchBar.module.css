@@ -4,6 +4,23 @@
   gap: 20px;
   align-items: center;
   position: relative;
+  padding: 0 10px 0 10px;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.filters p {
+  margin: 5px 0 5px 0;
+  color: black;
+}
+
+.dateInput {
+  border-color: transparent;
+  margin: 0 20px 0 0;
 }
 
 .searchBar{
@@ -11,6 +28,7 @@
   height: 40px;
   display: flex;
 }
+
 .searchInput{
   width: 100%;
   border-radius: 16px;
@@ -27,7 +45,9 @@
   transform: translateY(-50%);
   color: #555;  
   width: 20px;
+  margin-left: 10px;
 }
+
 
 .searchButton{
   width: 194px;
