@@ -1,22 +1,19 @@
-import React, { useState } from "react";
-// import { FaPaypal } from "rzzeact-icons/fa";
+import { useState } from "react";
 import axios from "axios";
 import "./RoomDetail.styles.css";
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 
 const RoomDetail = ({ room }) => {
   const [isBooking, setIsBooking] = useState(false);
-  //   const [initialDate, setInitialDate] = useState("");
-  //   const [finalDate, setFinalDate] = useState("");
+  const { darkMode } = useDarkMode();
+
 
   const handleBook = () => {
     setIsBooking(true);
     const bookingInfo = {
       roomId: room.id,
       user: localStorage.getItem("token"),
-      //   room: room.id,
       price: room.price,
-      //   initialDate: initialDate,
-      //   finalDate: finalDate,
       dateInit: new Date(),
       dateFinal: new Date(),
     };
@@ -41,48 +38,22 @@ const RoomDetail = ({ room }) => {
   } //como null en la const closeModal (Detail.jsx). Esto arregla el error.
 
   return (
-    //     <div className="room-table">
-    //     <div className="room-detail">
-    //         <div>
-    //             <h3>Type </h3>
-    //             <h3> {room.type}</h3>
-    //         </div>
-    //       <h3>Description {room.description}</h3>
-    //       <p>Price: ${room.price}</p>
-    //       {!isBooking ? (
-    //         <button onClick={handleBook}>
-    //           <i class="bi bi-paypal" onClick={handleBook} ></i> Book Now
-    //         </button>
-    //       ) : (
-    //         <p>Processing payment...</p>
-    //       )}
-    // </div>
-    // </div>
-    <table className="table">
-      <thead>
-        <tr>
-          <th scope="col">
-            Type <i className="bi bi-door-open-fill"></i>
-          </th>
-          <th scope="col">Description</th>
-          <th scope="col">Price</th>
-          <th scope="col">Pay</th>
-        </tr>
-      </thead>
-      <tbody>
-        {/* {hotel.rooms.map((room) => ( */}
-        <tr key={room.id}>
-          <td style={{ width: "25%" }}>{room.type}</td>
-          <td style={{ width: "50%" }}>{room.description}</td>
-          <td style={{ width: "15%" }}>{room.price} $</td>
-          <td style={{ width: "10%" }}>
-            <i className="bi bi-paypal" onClick={handleBook}></i>
-          </td>
-        </tr>
-        {/* ))} */}
-      </tbody>
-    </table>
-  );
+    <div>
+      <div className={`card-room ${darkMode ? "darkMode" : ""}`}>
+        <img  src={room.image[0]} alt={`Room ${room.id}`} className="card-img-top room-image" />
+        
+        <div className="card-body">
+          <h1 className="card-title">{room.type}</h1>
+          <p className="card-text">{room.description}</p>
+          <p className="card-text">Price {room.price} $</p>
+          <button onClick={handleBook}>
+          Book now 
+          <i className="bi bi-paypal paypal"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  )
 };
 
 export default RoomDetail;

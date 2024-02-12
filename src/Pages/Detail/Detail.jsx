@@ -46,7 +46,6 @@ const Detail = () => {
   }, [dispatch, id]);
 
   const hotel = useSelector((state) => state.hotelDetail);
-
   const handleRoomSelect = (roomType) => {
     const selectedRoom = hotel.rooms.find((room) => room.type === roomType);
     setSelectedRoom(selectedRoom);
@@ -165,7 +164,7 @@ const Detail = () => {
           },
         }}
       >
-        <button onClick={closeModal}>X</button>
+        <i onClick={closeModal} class="bi bi-arrow-left-circle return"></i>
         <RoomDetail room={selectedRoom} />
       </Modal>
     </motion.div>
