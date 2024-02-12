@@ -1,0 +1,209 @@
+.sidebar {
+    width: 100%; 
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border: 1px solid #D1D5DB;
+  }
+  
+  .filterContainer {
+    margin-bottom: 20px;
+  }
+  
+  .filterContainer p {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .filterContainer h2 {
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .dates {
+    display: flex;
+    gap: 10px;
+  }
+
+  
+  .select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    
+  }
+  
+  .inputContainer {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .orderContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .orderByContainer{
+    gap: 10px;
+  }
+  
+  .buttonsContainer{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+  }
+  .applyButton,
+  .clearButton {
+    width: 50%;
+    padding: 8px;
+    background-color: #022840;
+    color: #ffffff; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .clearButton {
+    background-color: #dc3545; 
+  }
+
+  .clearButton:hover{
+    background-color: #dc3546b8;
+  }
+  
+  .applyButton:hover{
+    background-color: #6093bf;;
+  }
+  
+
+  .select2{
+    width: 99%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+  }
+
+  @media screen and (max-width: 576px) {
+    .sidebar {
+      width: 90%; /* Reducimos el ancho de la barra lateral para pantallas más pequeñas */
+      margin-left: 10px; /* Reducimos el margen izquierdo para pantallas más pequeñas */
+      padding: 10px; /* Reducimos el padding para pantallas más pequeñas */
+      font-size: 10px;
+    }
+  
+    .filterContainer p {
+      font-size: 14px; /* Reducimos el tamaño del texto de los títulos de filtro para pantallas más pequeñas */
+    }
+  
+    .filterContainer h2 {
+      font-size: 1.2rem; /* Reducimos el tamaño de los subtítulos de filtro para pantallas más pequeñas */
+    }
+  
+    .select, .select2 {
+      width: 100%; /* Ajustamos el ancho de los selectores para que ocupen el espacio disponible para pantallas más pequeñas */
+      font-size: 10px;
+    }
+  
+    .input {
+      margin-right: 0; /* Quitamos el margen derecho de los inputs para pantallas más pequeñas */
+    }
+
+    .orderContainer{
+      flex-direction: column;
+    }
+  
+    .buttonsContainer {
+      flex-direction: column; /* Cambiamos la dirección del contenedor de botones a columna para pantallas más pequeñas */
+    }
+  
+    .applyButton, .clearButton {
+      width: 100%; /* Ajustamos el ancho de los botones para que ocupen el espacio disponible para pantallas más pequeñas */
+      margin-bottom: 10px; /* Añadimos un margen inferior entre los botones para pantallas más pequeñas */
+    }
+  }
+  
+  /* Media queries para pantallas más grandes */
+  @media screen and (min-width: 1400px) {
+    .sidebar {
+      width: 30%; /* Aumentamos el ancho de la barra lateral para pantallas más grandes */
+      margin-left: 52px; /* Aumentamos el margen izquierdo para pantallas más grandes */
+      padding: 20px; /* Aumentamos el padding para pantallas más grandes */
+    }
+  
+    .filterContainer p {
+      font-size: 16px; /* Aumentamos ligeramente el tamaño del texto de los títulos de filtro para pantallas más grandes */
+    }
+  
+    .filterContainer h2 {
+      font-size: 1.7rem; /* Aumentamos el tamaño de los subtítulos de filtro para pantallas más grandes */
+    }
+  
+    .select, .select2 {
+      width: 100%; /* Mantenemos el ancho de los selectores al 100% para pantallas más grandes */
+    }
+  
+    .buttonsContainer {
+      flex-direction: row; /* Mantenemos la dirección del contenedor de botones en fila para pantallas más grandes */
+    }
+  
+    .applyButton, .clearButton {
+      width: 45%; /* Distribuimos los botones en dos columnas para pantallas más grandes */
+      margin-bottom: 0; /* Quitamos el margen inferior entre los botones para pantallas más grandes */
+    }
+    .clearButton{
+      margin-left: 10px;
+    }
+  }
+
+  
+/* Estilos para el modo oscuro en el componente Filters */
+.sidebar.darkMode {
+  background-color: #333; /* Color de fondo oscuro */
+  color: #fff; /* Color de texto claro */
+}
+
+/* Estilos para los textos en el modo oscuro */
+.sidebar.darkMode h2 {
+  color: #fff; /* Color de texto claro */
+}
+
+/* Estilos para los selectores en el modo oscuro */
+.sidebar.darkMode .select {
+  background-color: #555; /* Color de fondo oscuro para los selectores */
+  color: #fff; /* Color de texto claro para los selectores */
+}
+
+.sidebar.darkMode .inputContainer .input{
+  background-color: #555; /* Color de fondo oscuro para los selectores */
+  color: #fff; /* Color de texto claro para los selectores */
+}
+.darkMode .orderContainer p,
+.darkMode .orderContainer select,
+.darkMode .orderContainer .option {
+  color: white; /* Color del texto en modo oscuro */
+  background-color: #333; /* Color de fondo en modo oscuro */
+}
+
+/* Estilos para los botones en el modo oscuro */
+.sidebar.darkMode .applyButton, .sidebar.darkMode .clearButton {
+  background-color: #022840; /* Color de fondo para los botones */
+  color: #fff; /* Color de texto para los botones */
+}
+
+/* Estilos para los botones en modo oscuro al pasar el ratón */
+.sidebar.darkMode .applyButton:hover, .sidebar.darkMode .clearButton:hover {
+  background-color: #6093bf; /* Color de fondo al pasar el ratón sobre los botones */
+}

@@ -1,0 +1,90 @@
+.header1 {
+  position: relative;
+  height: 700px; /* Reducimos la altura para pantallas más pequeñas */
+  background: url("../../assets/header-background.jpg") top/cover no-repeat; 
+  color: #fff ;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.header2 {
+  background-color: #022840;
+  height: auto; 
+  display: flex;
+  justify-content: center;
+}
+
+.headerContainer, .headerContainer2 {
+  width: 90%;
+  margin: 0 auto; /* Centramos horizontalmente */
+  padding: 20px;
+}
+
+.textContainer {
+  margin-bottom: 100px;
+  max-width: 1176px; /* Utilizamos max-width para evitar desbordamiento en pantallas pequeñas */
+  width: 100%;
+  line-height: 1.2; /* Cambiamos a una unidad adimensional para que sea más adaptable */
+}
+
+.textContainer h1 {
+  font-weight: 400;
+  font-style: italic;
+  font-size: 80px; /* Reducimos el tamaño del texto para pantallas más pequeñas */
+}
+
+.searchbarContainer {
+  width: 100%; /* Ancho completo para adaptarse al contenedor */
+  max-width: 1176px;
+  height: 80px; /* Reducimos la altura para pantallas más pequeñas */
+  border-radius: 16px;
+  background-color: #ffffff63;
+}
+
+  
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+
+  @media screen and (max-width: 576px) {
+    .header1 {
+      height: 300px; /* Ajustamos la altura para pantallas más pequeñas */
+    }
+  
+    .textContainer h1 {
+      font-size: 30px; /* Ajustamos el tamaño del texto para pantallas más pequeñas */
+      margin-bottom: -80px;
+    }
+  
+    .searchbarContainer {
+      height: 90px; /* Ajustamos la altura para pantallas más pequeñas */
+    }
+  }
+  
+  /* Media queries para pantallas más grandes */
+  @media screen and (min-width: 992px) {
+    .header1 {
+      height: 600px; /* Restauramos la altura original para pantallas más grandes */
+    }
+  
+    .textContainer {
+      max-width: 70%; /* Reducimos el ancho máximo para evitar que el texto se extienda demasiado en pantallas muy grandes */
+    }
+  
+    .textContainer h1 {
+      font-size: 60px; /* Ajustamos el tamaño del texto para pantallas más grandes */
+    }
+  
+    .searchbarContainer {
+      height: 135px; /* Restauramos la altura original para pantallas más grandes */
+    }
+  }
+
+.textContainer.darkMode{
+  color: #333; /* Color de fondo oscuro */
+}

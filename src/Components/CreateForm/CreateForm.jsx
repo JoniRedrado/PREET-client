@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import styles from "./createForm.module.css";
+import styles from "./CreateForm.module.css";
 import validation from "../../helpers/validation";
 
 const CreateForm = () => {
