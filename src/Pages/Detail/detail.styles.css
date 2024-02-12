@@ -38,6 +38,12 @@
   text-align: center;
 }
 
+.icons div{
+  display: flex;
+  margin-right: -165px;
+  margin-top: 228px;
+}
+
 .informationContainer h1 {
   font-size: 28px;
   font-weight: bold;

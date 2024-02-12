@@ -1,4 +1,5 @@
 /* eslint-disable no-case-declarations */
+import { userFavorites } from "./actions";
 import {
   NEXT_PAGE,
   PREV_PAGE,
@@ -190,14 +191,20 @@ function rootReducer(state = initialState, action) {
       // Agregar el nuevo favorito a la lista de favoritos del usuario
       return {
         ...state,
-        userFavorites: action.payload,  
+        userFavorites: action.payload,
+        allFavorites:  action.payload,
       };
     case REMOVE_FAVORITE:
       // Eliminar el favorito de la lista de favoritos del usuario
-      return {
-        ...state,
-        userFavorites: state.userFavorites.filter(favorite => favorite.id !== action.payload),
-      };
+      if (Array.isArray(state.userFavorites)) {
+        return {
+          ...state,
+          userFavorites: state.userFavorites.filter(favorite => favorite.id !== action.payload),
+        };
+      } else {
+        // Si state.userFavorites no es un array, devuelve el estado sin cambios
+        return state;
+      }
     default:
       return state;
   }

@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    text-decoration: none;
   }
   
   .centered-text {
@@ -10,6 +11,7 @@
   }
   
   .card {
+    color:black;
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
@@ -32,21 +34,36 @@
     border-radius: 8px 8px 0 0;
   }
   
-  .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    padding: 16px;
-  }
   
   .card-title {
-    margin: 0px 0px 20px 0px;
+    margin: 10px 0px 10px 0px;
     font-size: 15px;
     font-weight: bold;
     text-align: center;
+    text-decoration: none;
   }
   
+  .link{
+    text-decoration: none;
+    color:rgba(0, 0, 0, 0.9);
+  }
+
+  .message{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    width: 320px;
+    height: 320px;
+    flex-direction: column;
+  }
+
+  .heart{
+    color: white;
+    position: absolute;
+    top: 5px; /* Ajusta el valor superior según sea necesario */
+    right: -20px; 
+  }
+
   @media screen and (max-width: 576px) {
     .card {
       margin: 10px auto;

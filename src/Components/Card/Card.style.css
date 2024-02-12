@@ -9,6 +9,11 @@
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+.favorite-icon{
+  color:white;
+  position: absolute;
+  margin: 5px 210px;
+}
 
 .card-link {
   text-decoration: none;
