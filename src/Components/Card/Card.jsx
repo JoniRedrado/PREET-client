@@ -17,7 +17,8 @@ const Card = (props) => {
   const { darkMode } = useDarkMode(); 
   const dispatch = useDispatch();
   const [isFavorite, setIsFavorite] = useState(false);
-  const token = localStorage.getItem("token");
+
+
   const cardVariants = {
     hover: {
       scale: 1.05,
@@ -39,7 +40,6 @@ const Card = (props) => {
   const handleAddToFavorites = () => {
     dispatch(postFavorite(id));
     setIsFavorite(!isFavorite);
-    localStorage.setItem(`favorite_${id}`, "true");
   };
 
   return (
@@ -51,13 +51,11 @@ const Card = (props) => {
        
 
         <div className="card-image">
-        {token ? (
+        
           <div className="favorite-icon" onClick={isFavorite ? null : handleAddToFavorites}>
             {isFavorite ? <i className="bi bi-heart-fill"></i> : <i className="bi bi-heart"> </i>}
           </div>
-          ) : (
-            ""
-          )}
+   
           <motion.img 
             src={image} 
             className="card-img-top" 
