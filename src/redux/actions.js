@@ -292,20 +292,17 @@ export const postFavorite = (id, token) => {
 export const removeFavorite = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(`${import.meta.env.VITE_BACK_URL}/favorites/${id}`
-      // , {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`
-      //   }
-      // }
-      );
-      return dispatch({
-        type: REMOVE_FAVORITE,
-        payload: response.data,
-      });
+      const response = await axios.delete(`${import.meta.env.VITE_BACK_URL}/favorites/${id}`);
+      if (response.status === 200) {
+        dispatch({
+          type: REMOVE_FAVORITE,
+          payload: id,
+        });
+      } else {
+        console.error("Error al eliminar el favorito");
+      }
     } catch (error) {
       console.error(error);
     }
   };
 };
-

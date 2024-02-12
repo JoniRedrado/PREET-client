@@ -3,21 +3,21 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   FaMapMarkerAlt,
-  FaEnvelope,
   FaDollarSign,
 } from "react-icons/fa";
-import { postFavorite } from "../../redux/actions";
+import { postFavorite} from "../../redux/actions";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import './Card.style.css';
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState} from "react";
 
 
 const Card = (props) => {
-  const { id, name, image, country, rooms, stars, token } = props;
+  const { id, name, image, country, rooms, stars} = props;
   const { darkMode } = useDarkMode(); 
   const dispatch = useDispatch();
   const [isFavorite, setIsFavorite] = useState(false);
+  const token = localStorage.getItem("token");
   const cardVariants = {
     hover: {
       scale: 1.05,
@@ -39,7 +39,7 @@ const Card = (props) => {
   const handleAddToFavorites = () => {
     dispatch(postFavorite(id));
     setIsFavorite(!isFavorite);
-    // localStorage.setItem(`favorite_${id}`, "true");
+    localStorage.setItem(`favorite_${id}`, "true");
   };
 
   return (
@@ -51,9 +51,13 @@ const Card = (props) => {
        
 
         <div className="card-image">
+        {token ? (
           <div className="favorite-icon" onClick={isFavorite ? null : handleAddToFavorites}>
             {isFavorite ? <i className="bi bi-heart-fill"></i> : <i className="bi bi-heart"> </i>}
           </div>
+          ) : (
+            ""
+          )}
           <motion.img 
             src={image} 
             className="card-img-top" 

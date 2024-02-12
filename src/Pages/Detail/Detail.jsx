@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail, deleteHotel } from "../../redux/actions";
+import { getDetail, deleteHotel, postFavorite } from "../../redux/actions";
 import { motion } from "framer-motion";
 import { FaMapMarkerAlt /* , FaEnvelope */ } from "react-icons/fa";
 import RoomDetail from "../RoomDetail/RoomDetail";
@@ -20,6 +20,8 @@ const Detail = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+
 
   const handleDelete = (id) => {
     dispatch(deleteHotel(id));
@@ -79,6 +81,12 @@ const Detail = () => {
   //     })
   // }
 
+  const handleAddToFavorites = () => {
+    dispatch(postFavorite(id));
+    setIsFavorite(!isFavorite);
+    localStorage.setItem(`favorite_${id}`, "true");
+  };
+
   return (
     <motion.div
       className={`container ${darkMode ? "darkMode" : ""}`}
@@ -100,6 +108,9 @@ const Detail = () => {
               onClick={() => handleDelete(id)}
               title="Delete"
             ></i>
+            <div className="icon" onClick={isFavorite ? null : handleAddToFavorites}>
+              {isFavorite ? <i className="bi bi-heart-fill"></i> : <i className="bi bi-heart"> </i>}
+            </div>
           </>
         ) : (
           ""
