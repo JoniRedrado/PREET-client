@@ -1,0 +1,15 @@
+.reservation-container {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    background-color: #B0A8BF;
+}
+
+.reservation-image {
+    width: 200px;
+    margin: 20px;
+}
+
+.reservation-info {
+    margin-left: 10px;
+}

@@ -76,7 +76,7 @@ const UserBar = () => {
                 <FaHome /> Post Your Property
             </button>
         </Link>
-        <Link className={styles.link}>
+        <Link to="/myreservations" className={styles.link}>
             <button>
                 <FaHistory /> History
             </button>

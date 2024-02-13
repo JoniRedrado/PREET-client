@@ -14,6 +14,7 @@ import Favorites from "./Pages/Favorites/Favorites";
 import UserFavorites from "./Pages/Favorites/userFavorites/userFavorites";
 import styles from "./App.module.css"
 import SearchResult from "./Pages/SearchResult/SearchResult";
+import BookingsHistory from "./Pages/BookingsHistory/BookingsHistory";
 import { useDarkMode } from "./DarkModeContext/DarkModeContext";
 // import './App.css'
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/search/:nombreHotel" element={<SearchResult />} />
         <Route path="/favorites" element={<Favorites/>} />
         <Route path="/userFavorites" element={<UserFavorites/>} />
+        <Route path="/myreservations" element={<BookingsHistory/>} />
       </Routes>
       <Footer/>
     </div>

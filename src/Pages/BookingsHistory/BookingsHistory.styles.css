@@ -1,0 +1,14 @@
+.reservations-title {
+    margin-left: 20px;
+}
+
+.empty-history {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:50px;
+}
+
+.empty-history img {
+    width: 200px;
+}

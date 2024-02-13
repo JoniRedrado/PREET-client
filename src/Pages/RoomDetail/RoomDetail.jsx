@@ -1,5 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import axios from "axios";
+import swal from "sweetalert";
+
 import "./RoomDetail.styles.css";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 
@@ -7,6 +10,8 @@ const RoomDetail = ({ room }) => {
   const [isBooking, setIsBooking] = useState(false);
   const { darkMode } = useDarkMode();
 
+
+  const token = localStorage.getItem('token')
 
   const handleBook = () => {
     setIsBooking(true);
