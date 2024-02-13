@@ -45,7 +45,6 @@ const Filters = () => {
     dispatch(filterHotels(filters));
     dispatch(resetCurrentPage());
   };
-
   
   return (
     <div className={`${styles.sidebar} ${darkMode ? styles.darkMode : ""}`}>
