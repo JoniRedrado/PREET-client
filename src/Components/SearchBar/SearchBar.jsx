@@ -3,11 +3,11 @@ import { filterParams, filterHotels } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import s from "../SearchBar/SearchBar.module.css"
 import { FaSearch } from "react-icons/fa"
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState("");
 
   const defaultFilters = {
@@ -31,7 +31,7 @@ const SearchBar = () => {
     e.preventDefault()
     dispatch(filterHotels(filters))
     setSearchInput("")
-    // navigate(`/search/${encodeURIComponent(searchInput)}`);
+    navigate(`/search/${encodeURIComponent(searchInput)}`);
   }
 
   return (

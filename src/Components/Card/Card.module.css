@@ -1,0 +1,108 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  width: 816px;
+  height: 242px;
+  box-shadow: 2px 6px 8px 0px #00000040;
+}
+
+.favoriteIcon{
+  color:white;
+  position: absolute;
+  margin: 5px 210px;
+}
+
+
+.cardImage {
+  width: 40%;
+  height: 100%;
+  padding: 0px 10px 0px 10px;
+}
+
+.mainImage {
+  width: 328px;
+  height: 226px;
+  border-radius: 12px;
+  margin-top: -42px;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 90%; 
+  width: 60%;
+  margin: 10px;
+}
+
+.cardTitle {
+  margin: 0px;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 48px;
+}
+
+.cardStars {
+  font-size: 14px;
+  color: #666;
+  margin: 0px;
+}
+
+.cardText{
+  margin-top: 0px;
+}
+
+.cardFooter{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 20%;
+}
+.favoriteIcon{
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 75px;
+  top: 7px;
+}
+
+.fav{
+  width: 28px;
+  height: 28px;
+}
+
+.button{
+  width: 128px;
+  height: 48.85px;
+  border-radius: 8px;
+  border: none;
+  padding: 12px 24px 12px 24px;
+  background-color: #01283F;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.button:hover{
+  background-color: #6093bf;
+}
+
+.address{
+  color: blue; 
+  text-decoration: underline; 
+  cursor: pointer;
+  margin-top: 0px;
+}
+.card.darkMode {
+  background-color: #333; 
+  color: #fff; 
+}

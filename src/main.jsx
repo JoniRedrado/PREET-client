@@ -6,6 +6,7 @@ import store from "./redux/store.js";
 import { AuthProvider } from "./context/authContext.jsx";
 import Modal from "react-modal"
 import { DarkModeProvider } from "./DarkModeContext/DarkModeContext.jsx";
+import "./index.css"
 
 Modal.setAppElement('#root');
 

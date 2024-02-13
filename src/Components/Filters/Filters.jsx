@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import {
   filterHotels,
   filterParams,
@@ -11,7 +12,7 @@ import styles from "./Filters.module.css";
 const Filters = () => {
   const dispatch = useDispatch();
   const { darkMode } = useDarkMode(); 
-
+  const [selectedStar, setSelectedStar] = useState("");
   const defaultFilters = {
     country: "",
     stars: "",
@@ -27,6 +28,7 @@ const Filters = () => {
 
   const allCountries = useSelector((state) => state.countries);
 
+  
   const handleFilters = (e) => {
     const { name, value } = e.target;
     dispatch(filterParams({ ...filters, [name]: value }));
@@ -47,7 +49,7 @@ const Filters = () => {
   return (
     <div className={`${styles.sidebar} ${darkMode ? styles.darkMode : ""}`}>
       <div className={styles.filterContainer}>
-        <h2>Filters</h2>
+        <h2>Filter By:</h2>
         <div className={styles.dates}>
           <div className={styles.date}>
             <p>Start</p>
