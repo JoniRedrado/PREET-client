@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { login } from '../../Components/Auth/Auth';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/authContext';
+import { showModal } from "../../redux/actions";
 import styles from "../Login/Login.module.css"
+import { useDispatch } from 'react-redux';
 
 function LoginForm() {
 
@@ -10,17 +11,16 @@ function LoginForm() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     
-    const navigate = useNavigate();
+    const dispatch = useDispatch()
     const auth = useAuth();
 
     const handleLogin = async () => {
         try {
           const data = await login(email, password);
-          if (data.token) {
-            navigate('/', data.token)
-          } else if (data.message) {
+          if (data.message) {
             setError("Invalid Email or Password");
           }
+          dispatch(showModal("login", false))
         } catch (error) {
             setError("Invalid Email or Password"); 
         }
@@ -28,8 +28,8 @@ function LoginForm() {
 
     const handleGoogleLogin = async () =>{
       try {
-        const data = await auth.loginWithGoogle();
-        navigate('/', data.token)
+        await auth.loginWithGoogle();
+        dispatch(showModal("login", false))
       } catch (error) {
         setError("Error signing in with Google")
       }

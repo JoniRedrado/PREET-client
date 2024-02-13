@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { userFavorites } from "./actions";
+
 import {
   NEXT_PAGE,
   PREV_PAGE,
@@ -38,6 +38,7 @@ let initialState = {
   showModal: {
     register: false,
     login: false,
+    roomDetail: false,
   },
   userChanged: false,
   allFavorites: {},

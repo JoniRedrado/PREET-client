@@ -53,7 +53,7 @@ export  async function register({name, last_name, email, password}) {
 
       if (response.status === 200) {        
         swal({
-          title: "¡You are registered!",
+          title: "¡Succesfully registered!",
           text: "Now login and book your next PREET",
           icon: "success",
           button: null,

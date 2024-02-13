@@ -5,10 +5,11 @@ import { getDetail, deleteHotel, postFavorite } from "../../redux/actions";
 import { motion } from "framer-motion";
 import { FaMapMarkerAlt /* , FaEnvelope */ } from "react-icons/fa";
 import RoomDetail from "../RoomDetail/RoomDetail";
-import CommentsInDetail from "../../Components/ComentsInDetail/CommentsInDetail";;
+import CommentsInDetail from "../../Components/ComentsInDetail/CommentsInDetail";
 import Modal from "react-modal";
 import "./detail.styles.css";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+import { showModal } from "../../redux/actions";
 // import axios from "axios";
 
 const Detail = () => {
@@ -19,7 +20,7 @@ const Detail = () => {
   const { darkMode } = useDarkMode();
   const { id } = useParams();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -47,15 +48,17 @@ const Detail = () => {
   }, [dispatch, id]);
 
   const hotel = useSelector((state) => state.hotelDetail);
+  const modalRoomDetail = useSelector((state) => state.showModal.roomDetail);
+
   const handleRoomSelect = (roomType) => {
     const selectedRoom = hotel.rooms.find((room) => room.type === roomType);
     setSelectedRoom(selectedRoom);
-    setIsModalOpen(true);
+    dispatch(showModal("roomDetail", true));
   };
 
   const closeModal = () => {
     setSelectedRoom(null);
-    setIsModalOpen(false);
+    dispatch(showModal("roomDetail", false));
   };
 
   // //Integracion con PayPal
@@ -159,7 +162,7 @@ const Detail = () => {
         <p>cargando...</p>
       )}
       <Modal
-        isOpen={isModalOpen}
+        isOpen={modalRoomDetail}
         onRequestClose={closeModal}
         className="modal"
         style={{
@@ -168,7 +171,7 @@ const Detail = () => {
           },
         }}
       >
-        <i onClick={closeModal} class="bi bi-arrow-left-circle return"></i>
+        <i onClick={closeModal} className="bi bi-arrow-left-circle return"></i>
         <RoomDetail room={selectedRoom} />
       </Modal>
     </motion.div>

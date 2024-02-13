@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import template from "../../assets/Logo-White.svg";
 import template2 from "../../assets/Logo.svg";
 import Modal from "react-modal";
@@ -13,7 +13,6 @@ import {
   getAllHotels,
   resetCurrentPage,
   showModal,
-  filterParams,
 } from "../../redux/actions";
 import { useDarkMode } from '../../DarkModeContext/DarkModeContext';
 
@@ -21,20 +20,10 @@ function NavBar() {
   const token = localStorage.getItem("token");
   const { darkMode, toggleDarkMode } = useDarkMode();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const {pathname} = useLocation();
 
   const modalRegister = useSelector((state) => state.showModal.register);
   const modalLogin = useSelector((state) => state.showModal.login);
-
-  const defaultFilters = {
-    country: "",
-    stars: "",
-    minPrice: "",
-    maxPrice: "",
-    orderBy: "",
-    direction: "",
-  };
 
   const handleHomeButton = () => {
     dispatch(resetCurrentPage());
@@ -47,7 +36,6 @@ function NavBar() {
 
   function closeModal(option) {
     dispatch(showModal(option, false));
-    navigate("/");
   }
 
 
@@ -69,18 +57,10 @@ function NavBar() {
             )
           }
         </div>
-        {/* <div className={style.linksContainer}>
-          <Link to="/" className={style.link}>Home</Link>
-          <Link className={style.link}>Contact</Link>
-          <Link className={style.link}>About Us</Link>
-        </div> */}
       
       <div className={style.userButtons}>
         {token ? (
           <>
-            {/* <button className={style.moon} onClick={toggleDarkMode}>
-              {darkMode ? <i class="bi bi-moon"></i> : <i class="bi bi-sun"></i>}
-            </button> */}
             <UserBar />
             <div>
               <i className={darkMode ? "bi bi-sun" : "bi bi-moon"} onClick={toggleDarkMode}></i>
