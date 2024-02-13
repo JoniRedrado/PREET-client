@@ -39,7 +39,7 @@
 
 .cardTitle {
   margin: 0px;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 600;
   line-height: 48px;
 }
@@ -101,6 +101,10 @@
   text-decoration: underline; 
   cursor: pointer;
   margin-top: 0px;
+  font-size: 15px;
+}
+.price{
+  font-size: 20px;
 }
 .card.darkMode {
   background-color: #333; 
