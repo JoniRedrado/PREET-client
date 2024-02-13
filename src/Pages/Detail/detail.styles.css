@@ -69,6 +69,11 @@
   font-size: 18px;
 }
 
+.selectRoom {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
 /* Media Query para pantallas más pequeñas */
 @media (max-width: 600px) {
   .container {
