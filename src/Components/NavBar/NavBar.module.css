@@ -1,21 +1,122 @@
 .container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #022840;
-  height: 80px;
-  padding: 0 20px 0 20px;
-  margin: -10px
 }
 
-.container img {
-  width: 100px;
-  height: 80px;
+.items{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: center;
 }
-.container button {
-  align-self: center;
-  padding: 5px;
-  background-color: #B0A8BF;
-  border-color: transparent;
+
+.logo {
+  width: 100px;
+}
+
+.darkModeButton{
+  border-radius: 50%;
+  margin-right: 10px;
+  /* width: 696px;
+  height: 56px; */
+  /* display: flex;
+  align-items:end;
+  justify-content:end; */
+}
+
+.modalContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 500px;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.userButtons {
+  display: flex;
+  gap: 5px;
+}
+
+.buttons{
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff; 
+  font-size: 18px;
+  display: flex;
+  padding: 10px 30px 10px 30px;
+}
+
+.buttons:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.linksContainer{
+  width: 696px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.link{
+  text-decoration: none;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer; 
+  font-size: 20px;
+  padding: 10px 30px 10px 30px;
   border-radius: 5px;
+  
+}
+.link:hover{
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+i{
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Media queries para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+  .logo {
+    width: 60px; /* Reducimos aún más el tamaño del logo para pantallas más pequeñas */
+  }
+
+  .userButtons {
+    display: flex; /* Mostramos los botones de usuario para pantallas más pequeñas */
+    gap: 10px; /* Añadimos un pequeño espacio entre los botones */
+  }
+
+  .linksContainer {
+    display: flex; /* Mostramos los links del navbar para pantallas más pequeñas */
+  }
+
+  .buttons {
+    font-size: 14px; /* Reducimos más el tamaño del texto de los botones para pantallas más pequeñas */
+    padding: 5px 10px; /* Reducimos más el espacio interior de los botones para pantallas más pequeñas */
+  }
+  .link {
+    font-size: 16px; /* Reducimos el tamaño del texto de los enlaces para pantallas más pequeñas */
+    padding: 8px 20px; /* Reducimos el espacio interior de los enlaces para pantallas más pequeñas */
+  }
+}
+
+/* Media queries para pantallas más grandes */
+@media screen and (min-width: 992px) {
+  .logo {
+    width: 120px; /* Aumentamos ligeramente el tamaño del logo para pantallas más grandes */
+  }
+
+  .buttons {
+    font-size: 18px; /* Aumentamos ligeramente el tamaño del texto de los botones para pantallas más grandes */
+    padding: 10px 20px; /* Aumentamos ligeramente el espacio interior de los botones para pantallas más grandes */
+  }
 }

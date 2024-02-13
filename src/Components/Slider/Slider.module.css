@@ -1,0 +1,84 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  width: 92.5%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.container button {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #022840;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.container button:hover {
+  background-color: #6093bf;
+}
+
+.title {
+  font-size: 30px;
+}
+
+.info {
+  display: flex;
+  align-items: space-between;
+}
+
+.image {
+  border-radius: 20px;
+  margin-right: 150px;
+}
+
+.loadedImg {
+  justify-self: left;
+  width: 500px;
+  height: 350px;
+  padding: 1.5em;
+  border-radius: 40px;
+  opacity: 1;
+  transition: 1s;
+}
+
+.notLoadedImg {
+  justify-self: left;
+  width: 500px;
+  height: 350px;
+  padding: 1.5em;
+  border-radius: 40px;
+  opacity: 0;
+  transition: 1s;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  height: 300px;
+  width: 300px;
+  margin-top: 65px;
+}
+
+.hotelText {
+  text-align: center;
+  margin-top: -35px;
+}
+
+.slideBtns {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 1em;
+  height: 100%;
+  width: 100%;
+}
+
+.BtnLeft {
+  margin-right: 1em;
+}

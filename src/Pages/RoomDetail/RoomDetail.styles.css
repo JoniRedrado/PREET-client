@@ -1,0 +1,31 @@
+.card-room {
+  max-width: 100%; /* Ocupar todo el ancho disponible dentro del modal */
+  max-height: 100%; /* Ocupar todo el alto disponible dentro del modal */
+  display: flex; /* Para que los elementos internos se distribuyan correctamente */
+  flex-direction: column; /* Alinear los elementos verticalmente */
+  justify-content: center; /* Centrar verticalmente los elementos */
+  align-items: center; /* Centrar horizontalmente los elementos */
+}
+.room-image{
+  max-width: 100%;
+}
+
+.card-body h1,p,i{
+  font-size: 25px;
+}
+
+.card-body button{
+  width: 25%;
+  padding: 8px;
+  background-color: #022840;
+  color: #ffffff; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 350px;
+}
+
+.card-room.darkMode{
+  background-color: #333;
+  color: #fff; 
+}

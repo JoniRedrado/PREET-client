@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+
 import style from "./Slider.module.css";
 
 function Slider() {
@@ -50,7 +51,7 @@ function Slider() {
       setSelectedIndex(nextIndex);
     }, 500);
   };
-  console.log(rankedHotels)
+
   return (
     <div className={style.container}>
       <h1 className={style.title}>TOP HOTELS OF THE SEASON✨</h1>

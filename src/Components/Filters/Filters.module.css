@@ -46,7 +46,7 @@
     padding: 10px;
     margin-right: 5px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 28px;
   }
   
   .orderContainer {
@@ -83,7 +83,7 @@
   }
   
   .applyButton:hover{
-    background-color: #6093bf;;
+    background-color: #6093bf;
   }
   
 

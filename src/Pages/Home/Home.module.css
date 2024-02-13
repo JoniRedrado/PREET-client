@@ -1,5 +1,25 @@
-div{
-    background-color: red;
-    color: black;
-    font-size: 50px;
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    align-items: center;
 }
+
+.componentsContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.sliderContainer{
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+
+.darkMode .mainContainer {
+    background-color: #1a1a1a; /* Color de fondo oscuro */
+  }
+  
+  .darkMode .componentsContainer {
+    color: #ffffff; /* Color del texto en modo oscuro */
+  }

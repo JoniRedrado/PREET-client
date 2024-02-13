@@ -1,0 +1,171 @@
+.mainContainer {
+  width: 70%;
+  margin: 40px auto 40px auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family:sans-serif
+}
+
+.mainTitle {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #022840;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.fieldContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.fieldContainer p {
+  margin-right: 20px;
+  width: 150px;
+  font-size: 18px;
+  color: #555;
+}
+
+.editableField {
+  flex-grow: 1;
+}
+
+.phoneInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.editButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.buttonContainer {
+  margin-left: auto;
+}
+
+.buttonContainer button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.cancelButton {
+  background-color: #ddd;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+.cancelButton:hover {
+  background-color: #bbb;
+}
+
+.saveButton {
+  background-color: #022840;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.saveButton:hover {
+  background-color: #6093bf;
+}
+
+.editButton {
+  background-color: #022840;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.editButton:hover {
+  background-color: #6093bf;
+  color: white;
+}
+
+.dateInput {
+  width: 30%;
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+.dateInput:focus {
+  outline: none;
+  border-color: #022840;
+  box-shadow: 0 0 5px rgba(2, 40, 64, 0.5);
+}
+
+.select {
+  width: 90%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #022840;
+  box-shadow: 0 0 5px rgba(2, 40, 64, 0.5);
+}
+
+.input {
+  width: 90%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #022840;
+  box-shadow: 0 0 5px rgba(2, 40, 64, 0.5);
+}
+
+.codeAreaSelect{
+  width: 25%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-left: 11px;
+}
+
+.codeAreaSelect:focus {
+  outline: none;
+  border-color: #022840;
+  box-shadow: 0 0 5px rgba(2, 40, 64, 0.5);
+}
+
+.phoneInput{
+  width: 64%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}

@@ -1,37 +1,123 @@
 .container {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.icons i {
+  font-size: 30px;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #082c44;
+}
+
+.icons i:hover {
+  color: #0774bd;
+}
+
+.informationContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.icons div{
+  display: flex;
+  /* margin-right: -65px; */
+  /* margin-top: 228px; */
+}
+
+.informationContainer h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.informationContainer img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.informationContainer h2 {
+  font-size: 18px;
+  font-weight: normal;
+  margin: 10px 0;
+}
+
+.info-icon {
+  color: #082c44;
+  font-size: 18px;
+}
+
+.selectRoom {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+/* Media Query para pantallas más pequeñas */
+@media (max-width: 600px) {
+  .container {
+    width: 90%;
   }
-  
-  .container img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  .container h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .container h2 {
-    font-size: 18px;
-    margin-bottom: 8px;
-  }
-  
-  button {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #2e86de;
-  }
+}
+
+.container.darkMode {
+  background-color: #333; /* Color de fondo oscuro */
+  color: #fff;
+}
+
+.container.darkMode .icons i,
+.container.darkMode .info-icon {
+  color: #fff;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 0px;
+  margin:0px;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+.modal button {
+  cursor: pointer;
+  margin-bottom: 8px;
+  font-size: 13px;
+  /* font-weight: bold; */
+  color: #fff;
+  background-color: #082c44;
+}
+
+.modal .return{
+  position: absolute;
+  cursor: pointer;
+  margin:10px;
+  margin-top: 10px;
+  font-size: 25px;
+  color:#082c44;
+}

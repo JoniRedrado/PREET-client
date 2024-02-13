@@ -1,0 +1,66 @@
+/* Estilos para el modo oscuro */
+
+/* Estilos para el contenedor principal */
+.darkMode {
+    background-color: #121212; /* Color de fondo oscuro */
+    color: #ffffff; /* Color de texto claro */
+  }
+  
+  /* Estilos para el texto */
+  .darkMode h1, .darkMode h2, .darkMode h3, .darkMode h4, .darkMode h5, .darkMode h6 {
+    color: #ffffff; /* Color de texto claro */
+  }
+  
+  
+  /* Estilos para los enlaces */
+  .darkMode a {
+    color: #ffffff; /* Color de enlace */
+  }
+  
+  /* Estilos para los botones */
+  .darkMode .button {
+    background-color: #022840;; /* Color de fondo del botón */
+    color: #ffffff; /* Color de texto claro */
+  }
+  
+  .darkMode .button:hover {
+    background-color: #6093bf; /* Color de fondo del botón al pasar el ratón */
+  }
+  
+  /* Estilos para la barra de navegación */
+  .darkMode .navbar {
+    background-color: #212121; /* Color de fondo de la barra de navegación */
+    color: #ffffff; /* Color de texto claro */
+  }
+  
+  /* Estilos para los íconos */
+  .darkMode .icon {
+    color: #ffffff; /* Color de ícono claro */
+  }
+  
+  /* Estilos para las tarjetas */
+  .darkMode .card {
+    background-color: #424242; /* Color de fondo de la tarjeta */
+    color: #ffffff; /* Color de texto claro */
+  }
+  
+  /* Estilos para los elementos resaltados */
+  .darkMode .highlight {
+    background-color: #ffca28; /* Color de fondo del elemento resaltado */
+    color: #000000; /* Color de texto oscuro */
+  }
+
+  .darkMode select{
+    background-color: #424242; /* Color de fondo de la tarjeta */
+    color: #ffffff;
+  }
+
+  .darkMode input{
+    background-color: #424242; /* Color de fondo de la tarjeta */
+    color: #ffffff;
+  }
+  
+  .darkMode .formContainer{
+    background-color: #424242; /* Color de fondo de la tarjeta */
+    color: #ffffff; /* Color de texto claro */
+  }

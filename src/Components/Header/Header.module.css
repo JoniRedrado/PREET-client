@@ -8,10 +8,9 @@
 }
 
 
-
 .header2 {
   background-color: #022840;
-  height: auto; 
+  height: auto; /* Altura automática para adaptarse al contenido */
   display: flex;
   justify-content: center;
 }

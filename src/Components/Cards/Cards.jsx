@@ -1,37 +1,38 @@
+/* eslint-disable react/prop-types */
 import Card from "../Card/Card";
-import Pagination from "../../components/Pagination/Pagination";
-import { useSelector } from "react-redux";
-import './Cards.style.css'
+import Pagination from "../Pagination/Pagination";
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+import styles from "./Cards.module.css"
 
-// eslint-disable-next-line react/prop-types
 const Cards = ({ allHotels }) => {  
-    const hotelsPerPage = 8
-
-    const currentPage = useSelector((state) => state.currentPage)
-  
-    const lastIndex = currentPage * hotelsPerPage
-    const firstIndex = lastIndex - hotelsPerPage
-
-    const hotelList = allHotels
+  const hotelList = allHotels
+  const { darkMode } = useDarkMode(); 
 
   return (
-    <div className="cards-container">
-      {hotelList.map((hotel) => {
+    <div className={`${styles.mainContainer}${darkMode ? styles.darkMode : ''}`}>
+        <div className={styles.cardsContainer}>
+      {hotelList.Hotel?.map((hotel) => {
         return <Card 
           key={hotel.id}
           id={hotel.id}
           name={hotel.name} 
           address={hotel.address}
           country={hotel.country.name} 
-          address_url={hotel.address_url} 
-          price={hotel.price} 
+          stars={hotel.stars}
           email={hotel.email} 
-          image={hotel.image} 
+          image={hotel.image}
+          rooms={hotel.rooms} 
         />;
-}).slice(firstIndex, lastIndex)}
-      <Pagination hotelsPerPage={hotelsPerPage} hotels={hotelList} />
+      })
+      }
+      </div>
+      <div className={styles.pagination}>
+      <Pagination />
+      </div>
     </div>
+    
   );
+  
 };
 
 export default Cards;
