@@ -2,14 +2,15 @@
 import { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
-
+import { showModal } from "../../redux/actions";
 import "./RoomDetail.styles.css";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+import { useDispatch } from "react-redux";
 
 const RoomDetail = ({ room }) => {
   const [isBooking, setIsBooking] = useState(false);
   const { darkMode } = useDarkMode();
-
+  const dispatch = useDispatch();
 
   const token = localStorage.getItem('token')
 
@@ -24,18 +25,43 @@ const RoomDetail = ({ room }) => {
     };
 
     console.log(bookingInfo);
+    console.log(!token);
+    
+    const handleLoginClick = () => {
+      dispatch(showModal("login", true));
+      dispatch(showModal("roomDetail", false));
+    };
 
-    axios
-      .post(
-        `${import.meta.env.VITE_BACK_URL}/payment/create-order`,
-        bookingInfo
-      )
-      .then((res) => {
-        window.location.href = res.data.links[1].href;
-      })
-      .catch((error) => {
-        console.error("Error creating order:", error);
+    if(!token) {
+      swal({
+        title: "Please login",
+        text: "In order to complete your payment and get your reservation confirmation",
+        icon: "error",
+        buttons: {
+          cancel: "Cancel",
+          login: {
+            text: "Login",
+            value: "login",
+          },
+        },
+      }).then((value) => {
+        if (value === "login") {
+          handleLoginClick()
+        }
       });
+    } else {
+      axios
+        .post(
+          `${import.meta.env.VITE_BACK_URL}/payment/create-order`,
+          bookingInfo
+        )
+        .then((res) => {
+          window.location.href = res.data.links[1].href;
+        })
+        .catch((error) => {
+          console.error("Error creating order:", error);
+        });
+    }
   };
 
   if (!room) {
