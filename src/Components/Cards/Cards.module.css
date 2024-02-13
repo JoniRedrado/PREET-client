@@ -1,22 +1,17 @@
-.main-div{
+.mainContainer{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.cards-container {
+.cardsContainer {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content:center;
     width: 100%;
-
-}
-.card {
-    width: 240px;
-    margin: 15px;
 }
 
-.main-div.darkMode {
+.mainContainer.darkMode {
     background-color: #333333; /* Color de fondo en modo oscuro */
     color: white; /* Color del texto en modo oscuro */
 }
