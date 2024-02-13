@@ -1,0 +1,58 @@
+.container {
+  margin-bottom: 3em;
+}
+
+.comment {
+  display: flex;
+  align-items: center;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.container h4 {
+  text-align: start;
+  margin-left: 4em;
+}
+
+.line {
+  border: 1px solid #ddd;
+  width: 90%;
+}
+
+.paginationContainer {
+  bottom: 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-top: 100px;
+}
+
+.paginationButton {
+  margin: 0 10px;
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #022840;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.paginationContainer button:hover {
+  background-color: #6093bf;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.paginationButtonOff {
+  margin: 0 10px;
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: gray;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: gray !important;
+}

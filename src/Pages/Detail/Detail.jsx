@@ -5,6 +5,7 @@ import { getDetail, deleteHotel, postFavorite } from "../../redux/actions";
 import { motion } from "framer-motion";
 import { FaMapMarkerAlt /* , FaEnvelope */ } from "react-icons/fa";
 import RoomDetail from "../RoomDetail/RoomDetail";
+import CommentsInDetail from "../../Components/ComentsInDetail/CommentsInDetail";;
 import Modal from "react-modal";
 import "./detail.styles.css";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
@@ -136,6 +137,7 @@ const Detail = () => {
           </h2>
           <h2>Available Rooms:</h2>
           <select
+            className="selectRoom"
             defaultValue="Select you room"
             onChange={(e) => handleRoomSelect(e.target.value)}
           >
@@ -150,6 +152,8 @@ const Detail = () => {
               <option disabled>No rooms available</option>
             )}
           </select>
+          <h2>Guests Reviews:</h2>
+          <CommentsInDetail className="comments"/>
         </div>
       ) : (
         <p>cargando...</p>
