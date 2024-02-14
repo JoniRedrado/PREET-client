@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import Map from "../Map/Map";
 
 const Card = (props) => {
-  const { id, name, address, image, country, rooms, stars } = props;
+  const { id, name, address, image, country, rooms, stars, refComponent } = props;
   const { darkMode } = useDarkMode();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -52,11 +52,13 @@ const Card = (props) => {
   }
 
   return (
-    <motion.div
-      className={`${styles.card} ${darkMode ? styles.darkMode : ""}`}
-      variants={cardVariants}
-      whileHover="hover"
-    >
+      <motion.div
+        className={`${styles.card} ${darkMode ? styles.darkMode : ""}`}
+        variants={cardVariants}
+        whileHover="hover"
+        ref={refComponent.index === 0 ? refComponent.refCard : null}
+      >
+
       <div className={styles.cardImage}>
         {token ? (
           <div
