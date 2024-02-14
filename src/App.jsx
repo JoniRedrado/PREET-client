@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Detail from "./Pages/Detail/Detail";
 import CreatePage from "./Pages/Create/CreatePage";
@@ -16,16 +16,31 @@ import styles from "./App.module.css"
 import SearchResult from "./Pages/SearchResult/SearchResult";
 import BookingsHistory from "./Pages/BookingsHistory/BookingsHistory";
 import LoginAdmin from "./Pages/LoginAdmin/LoginAdmin";
+import GestionUsers from "./Components/Dashboard/GestionUsers/GestionUsers";
+import GestionHotels from "./Components/Dashboard/GestionHotels/GestionHotels";
 import { useDarkMode } from "./DarkModeContext/DarkModeContext";
+import { useEffect, useState} from "react";
 // import './App.css'
 
 function App() {
 
   const { darkMode } = useDarkMode();
+  const location = useLocation();
+  const [showHeader, setShowHeader] = useState(true)
+
+  useEffect(() =>{
+    setShowHeader(   
+                  location.pathname !== "/admin"  
+                  && location.pathname !== "/dashboard"  
+                  && location.pathname !== "/favorites" 
+                  && location.pathname !== "/dashboard/users"
+                  && location.pathname !== "/dashboard/hotels"
+                );
+  }, [location.pathname])
 
   return (
     <div className={`${styles.mainDiv} ${darkMode ? styles.darkMode : ''}`}>
-      <Header/>
+      {showHeader && <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/detail/:id" element={<Detail />} />
@@ -41,6 +56,9 @@ function App() {
         <Route path="/userFavorites" element={<UserFavorites/>} />
         <Route path="/myreservations" element={<BookingsHistory/>} />
         <Route path="/admin" element={<LoginAdmin/>} />
+        <Route path="/dashboard/users" element={<GestionUsers/>} />
+        <Route path="/dashboard/hotels" element={<GestionHotels/>} />
+
       </Routes>
       <Footer/>
     </div>
