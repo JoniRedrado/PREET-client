@@ -4,6 +4,7 @@ import { useAuth } from '../../context/authContext';
 import { showModal } from "../../redux/actions";
 import styles from "../Login/Login.module.css"
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
 
@@ -13,14 +14,21 @@ function LoginForm() {
     
     const dispatch = useDispatch()
     const auth = useAuth();
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         try {
           const data = await login(email, password);
           if (data.message) {
             setError("Invalid Email or Password");
-          }
+          }else{
+            if (data.rol === "admin") {
+              navigate('/')
+            }else{
+              navigate('/')
+            }
           dispatch(showModal("login", false))
+          }
         } catch (error) {
             setError("Invalid Email or Password"); 
         }
