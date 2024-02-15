@@ -71,11 +71,11 @@ const UserBar = () => {
                 <FaUser /> Manage Account
             </button>
         </Link>
-        <Link to="/create" className={styles.link}>
+        {/* <Link to="/create" className={styles.link}>
             <button>
                 <FaHome /> Post Your Property
             </button>
-        </Link>
+        </Link> */}
         <Link to="/myreservations" className={styles.link}>
             <button>
                 <FaHistory /> History
@@ -86,11 +86,11 @@ const UserBar = () => {
                 <FaStar /> Favorites
             </button>
         </Link>
-        <Link to="/dashboard" className={styles.link}>
+        {/* <Link to="/dashboard" className={styles.link}>
             <button> 
             <FaUserCog /> Dashboard
             </button>
-        </Link>
+        </Link> */}
         <button onClick={() => logout("login")} className={styles.singOut}>
           <FaSignOutAlt /> Sign Out
         </button>
