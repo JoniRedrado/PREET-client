@@ -3,34 +3,31 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetail, deleteHotel, postFavorite } from "../../redux/actions";
 import { motion } from "framer-motion";
-import { FaMapMarkerAlt /* , FaEnvelope */ } from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import RoomDetail from "../RoomDetail/RoomDetail";
 import CommentsInDetail from "../../Components/ComentsInDetail/CommentsInDetail";
 import Modal from "react-modal";
 import "./detail.styles.css";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { showModal } from "../../redux/actions";
-// import axios from "axios";
 
 const Detail = () => {
   const token = localStorage.getItem("token");
-  // <RoomDetail key={room.id} room={room} price={room.price} />
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { darkMode } = useDarkMode();
   const { id } = useParams();
 
-  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
 
 
-  const handleDelete = (id) => {
-    dispatch(deleteHotel(id));
-    window.alert("The card has been successfully deleted");
-    navigate("/");
-    window.location.reload();
-  };
+  // const handleDelete = (id) => {
+  //   dispatch(deleteHotel(id));
+  //   window.alert("The card has been successfully deleted");
+  //   navigate("/");
+  //   window.location.reload();
+  // };
 
   const renderStars = (count) => {
     const starsArray = Array.from({ length: count }, (_, index) => (
@@ -103,14 +100,6 @@ const Detail = () => {
         </Link>
         {token ? (
           <>
-            <Link to={`/update/${hotel.id}`}>
-              <i className="bi bi-pencil-square" title="Update"></i>
-            </Link>
-            <i
-              className="bi bi-trash"
-              onClick={() => handleDelete(id)}
-              title="Delete"
-            ></i>
             <div className="icon" onClick={isFavorite ? null : handleAddToFavorites}>
               {isFavorite ? <i className="bi bi-heart-fill"></i> : <i className="bi bi-heart"> </i>}
             </div>
@@ -125,7 +114,6 @@ const Detail = () => {
           <h1>{hotel.name}</h1>
           <img src={hotel.image} alt={hotel.name} />
           <h2>{renderStars(hotel.stars)}</h2>
-          {/* <h2>Price per night: ${hotel.price}</h2> */}
           <h2>
             <FaMapMarkerAlt className="info-icon" />
             Address: {hotel.address}
