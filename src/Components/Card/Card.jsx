@@ -27,8 +27,8 @@ const Card = (props) => {
   };
 
   useEffect(() => {
-    const {hotelsRender, index, scrollToFirstCard} = dataScroll;
-    hotelsRender > 0 && index === hotelsRender && scrollToFirstCard();
+    const {index, scrollToFirstCard} = dataScroll;
+    index === 1 && scrollToFirstCard();
   }, []);
   
   const handleAddressClick = () => {

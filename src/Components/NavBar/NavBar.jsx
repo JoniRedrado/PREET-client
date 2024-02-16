@@ -16,7 +16,7 @@ import {
 } from "../../redux/actions";
 import { useDarkMode } from '../../DarkModeContext/DarkModeContext';
 
-function NavBar() {
+function NavBar({ heightNav }) {
   const token = localStorage.getItem("token");
   const { darkMode, toggleDarkMode } = useDarkMode();
   const dispatch = useDispatch();
@@ -40,19 +40,19 @@ function NavBar() {
 
 
   return (
-    <div className={`${style.container} ${darkMode ? style.darkMode : ''}`}>
+    <div className={`${style.container} ${darkMode ? style.darkMode : ''}`} style={heightNav}>
       <div className={style.items}>
         <div className={style.logo}>
           {pathname === '/' 
             ? (
               <Link to="/" onClick={handleHomeButton}>
-                <img src={template2} width="18%" alt="Logo" className={style.logo}/>
+                <img src={template2} width="18%" alt="Logo" className={`${heightNav ? style.imgLogoSmall : style.imgLogo}`}/>
               </Link>
             )
             :
             (
               <Link to="/" onClick={handleHomeButton}>
-                <img src={template} width="18%" alt="Logo" className={style.logo}/>
+                <img src={template} width="18%" alt="Logo" className={`${heightNav ? style.imgLogoSmall : style.imgLogo}`}/>
               </Link>
             )
           }

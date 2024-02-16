@@ -10,8 +10,19 @@
   text-align: center;
 }
 
+.imgLogoSmall{
+  width: 72px;
+  height: auto;
+ }
+
+.imgLogo{
+ width: 100px;
+ height: auto;
+}
+
 .logo {
-  width: 100px;
+  width: 50%;
+  text-align: left;
 }
 
 .darkModeButton{
@@ -86,9 +97,9 @@ i{
 
 /* Media queries para pantallas más pequeñas */
 @media screen and (max-width: 768px) {
-  .logo {
-    width: 60px; /* Reducimos aún más el tamaño del logo para pantallas más pequeñas */
-  }
+  /*.logo {
+    width: 60px; /* Reducimos aún más el tamaño del logo para pantallas más pequeñas 
+  } */
 
   .userButtons {
     display: flex; /* Mostramos los botones de usuario para pantallas más pequeñas */
@@ -111,9 +122,9 @@ i{
 
 /* Media queries para pantallas más grandes */
 @media screen and (min-width: 992px) {
-  .logo {
-    width: 120px; /* Aumentamos ligeramente el tamaño del logo para pantallas más grandes */
-  }
+  /*.logo {
+    width: 120px; /* Aumentamos ligeramente el tamaño del logo para pantallas más grandes 
+  } */
 
   .buttons {
     font-size: 18px; /* Aumentamos ligeramente el tamaño del texto de los botones para pantallas más grandes */

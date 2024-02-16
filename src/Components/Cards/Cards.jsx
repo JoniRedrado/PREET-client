@@ -3,21 +3,19 @@ import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import styles from "./Cards.module.css";
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 const Cards = ({ allHotels }) => {  
-  const [buttonPage, setButtonPage] = useState(false);
-  
+  const buttonPage = useRef(false);
   const refCard = useRef();
 
   const hotelList = allHotels
-  const hotelsLength = hotelList.Hotel?.length;
 
   const { darkMode } = useDarkMode(); 
   
   const scrollToFirstCard = () => {
-    if(buttonPage){
-      setButtonPage(false);
+    if(buttonPage.current){
+      buttonPage.current = false;
       refCard.current.scrollIntoView({ behavior: 'smooth' });
     }
   }
@@ -38,15 +36,14 @@ const Cards = ({ allHotels }) => {
           rooms={hotel.rooms}
           dataScroll={{index,
                        refCard, 
-                       scrollToFirstCard,
-                       hotelsRender: hotelsLength - 1}}
+                       scrollToFirstCard}}
 
         />;
       })
       }
       </div>
       <div className={styles.pagination}>
-      <Pagination setButtonPage={setButtonPage} />
+      <Pagination buttonPage={buttonPage} />
       </div>
     </div>
     
