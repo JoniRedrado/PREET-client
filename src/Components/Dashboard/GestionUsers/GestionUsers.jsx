@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import NavBarDashboard from "../NavBarDashboard/NavBarDashboard"
 
 
 import "./GestionUsers.modules.css";
@@ -33,7 +33,7 @@ const GestionUsers = () =>{
     }
   };
 
-  const restoreHotel = async (id) => {
+  const restoreUser = async (id) => {
     try {
       await axios.put(`${import.meta.env.VITE_BACK_URL}/users/restore/${id}`);
       getUsers(); 
@@ -67,17 +67,17 @@ const GestionUsers = () =>{
 
     return(
         <>
+          <NavBarDashboard/>
+
           <Link to={"/dashboard"}>
-            <button>
-              return dashboard
-            </button>
+            <i class="bi bi-arrow-left-circle"></i>
           </Link>
-          <button onClick={handleShowDeletedUsers}>
+          <button onClick={handleShowDeletedUsers} type="button" class="btn btn-primary btn-lg">
             {showDeletedUsers ? "Hide Deleted Users" : "Show Deleted Users"}
           </button>
           {showDeletedUsers && (
-            <table>
-              <thead className="encbezado">
+            <table className="table">
+              <thead className="table-dark">
               <tr>
                 <th>Name</th>
                 <th>Last Name</th>
@@ -92,7 +92,7 @@ const GestionUsers = () =>{
                 <td>{deletedUser.last_name}</td>
                 <td>{deletedUser.email}</td>
                 <td>
-                  <button onClick={() => restoreHotel(deletedUser.id)}>Restore</button>
+                  <i onClick={() => restoreUser(deletedUser.id)} class="bi bi-arrow-counterclockwise"></i>
                 </td>
               </tr>
             ))}
@@ -100,8 +100,8 @@ const GestionUsers = () =>{
             </table>
           )}
         
-        <table>
-           <thead className="encabezado">
+        <table className="table">
+           <thead className="table-dark">
              <tr>
                <th>Name</th>
                <th>Last Name</th>
@@ -116,9 +116,7 @@ const GestionUsers = () =>{
                 <td>{user.last_name}</td>
                 <td>{user.email}</td>
                 <td>
-                  <button className="deleteButton" onClick={() => deleteUser(user.id)}>
-                    <i className="bi bi-trash" title="Delete"></i>
-                  </button>
+                    <i className="bi bi-dash-circle-fill" title="Delete" onClick={() => deleteUser(user.id)}></i>
                 </td>
               </tr>
             ))}

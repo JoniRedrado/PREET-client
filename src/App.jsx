@@ -40,6 +40,8 @@ function App() {
                   && location.pathname !== "/dashboard/rooms"
                   && location.pathname !== "/update/:id"
                   && location.pathname !== "/updaterooms/:id"
+                  && location.pathname !== "/create"
+
                 );
   }, [location.pathname])
 
