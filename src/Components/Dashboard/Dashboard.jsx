@@ -43,7 +43,9 @@ const Dashboard = () => {
   <div className="card-body">
     <h5 className="card-title">Gestión de habitaciones</h5>
     <p className="card-text">Permitir a los administradores agregar, eliminar y actualizar información sobre las habitaciones disponibles en cada hotel, como el tipo de habitación, la disponibilidad, el precio, las comodidades, et</p>
+    <Link to={"/dashboard/rooms"}>
     <a href="#" className="card-link">Card link</a>
+    </Link>
   </div>
 </div>
 <div className="card" >
