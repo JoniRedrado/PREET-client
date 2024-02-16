@@ -9,18 +9,25 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState("");
+  const [persons, setPersons] = useState(1)
 
   const defaultFilters = {
     name: "",
     country: "",
     startDate: "",
     endDate: "",
-    // persons: 1,
+    persons: 1,
   };
 
   const filters = useSelector((state) => state.submitFilters || defaultFilters)
 
   const handleFilters = (e) => {
+    e.preventDefault()
+    const { name, value } = e.target;
+    dispatch(filterParams({ ...filters, [name]: value }));
+  };
+
+  const handleSearchInput = (e) => {
     e.preventDefault()
     const { name, value } = e.target;
     setSearchInput(value)
@@ -31,9 +38,30 @@ const SearchBar = () => {
     e.preventDefault()
     dispatch(filterHotels(filters))
     setSearchInput("")
-    navigate(`/search/${encodeURIComponent(searchInput)}`);
+    // location.pathname === "/" ? navigate(`/search/${encodeURIComponent(searchInput)}`) : null;
+    navigate(`/search/`);
   }
 
+  //Contador para la cantidad de personas
+  const handleDecrease = () => {
+    if (persons > 1) {
+      setPersons(persons - 1)
+      dispatch(filterParams({...filters, persons: persons - 1}))
+    }
+  }
+
+  const handleIncrease = () => {
+      setPersons(persons + 1)
+      dispatch(filterParams({...filters, persons: persons + 1}))
+  }
+
+  const handlePersons = (e) => {
+    e.preventDefault()
+    setPersons(e.target.value)
+    dispatch(filterParams({...filters, persons: e.target.value}))
+  }
+
+  console.log(filters);
   return (
     <div className={s.container}>
       <div className={s.searchBar}>
@@ -42,7 +70,7 @@ const SearchBar = () => {
           className={s.searchInput}
           type="text"
           placeholder="Explore hotels or countries"
-          onChange={handleFilters}
+          onChange={handleSearchInput}
           name='name'
           value={searchInput}
         />
@@ -56,15 +84,12 @@ const SearchBar = () => {
           <p>Check-out</p>
           <input type="date" name='endDate' onChange={handleFilters} className={ s.dateInput }/>
         </div>
-        {/* <div>
+        <div>
           <p>Persons</p>
-          <select name="persons">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="+4">+4</option>
-          </select>
-        </div> */}
+            <button onClick={handleDecrease}> - </button>
+            <input type="text" name="persons" value={persons} onChange={handlePersons} className={s.personsCounterInput} />
+            <button onClick={handleIncrease}> + </button>
+        </div>
         <button onClick={handleSubmit} className={s.searchButton}>Search</button>
       </div>
     </div>

@@ -35,7 +35,7 @@ function SearchResult() {
             <Filters/>
           </div>
           <div className={styles.cardsContainer}>
-          <h2>{`${searchTerm}: ${totalHotels} Hotels found`}</h2>
+          <h2>{`${searchTerm} ${totalHotels} Hotels found`}</h2>
           {noResults ? (
             <TryAgain />
           ):(
