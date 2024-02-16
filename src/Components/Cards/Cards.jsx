@@ -11,7 +11,7 @@ const Cards = ({ allHotels }) => {
   const refCard = useRef();
 
   const hotelList = allHotels
-  const hotelsLength = hotelList.Hotel.length;
+  const hotelsLength = hotelList.Hotel?.length;
 
   const { darkMode } = useDarkMode(); 
   
