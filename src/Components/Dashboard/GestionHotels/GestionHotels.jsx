@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import NavBarDashboard from "../NavBarDashboard/NavBarDashboard";
 import "./GestionHotels.modules.css";
 
 const GestionHotels = () => {
@@ -61,17 +61,16 @@ const GestionHotels = () => {
 
   return (
     <>
+          <NavBarDashboard/>
       <Link to={"/dashboard"}>
-        <button>
-          return dashboard
-        </button>
+        <i class="bi bi-arrow-left-circle"></i>
       </Link>
-      <button onClick={handleShowDeletedHotels}>
+      <button onClick={handleShowDeletedHotels} type="button" class="btn btn-primary btn-lg">
         {showDeletedHotels ? "Hide Deleted Hotels" : "Show Deleted Hotels"}
       </button>
       {showDeletedHotels && (
-        <table>
-          <thead className="encabezado">
+        <table className="table">
+          <thead className="table-dark">
             <tr>
               <th>Name</th>
               <th>Stars</th>
@@ -86,7 +85,7 @@ const GestionHotels = () => {
                 <td>{deletedHotel.stars}</td>
                 <td>{deletedHotel.country && deletedHotel.country.name}</td>
                 <td>
-                  <button onClick={() => restoreHotel(deletedHotel.id)}>Restore</button>
+                  <i  onClick={() => restoreHotel(deletedHotel.id)} class="bi bi-arrow-counterclockwise"></i>
                 </td>
               </tr>
             ))}
@@ -94,8 +93,8 @@ const GestionHotels = () => {
         </table>
       )}
 
-      <table>
-        <thead className="encabezado">
+      <table className="table">
+        <thead className="table-dark">
           <tr>
             <th>Name</th>
             <th>Stars</th>
@@ -111,15 +110,12 @@ const GestionHotels = () => {
               <td>{hotel.stars}</td>
               <td>{hotel.country.name}</td>
               <td>
-                <button className="deleteButton" onClick={() => deleteHotel(hotel.id)}>
-                  <i className="bi bi-trash" title="Delete"></i>
-                </button>
+                  <i title="Delete" onClick={() => deleteHotel(hotel.id)} class="bi bi-dash-circle-fill"></i>
+
               </td>
               <td>
                 <Link to={`/update/${hotel.id}`}>
-                  <button>
                     <i className="bi bi-pencil-square" title="Update"></i>
-                  </button>
                 </Link>
               </td>
             </tr>

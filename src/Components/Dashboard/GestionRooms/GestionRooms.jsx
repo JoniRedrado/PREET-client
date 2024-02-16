@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import NavBarDashboard from "../NavBarDashboard/NavBarDashboard";
 
 import "./GestionRooms.modules.css";
 
@@ -8,12 +9,13 @@ import "./GestionRooms.modules.css";
 const GestionRooms = () => {
 
     const [roomsData, setRoomsData] = useState([])
+    console.log(roomsData);
     const [roomsDelete, setRoomsDelete] = useState([])
     const [showDeletedRooms, setShowDeletedRooms] = useState(false);
 
     const getRooms = async () =>{
         try {
-            const {data} = await axios.get(`${import.meta.env.VITE_BACK_URL}/rooms`)
+            const {data} = await axios.get(`${import.meta.env.VITE_BACK_URL}/rooms?size=30`)
             console.log(data);
             setRoomsData(data)
         } catch (error) {
@@ -35,7 +37,7 @@ const GestionRooms = () => {
     const getRoomsDeleted = async () => {
         try {
             const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/rooms/deleted`);
-            console.log(data);
+            console.log(data.rooms);
             setRoomsDelete(data.rooms);
         } catch (error) {
             console.error(error.message);
@@ -66,22 +68,22 @@ const GestionRooms = () => {
 
     return(
         <>
+          <NavBarDashboard/>
             <Link to={"/dashboard"}>
-                <button>
-                    return dashboard
-                </button>
+              <i className="bi bi-arrow-left-circle"></i>
             </Link>
-            <button onClick={handleShowDeletedRooms}>
-                {showDeletedRooms ? "Hide Deleted Rooms" : "Show Deleted Rooms"}
+            <button onClick={handleShowDeletedRooms} type="button" className="btn btn-primary btn-lg">
+              {showDeletedRooms ? "Hide Deleted Rooms" : "Show Deleted Rooms"}   
             </button>
             {showDeletedRooms && (
-        <table>
-          <thead className="encabezado">
+        <table className="table">
+          <thead className="table-dark">
             <tr>
                 <th>Type</th>
                 <th>Description</th>
                 <th>Price</th>
                 <th>Name Hotel</th>
+                <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -92,20 +94,23 @@ const GestionRooms = () => {
                 <td>{deletedRooms.price}$</td>
                 <td>{deletedRooms.hotel && deletedRooms.hotel.name}</td>
                 <td>
-                  <button onClick={() => restoreRooms(deletedRooms.id)}>Restore</button>
+                  <i  onClick={() => restoreRooms(deletedRooms.id)} class="bi bi-arrow-counterclockwise"></i>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
             )}
-            <table>
-            <thead className="encabezado">
+            <table className="table">
+            <thead  className="table-dark">
              <tr>
                <th>Type</th>
                <th>Description</th>
                <th>Price</th>
+               <th>Numeration</th>
+               {/* <th>Guest</th> */}
               <th>Name Hotel</th>
+              <th>Actions</th>
              </tr>
            </thead>
            <tbody>
@@ -114,12 +119,18 @@ const GestionRooms = () => {
                 <td>{rooms.type}</td>
                 <td>{rooms.description}</td>
                 <td>{rooms.price}$</td>
+                <td>{rooms.numeration}</td>
+                <td>{rooms.guest}</td>
                 <td>{rooms.hotel.name}</td>
                 <td>
-                  <button className="deleteButton" onClick={() => deleteRooms(rooms.id)}>
-                    <i className="bi bi-trash" title="Delete"></i>
-                  </button>
+                  <i title="Delete" onClick={() => deleteRooms(rooms.id)} class="bi bi-dash-circle-fill"></i>
                 </td>
+                <td>
+                <Link to={`/updaterooms/${rooms.id}`}>
+                    <i className="bi bi-pencil-square" title="Update"></i>
+                  
+                </Link>
+              </td>
               </tr>
             ))}
           </tbody>
