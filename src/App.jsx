@@ -56,7 +56,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/settings" element={<Settings/>}/>
         <Route path="/booked" element={<BookedSuccesfully />} />
-        <Route path="/search/:nombreHotel" element={<SearchResult />} />
+        <Route path="/search/" element={<SearchResult />} />
         <Route path="/favorites" element={<Favorites/>} />
         <Route path="/userFavorites" element={<UserFavorites/>} />
         <Route path="/myreservations" element={<BookingsHistory/>} />

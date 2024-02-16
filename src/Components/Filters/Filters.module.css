@@ -26,7 +26,35 @@
     gap: 10px;
   }
 
-  
+  .starsButtonsContainer {
+    display: flex;
+    margin-top: -10px;
+  }
+
+  .starButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  .activeStar {
+    font-size: 35px;
+    color: #FFBC00
+  }
+
+  .unactiveStar {
+    font-size: 35px;
+    color: grey
+  }
+
+  .personsCounterInput {
+    width: 20px;
+    margin-top: -5px;
+    text-align: center;
+    border-color: transparent;
+  }
+
   .select {
     width: 100%;
     padding: 10px;
