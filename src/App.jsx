@@ -18,8 +18,10 @@ import BookingsHistory from "./Pages/BookingsHistory/BookingsHistory";
 import LoginAdmin from "./Pages/LoginAdmin/LoginAdmin";
 import GestionUsers from "./Components/Dashboard/GestionUsers/GestionUsers";
 import GestionHotels from "./Components/Dashboard/GestionHotels/GestionHotels";
+import GestionRooms from "./Components/Dashboard/GestionRooms/GestionRooms";
 import { useDarkMode } from "./DarkModeContext/DarkModeContext";
 import { useEffect, useState} from "react";
+import UpdateRooms from "./Components/UpdateRooms/UpdateRooms";
 // import './App.css'
 
 function App() {
@@ -35,6 +37,9 @@ function App() {
                   && location.pathname !== "/favorites" 
                   && location.pathname !== "/dashboard/users"
                   && location.pathname !== "/dashboard/hotels"
+                  && location.pathname !== "/dashboard/rooms"
+                  && location.pathname !== "/update/:id"
+                  && location.pathname !== "/updaterooms/:id"
                 );
   }, [location.pathname])
 
@@ -58,7 +63,8 @@ function App() {
         <Route path="/admin" element={<LoginAdmin/>} />
         <Route path="/dashboard/users" element={<GestionUsers/>} />
         <Route path="/dashboard/hotels" element={<GestionHotels/>} />
-
+        <Route path="/dashboard/rooms" element={<GestionRooms/>} />
+        <Route path="/updaterooms/:id" element={<UpdateRooms/>} />
       </Routes>
       <Footer/>
     </div>
