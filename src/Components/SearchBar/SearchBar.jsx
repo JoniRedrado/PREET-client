@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { filterParams, filterHotels } from "../../redux/actions";
+import { filterParams, filterHotels, specificPage } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import s from "../SearchBar/SearchBar.module.css"
 import { FaSearch } from "react-icons/fa"
@@ -36,6 +36,7 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    dispatch(specificPage(1));
     dispatch(filterHotels(filters))
     setSearchInput("")
     // location.pathname === "/" ? navigate(`/search/${encodeURIComponent(searchInput)}`) : null;

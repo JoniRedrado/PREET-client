@@ -197,7 +197,7 @@ export const filterHotels = (params) => {
         params: queryParams,
       });
 
-      console.log(response.data);
+      //console.log(response.data);
 
       dispatch({
         type: FILTER_HOTELS,
