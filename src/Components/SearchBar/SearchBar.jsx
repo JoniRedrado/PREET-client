@@ -62,7 +62,7 @@ const SearchBar = () => {
     dispatch(filterParams({...filters, persons: e.target.value}))
   }
 
-  console.log(filters);
+  //console.log(filters);
   return (
     <div className={s.container}>
       <div className={s.searchBar}>

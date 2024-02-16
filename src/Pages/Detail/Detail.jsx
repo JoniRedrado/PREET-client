@@ -39,9 +39,8 @@ const Detail = () => {
   };
 
   useEffect(() => {
-    if (id) {
-      dispatch(getDetail(id));
-    }
+    if (id) dispatch(getDetail(id));
+    window.scrollTo({top: 0, behavior: 'smooth'});
   }, [dispatch, id]);
 
   const hotel = useSelector((state) => state.hotelDetail);

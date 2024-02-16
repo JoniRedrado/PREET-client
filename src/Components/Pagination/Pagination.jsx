@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { filterHotels, nextPage, prevPage } from '../../redux/actions';
 import s from "../Pagination/Pagination.module.css";
 
-const Pagination = ({ setButtonPage }) => {
+const Pagination = ({ buttonPage }) => {
   const dispatch = useDispatch();
   const currentPage = useSelector((state) => state.currentPage);
   const totalHotels = useSelector((state) => state.totalHotels);
@@ -11,13 +11,13 @@ const Pagination = ({ setButtonPage }) => {
   const totalPages = Math.ceil(totalHotels / 6)
 
   const handlePrevClick = () => {
-    setButtonPage(true);
+    buttonPage.current = true;
     dispatch(prevPage());
     dispatch(filterHotels(filters));
   };
 
   const handleNextClick = () => {
-      setButtonPage(true);
+      buttonPage.current = true;
       dispatch(nextPage());
       dispatch(filterHotels(filters));
   };

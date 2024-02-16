@@ -30,7 +30,7 @@ const Header = () => {
             return (
                 <header className={styles.header2}>
                     <div className={styles.headerContainer2}>
-                        <NavBar/>
+                        <NavBar heightNav={{height: '5px'}}/>
                     </div>
                 </header>
             )
