@@ -61,7 +61,7 @@ const GestionHotels = () => {
 
   return (
     <>
-          <NavBarDashboard/>
+      <NavBarDashboard/>
       <Link to={"/dashboard"}>
         <i class="bi bi-arrow-left-circle"></i>
       </Link>
@@ -72,6 +72,7 @@ const GestionHotels = () => {
         <table className="table">
           <thead className="table-dark">
             <tr>
+              <th>Image</th>
               <th>Name</th>
               <th>Stars</th>
               <th>Country</th>
@@ -81,6 +82,7 @@ const GestionHotels = () => {
           <tbody>
             {hotelDelete.map((deletedHotel) => (
               <tr key={deletedHotel.id}>
+                <td><img className="imagen-hotel" src={deletedHotel.image[0].image} alt={deletedHotel.type}/></td>
                 <td>{deletedHotel.name}</td>
                 <td>{deletedHotel.stars}</td>
                 <td>{deletedHotel.country && deletedHotel.country.name}</td>
@@ -96,6 +98,7 @@ const GestionHotels = () => {
       <table className="table">
         <thead className="table-dark">
           <tr>
+            <th>Image</th>
             <th>Name</th>
             <th>Stars</th>
             <th>Country</th>
@@ -106,6 +109,7 @@ const GestionHotels = () => {
         <tbody>
           {hotelsData && hotelsData.map((hotel) => (
             <tr key={hotel.id}>
+              <td><img  className="imagen-hotel" src={hotel.image} alt={hotel.type}/></td>
               <td>{hotel.name}</td>
               <td>{hotel.stars}</td>
               <td>{hotel.country.name}</td>

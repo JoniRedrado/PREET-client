@@ -9,6 +9,11 @@
     cursor: pointer;
 }
 
+.imagen-rooms{
+  width: 100%;
+  max-height: 800px;
+}
+
 .table {
     width: 80%;
     max-width: 100%;

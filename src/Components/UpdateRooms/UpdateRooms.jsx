@@ -13,7 +13,8 @@ const UpdateRooms = () => {
         description:"",
         price:"",
         guest:"",
-        numeration:""
+        numeration:"",
+        image:null
     })
 
     
@@ -60,11 +61,61 @@ const UpdateRooms = () => {
         getTypes()
     }, [])
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+
+        if (file) {
+            try {
+                const imagePreviewURL = URL.createObjectURL(file);
+
+                setRoomsData((prevData) => ({
+                    ...prevData,
+                    image: imagePreviewURL,
+                }));
+            } catch (error) {
+                console.error("Error creating object URL for image:", error);
+            }
+        }
+    };
+
     const handleSubmit = async (e) => {
-        console.log("Formulario enviado");
         e.preventDefault();
+
+        let imageUpdate = roomsData.image;
+
+        if (roomsData.image && roomsData.image.startsWith("blob:")) {
+            const formData = new FormData();
+            formData.append("file", e.target.querySelector('input[type="file"]').files[0]);
+            formData.append("upload_preset", "PREET2024");
+
+            try {
+                const responseCloudinary = await fetch(
+                    "https://api.cloudinary.com/v1_1/drntvj4ut/image/upload",
+                    {
+                        method: "POST",
+                        body: formData,
+                    }
+                );
+
+                const cloudinaryData = await responseCloudinary.json();
+
+                if (cloudinaryData.secure_url) {
+                    imageUpdate = cloudinaryData.secure_url;
+                } else {
+                    console.error("Error: No 'secure_url' found in Cloudinary response");
+                }
+            } catch (error) {
+                console.error("Error uploading image to Cloudinary:", error);
+            }
+        }
+
+        const updatedData = {
+            ...roomsData,
+            image: imageUpdate,
+        };
+
         try {
-            await axios.put(`${import.meta.env.VITE_BACK_URL}/rooms/update/${id}`, roomsData);
+            await axios.put(`${import.meta.env.VITE_BACK_URL}/rooms/update/${id}`, updatedData);
             navigate("/dashboard/rooms");
         } catch (error) {
             console.error("Error updating room:", error);
@@ -91,6 +142,16 @@ const UpdateRooms = () => {
             <input type="number" name="price" value={roomsData.price} onChange={handleChange}></input>
             <label>Numeration</label>
             <input type="text" name="numeration" value={roomsData.numeration} onChange={handleChange}></input>
+            <div>
+                    {roomsData.image && (
+                        <div>
+                            <h3>Imagen Actual:</h3>
+                            <img src={roomsData.image} alt="Imagen Actual" />
+                        </div>
+                    )}
+                    <label>Nueva Imagen</label>
+                    <input type="file" accept="image/*" onChange={handleImageChange} />
+            </div>
             <button type="submit">Update</button>
           </form>
       </div>

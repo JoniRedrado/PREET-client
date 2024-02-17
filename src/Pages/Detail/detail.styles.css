@@ -1,4 +1,4 @@
-.container {
+.container-detail{
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;
@@ -81,7 +81,7 @@
   }
 }
 
-.container.darkMode {
+.container-detail.darkMode {
   background-color: #333; /* Color de fondo oscuro */
   color: #fff;
 }

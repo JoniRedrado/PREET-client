@@ -79,16 +79,20 @@ const GestionRooms = () => {
         <table className="table">
           <thead className="table-dark">
             <tr>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Name Hotel</th>
-                <th>Action</th>
+              <th>Image</th>
+              <th>Numeration</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Name Hotel</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {roomsDelete.map((deletedRooms) => (
               <tr key={deletedRooms.id}>
+                <td><img img className="imagen-rooms" src={deletedRooms.image[0].image} alt={deletedRooms.type}/></td>
+                <td>{deletedRooms.numeration}</td>
                 <td>{deletedRooms.type}</td>
                 <td>{deletedRooms.description}</td>
                 <td>{deletedRooms.price}$</td>
@@ -104,10 +108,11 @@ const GestionRooms = () => {
             <table className="table">
             <thead  className="table-dark">
              <tr>
+              <th>Image</th>
+              <th>Numeration</th>
                <th>Type</th>
                <th>Description</th>
                <th>Price</th>
-               <th>Numeration</th>
                {/* <th>Guest</th> */}
               <th>Name Hotel</th>
               <th>Actions</th>
@@ -116,12 +121,13 @@ const GestionRooms = () => {
            <tbody>
              {roomsData && roomsData.map((rooms) => (
               <tr key={rooms.id}>
+                <td><img className="imagen-rooms" src={rooms.image[0].image} alt={rooms.type}/></td>
+                <td>{rooms.numeration}</td>
                 <td>{rooms.type}</td>
                 <td>{rooms.description}</td>
                 <td>{rooms.price}$</td>
-                <td>{rooms.numeration}</td>
                 <td>{rooms.guest}</td>
-                <td>{rooms.hotel.name}</td>
+                <td>{rooms.hotel && rooms.hotel.name}</td>
                 <td>
                   <i title="Delete" onClick={() => deleteRooms(rooms.id)} class="bi bi-dash-circle-fill"></i>
                 </td>

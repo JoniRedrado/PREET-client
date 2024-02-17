@@ -88,7 +88,7 @@ const Detail = () => {
 
   return (
     <motion.div
-      className={`container ${darkMode ? "darkMode" : ""}`}
+      className={`container-detail ${darkMode ? "darkMode" : ""}`}
       initial={{ opacity: 0, y: -20 }} // Estado inicial de la animación
       animate={{ opacity: 1, y: 0 }} // Estado final de la animación
       transition={{ duration: 0.5 }} // Duración de la animación
