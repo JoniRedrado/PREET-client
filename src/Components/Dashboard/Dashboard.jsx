@@ -9,92 +9,59 @@ import NavBarDashboard from "./NavBarDashboard/NavBarDashboard";
 const Dashboard = () => {
   return(
     <div>
-      <NavBarDashboard/>
-      {/* <div className="container">
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
-          <div className="container-fluid">
-            <a className="navbar-brand" href="#">Dashboard Admin</a>
-          </div>
-        </nav>
-      </div> */}
+    <NavBarDashboard/>
     <div className="sidebar-card">
       <ul className="nav flex-column">
       <Link to={"/create"}>
         <li className="nav-item">
           <a className="nav-link active" aria-current="page" href="#">Post your Hotel</a>
         </li>
-      </Link> 
+      </Link>
+      <Link to={"/"}>
+        <li className="nav-item">
+          <a className="nav-link" href="#">Home</a>
+        </li>
+      </Link>
+      <Link to={"/dashboard/rooms"}>
       <li className="nav-item">
-        <a className="nav-link" href="#">Link</a>
+        <a className="nav-link" href="#">Gestión de habitaciones</a>
       </li>
+      </Link>
+      <Link to={"/dashboard/hotels"}>
       <li className="nav-item">
-        <a className="nav-link" href="#">Link</a>
+        <a className="nav-link" href="#">Gestión de hoteles</a>
       </li>
+      </Link>
+      <Link to={"/dashboard/users"}>
       <li className="nav-item">
-        <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+        <a className="nav-link" href="#">Gestión de usuarios</a>
       </li>
+      </Link>
+      <Link to={"/dashboard/feedback"}>
+      <li className="nav-item">
+        <a className="nav-link" href="#">Comentarios y calificaciones</a>
+        <p>Proporcionar acceso a los comentarios y calificaciones dejados por los usuarios sobre los hoteles y sus experiencias de reserva. Esto ayudará a identificar problemas y áreas de mejora en la calidad del servicio.</p>
+      </li>
+      </Link>
     </ul>
     <div className="card-container">
-<div className="card" >
-  <div className="card-body">
-    <h5 className="card-title">Gestión de habitaciones</h5>
-    {/* <p className="card-text">Permitir a los administradores agregar, eliminar y actualizar información sobre las habitaciones disponibles en cada hotel, como el tipo de habitación, la disponibilidad, el precio, las comodidades, et</p> */}
-    <Link to={"/dashboard/rooms"}>
-    <a href="#" className="card-link">Card link</a>
-    </Link>
-  </div>
-</div>
-<div className="card" >
-  <div className="card-body">
-    <h5 className="card-title">Gestión de hoteles</h5>
-    {/* <p className="card-text">Proporcionar herramientas para agregar nuevos hoteles a la plataforma, actualizar la información del hotel, como la dirección, las imágenes, las comodidades, etc., y desactivar hoteles que ya no están disponibles para reservas.</p> */}
-    <Link to={"/dashboard/hotels"}>
-    <a href="#" className="card-link">Card link</a>
-    </Link>
-
-  </div>
-</div>
-<div className="card" >
-  <div className="card-body">
-    <h5 className="card-title">Gestión de usuarios</h5>
-    {/* <p className="card-text">Permitir a los administradores ver y gestionar la información de los usuarios registrados en la plataforma, como los datos personales, las preferencias de comunicación, el historial de reservas, etc.</p> */}
-    <Link to={"/dashboard/users"}>
-      <a href="#" className="card-link">Card link</a>
-    </Link>
-  </div>
-</div>
-<div className="card" >
-  <div className="card-body">
-    <h5 className="card-title">Estadísticas de reservas</h5>
-    <p className="card-text"> Mostrar gráficos o tablas con estadísticas sobre reservas, como la cantidad de reservas realizadas en un período de tiempo específico, el ingreso total generado por las reservas, el número de reservas por hotel, etc. Esto ayudará a entender las tendencias y el rendimiento general del negocio.</p>
-    <a href="#" className="card-link">Card link</a>
-  </div>
-</div>
-<div className="card" >
-  <div className="card-body">
-    <h5 className="card-title">Comentarios y calificaciones</h5>
-    <p className="card-text"> Proporcionar acceso a los comentarios y calificaciones dejados por los usuarios sobre los hoteles y sus experiencias de reserva. Esto ayudará a identificar problemas y áreas de mejora en la calidad del servicio.</p>
-      <a href="#" className="card-link">Card link</a>
-
-  </div>
-</div>
-<div className="card" >
-  <div className="card-body">
-    <h5 className="card-title">Informes y exportaciones</h5>
-    <p className="card-text">Ofrecer la posibilidad de generar informes detallados sobre diferentes aspectos de la plataforma, como ingresos, ocupación de habitaciones, preferencias de reserva de los usuarios, etc. También permitir la exportación de estos informes en diferentes formatos (por ejemplo, CSV, PDF) para su análisis adicional.</p>
-    <a href="#" className="card-link">Card link</a>
-  </div>
-</div>
-{/* <div className="card" >
-  <div className="card-body">
-    <h5 className="card-title">Notificaciones y alertas</h5>
-    <p className="card-text">Configurar un sistema de notificaciones y alertas para informar a los administradores sobre eventos importantes, como nuevas reservas, cancelaciones, problemas técnicos, etc</p>
-    <a href="#" className="card-link">Card link</a>
-  </div>
-</div> */}
-</div>
+      <div className="card" >
+        <div className="card-body">
+          <h5 className="card-title">Estadísticas de reservas</h5>
+          <p className="card-text"> Mostrar gráficos o tablas con estadísticas sobre reservas, como la cantidad de reservas realizadas en un período de tiempo específico, el ingreso total generado por las reservas, el número de reservas por hotel, etc. Esto ayudará a entender las tendencias y el rendimiento general del negocio.</p>
+          <a href="#" className="card-link">Card link</a>
+        </div>
+      </div>
+      <div className="card" >
+        <div className="card-body">
+          <h5 className="card-title">Informes y exportaciones</h5>
+          <p className="card-text">Ofrecer la posibilidad de generar informes detallados sobre diferentes aspectos de la plataforma, como ingresos, ocupación de habitaciones, preferencias de reserva de los usuarios, etc. También permitir la exportación de estos informes en diferentes formatos (por ejemplo, CSV, PDF) para su análisis adicional.</p>
+          <a href="#" className="card-link">Card link</a>
+        </div>
+      </div>
     </div>
-    </div>
+  </div>
+  </div>
   )
 }
 

@@ -5,7 +5,11 @@
     background-color: transparent;
     border-collapse: collapse;
   }
-  
+
+.imagen-hotel{
+  width: 70%;
+  max-height: 100px;
+}
   .table th,
   .table td {
     padding: 0.75rem;

@@ -19,6 +19,7 @@ import LoginAdmin from "./Pages/LoginAdmin/LoginAdmin";
 import GestionUsers from "./Components/Dashboard/GestionUsers/GestionUsers";
 import GestionHotels from "./Components/Dashboard/GestionHotels/GestionHotels";
 import GestionRooms from "./Components/Dashboard/GestionRooms/GestionRooms";
+import GestionFeedBack from "./Components/Dashboard/GestionFeedback/GestionFeedBack";
 import { useDarkMode } from "./DarkModeContext/DarkModeContext";
 import { useEffect, useState} from "react";
 import UpdateRooms from "./Components/UpdateRooms/UpdateRooms";
@@ -38,6 +39,7 @@ function App() {
                   && location.pathname !== "/dashboard/users"
                   && location.pathname !== "/dashboard/hotels"
                   && location.pathname !== "/dashboard/rooms"
+                  && location.pathname !== "/dashboard/feedback"
                   && location.pathname !== "/update/:id"
                   && location.pathname !== "/updaterooms/:id"
                   && location.pathname !== "/create"
@@ -65,6 +67,7 @@ function App() {
         <Route path="/admin" element={<LoginAdmin/>} />
         <Route path="/dashboard/users" element={<GestionUsers/>} />
         <Route path="/dashboard/hotels" element={<GestionHotels/>} />
+        <Route path="/dashboard/feedback" element={<GestionFeedBack/>} />
         <Route path="/dashboard/rooms" element={<GestionRooms/>} />
         <Route path="/updaterooms/:id" element={<UpdateRooms/>} />
       </Routes>
