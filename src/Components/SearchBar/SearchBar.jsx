@@ -78,11 +78,11 @@ const SearchBar = () => {
       </div>
       <div className={s.filters}>
         <div className={s.date}>
-          <p>Check-in</p>
+          <p className={s.check}>Check-in</p>
           <input type="date" name='startDate' onChange={handleFilters} className={ s.dateInput } />
         </div>
         <div className={s.date}>
-          <p>Check-out</p>
+          <p className={s.check}>Check-out</p>
           <input type="date" name='endDate' onChange={handleFilters} className={ s.dateInput }/>
         </div>
         <div>
