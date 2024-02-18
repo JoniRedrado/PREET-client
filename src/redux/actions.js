@@ -83,10 +83,20 @@ export const getHotelByName = (name) => {
     }
   };
 };
-export const getDetail = (id) => {
+export const getDetail = (id, params) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels/detail/${id}`);
+      const queryParams = {
+        minPrice: params.minPrice,
+        maxPrice: params.maxPrice,
+        startDate: params.startDate,
+        endDate: params.endDate,
+        guest: params.guest,
+      };
+
+      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels/detail/${id}`, {
+        params: queryParams,
+      });
       return dispatch({
         type: GET_DETAIL,
         payload: response.data,

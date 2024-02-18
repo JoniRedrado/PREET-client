@@ -29,7 +29,7 @@ const BookingsHistory = () => {
     }, [])
 
     return (
-        <div className="">
+        <div className="reservations-container">
             <h1 className="reservations-title">My Reservations</h1>
             {isLoading ? (
                 <img src="https://cdn.pixabay.com/animation/2023/03/20/02/45/02-45-27-186_512.gif" alt="loading"/>
@@ -44,9 +44,12 @@ const BookingsHistory = () => {
                     {userReservations.map((reservation) => {
                         return <SingleBooking 
                         key={reservation.id}
-                        image='https://cdn-icons-png.flaticon.com/512/235/235889.png'
-                        date={reservation.dateInit}
-                        room={reservation.roomId}/>
+                        image={reservation.room.image[0].image}
+                        amount={reservation.amount}
+                        nights={reservation.nights}
+                        dateInit={reservation.dateInit}
+                        dateFinal={reservation.dateFinal}
+                        room={reservation.room.type}/>
                     })}
                 </div>
             )

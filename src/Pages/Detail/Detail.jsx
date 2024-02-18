@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail, deleteHotel, postFavorite } from "../../redux/actions";
+import { getDetail, postFavorite } from "../../redux/actions";
 import { motion } from "framer-motion";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import RoomDetail from "../RoomDetail/RoomDetail";
@@ -14,20 +14,11 @@ import { showModal } from "../../redux/actions";
 const Detail = () => {
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { darkMode } = useDarkMode();
   const { id } = useParams();
 
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
-
-
-  // const handleDelete = (id) => {
-  //   dispatch(deleteHotel(id));
-  //   window.alert("The card has been successfully deleted");
-  //   navigate("/");
-  //   window.location.reload();
-  // };
 
   const renderStars = (count) => {
     const starsArray = Array.from({ length: count }, (_, index) => (
@@ -38,13 +29,17 @@ const Detail = () => {
     return starsArray;
   };
 
-  useEffect(() => {
-    if (id) dispatch(getDetail(id));
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }, [dispatch, id]);
-
   const hotel = useSelector((state) => state.hotelDetail);
   const modalRoomDetail = useSelector((state) => state.showModal.roomDetail);
+  const filters = useSelector((state) => state.submitFilters)
+
+  console.log(filters);
+  console.log(hotel);
+
+  useEffect(() => {
+    if (id) dispatch(getDetail(id, filters));
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }, [dispatch, id]);
 
   const handleRoomSelect = (roomType) => {
     const selectedRoom = hotel.rooms.find((room) => room.type === roomType);
@@ -56,29 +51,6 @@ const Detail = () => {
     setSelectedRoom(null);
     dispatch(showModal("roomDetail", false));
   };
-
-  // //Integracion con PayPal
-  // const handleBook = () => {
-  //   //Objeto para enviar info de la reserva al backend, crear la orden de y luego guardar la reserva en la DB
-  //   const bookingInfo = {
-  //     user: localStorage.getItem('user_id'),
-  //     name: hotel.name,
-  //     price: hotel.price,
-  //     id: hotel.id,
-  //     initialDate: new Date(),
-  //     finalDate: new Date(),
-
-  //   }
-  //   //Peticion POST para crear la orden, luego redireccionar a la url de PayPal, ahi el usuario ingresa con su cuenta y realiza el pago.
-  //   //Una vez realizado o cancelado el pago, paypal te devuelve a nuestra app
-  //   //Cuenta de prueba paypal:
-  //   //email: sb-ujxlq29504971@personal.example.com
-  //   //password: /$>7^oW<
-  //   axios.post('${import.meta.env.VITE_BACK_URL}/payment/create-order', bookingInfo)
-  //     .then(res => {
-  //       window.location.href = res.data.links[1].href
-  //     })
-  // }
 
   const handleAddToFavorites = () => {
     dispatch(postFavorite(id));

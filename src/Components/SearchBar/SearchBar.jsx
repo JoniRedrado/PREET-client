@@ -9,14 +9,14 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState("");
-  const [persons, setPersons] = useState(1)
+  const [guest, setGuest] = useState(1)
 
   const defaultFilters = {
     name: "",
     country: "",
     startDate: "",
     endDate: "",
-    persons: 1,
+    guest: 1,
   };
 
   const filters = useSelector((state) => state.submitFilters || defaultFilters)
@@ -45,21 +45,21 @@ const SearchBar = () => {
 
   //Contador para la cantidad de personas
   const handleDecrease = () => {
-    if (persons > 1) {
-      setPersons(persons - 1)
-      dispatch(filterParams({...filters, persons: persons - 1}))
+    if (guest > 1) {
+      setGuest(guest - 1)
+      dispatch(filterParams({...filters, guest: guest - 1}))
     }
   }
 
   const handleIncrease = () => {
-      setPersons(persons + 1)
-      dispatch(filterParams({...filters, persons: persons + 1}))
+      setGuest(guest + 1)
+      dispatch(filterParams({...filters, guest: guest + 1}))
   }
 
-  const handlePersons = (e) => {
+  const handleGuest = (e) => {
     e.preventDefault()
-    setPersons(e.target.value)
-    dispatch(filterParams({...filters, persons: e.target.value}))
+    setGuest(e.target.value)
+    dispatch(filterParams({...filters, guest: e.target.value}))
   }
 
   //console.log(filters);
@@ -88,7 +88,7 @@ const SearchBar = () => {
         <div>
           <p>Persons</p>
             <button onClick={handleDecrease}> - </button>
-            <input type="text" name="persons" value={persons} onChange={handlePersons} className={s.personsCounterInput} />
+            <input type="text" name="guest" value={guest} onChange={handleGuest} className={s.personsCounterInput} />
             <button onClick={handleIncrease}> + </button>
         </div>
         <button onClick={handleSubmit} className={s.searchButton}>Search</button>

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Link, useLocation } from "react-router-dom";
 import template from "../../assets/Logo-White.svg";
 import template2 from "../../assets/Logo.svg";
