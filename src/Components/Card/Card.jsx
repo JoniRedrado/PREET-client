@@ -94,12 +94,19 @@ const Card = (props) => {
           
         <h5 className={styles.cardTitle}>{name ? name : "N/A"}</h5> 
           <p className={styles.cardStars}>{stars ? renderStars(stars) : "N/A"}</p> 
-          <p onClick={handleAddressClick} className={styles.address}>{address ? address : "N/A"} {country ? country : "N/A"}</p>
+          <div className={styles.countryDiv}>
+          <p className={styles.country}>{country ? country : "N/A"}</p>
+          <p onClick={handleAddressClick} className={styles.address}>Show in map</p>
+          </div>
         </div>
         <div className={styles.cardFooter}>
-          <p className={styles.price}>
-            Starting from ${rooms.length > 0 ? rooms[0].price : "N/A"}
+          <div className={styles.priceContainer}>
+          <p className={styles.priceText}>
+            Aviable rooms from 
           </p>
+          <p className={styles.priceNumber}>${rooms.length > 0 ? rooms[0].price : "N/A"}</p>
+          </div>
+
           <button className={styles.button} onClick={handleClick}>Book Now</button>
         </div>
         </div>

@@ -16,6 +16,7 @@ function Slider() {
       .get(`${import.meta.env.VITE_BACK_URL}/hotels/range`)
       .then((response) => {
         setRankedHotels(response.data);
+        console.log(rankedHotels)
         setSelectedHotel(response.data[0]);
       })
       .catch((error) => {
