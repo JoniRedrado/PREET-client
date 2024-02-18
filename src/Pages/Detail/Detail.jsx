@@ -1,36 +1,24 @@
 import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail, deleteHotel, postFavorite } from "../../redux/actions";
+import { getDetail, postFavorite } from "../../redux/actions";
 import { motion } from "framer-motion";
-import { FaMapMarkerAlt /* , FaEnvelope */ } from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import RoomDetail from "../RoomDetail/RoomDetail";
 import CommentsInDetail from "../../Components/ComentsInDetail/CommentsInDetail";
 import Modal from "react-modal";
 import "./detail.styles.css";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { showModal } from "../../redux/actions";
-// import axios from "axios";
 
 const Detail = () => {
   const token = localStorage.getItem("token");
-  // <RoomDetail key={room.id} room={room} price={room.price} />
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { darkMode } = useDarkMode();
   const { id } = useParams();
 
-  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
-
-
-  const handleDelete = (id) => {
-    dispatch(deleteHotel(id));
-    window.alert("The card has been successfully deleted");
-    navigate("/");
-    window.location.reload();
-  };
 
   const renderStars = (count) => {
     const starsArray = Array.from({ length: count }, (_, index) => (
@@ -41,14 +29,17 @@ const Detail = () => {
     return starsArray;
   };
 
-  useEffect(() => {
-    if (id) {
-      dispatch(getDetail(id));
-    }
-  }, [dispatch, id]);
-
   const hotel = useSelector((state) => state.hotelDetail);
   const modalRoomDetail = useSelector((state) => state.showModal.roomDetail);
+  const filters = useSelector((state) => state.submitFilters)
+
+  console.log(filters);
+  console.log(hotel);
+
+  useEffect(() => {
+    if (id) dispatch(getDetail(id, filters));
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }, [dispatch, id]);
 
   const handleRoomSelect = (roomType) => {
     const selectedRoom = hotel.rooms.find((room) => room.type === roomType);
@@ -61,29 +52,6 @@ const Detail = () => {
     dispatch(showModal("roomDetail", false));
   };
 
-  // //Integracion con PayPal
-  // const handleBook = () => {
-  //   //Objeto para enviar info de la reserva al backend, crear la orden de y luego guardar la reserva en la DB
-  //   const bookingInfo = {
-  //     user: localStorage.getItem('user_id'),
-  //     name: hotel.name,
-  //     price: hotel.price,
-  //     id: hotel.id,
-  //     initialDate: new Date(),
-  //     finalDate: new Date(),
-
-  //   }
-  //   //Peticion POST para crear la orden, luego redireccionar a la url de PayPal, ahi el usuario ingresa con su cuenta y realiza el pago.
-  //   //Una vez realizado o cancelado el pago, paypal te devuelve a nuestra app
-  //   //Cuenta de prueba paypal:
-  //   //email: sb-ujxlq29504971@personal.example.com
-  //   //password: /$>7^oW<
-  //   axios.post('${import.meta.env.VITE_BACK_URL}/payment/create-order', bookingInfo)
-  //     .then(res => {
-  //       window.location.href = res.data.links[1].href
-  //     })
-  // }
-
   const handleAddToFavorites = () => {
     dispatch(postFavorite(id));
     setIsFavorite(!isFavorite);
@@ -92,7 +60,7 @@ const Detail = () => {
 
   return (
     <motion.div
-      className={`container ${darkMode ? "darkMode" : ""}`}
+      className={`container-detail ${darkMode ? "darkMode" : ""}`}
       initial={{ opacity: 0, y: -20 }} // Estado inicial de la animación
       animate={{ opacity: 1, y: 0 }} // Estado final de la animación
       transition={{ duration: 0.5 }} // Duración de la animación
@@ -103,14 +71,6 @@ const Detail = () => {
         </Link>
         {token ? (
           <>
-            <Link to={`/update/${hotel.id}`}>
-              <i className="bi bi-pencil-square" title="Update"></i>
-            </Link>
-            <i
-              className="bi bi-trash"
-              onClick={() => handleDelete(id)}
-              title="Delete"
-            ></i>
             <div className="icon" onClick={isFavorite ? null : handleAddToFavorites}>
               {isFavorite ? <i className="bi bi-heart-fill"></i> : <i className="bi bi-heart"> </i>}
             </div>
@@ -125,7 +85,6 @@ const Detail = () => {
           <h1>{hotel.name}</h1>
           <img src={hotel.image} alt={hotel.name} />
           <h2>{renderStars(hotel.stars)}</h2>
-          {/* <h2>Price per night: ${hotel.price}</h2> */}
           <h2>
             <FaMapMarkerAlt className="info-icon" />
             Address: {hotel.address}

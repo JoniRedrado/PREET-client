@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { filterParams, filterHotels } from "../../redux/actions";
+import { filterParams, filterHotels, specificPage } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import s from "../SearchBar/SearchBar.module.css"
 import { FaSearch } from "react-icons/fa"
@@ -9,18 +9,25 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState("");
+  const [guest, setGuest] = useState(1)
 
   const defaultFilters = {
     name: "",
     country: "",
     startDate: "",
     endDate: "",
-    // persons: 1,
+    guest: 1,
   };
 
   const filters = useSelector((state) => state.submitFilters || defaultFilters)
 
   const handleFilters = (e) => {
+    e.preventDefault()
+    const { name, value } = e.target;
+    dispatch(filterParams({ ...filters, [name]: value }));
+  };
+
+  const handleSearchInput = (e) => {
     e.preventDefault()
     const { name, value } = e.target;
     setSearchInput(value)
@@ -29,11 +36,33 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    dispatch(specificPage(1));
     dispatch(filterHotels(filters))
     setSearchInput("")
-    navigate(`/search/${encodeURIComponent(searchInput)}`);
+    // location.pathname === "/" ? navigate(`/search/${encodeURIComponent(searchInput)}`) : null;
+    navigate(`/search/`);
   }
 
+  //Contador para la cantidad de personas
+  const handleDecrease = () => {
+    if (guest > 1) {
+      setGuest(guest - 1)
+      dispatch(filterParams({...filters, guest: guest - 1}))
+    }
+  }
+
+  const handleIncrease = () => {
+      setGuest(guest + 1)
+      dispatch(filterParams({...filters, guest: guest + 1}))
+  }
+
+  const handleGuest = (e) => {
+    e.preventDefault()
+    setGuest(e.target.value)
+    dispatch(filterParams({...filters, guest: e.target.value}))
+  }
+
+  //console.log(filters);
   return (
     <div className={s.container}>
       <div className={s.searchBar}>
@@ -42,7 +71,7 @@ const SearchBar = () => {
           className={s.searchInput}
           type="text"
           placeholder="Explore hotels or countries"
-          onChange={handleFilters}
+          onChange={handleSearchInput}
           name='name'
           value={searchInput}
         />
@@ -56,15 +85,12 @@ const SearchBar = () => {
           <p>Check-out</p>
           <input type="date" name='endDate' onChange={handleFilters} className={ s.dateInput }/>
         </div>
-        {/* <div>
+        <div>
           <p>Persons</p>
-          <select name="persons">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="+4">+4</option>
-          </select>
-        </div> */}
+            <button onClick={handleDecrease}> - </button>
+            <input type="text" name="guest" value={guest} onChange={handleGuest} className={s.personsCounterInput} />
+            <button onClick={handleIncrease}> + </button>
+        </div>
         <button onClick={handleSubmit} className={s.searchButton}>Search</button>
       </div>
     </div>

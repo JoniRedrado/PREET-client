@@ -1,11 +1,12 @@
 .card-room {
-  max-width: 100%; /* Ocupar todo el ancho disponible dentro del modal */
+  width: 100%; /* Ocupar todo el ancho disponible dentro del modal */
   max-height: 100%; /* Ocupar todo el alto disponible dentro del modal */
   display: flex; /* Para que los elementos internos se distribuyan correctamente */
   flex-direction: column; /* Alinear los elementos verticalmente */
   justify-content: center; /* Centrar verticalmente los elementos */
   align-items: center; /* Centrar horizontalmente los elementos */
 }
+
 .room-image{
   max-width: 100%;
 }

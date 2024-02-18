@@ -30,9 +30,9 @@ function CommentsInDetail() {
 
   return (
     <div>
-      {hotelComments && hotelComments.length > 0 ? (
-        hotelComments.map((comment) => (
-          <div className={style.container}>
+      {hotelComments && hotelComments.rows?.length > 0 ? (
+        hotelComments.rows.map((comment) => (
+          <div className={style.container} key={comment.id}>
             <div className={style.comment} key={comment.id}>
               <div className={style.userInfo}>
                 <h2>{comment.user.name}</h2>

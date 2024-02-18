@@ -5,12 +5,16 @@ import swal from "sweetalert";
 import { showModal } from "../../redux/actions";
 import "./RoomDetail.styles.css";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const RoomDetail = ({ room }) => {
   const [isBooking, setIsBooking] = useState(false);
   const { darkMode } = useDarkMode();
   const dispatch = useDispatch();
+
+  const filters = useSelector((state) => state.submitFilters)
+  console.log(room);
+  console.log(filters);
 
   const token = localStorage.getItem('token')
 
@@ -20,8 +24,8 @@ const RoomDetail = ({ room }) => {
       roomId: room.id,
       user: localStorage.getItem("token"),
       price: room.price,
-      dateInit: new Date(),
-      dateFinal: new Date(),
+      dateInit: filters.startDate,
+      dateFinal: filters.endDate,
     };
 
     console.log(bookingInfo);
@@ -69,7 +73,6 @@ const RoomDetail = ({ room }) => {
   } //como null en la const closeModal (Detail.jsx). Esto arregla el error.
 
   return (
-    <div>
       <div className={`card-room ${darkMode ? "darkMode" : ""}`}>
         <img  src={room.image[0]} alt={`Room ${room.id}`} className="card-img-top room-image" />
         
@@ -83,7 +86,6 @@ const RoomDetail = ({ room }) => {
           </button>
         </div>
       </div>
-    </div>
   )
 };
 

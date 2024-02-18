@@ -12,16 +12,18 @@ import styles from "./Filters.module.css";
 const Filters = () => {
   const dispatch = useDispatch();
   const { darkMode } = useDarkMode(); 
-  const [selectedStar, setSelectedStar] = useState("");
+  const [selectedStars, setSelectedStars] = useState([1, 2, 3, 4, 5])
+  const [guest, setGuest] = useState(1)
   const defaultFilters = {
     country: "",
-    stars: "",
+    stars: 5,
     minPrice: "",
     maxPrice: "",
     orderBy: "",
     direction: "",
     startDate: "",
-    endDate: ""
+    endDate: "",
+    guest: 1
   };
 
   const filters = useSelector((state) => state.submitFilters) || defaultFilters;
@@ -38,6 +40,7 @@ const Filters = () => {
     dispatch(filterParams(defaultFilters));
     dispatch(resetCurrentPage());
     dispatch(getAllHotels());
+    setSelectedStars([1, 2, 3, 4, 5])
     console.log(defaultFilters);
   };
 
@@ -45,11 +48,42 @@ const Filters = () => {
     dispatch(filterHotels(filters));
     dispatch(resetCurrentPage());
   };
+
+  const handleStarClick = (star) => {
+    const newSelectedStars = [1, 2, 3, 4, 5].filter((selectedStar) => selectedStar <= star);
+    setSelectedStars(newSelectedStars);
+    dispatch(filterParams({ ...filters, stars: star}));
+  };
+
+  //Contador para la cantidad de personas
+  const handleDecrease = () => {
+    if (guest > 1) {
+      setGuest(guest - 1)
+      dispatch(filterParams({...filters, guest: guest - 1}))
+    }
+  }
+
+  const handleIncrease = () => {
+      setGuest(guest + 1)
+      dispatch(filterParams({...filters, guest: guest + 1}))
+  }
+
+  const handleGuest = (e) => {
+    e.preventDefault()
+    setGuest(e.target.value)
+    dispatch(filterParams({...filters, guest: e.target.value}))
+  }
   
   return (
     <div className={`${styles.sidebar} ${darkMode ? styles.darkMode : ""}`}>
       <div className={styles.filterContainer}>
         <h2>Filter By:</h2>
+        <div>
+          <p>Persons</p>
+            <button onClick={handleDecrease}> - </button>
+            <input type="text" name="guest" value={guest} onChange={handleGuest} className={styles.personsCounterInput} />
+            <button onClick={handleIncrease}> + </button>
+        </div>
         <div className={styles.dates}>
           <div className={styles.date}>
             <p>Start</p>
@@ -82,31 +116,17 @@ const Filters = () => {
 
         <div className={styles.starsSelect}>
           <p>Stars</p>
-          <select
-            name="stars"
-            value={filters.stars || ""}
-            onChange={handleFilters}
-            className={styles.select}
-          >
-            <option value="" className={styles.option}>
-              All
-            </option>
-            <option value="1" className={styles.option}>
-              ⭐
-            </option>
-            <option value="2" className={styles.option}>
-              ⭐⭐
-            </option>
-            <option value="3" className={styles.option}>
-              ⭐⭐⭐
-            </option>
-            <option value="4" className={styles.option}>
-              ⭐⭐⭐⭐
-            </option>
-            <option value="5" className={styles.option}>
-              ⭐⭐⭐⭐⭐
-            </option>
-          </select>
+          <div className={styles.starsButtonsContainer}>
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    className={`${styles.starButton} ${selectedStars.includes(star) ? styles.activeStar : styles.unactiveStar}`}
+                    onClick={() => handleStarClick(star)}>
+                  <span role="img" aria-label="star">&#x2605;</span>
+                  </button>
+                ))}
+          </div>
+         
         </div>
 
         <div className={styles.priceSelect}>

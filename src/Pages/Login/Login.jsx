@@ -23,7 +23,7 @@ function LoginForm() {
             setError("Invalid Email or Password");
           }else{
             if (data.rol === "admin") {
-              navigate('/')
+              navigate('/dashboard')
             }else{
               navigate('/')
             }

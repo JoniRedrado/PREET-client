@@ -8,7 +8,6 @@ import Loading from "../../assets/Loading.gif"
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import swal from "sweetalert";
 
-
 const UpdateForm = () => {
   const navigate = useNavigate()
   const { id } = useParams();

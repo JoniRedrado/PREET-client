@@ -3,14 +3,14 @@ import { postFavorite } from "../../redux/actions";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import styles from "./Card.module.css"; 
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import notFavorite from "../../assets/notFavorite.png"
 import Favorite from "../../assets/Favorite.png"
 import { useNavigate } from "react-router-dom";
 import Map from "../Map/Map";
 
 const Card = (props) => {
-  const { id, name, address, image, country, rooms, stars, refComponent } = props;
+  const { id, name, address, image, country, rooms, stars, dataScroll } = props;
   const { darkMode } = useDarkMode();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,6 +25,11 @@ const Card = (props) => {
       },
     },
   };
+
+  useEffect(() => {
+    const {index, scrollToFirstCard} = dataScroll;
+    index === 1 && scrollToFirstCard();
+  }, []);
   
   const handleAddressClick = () => {
     setIsMapOpen(true);
@@ -56,7 +61,7 @@ const Card = (props) => {
         className={`${styles.card} ${darkMode ? styles.darkMode : ""}`}
         variants={cardVariants}
         whileHover="hover"
-        ref={refComponent.index === 0 ? refComponent.refCard : null}
+        ref={dataScroll.index === 0 ? dataScroll.refCard : null}
       >
 
       <div className={styles.cardImage}>
