@@ -13,7 +13,7 @@ const Filters = () => {
   const dispatch = useDispatch();
   const { darkMode } = useDarkMode(); 
   const [selectedStars, setSelectedStars] = useState([1, 2, 3, 4, 5])
-  const [persons, setPersons] = useState(1)
+  const [guest, setGuest] = useState(1)
   const defaultFilters = {
     country: "",
     stars: 5,
@@ -22,7 +22,8 @@ const Filters = () => {
     orderBy: "",
     direction: "",
     startDate: "",
-    endDate: ""
+    endDate: "",
+    guest: 1
   };
 
   const filters = useSelector((state) => state.submitFilters) || defaultFilters;
@@ -56,21 +57,21 @@ const Filters = () => {
 
   //Contador para la cantidad de personas
   const handleDecrease = () => {
-    if (persons > 1) {
-      setPersons(persons - 1)
-      dispatch(filterParams({...filters, persons: persons - 1}))
+    if (guest > 1) {
+      setGuest(guest - 1)
+      dispatch(filterParams({...filters, guest: guest - 1}))
     }
   }
 
   const handleIncrease = () => {
-      setPersons(persons + 1)
-      dispatch(filterParams({...filters, persons: persons + 1}))
+      setGuest(guest + 1)
+      dispatch(filterParams({...filters, guest: guest + 1}))
   }
 
-  const handlePersons = (e) => {
+  const handleGuest = (e) => {
     e.preventDefault()
-    setPersons(e.target.value)
-    dispatch(filterParams({...filters, persons: e.target.value}))
+    setGuest(e.target.value)
+    dispatch(filterParams({...filters, guest: e.target.value}))
   }
   
   return (
@@ -80,7 +81,7 @@ const Filters = () => {
         <div>
           <p>Persons</p>
             <button onClick={handleDecrease}> - </button>
-            <input type="text" name="persons" value={persons} onChange={handlePersons} className={styles.personsCounterInput} />
+            <input type="text" name="guest" value={guest} onChange={handleGuest} className={styles.personsCounterInput} />
             <button onClick={handleIncrease}> + </button>
         </div>
         <div className={styles.dates}>

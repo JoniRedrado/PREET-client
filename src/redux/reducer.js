@@ -28,7 +28,9 @@ import {
 let initialState = {
   allHotels: {},
   filteredHotels: {},
-  submitFilters: {},
+  submitFilters: {
+    guest: 1
+  },
   currentPage: 1,
   hotelDetail: {},
   countries: [],

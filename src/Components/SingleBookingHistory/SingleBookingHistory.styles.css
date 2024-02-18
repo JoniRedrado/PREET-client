@@ -1,15 +1,40 @@
-.reservation-container {
+.reservation-card {
     display: flex;
     align-items: center;
     margin: 20px;
-    background-color: #B0A8BF;
+    background-color: #d1d1d1;
+    border-radius: 10px;
+    border: solid rgb(138, 138, 138) 1px;
+    overflow: hidden;
+    max-height: 150px;
+    width: 800px;
+}
+
+.image-container {
+    max-width: 300px;
+    height: 200px;
+    overflow: hidden;
+    margin-right: 20px;
 }
 
 .reservation-image {
-    width: 200px;
-    margin: 20px;
+    width: 350px;
+    height: auto;
 }
 
 .reservation-info {
-    margin-left: 10px;
+    margin: 20px 10px 20px 10px;
+}
+
+.reservation-info h3 {
+    font-size: 20px;
+}
+
+.reservation-info p {
+    font-size: 15px;
+}
+
+.reservation-info span {
+    font-size: 15px;
+    font-style: italic;
 }
