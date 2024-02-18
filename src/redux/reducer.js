@@ -102,7 +102,7 @@ function rootReducer(state = initialState, action) {
         countryFilter = state.allHotels;
       } else {
         countryFilter = state.allHotels.filter(
-          (hotel) => hotel.countryId == action.payload
+          (hotel) => hotel.country.name == action.payload
         );
       }
 

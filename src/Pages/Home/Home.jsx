@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Cards from "../../Components/Cards/Cards";
 import { getAllHotels, getAllCountries, userLog } from "../../redux/actions";
-import Filters from "../../Components/Filters/Filters";
-import TryAgain from "../../Components/Try again/TryAgain";
 import Slider from "../../Components/Slider/Slider";
+import TrendingCountries from "../../Components/TrendingCountries/TrendingCountries";
 import { useDarkMode } from '../../DarkModeContext/DarkModeContext';
 import styles from "./Home.module.css"
 
@@ -45,15 +43,8 @@ function Home() {
       <Slider />
       </div>
 
-      <div className={styles.componentsContainer}>
-      <Filters />
-        {noResults ? (
-          <TryAgain />
-        ) : (
-        <div>
-          <Cards allHotels={searched ? filteredHotels : allHotels} />
-        </div>
-      )}
+      <div className={styles.trendingCountriesContainer}>
+        <TrendingCountries/>
       </div>
     </div>
   );

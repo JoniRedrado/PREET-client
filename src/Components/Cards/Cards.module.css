@@ -7,12 +7,12 @@
 .cardsContainer {
     display: flex;
     flex-direction: column;
-    justify-content:center;
+    align-items: flex-start;
     width: 100%;
 }
 
 .mainContainer.darkMode {
-    background-color: #333333; /* Color de fondo en modo oscuro */
-    color: white; /* Color del texto en modo oscuro */
+    background-color: #333333;
+    color: white; 
 }
   

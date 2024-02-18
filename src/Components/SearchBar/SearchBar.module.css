@@ -95,48 +95,7 @@
   border-color: transparent;
 }
 
-/* Media queries para pantallas más pequeñas */
-@media screen and (max-width: 576px) {
-  .container {
-    gap: 10px; /* Reducimos el espacio entre elementos para pantallas más pequeñas */
-  }
-
-  .searchInput {
-    padding-left: 20px; /* Reducimos el padding izquierdo del input de búsqueda para pantallas más pequeñas */
-  }
-
-  .searchIcon {
-    left: 8px; /* Ajustamos la posición del ícono de búsqueda para pantallas más pequeñas */
-    width: 12px; /* Reducimos el tamaño del ícono de búsqueda para pantallas más pequeñas */
-  }
-
-  .searchButton {
-    width: 150px; /* Reducimos el ancho del botón de búsqueda para pantallas más pequeñas */
-    height: 30PX; /* Reducimos la altura del botón de búsqueda para pantallas más pequeñas */
-    font-size: 16px; /* Reducimos el tamaño de la fuente del botón de búsqueda para pantallas más pequeñas */
-  }
-}
-
-/* Media queries para pantallas más grandes */
-@media screen and (min-width: 1400px) {
-  .container {
-    gap: 30px; /* Aumentamos el espacio entre elementos para pantallas más grandes */
-  }
-
-  .searchInput {
-    padding-left: 40px; /* Aumentamos el padding izquierdo del input de búsqueda para pantallas más grandes */
-  }
-
-  .searchIcon {
-    left: 16px; /* Ajustamos la posición del ícono de búsqueda para pantallas más grandes */
-    width: 20px; /* Aumentamos el tamaño del ícono de búsqueda para pantallas más grandes */
-    margin-top: -7px;
-    
-  }
-
-  .searchButton {
-    width: 220px; /* Aumentamos el ancho del botón de búsqueda para pantallas más grandes */
-    height: 56px; /* Aumentamos la altura del botón de búsqueda para pantallas más grandes */
-    font-size: 20px; /* Aumentamos el tamaño de la fuente del botón de búsqueda para pantallas más grandes */
-  }
+.check{
+  font-size: 16px;
+  font-weight: 600;
 }

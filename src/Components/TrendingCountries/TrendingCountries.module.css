@@ -1,0 +1,81 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.titleContainer{
+    width: 90%;
+    margin-bottom: 10px;
+}
+.title{
+    font-size: 40px;
+    line-height: 60px;
+    font-weight: bold;
+    align-self: flex-start;
+}
+.titleContainer p {
+    margin: 0;
+    font-size: 18px;
+    color: rgb(97, 97, 97);
+}
+.upperDiv{
+    display: flex;
+    width: 90%;
+    height: 440px;
+    gap: 10px;
+}
+.countryContainer1{
+    width: 100%;
+    cursor: pointer;
+}
+.upperPhotos{
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+}
+.textContainer1{
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: white;
+    bottom: 430px;
+    left: 20px;
+    font-size: 20px;
+}
+.flag1{
+    width: 35px;
+    margin-left: 5px;
+}
+
+.lowerDiv{
+    display: flex;
+    width: 90%;
+    height: 255px;
+    gap: 10px;
+}
+.countryContainer2{
+    width: 100%;
+    cursor: pointer;
+}
+
+.lowerPhotos{
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+}
+
+.textContainer2{
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: white;
+    bottom: 245px;
+    left: 20px;
+
+}
+
+.flag2{
+    width: 25px;
+    margin-left: 5px;
+}
