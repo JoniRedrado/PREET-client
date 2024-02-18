@@ -119,7 +119,7 @@ const GestionRooms = () => {
              </tr>
            </thead>
            <tbody>
-             {roomsData && roomsData.map((rooms) => (
+             {roomsData && roomsData.rooms?.map((rooms) => (
               <tr key={rooms.id}>
                 <td><img className="imagen-rooms" src={rooms.image[0].image} alt={rooms.type}/></td>
                 <td>{rooms.numeration}</td>
