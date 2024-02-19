@@ -23,13 +23,14 @@ import {
   HOTEL_FAVORITES,
   POST_FAVORITE,
   REMOVE_FAVORITE,
+  DETAIL_FILTER_PARAMS,
 } from "./actions-types";
 
 let initialState = {
   allHotels: {},
   filteredHotels: {},
   submitFilters: {
-    guest: 1
+    /* guest: 1 */
   },
   currentPage: 1,
   hotelDetail: {},
@@ -44,8 +45,9 @@ let initialState = {
   },
   userChanged: false,
   allFavorites: {},
-  userFavorites:[],
-  hotelFavorites:[],
+  userFavorites: [],
+  hotelFavorites: [],
+  submitRoomFilters: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -65,31 +67,37 @@ function rootReducer(state = initialState, action) {
         totalHotels: action.payload.total,
         currentPage: 1,
       };
+
     case NEXT_PAGE:
       return {
         ...state,
         currentPage: action.payload,
       };
+
     case PREV_PAGE:
       return {
         ...state,
         currentPage: action.payload,
       };
+
     case SPECIFIC_PAGE:
       return {
         ...state,
         currentPage: action.payload,
       };
+
     case RESET_CURRENT_PAGE:
       return {
         ...state,
         currentPage: 1,
       };
+
     case GET_DETAIL:
       return {
         ...state,
         hotelDetail: action.payload,
       };
+
     case DELETE_HOTEL:
       return {
         ...state,
@@ -142,7 +150,7 @@ function rootReducer(state = initialState, action) {
         filteredHotels: action.payload,
         totalHotels: action.payload.total,
       };
-      
+
     case FILTER_HOTELS:
       return {
         ...state,
@@ -170,44 +178,59 @@ function rootReducer(state = initialState, action) {
           [action.payload.option]: action.payload.boolean,
         },
       };
+
     case USER_LOG:
       return {
         ...state,
-        userChanged: !state.userChanged
+        userChanged: !state.userChanged,
       };
+
     case GET_ALL_FAVORITES:
       return {
         ...state,
         allFavorites: action.payload,
       };
+
     case USER_FAVORITES:
       return {
         ...state,
         userFavorites: action.payload,
       };
+
     case HOTEL_FAVORITES:
       return {
         ...state,
         hotelFavorites: action.payload,
       };
+
     case POST_FAVORITE:
       // Agregar el nuevo favorito a la lista de favoritos del usuario
       return {
         ...state,
         userFavorites: action.payload,
-        allFavorites:  action.payload,
+        allFavorites: action.payload,
       };
+
     case REMOVE_FAVORITE:
       // Eliminar el favorito de la lista de favoritos del usuario
       if (Array.isArray(state.userFavorites)) {
         return {
           ...state,
-          userFavorites: state.userFavorites.filter(favorite => favorite.id !== action.payload),
+          userFavorites: state.userFavorites.filter(
+            (favorite) => favorite.id !== action.payload
+          ),
         };
       } else {
         // Si state.userFavorites no es un array, devuelve el estado sin cambios
         return state;
       }
+
+    case DETAIL_FILTER_PARAMS:
+      return {
+        ...state,
+        submitRoomFilters: action.payload,
+      };
+
     default:
       return state;
   }
