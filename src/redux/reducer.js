@@ -42,6 +42,7 @@ let initialState = {
     register: false,
     login: false,
     roomDetail: false,
+    postReview: false,
   },
   userChanged: false,
   allFavorites: {},
