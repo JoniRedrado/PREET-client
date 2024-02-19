@@ -1,19 +1,26 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NavBarDashboard from "../NavBarDashboard/NavBarDashboard";
+// import NavBarDashboard from "../NavBarDashboard/NavBarDashboard";
 import "./GestionHotels.modules.css";
 
 const GestionHotels = () => {
+
   const [hotelsData, setHotelsData] = useState([]);
   const [hotelDelete, setHotelDelete] = useState([]);
   const [showDeletedHotels, setShowDeletedHotels] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
+  const [totalPages, setTotalPages] = useState(0);
+  const [searchInput, setSearchInput] = useState('');
 
-  const getHotels = async () => {
+  const getHotels = async (query) => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels?size=30`);
-      console.log(data);
+      const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels`,{
+        params: { ...query, page: currentPage, size: pageSize }
+      });
       setHotelsData(data.Hotel);
+      setTotalPages(Math.ceil(data.total / pageSize));
     } catch (error) {
       console.error(error.message);
     }
@@ -28,11 +35,13 @@ const GestionHotels = () => {
     }
   };
 
-  const getHotelsDeleted = async () => {
+  const getHotelsDeleted = async (query) => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels/deleted`);
-      console.log(data);
+      const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels/deleted`, {
+        params: { ...query, page: currentPage, size: pageSize }
+      });
       setHotelDelete(data.hotels || []);
+      setTotalPages(Math.ceil(data.total / pageSize));
     } catch (error) {
       console.error(error.message);
     }
@@ -47,10 +56,30 @@ const GestionHotels = () => {
       console.error(error.message);
     }
   };
+  
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleSearchInput = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearch = () => {
+    getHotels({ name: searchInput });
+  };
 
   useEffect(() => {
-    getHotels();
-  }, []);
+    getHotels({});
+  }, [currentPage, pageSize]);
 
   const handleShowDeletedHotels = () => {
     setShowDeletedHotels(!showDeletedHotels);
@@ -61,7 +90,20 @@ const GestionHotels = () => {
 
   return (
     <>
-      <NavBarDashboard/>
+      <div className=".search-dashboard">
+        {/* <NavBarDashboard/> */}
+        <div>
+        <input
+          type="text"
+          placeholder="name"
+          onChange={handleSearchInput}
+          name='name'
+          value={searchInput}
+        />
+        <button onClick={handleSearch}>Search</button>
+        </div>
+
+      </div>
       <Link to={"/dashboard"}>
         <i class="bi bi-arrow-left-circle"></i>
       </Link>
@@ -126,6 +168,15 @@ const GestionHotels = () => {
           ))}
         </tbody>
       </table>
+      <div>
+        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <span>{currentPage}</span>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+          Next
+        </button>
+      </div>
     </>
   );
 };

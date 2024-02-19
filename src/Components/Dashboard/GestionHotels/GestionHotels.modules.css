@@ -1,3 +1,15 @@
+/* .search-dashboard{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.nav-search{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+} */
+
 .table {
     width: 80%;
     max-width: 100%;

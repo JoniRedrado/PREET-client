@@ -2,18 +2,18 @@ import axios from "axios";
 import  "./UpdateRooms.modules.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import NavBarDashboard from "../Dashboard/NavBarDashboard/NavBarDashboard";
+// import NavBarDashboard from "../Dashboard/NavBarDashboard/NavBarDashboard";
 const UpdateRooms = () => {
 
     const {id} = useParams();
     const navigate= useNavigate();
 
     const [roomsData, setRoomsData] = useState({
+        numeration:"",
         type:"",
         description:"",
         price:"",
         guest:"",
-        numeration:"",
         image:null
     })
 
@@ -37,13 +37,20 @@ const UpdateRooms = () => {
     const getTypes = async () =>{
         try {
             const {data} = await axios.get(`${import.meta.env.VITE_BACK_URL}/rooms`)
-            console.log(data);
+            // console.log(data);
 
-            const roomTypes = data.map((room) => room.type);
-            const uniqueRoomTypes = [...new Set(roomTypes)]
+            // const roomTypes = data.map((room) => room.type);
+            // const uniqueRoomTypes = [...new Set(roomTypes)]
 
-            console.log(uniqueRoomTypes);
-            setRoomsTypes(uniqueRoomTypes)
+            // console.log(uniqueRoomTypes);
+            // setRoomsTypes(uniqueRoomTypes)
+            if (Array.isArray(data.rooms)) {
+                const roomTypes = data.rooms.map((room) => room.type);
+                const uniqueRoomTypes = [...new Set(roomTypes)];
+                setRoomsTypes(uniqueRoomTypes);
+            } else {
+                console.error("Error: Data received is not an array:", data);
+            }
         } catch (error) {
             console.error("Error fetching rooms types:", error);   
             
@@ -127,6 +134,8 @@ const UpdateRooms = () => {
         {/* <NavBarDashboard/> */}
           <form className="form" onSubmit={handleSubmit}>
             <h1>Update Room</h1>
+            <label>Numeration</label>
+            <input type="text" name="numeration" value={roomsData.numeration} onChange={handleChange}></input>
             <label>Types</label>
             <select name="type" value={roomsData.type} onChange={handleChange}>
                 <option value="">Seleccione un tipo de habitación</option>
@@ -140,8 +149,9 @@ const UpdateRooms = () => {
             <input type="text" name="description" value={roomsData.description} onChange={handleChange}></input>
             <label>Price</label>
             <input type="number" name="price" value={roomsData.price} onChange={handleChange}></input>
-            <label>Numeration</label>
-            <input type="text" name="numeration" value={roomsData.numeration} onChange={handleChange}></input>
+            <label>Guest</label>
+            <input type="number" name="guest" value={roomsData.guest} onChange={handleChange}></input>
+            
             <div>
                     {roomsData.image && (
                         <div>
