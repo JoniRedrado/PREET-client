@@ -2,7 +2,7 @@
   display: flex;
 }
 
-.items{
+.items {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,14 +10,14 @@
   text-align: center;
 }
 
-.imgLogoSmall{
+.imgLogoSmall {
   width: 72px;
   height: auto;
- }
+}
 
-.imgLogo{
- width: 100px;
- height: auto;
+.imgLogo {
+  width: 100px;
+  height: auto;
 }
 
 .logo {
@@ -25,7 +25,7 @@
   text-align: left;
 }
 
-.darkModeButton{
+.darkModeButton {
   border-radius: 50%;
   margin-right: 10px;
   /* width: 696px;
@@ -53,11 +53,11 @@
   gap: 5px;
 }
 
-.buttons{
+.buttons {
   background: none;
   border: none;
   cursor: pointer;
-  color: #fff; 
+  color: #fff;
   font-size: 18px;
   display: flex;
   padding: 10px 30px 10px 30px;
@@ -67,30 +67,29 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.linksContainer{
+.linksContainer {
   width: 696px;
   height: 56px;
   display: flex;
   align-items: center;
-  justify-content: center
+  justify-content: center;
 }
 
-.link{
+.link {
   text-decoration: none;
   color: white;
   background: none;
   border: none;
-  cursor: pointer; 
+  cursor: pointer;
   font-size: 20px;
   padding: 10px 30px 10px 30px;
   border-radius: 5px;
-  
 }
-.link:hover{
+.link:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-i{
+i {
   font-size: 20px;
   cursor: pointer;
 }
@@ -130,4 +129,44 @@ i{
     font-size: 18px; /* Aumentamos ligeramente el tamaño del texto de los botones para pantallas más grandes */
     padding: 10px 20px; /* Aumentamos ligeramente el espacio interior de los botones para pantallas más grandes */
   }
+}
+
+/* Abajo estilos para botón de idiomas*/
+.btnLink {
+  background: none;
+  border: none;
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.dropdownMenu {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdownMenu li {
+  display: block;
+}
+
+.dropdownMenu li button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.dropdownMenu li button:hover {
+  background-color: #f5f5f5;
 }

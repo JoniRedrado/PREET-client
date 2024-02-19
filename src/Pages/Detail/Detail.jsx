@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetail, postFavorite } from "../../redux/actions";
@@ -8,15 +8,18 @@ import RoomDetail from "../RoomDetail/RoomDetail";
 import CommentsInDetail from "../../Components/ComentsInDetail/CommentsInDetail";
 import FiltersForDetail from "../../Components/FiltersForDetail/FiltersForDetail";
 import Modal from "react-modal";
-import "./detail.styles.css";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { showModal } from "../../redux/actions";
+import { useTranslation } from "react-i18next";
+
+import "./detail.styles.css";
 
 const Detail = () => {
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const { darkMode } = useDarkMode();
   const { id } = useParams();
+  const { t } = useTranslation();
 
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -32,14 +35,14 @@ const Detail = () => {
 
   const hotel = useSelector((state) => state.hotelDetail);
   const modalRoomDetail = useSelector((state) => state.showModal.roomDetail);
-  const filters = useSelector((state) => state.submitFilters)
+  const filters = useSelector((state) => state.submitFilters);
 
   /* console.log(filters); */
   console.log(hotel);
 
   useEffect(() => {
     if (id) dispatch(getDetail(id, filters));
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [dispatch, id]);
 
   const handleRoomSelect = (roomType) => {
@@ -95,26 +98,30 @@ const Detail = () => {
           <div className="informationContainer">
             <h1>{hotel.name}</h1>
             <img src={hotel.image} alt={hotel.name} />
-            <h2>{renderStars(hotel.stars)}</h2>
+            <div className="scores">
+              <h2>{renderStars(hotel.stars)}</h2>
+              <h2>Ranking PREET: {hotel.ranking}</h2>
+            </div>
+
             <h2>
               <FaMapMarkerAlt className="info-icon" />
-              Address: {hotel.address}
+              {t("Detail.address")} {hotel.address}
             </h2>
             <h2>
               <FaMapMarkerAlt className="info-icon" />
-              Country: {hotel.country && hotel.country.name}
+              {t("Detail.country")} {hotel.country && hotel.country.name}
             </h2>
             <h2>
               <FaMapMarkerAlt className="info-icon" />
-              Location: {hotel.address_url}
+              {t("Detail.Website")} {hotel.address_url}
             </h2>
-            <h2>Available Rooms:</h2>
+            <h2>{t("Detail.select")}</h2>
             <select
               className="selectRoom"
               defaultValue="Select you room"
               onChange={(e) => handleRoomSelect(e.target.value)}
             >
-              <option disabled>Select you room</option>
+              <option disabled>{t("Detail.option")}</option>
               {hotel.rooms && hotel.rooms.length > 0 ? (
                 hotel.rooms.map((room) => (
                   <option key={room.id} value={room.type}>
@@ -122,14 +129,14 @@ const Detail = () => {
                   </option>
                 ))
               ) : (
-                <option disabled>No rooms available</option>
+                <option disabled>{t("Detail.noRooms")}</option>
               )}
             </select>
-            <h2>Guests Reviews:</h2>
+            <h2>{t("Detail.reviews")}</h2>
             <CommentsInDetail className="comments" />
           </div>
         ) : (
-          <p>cargando...</p>
+          <p>{t("Detail.loading")}</p>
         )}
         <Modal
           isOpen={modalRoomDetail}
@@ -152,4 +159,10 @@ const Detail = () => {
   );
 };
 
-export default Detail;
+export default function WrappedApp() {
+  return (
+    <Suspense>
+      <Detail />
+    </Suspense>
+  );
+}
