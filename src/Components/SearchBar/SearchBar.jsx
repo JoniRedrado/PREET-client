@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { filterParams, filterHotels, specificPage } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import s from "../SearchBar/SearchBar.module.css"
 import { FaSearch } from "react-icons/fa"
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const [searchInput, setSearchInput] = useState("");
-  const [guest, setGuest] = useState(1)
+  const [guest, setGuest] = useState(1);
+
 
   const defaultFilters = {
     name: "",
@@ -70,7 +74,7 @@ const SearchBar = () => {
         <input
           className={s.searchInput}
           type="text"
-          placeholder="Explore hotels or countries"
+          placeholder={t("SearchBar.placeholder")}
           onChange={handleSearchInput}
           name='name'
           value={searchInput}
@@ -86,15 +90,21 @@ const SearchBar = () => {
           <input type="date" name='endDate' onChange={handleFilters} className={ s.dateInput }/>
         </div>
         <div>
-          <p>Persons</p>
+          <p>{t("SearchBar.guests")}</p>
             <button onClick={handleDecrease}> - </button>
             <input type="text" name="guest" value={guest} onChange={handleGuest} className={s.personsCounterInput} />
             <button onClick={handleIncrease}> + </button>
         </div>
-        <button onClick={handleSubmit} className={s.searchButton}>Search</button>
+        <button onClick={handleSubmit} className={s.searchButton}>{t("SearchBar.button")}</button>
       </div>
     </div>
   );
 };
 
-export default SearchBar;
+export default function WrappedApp() {
+  return (
+    <Suspense>
+      <SearchBar />
+    </Suspense>
+  );
+}

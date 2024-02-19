@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllFavorites } from "../../redux/actions";
+import { useTranslation } from "react-i18next";
 
 const Favorites = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const favorites = useSelector((state) => state.allFavorites.Favorite);
 
   useEffect(() => {
@@ -12,19 +14,19 @@ const Favorites = () => {
   }, [dispatch]);
 
   if (!Array.isArray(favorites)) {
-    return <div>Loading...</div>;
+    return <div>{t("Favorites.loading")}</div>;
   }
 
   return (
     <>
       <div>
-        <h2>All Favorites</h2>
+        <h2>{t("Favorites.title")}</h2>
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Hotel Name</th>
-              <th>User Name</th>
-              <th>User Email</th>
+              <th>{t("Favorites.hotel")}</th>
+              <th>{t("Favorites.user")}</th>
+              <th>{t("Favorites.email")}</th>
             </tr>
           </thead>
           <tbody>
@@ -42,4 +44,10 @@ const Favorites = () => {
   );
 };
 
-export default Favorites;
+export default function WrappedApp() {
+  return (
+    <Suspense>
+      <Favorites />
+    </Suspense>
+  );
+}

@@ -3,20 +3,20 @@ import { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import { showModal } from "../../redux/actions";
-import "./RoomDetail.styles.css";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { useDispatch, useSelector } from "react-redux";
+import "./RoomDetail.styles.css";
 
 const RoomDetail = ({ room }) => {
   const [isBooking, setIsBooking] = useState(false);
   const { darkMode } = useDarkMode();
   const dispatch = useDispatch();
 
-  const filters = useSelector((state) => state.submitFilters)
+  const filters = useSelector((state) => state.submitFilters);
   console.log(room);
   console.log(filters);
 
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem("token");
 
   const handleBook = () => {
     setIsBooking(true);
@@ -30,13 +30,13 @@ const RoomDetail = ({ room }) => {
 
     console.log(bookingInfo);
     console.log(!token);
-    
+
     const handleLoginClick = () => {
       dispatch(showModal("login", true));
       dispatch(showModal("roomDetail", false));
     };
 
-    if(!token) {
+    if (!token) {
       swal({
         title: "Please login",
         text: "In order to complete your payment and get your reservation confirmation",
@@ -50,7 +50,7 @@ const RoomDetail = ({ room }) => {
         },
       }).then((value) => {
         if (value === "login") {
-          handleLoginClick()
+          handleLoginClick();
         }
       });
     } else {
@@ -73,20 +73,24 @@ const RoomDetail = ({ room }) => {
   } //como null en la const closeModal (Detail.jsx). Esto arregla el error.
 
   return (
-      <div className={`card-room ${darkMode ? "darkMode" : ""}`}>
-        <img  src={room.image[0]} alt={`Room ${room.id}`} className="card-img-top room-image" />
-        
-        <div className="card-body">
-          <h1 className="card-title">{room.type}</h1>
-          <p className="card-text">{room.description}</p>
-          <p className="card-text">Price {room.price} $</p>
-          <button onClick={handleBook}>
-          Book now 
+    <div className={`card-room ${darkMode ? "darkMode" : ""}`}>
+      <img
+        src={room.image[0]}
+        alt={`Room ${room.id}`}
+        className="card-img-top room-image"
+      />
+
+      <div className="card-body">
+        <h1 className="card-title">{room.type}</h1>
+        <p className="card-text">{room.description}</p>
+        <p className="card-text">Price {room.price} $</p>
+        <button onClick={handleBook}>
+          Book now
           <i className="bi bi-paypal paypal"></i>
-          </button>
-        </div>
+        </button>
       </div>
-  )
+    </div>
+  );
 };
 
 export default RoomDetail;

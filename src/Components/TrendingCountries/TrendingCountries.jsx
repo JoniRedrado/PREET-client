@@ -13,6 +13,8 @@ import BR from "../../assets/BR.png";
 import PhotoBr from "../../assets/PhotoBr.jpg";
 import PER from "../../assets/PER.png";
 import PhotoPer from "../../assets/PhotoPer.jpg";
+import { Suspense } from "react";
+import { useTranslation } from "react-i18next";
 
 const countryData = [
   { name: "Argentina", flag: ARG, photo: PhotoArg },
@@ -25,6 +27,7 @@ const countryData = [
 const TrendingCountries = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleCountryClick = (countryName) => {
     dispatch(filterParams({ name: countryName })); 
@@ -45,8 +48,8 @@ const TrendingCountries = () => {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.titleContainer}>
-      <span className={styles.title}>Latinamerica trending countries</span>
-      <p>The most chosen options by people from Latinamerica.</p>
+      <span className={styles.title}>{t("Trending.title")}</span>
+      <p>{t("Trending.subtitle")}</p>
       </div>
       <div className={styles.upperDiv}>
         {countryData.slice(0, 2).map((country, index) => (
@@ -86,4 +89,10 @@ const TrendingCountries = () => {
   );
 };
 
-export default TrendingCountries;
+export default function WrappedApp() {
+  return (
+    <Suspense>
+      <TrendingCountries />
+    </Suspense>
+  );
+}

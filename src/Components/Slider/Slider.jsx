@@ -1,22 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 import style from "./Slider.module.css";
 
 function Slider() {
+  const { t } = useTranslation();  
   const [rankedHotels, setRankedHotels] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedHotel, setSelectedHotel] = useState("");
   const [loaded, setLoaded] = useState(false);
   const autoPlay = true;
 
+
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACK_URL}/hotels/range`)
       .then((response) => {
         setRankedHotels(response.data);
-        console.log(rankedHotels)
+        console.log(rankedHotels);
         setSelectedHotel(response.data[0]);
       })
       .catch((error) => {
@@ -55,7 +58,7 @@ function Slider() {
 
   return (
     <div className={style.container}>
-      <h1 className={style.title}>TOP HOTELS OF THE SEASON✨</h1>
+      <h1 className={style.title}>{t("Slider.title")}✨</h1>
       <div className={style.info}>
         <div className={style.image}>
           {selectedHotel && (
@@ -72,9 +75,9 @@ function Slider() {
           <div className={style.hotelText}>
             <h1>{selectedHotel.name}</h1>
             <Link to={`/detail/${selectedHotel.id}`}>
-              <button>Book Now</button>
+              <button>{t("Slider.button")}</button>
             </Link>
-            <p>Ranked by our users</p>
+            <p>{t("Slider.subtitle")}</p>
           </div>
           <div className={style.slideBtns}>
             <button className={style.BtnLeft} onClick={previous}>
@@ -88,4 +91,10 @@ function Slider() {
   );
 }
 
-export default Slider;
+export default function WrappedApp() {
+  return (
+    <Suspense>
+      <Slider />
+    </Suspense>
+  );
+}

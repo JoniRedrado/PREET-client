@@ -1,21 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import axios from "axios";
-import styles from "./CreateForm.module.css";
 import validation from "../../helpers/validation";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCountries } from "../../redux/actions";
-import Loading from "../../assets/Loading.gif"
+import Loading from "../../assets/Loading.gif";
 import swal from "sweetalert";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
-
+import { useTranslation } from "react-i18next";
+import styles from "./CreateForm.module.css";
 
 const CreateForm = () => {
-
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const { darkMode } = useDarkMode(); 
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { darkMode } = useDarkMode();
+  const { t } = useTranslation();
 
   const [hotelData, setHotelData] = useState({
     name: "",
@@ -23,17 +22,19 @@ const CreateForm = () => {
     address_url: "",
     price: "",
     email: "",
-    image: null, 
+    image: null,
     country: "",
     countryId: "",
     stars: "",
   });
+
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  useEffect(() =>{
-    dispatch(getAllCountries())
-  }, [dispatch])
-  const countries = useSelector((state) => state.countries)
+
+  useEffect(() => {
+    dispatch(getAllCountries());
+  }, [dispatch]);
+  const countries = useSelector((state) => state.countries);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -63,8 +64,8 @@ const CreateForm = () => {
 
         setErrors((prevErrors) => ({
           ...prevErrors,
-          image:""
-        }))
+          image: "",
+        }));
       } catch (error) {
         console.error("Error creating object URL for image:", error);
       }
@@ -83,15 +84,18 @@ const CreateForm = () => {
     e.preventDefault();
     const validationErrors = validation(hotelData);
     setErrors(validationErrors);
-  
+
     if (Object.keys(validationErrors).length === 0) {
       try {
         if (hotelData.image && hotelData.image.startsWith("blob:")) {
           setLoading(true);
           const formData = new FormData();
-          formData.append("file", e.target.querySelector('input[type="file"]').files[0]);
+          formData.append(
+            "file",
+            e.target.querySelector('input[type="file"]').files[0]
+          );
           formData.append("upload_preset", "PREET2024");
-  
+
           const responseCloudinary = await fetch(
             "https://api.cloudinary.com/v1_1/drntvj4ut/image/upload",
             {
@@ -99,24 +103,24 @@ const CreateForm = () => {
               body: formData,
             }
           );
-  
+
           const cloudinaryData = await responseCloudinary.json();
-  
+
           if (cloudinaryData.secure_url) {
             const updatedData = {
               ...hotelData,
               image: cloudinaryData.secure_url,
             };
-  
+
             const responseBackend = await axios.post(
               `${import.meta.env.VITE_BACK_URL}/hotels`,
               updatedData
             );
-  
+
             if (responseBackend.data.name) {
               swal({
                 title: "¡Hotel created succesfully!",
-                text: 'The hotel is ready to start booking',
+                text: "The hotel is ready to start booking",
                 icon: "success",
                 button: null,
               });
@@ -134,12 +138,17 @@ const CreateForm = () => {
                 stars: 1,
               });
             } else {
-              console.error("Error Posting Hotel:", responseBackend.data.message);
+              console.error(
+                "Error Posting Hotel:",
+                responseBackend.data.message
+              );
             }
           } else {
-            console.error("Error: No 'secure_url' found in Cloudinary response");
+            console.error(
+              "Error: No 'secure_url' found in Cloudinary response"
+            );
           }
-  
+
           setLoading(false);
         }
       } catch (error) {
@@ -157,27 +166,32 @@ const CreateForm = () => {
     }
   };
 
-
-const fieldLabels = {
-  name: "Name",
-  address: "Address",
-  address_url: "Address URL",
-  price: "Price",
-  email: "Email"
-}
+  const fieldLabels = {
+    name: "Name",
+    address: "Address",
+    address_url: "Address URL",
+    price: "Price",
+    email: "Email",
+  };
 
   return (
-    <div className={`${styles.formContainer} ${darkMode ? styles.darkMode : ''}`}>
-       <h1 className={styles.title}>Post Your Hotel</h1>
+    <div
+      className={`${styles.formContainer} ${darkMode ? styles.darkMode : ""}`}
+    >
+      <h1 className={styles.title}>{t("CreateForm.title")}</h1>
       <form onSubmit={handleSubmit}>
         {Object.keys(fieldLabels).map((field) => (
           <div key={field} className={styles.fieldContainer}>
-            <label> 
+            <label>
               {fieldLabels[field]}
               <input
                 type="text"
                 name={field}
-                placeholder={field === "address_url" ? "Adress Url" :field.charAt(0).toUpperCase() + field.slice(1)}
+                placeholder={
+                  field === "address_url"
+                    ? "Adress Url"
+                    : field.charAt(0).toUpperCase() + field.slice(1)
+                }
                 value={hotelData[field] || ""}
                 onChange={handleChange}
                 className={`${styles.input} ${errors[field] && styles.error}`}
@@ -190,23 +204,25 @@ const fieldLabels = {
         ))}
 
         <div className={styles.fieldContainer}>
-          <label>Stars
+          <label>
+            {t("CreateForm.stars")}
             <select
-              className={`${styles.starsSelect} ${errors.stars && styles.error}`}
+              className={`${styles.starsSelect} ${
+                errors.stars && styles.error
+              }`}
               name="stars"
               value={hotelData.stars}
               onChange={handleChange}
             >
               <option value="" disabled>
-                Select one...
+                {t("CreateForm.optionSt")}
               </option>
               {[1, 2, 3, 4, 5].map((star) => (
                 <option key={star} value={star}>
-                {star}
+                  {star}
                 </option>
               ))}
             </select>
-
             {errors.stars && (
               <span className={styles.errors}>{errors.stars}</span>
             )}
@@ -214,15 +230,18 @@ const fieldLabels = {
         </div>
 
         <div className={styles.fieldContainer}>
-          <label> Country
+          <label>
+            {t("CreateForm.country")}
             <select
-              className={`${styles.countrySelect} ${errors.countryId && styles.error}`}
+              className={`${styles.countrySelect} ${
+                errors.countryId && styles.error
+              }`}
               name="countryId"
               value={hotelData.countryId}
               onChange={handleChange}
             >
               <option value="" disabled>
-                Select one...
+                {t("CreateForm.optionCt")}
               </option>
               {countries.map((country) => (
                 <option key={country} value={country}>
@@ -238,36 +257,51 @@ const fieldLabels = {
 
         <div className={styles.imageContainer}>
           <label>
-            Main Image
+            {t("CreateForm.image")}
             <input
               type="file"
               accept="image/*"
               onChange={handleImageChange}
               className={`${styles.input} ${errors.image && styles.error}`}
             />
-             {errors.image && (
+            {errors.image && (
               <span className={styles.errors}>{errors.image}</span>
             )}
           </label>
           {hotelData.image && (
             <>
-              <img src={hotelData.image} alt="Preview" className={styles.imagePreview} />
-              <button type="button" onClick={handleImageRemove} className={styles.removeButton}>
-                REMOVE
+              <img
+                src={hotelData.image}
+                alt="Preview"
+                className={styles.imagePreview}
+              />
+              <button
+                type="button"
+                onClick={handleImageRemove}
+                className={styles.removeButton}
+              >
+                {t("CreateForm.remove")}
               </button>
             </>
           )}
         </div>
         <div className={styles.sendContainer}>
-        <button className={styles.formButton} type="submit">
-          POST
-        </button>
-        {loading && <img src={Loading} alt="Loading" className={styles.loading}/>}
+          <button className={styles.formButton} type="submit">
+            {t("CreateForm.post")}
+          </button>
+          {loading && (
+            <img src={Loading} alt="Loading" className={styles.loading} />
+          )}
         </div>
-       
       </form>
     </div>
   );
 };
 
-export default CreateForm;
+export default function WrappedApp() {
+  return (
+    <Suspense>
+      <CreateForm />
+    </Suspense>
+  );
+}
