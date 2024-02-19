@@ -21,7 +21,7 @@ function CommentsInDetail() {
       })
       .then((response) => {
         setHotelComments(response.data);
-        console.log("Datos de hoteles obtenidos correctamente:", response.data);
+        /* console.log("Datos de hoteles obtenidos correctamente:", response.data); */
       })
       .catch((error) => {
         console.error("Error al obtener comentarios del hotel:", error);

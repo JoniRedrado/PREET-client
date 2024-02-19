@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 import {
   NEXT_PAGE,
@@ -25,14 +25,16 @@ import {
   HOTEL_FAVORITES,
   POST_FAVORITE,
   REMOVE_FAVORITE,
-} from './actions-types';
-
+  DETAIL_FILTER_PARAMS,
+} from "./actions-types";
 
 export const getAllHotels = () => {
   return async (dispatch, getStage) => {
     const { currentPage } = getStage();
     try {
-      const endpoint = `${import.meta.env.VITE_BACK_URL}/hotels?page=${currentPage}`;
+      const endpoint = `${
+        import.meta.env.VITE_BACK_URL
+      }/hotels?page=${currentPage}`;
       const response = await axios.get(endpoint);
 
       dispatch({
@@ -48,7 +50,9 @@ export const getAllHotels = () => {
 export const getAllCountries = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/countries`);
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BACK_URL}/countries`
+      );
       dispatch({
         type: GET_ALL_COUNTRIES,
         payload: data,
@@ -63,14 +67,19 @@ export const getHotelByName = (name) => {
   return async (dispatch, getStage) => {
     const { currentPage } = getStage();
     try {
-      const responseHotels = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels?name=${name}&page=${currentPage}`);
+      const responseHotels = await axios.get(
+        `${
+          import.meta.env.VITE_BACK_URL
+        }/hotels?name=${name}&page=${currentPage}`
+      );
 
       console.log(responseHotels.data);
 
       const responseCountries = await axios.get(
-        `${import.meta.env.VITE_BACK_URL}/countries/${name}`);
-      
-      const bothResponse = [...responseHotels.data, ...responseCountries.data]
+        `${import.meta.env.VITE_BACK_URL}/countries/${name}`
+      );
+
+      const bothResponse = [...responseHotels.data, ...responseCountries.data];
 
       console.log(bothResponse);
 
@@ -83,7 +92,9 @@ export const getHotelByName = (name) => {
     }
   };
 };
+
 export const getDetail = (id, params) => {
+  console.log(params);
   return async function (dispatch) {
     try {
       const queryParams = {
@@ -94,9 +105,12 @@ export const getDetail = (id, params) => {
         guest: params.guest,
       };
 
-      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels/detail/${id}`, {
-        params: queryParams,
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACK_URL}/hotels/detail/${id}`,
+        {
+          params: queryParams,
+        }
+      );
       return dispatch({
         type: GET_DETAIL,
         payload: response.data,
@@ -145,7 +159,9 @@ export const resetCurrentPage = () => {
 export const deleteHotel = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(`${import.meta.env.VITE_BACK_URL}/hotels/${id}`);
+      const response = await axios.delete(
+        `${import.meta.env.VITE_BACK_URL}/hotels/${id}`
+      );
       return dispatch({
         type: DELETE_HOTEL,
         payload: response.data,
@@ -203,9 +219,12 @@ export const filterHotels = (params) => {
         endDate: params.endDate,
       };
 
-      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels`, {
-        params: queryParams,
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACK_URL}/hotels`,
+        {
+          params: queryParams,
+        }
+      );
 
       //console.log(response.data);
 
@@ -213,7 +232,6 @@ export const filterHotels = (params) => {
         type: FILTER_HOTELS,
         payload: response.data,
       });
-      
     } catch (error) {
       console.error(`Error al filtrar hoteles:`, error);
     }
@@ -222,40 +240,45 @@ export const filterHotels = (params) => {
 
 export const showModal = (option, boolean) => {
   return {
-      type: SHOW_MODAL,
-      payload: {option, boolean}
+    type: SHOW_MODAL,
+    payload: { option, boolean },
   };
 };
 
 export const userLog = () => {
   return {
-      type: USER_LOG,
+    type: USER_LOG,
   };
 };
 
 export const getAllFavorites = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/favorites`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACK_URL}/favorites`
+      );
       console.log(response.data);
       return dispatch({
         type: GET_ALL_FAVORITES,
         payload: response.data,
       });
     } catch (error) {
-        console.error(error)
+      console.error(error);
     }
   };
-}
+};
 
 export const userFavorites = (token) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/favorites/user`, {
-        headers: {
-          Authorization: `Bearer ${token}`
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACK_URL}/favorites/user`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
       return dispatch({
         type: USER_FAVORITES,
         payload: response.data,
@@ -264,12 +287,14 @@ export const userFavorites = (token) => {
       console.error(error);
     }
   };
-}
+};
 
 export const hotelFavorites = (hotelId) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/favorites/hotel/${hotelId}`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACK_URL}/favorites/hotel/${hotelId}`
+      );
       return dispatch({
         type: HOTEL_FAVORITES,
         payload: response.data,
@@ -280,29 +305,34 @@ export const hotelFavorites = (hotelId) => {
   };
 };
 
-
 export const postFavorite = (id, token) => {
-  return async function(dispatch){
+  return async function (dispatch) {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/favorites/${id}`,{},{
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-      })
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACK_URL}/favorites/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       return dispatch({
         type: POST_FAVORITE,
         payload: response.data,
       });
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
-}
+  };
+};
 
 export const removeFavorite = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(`${import.meta.env.VITE_BACK_URL}/favorites/${id}`);
+      const response = await axios.delete(
+        `${import.meta.env.VITE_BACK_URL}/favorites/${id}`
+      );
       if (response.status === 200) {
         dispatch({
           type: REMOVE_FAVORITE,
@@ -314,5 +344,15 @@ export const removeFavorite = (id) => {
     } catch (error) {
       console.error(error);
     }
+  };
+};
+
+export const DetailFilterParams = (params) => {
+  console.log(params);
+  return function (dispatch) {
+    dispatch({
+      type: DETAIL_FILTER_PARAMS,
+      payload: params,
+    });
   };
 };

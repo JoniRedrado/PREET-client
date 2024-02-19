@@ -23,6 +23,7 @@ import GestionFeedBack from "./Components/Dashboard/GestionFeedback/GestionFeedB
 import { useDarkMode } from "./DarkModeContext/DarkModeContext";
 import { useEffect, useState} from "react";
 import UpdateRooms from "./Components/UpdateRooms/UpdateRooms";
+import BookingDetails from "./Pages/BookingDetail/BookingDetails";
 import CreateRooms from "./Components/CreateRooms/CreateRooms"
 // import './App.css'
 
@@ -73,6 +74,7 @@ function App() {
         <Route path="/dashboard/feedback" element={<GestionFeedBack/>} />
         <Route path="/dashboard/rooms" element={<GestionRooms/>} />
         <Route path="/updaterooms/:id" element={<UpdateRooms/>} />
+        <Route path="/bookingDetails/:id" element={<BookingDetails/>} />
         <Route path="/createrooms" element={<CreateRooms/>} />
       </Routes>
       <Footer/>

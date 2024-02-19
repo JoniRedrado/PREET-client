@@ -16,6 +16,7 @@ function Slider() {
       .get(`${import.meta.env.VITE_BACK_URL}/hotels/range`)
       .then((response) => {
         setRankedHotels(response.data);
+        console.log(rankedHotels)
         setSelectedHotel(response.data[0]);
       })
       .catch((error) => {
@@ -71,7 +72,7 @@ function Slider() {
           <div className={style.hotelText}>
             <h1>{selectedHotel.name}</h1>
             <Link to={`/detail/${selectedHotel.id}`}>
-              <button>See More</button>
+              <button>Book Now</button>
             </Link>
             <p>Ranked by our users</p>
           </div>
