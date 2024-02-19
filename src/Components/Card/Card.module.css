@@ -56,9 +56,10 @@
 
 .cardFooter{
   display: flex;
-  justify-content: space-between;
   width: 100%;
-  height: 20%;
+  height: 100px;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 .favoriteIcon{
   position: relative;
@@ -90,12 +91,21 @@
   font-size: 16px;
   line-height: 24px;
   cursor: pointer;
+  align-self: flex-end;
 }
 
 .button:hover{
   background-color: #6093bf;
 }
-
+.countryDiv{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.country {
+  font-size: 15px;
+  margin-top: 0px;
+}
 .address{
   color: blue; 
   text-decoration: underline; 
@@ -103,8 +113,22 @@
   margin-top: 0px;
   font-size: 15px;
 }
-.price{
-  font-size: 20px;
+.priceContainer{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 80px;
+  
+}
+.priceText{
+  font-size: 15px;
+  margin-bottom: -20px;
+}
+.priceNumber{
+color: #0023A1;
+font-weight: 600;
+font-size: 28px;
+line-height: 42px;
 }
 .card.darkMode {
   background-color: #333; 

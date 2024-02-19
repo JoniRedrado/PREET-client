@@ -1,0 +1,80 @@
+.mainContainer {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+    color: #333;
+  }
+  
+  .bookingInfo {
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .bookingInfo p {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #666;
+  }
+  
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Ajusta según sea necesario */
+    font-size: 18px;
+    color: #666;
+  }
+  .icon{
+    font-size: 150px;
+    color: #022840;
+  }
+
+  .button{
+    width: 200px;
+    height: 50pxpx;
+    border-radius: 8px;
+    border: none;
+    padding: 12px 24px 12px 24px;
+    background-color: #01283F;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    cursor: pointer;
+  }
+  
+  .button:hover{
+    background-color: #6093bf;
+  }
+
+  .tickIcon {
+    animation: tick 1.2s ease-in-out;
+  }
+  
+  @keyframes tick {
+    0% {
+      transform: scale(0);
+    }
+    30% {
+      transform: scale(1.2);
+    }
+    50% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
