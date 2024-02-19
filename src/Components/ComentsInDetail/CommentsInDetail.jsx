@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 import style from "./CommentsInDetail.module.css";
 
 function CommentsInDetail() {
   const { id } = useParams();
+  const { t } = useTranslation();
   const [hotelComments, setHotelComments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const commentsPerPage = 10;
@@ -44,7 +46,7 @@ function CommentsInDetail() {
           </div>
         ))
       ) : (
-        <h4>There are no comments for this hotel yet</h4>
+        <h4>{t("CommentsInD.message")}</h4>
       )}
       {hotelComments.length > 0 && (
         <div className={style.paginationContainer}>
@@ -79,4 +81,10 @@ function CommentsInDetail() {
   );
 }
 
-export default CommentsInDetail;
+export default function WrappedApp() {
+  return (
+    <Suspense>
+      <CommentsInDetail />
+    </Suspense>
+  );
+}

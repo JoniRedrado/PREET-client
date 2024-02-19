@@ -1,0 +1,162 @@
+{
+  "Slider": {
+    "title": "TOP HOTELS OF THE SEASON",
+    "button": "Book Now!!",
+    "subtitle": "Ranked by our users"
+  },
+  "Trending": {
+    "title": "Latin America trending destinations",
+    "subtitle": "The most visited countries by people from Latin America"
+  },
+  "SearchBar": {
+    "placeholder": "Explore hotels or countries",
+    "guests": "Guests",
+    "button": "Search"
+  },
+  "NavBar": {
+    "signUp": "Sign Up",
+    "logIn": "Sign In"
+  },
+  "UserBar": {
+    "welcome": "Welcome",
+    "manage": "Manage Account",
+    "history": "History",
+    "favorites": "Favorites",
+    "out": "Sign Out"
+  },
+  "Header": {
+    "phrase": "Book a hotel, get wonderful memories"
+  },
+  "Detail": {
+    "address": "Address:",
+    "country": "Country:",
+    "Website": "Website:",
+    "select": "Available Rooms:",
+    "option": "Select you room",
+    "noRooms": "No rooms available",
+    "reviews": "Guests Reviews:",
+    "loading": "Loading..."
+  },
+  "CommentsInD": {
+    "message": "There are no comments for this hotel yet"
+  },
+  "FiltersForD": {
+    "title": "Filters",
+    "start": "Check-in",
+    "end": "Check-out",
+    "price": "Price",
+    "guests": "Guests",
+    "applyBtn": "Apply Filters",
+    "resetBtn": "Reset Filters"
+  },
+  "Card": {
+    "map": "Show in map",
+    "price": "Aviable rooms from",
+    "book": "Book Now"
+  },
+  "Filters": {
+    "title": "Filter By:",
+    "guests": "Guests",
+    "start": "Check-in",
+    "end": "Check-out",
+    "countries": "Country",
+    "all": "All Countries",
+    "stars": "Stars",
+    "price": "Price",
+    "order": "Order By",
+    "direction": "Direction",
+    "applyBtn": "Apply Filters",
+    "resetBtn": "Reset Filters"
+  },
+  "Favorites": {
+    "loading": "Loading...",
+    "title": "All Favorites",
+    "hotel": "Hotel Name",
+    "user": "User Name",
+    "email": "User Email"
+  },
+  "UserFavs": {
+    "title": "My Favorites"
+  },
+  "HistoryBkng": {
+    "title": "My Reservations",
+    "message": "You dont have any reservations yet."
+  },
+  "SingHistBkng": {
+    "from": "From",
+    "to": "to",
+    "nights": "nights",
+    "amount": "Amount paid:"
+  },
+  "Settings": {
+    "title": "Personal Details",
+    "subtitle": "Update your information",
+    "gendSelect": "Select your gender",
+    "male": "Male",
+    "female": "Female",
+    "NonBinary": "Non-binary",
+    "nothing": "I prefer not to say",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "phoneOpt": "Phone number",
+    "name": "name",
+    "lastName": "last_name",
+    "email": "email",
+    "birth": "birth_date",
+    "gender": "gender",
+    "phone": "phone_number",
+    "nationality": "nationality",
+    "addA": "Add a"
+  },
+  "Register": {
+    "title": "Register User",
+    "name": "Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "registerBtn": "Register"
+  },
+  "Login": {
+    "title": "Sign In",
+    "logInBtn": "Sign in",
+    "GlgLogInBtn": "Sign in with Google"
+  },
+  "TryAgain": {
+    "message": "Hotel not found, try with another search."
+  },
+  "CreateForm": {
+    "title": "Post Your Hotel",
+    "stars": "Stars",
+    "optionSt": "Select one...",
+    "country": "Country",
+    "optionCt": "Select one...",
+    "image": "Main Image",
+    "remove": "REMOVE",
+    "post": "POST"
+  },
+  "UpdateForm": {
+    "title": "Update Hotel",
+    "stars": "Stars",
+    "country": "Country",
+    "upload": "Upload Image",
+    "remove": "Remove",
+    "post": "POST"
+  },
+  "LoginAdmin": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password"
+  },
+  "UpdateRooms": {
+    "title": "Update Room",
+    "types": "Types",
+    "SelectType": "Select a room type",
+    "description": "Description",
+    "price": "Price",
+    "numeration": "Numeration",
+    "crntImage": "Current Image: ",
+    "newImage": "New Image: ",
+    "update": "Update"
+  }
+}

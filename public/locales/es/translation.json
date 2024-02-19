@@ -1,0 +1,162 @@
+{
+  "Slider": {
+    "title": "TOP HOTELES DE LA TEMPORADA",
+    "button": "Reserva ahora!!",
+    "subtitle": "Rankeado por nuestros usuarios"
+  },
+  "Trending": {
+    "title": "Destinos que marcan tendencia",
+    "subtitle": "Los países más vistados por gente de América Latina"
+  },
+  "SearchBar": {
+    "placeholder": "Explora hoteles o países",
+    "guests": "Huéspedes",
+    "button": "Buscar"
+  },
+  "NavBar": {
+    "signUp": "Regístrate",
+    "logIn": "Iniciar sesión"
+  },
+  "UserBar": {
+    "welcome": "Bienvenido",
+    "manage": "Configuración de cuenta",
+    "history": "Historial",
+    "favorites": "Favoritos",
+    "out": "Cerrar Sesión"
+  },
+  "Header": {
+    "phrase": "Reserva tu hotel y obtén recuerdos maravillosos"
+  },
+  "Detail": {
+    "address": "Dirección:",
+    "country": "País:",
+    "Website": "Sitio Web:",
+    "select": "Habitaciones Disponibles:",
+    "option": "Elige tu habitación",
+    "noRooms": "No hay disponibilidad",
+    "reviews": "Reseñas:",
+    "loading": "Cargando..."
+  },
+  "CommentsInD": {
+    "message": "Aún no hay comentarios para este hotel"
+  },
+  "FiltersForD": {
+    "title": "Filtros",
+    "start": "Check-in",
+    "end": "Check-out",
+    "price": "Precio",
+    "guests": "Huéspedes",
+    "applyBtn": "Aplicar Filtros",
+    "resetBtn": "Restablecer"
+  },
+  "Card": {
+    "map": "Ver en mapa",
+    "price": "Habitaciones disponibles desde",
+    "book": "Reservar"
+  },
+  "Filters": {
+    "title": "Filtrar Por:",
+    "guests": "Huéspedes",
+    "start": "Check-in",
+    "end": "Check-out",
+    "countries": "País",
+    "all": "Todos los países",
+    "stars": "Estrellas",
+    "price": "Precio",
+    "order": "Ordenar por",
+    "directionOpt": "Dirección",
+    "applyBtn": "Aplicar Filtros",
+    "resetBtn": "Restablecer"
+  },
+  "Favorites": {
+    "loading": "Cargando...",
+    "title": "Todos los favoritos",
+    "hotel": "Nombre del hotel",
+    "user": "Nombre del usuario",
+    "email": "Email del usuario"
+  },
+  "UserFavs": {
+    "title": "Mis Favoritos"
+  },
+  "HistoryBkng": {
+    "title": "Mis Reservas",
+    "message": "Aún no has hecho ninguna reservación."
+  },
+  "SingHistBkng": {
+    "from": "Desde",
+    "to": "hasta",
+    "nights": "noches",
+    "amount": "Monto pagado:"
+  },
+  "Settings": {
+    "title": "Detalles Personales",
+    "subtitle": "Actualiza tu información",
+    "gendSelect": "Selecciona tu género",
+    "male": "Hombre",
+    "female": "Mujer",
+    "NonBinary": "No-binario",
+    "nothing": "Prefiero no decir",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "edit": "Editar",
+    "phoneOpt": "Número de teléfono",
+    "name": "nombre",
+    "lastName": "apellido",
+    "email": "email",
+    "birth": "fecha_de_nacimiento",
+    "gender": "género",
+    "phone": "teléfono",
+    "nationality": "nacionalidad",
+    "addA": "Agregar"
+  },
+  "Register": {
+    "title": "Registrar Usuario",
+    "name": "Nombre",
+    "lastName": "Apellido",
+    "email": "Email",
+    "password": "Contraseña",
+    "registerBtn": "Registrarse"
+  },
+  "Login": {
+    "title": "Inicia Sesión",
+    "logInBtn": "Iniciar sesión",
+    "GlgLogInBtn": "Iniciar sesión con Google"
+  },
+  "TryAgain": {
+    "message": "Hotel no encontrado, prueba con otra búsqueda."
+  },
+  "CreateForm": {
+    "title": "Registra Tu Hotel",
+    "stars": "Estrellas",
+    "optionSt": "Selecciona una...",
+    "country": "País",
+    "optionCt": "Selecciona uno...",
+    "image": "Imagen principal",
+    "remove": "ELIMINAR",
+    "post": "REGISTRAR"
+  },
+  "UpdateForm": {
+    "title": "Actualiza Tu Hotel",
+    "stars": "Estrellas",
+    "country": "País",
+    "upload": "Cargar imagen",
+    "remove": "Eliminar",
+    "post": "REGISTRAR"
+  },
+  "LoginAdmin": {
+    "title": "Inicia Sesión",
+    "email": "Email",
+    "password": "Contraseña"
+  },
+  "UpdateRooms": {
+    "title": "Actualiza Tu Habitación",
+    "types": "Tipos",
+    "SelectType": "Selecciona un tipo de habitación",
+    "description": "Descripción",
+    "price": "Precio",
+    "numeration": "Numeración",
+    "crntImage": "Imagen Actual: ",
+    "newImage": "Nueva Imagen: ",
+    "update": "Actualizar"
+  }
+}

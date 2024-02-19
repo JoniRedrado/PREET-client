@@ -4,6 +4,11 @@ import Pagination from "../Pagination/Pagination";
 import axios from "axios";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { useNavigate, Link } from "react-router-dom";
+// import RankingChart from "./Metrics/MetricRankings/MetricRankings";
+// import MetricUsers from "./Metrics/MetricUsers/MetricUsers";
+// import IncomesChart from "./Metrics/MetricIncomes/MetricIncomes";
+// import BookingsChart from "./Metrics/MetricBookings/MetricBookings";
+// import NetIncomeChart from "./Metrics/MetricNetIncomes/MetricNetIncomes";
 // import NavBarDashboard from "./NavBarDashboard/NavBarDashboard";
 
 const Dashboard = () => {
@@ -50,6 +55,11 @@ const Dashboard = () => {
       </Link>
     </ul>
     <div className="card-container">
+      {/* <MetricUsers/> */}
+      {/* <RankingChart/> */}
+      {/* <IncomesChart/> */}
+      {/* <BookingsChart/> */}
+      {/* <NetIncomeChart/> */}
       <div className="card" >
         <div className="card-body">
           <h5 className="card-title">Estadísticas de reservas</h5>

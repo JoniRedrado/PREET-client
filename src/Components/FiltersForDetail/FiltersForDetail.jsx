@@ -1,14 +1,17 @@
+import { Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetail, DetailFilterParams } from "../../redux/actions";
 import { useParams } from "react-router-dom";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+import { useTranslation } from "react-i18next";
 
 import styles from "./FiltersForDetail.module.css";
 
-const Filters = () => {
+const FiltersForDetail = () => {
   const { darkMode } = useDarkMode();
   const dispatch = useDispatch();
   const { id } = useParams();
+  const { t } = useTranslation();
 
   const defaultFilters = {
     minPrice: "",
@@ -38,11 +41,11 @@ const Filters = () => {
   return (
     <div className={`${styles.sidebar} ${darkMode ? styles.darkMode : ""}`}>
       <div className={styles.filterContainer}>
-        <h2>Filters</h2>
+        <h2>{t("FiltersForD.title")}</h2>
 
         <div className={styles.dates}>
           <div>
-            <p>Start</p>
+            <p>{t("FiltersForD.start")}</p>
             <input
               onChange={handleFilters}
               type="date"
@@ -51,7 +54,7 @@ const Filters = () => {
             />
           </div>
           <div>
-            <p>End</p>
+            <p>{t("FiltersForD.end")}</p>
             <input
               onChange={handleFilters}
               type="date"
@@ -62,7 +65,7 @@ const Filters = () => {
         </div>
 
         <div>
-          <p>Price</p>
+          <p>{t("FiltersForD.price")}</p>
           <div className={styles.inputContainer}>
             <input
               type="number"
@@ -95,7 +98,7 @@ const Filters = () => {
         </div>
 
         <div>
-          <p>Guests</p>
+          <p>{t("FiltersForD.guests")}</p>
           <select
             name="guest"
             value={filters.guest || ""}
@@ -115,10 +118,10 @@ const Filters = () => {
 
         <div className={styles.buttonsContainer}>
           <button onClick={applyFilters} className={styles.applyButton}>
-            Apply Filters
+            {t("FiltersForD.applyBtn")}
           </button>
           <button onClick={handleReset} className={styles.clearButton}>
-            Reset Filters
+            {t("FiltersForD.resetBtn")}
           </button>
         </div>
       </div>
@@ -126,4 +129,10 @@ const Filters = () => {
   );
 };
 
-export default Filters;
+export default function WrappedApp() {
+  return (
+    <Suspense>
+      <FiltersForDetail />
+    </Suspense>
+  );
+}

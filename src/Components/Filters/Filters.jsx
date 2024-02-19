@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import {
   filterHotels,
   filterParams,
@@ -7,13 +7,15 @@ import {
   getAllHotels,
 } from "../../redux/actions";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+import { useTranslation } from "react-i18next";
 import styles from "./Filters.module.css";
 
 const Filters = () => {
   const dispatch = useDispatch();
-  const { darkMode } = useDarkMode(); 
-  const [selectedStars, setSelectedStars] = useState([1, 2, 3, 4, 5])
-  const [guest, setGuest] = useState(1)
+  const { darkMode } = useDarkMode();
+  const { t } = useTranslation();
+  const [selectedStars, setSelectedStars] = useState([1, 2, 3, 4, 5]);
+  const [guest, setGuest] = useState(1);
   const defaultFilters = {
     country: "",
     stars: 5,
@@ -23,14 +25,13 @@ const Filters = () => {
     direction: "",
     startDate: "",
     endDate: "",
-    guest: 1
+    guest: 1,
   };
 
   const filters = useSelector((state) => state.submitFilters) || defaultFilters;
 
   const allCountries = useSelector((state) => state.countries);
 
-  
   const handleFilters = (e) => {
     const { name, value } = e.target;
     dispatch(filterParams({ ...filters, [name]: value }));
@@ -40,7 +41,7 @@ const Filters = () => {
     dispatch(filterParams(defaultFilters));
     dispatch(resetCurrentPage());
     dispatch(getAllHotels());
-    setSelectedStars([1, 2, 3, 4, 5])
+    setSelectedStars([1, 2, 3, 4, 5]);
     console.log(defaultFilters);
   };
 
@@ -50,52 +51,72 @@ const Filters = () => {
   };
 
   const handleStarClick = (star) => {
-    const newSelectedStars = [1, 2, 3, 4, 5].filter((selectedStar) => selectedStar <= star);
+    const newSelectedStars = [1, 2, 3, 4, 5].filter(
+      (selectedStar) => selectedStar <= star
+    );
     setSelectedStars(newSelectedStars);
-    dispatch(filterParams({ ...filters, stars: star}));
+    dispatch(filterParams({ ...filters, stars: star }));
   };
 
   //Contador para la cantidad de personas
   const handleDecrease = () => {
     if (guest > 1) {
-      setGuest(guest - 1)
-      dispatch(filterParams({...filters, guest: guest - 1}))
+      setGuest(guest - 1);
+      dispatch(filterParams({ ...filters, guest: guest - 1 }));
     }
-  }
+  };
 
   const handleIncrease = () => {
-      setGuest(guest + 1)
-      dispatch(filterParams({...filters, guest: guest + 1}))
-  }
+    setGuest(guest + 1);
+    dispatch(filterParams({ ...filters, guest: guest + 1 }));
+  };
 
   const handleGuest = (e) => {
-    e.preventDefault()
-    setGuest(e.target.value)
-    dispatch(filterParams({...filters, guest: e.target.value}))
-  }
-  
+    e.preventDefault();
+    setGuest(e.target.value);
+    dispatch(filterParams({ ...filters, guest: e.target.value }));
+  };
+
   return (
     <div className={`${styles.sidebar} ${darkMode ? styles.darkMode : ""}`}>
       <div className={styles.filterContainer}>
-        <h2>Filter By:</h2>
+        <h2>{t("Filters.title")}</h2>
         <div>
-          <p>Persons</p>
-            <button onClick={handleDecrease}> - </button>
-            <input type="text" name="guest" value={guest} onChange={handleGuest} className={styles.personsCounterInput} />
-            <button onClick={handleIncrease}> + </button>
+          <p>{t("Filters.guests")}</p>
+          <button onClick={handleDecrease}> - </button>
+          <input
+            type="text"
+            name="guest"
+            value={guest}
+            onChange={handleGuest}
+            className={styles.personsCounterInput}
+          />
+          <button onClick={handleIncrease}> + </button>
         </div>
         <div className={styles.dates}>
           <div className={styles.date}>
-            <p>Start</p>
-            <input onChange={handleFilters} type="date" name="startDate" value={filters.startDate || ""} className={styles.dateInput} />
+            <p>{t("Filters.start")}</p>
+            <input
+              onChange={handleFilters}
+              type="date"
+              name="startDate"
+              value={filters.startDate || ""}
+              className={styles.dateInput}
+            />
           </div>
           <div className={styles.date}>
-            <p>End</p>
-            <input onChange={handleFilters} type="date" name="endDate" value={filters.endDate || ""} className={styles.dateInput} />
+            <p>{t("Filters.end")}</p>
+            <input
+              onChange={handleFilters}
+              type="date"
+              name="endDate"
+              value={filters.endDate || ""}
+              className={styles.dateInput}
+            />
           </div>
         </div>
         <div className={styles.countriesContainer}>
-          <p>Countries</p>
+          <p>{t("Filters.countries")}</p>
           <select
             name="country"
             value={filters.country || ""}
@@ -103,7 +124,7 @@ const Filters = () => {
             className={styles.select}
           >
             <option className={styles.option} value="">
-              All Countries
+              {t("Filters.all")}
             </option>
             {allCountries &&
               allCountries.map((country, index) => (
@@ -115,22 +136,28 @@ const Filters = () => {
         </div>
 
         <div className={styles.starsSelect}>
-          <p>Stars</p>
+          <p>{t("Filters.stars")}</p>
           <div className={styles.starsButtonsContainer}>
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <button
-                    key={star}
-                    className={`${styles.starButton} ${selectedStars.includes(star) ? styles.activeStar : styles.unactiveStar}`}
-                    onClick={() => handleStarClick(star)}>
-                  <span role="img" aria-label="star">&#x2605;</span>
-                  </button>
-                ))}
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                className={`${styles.starButton} ${
+                  selectedStars.includes(star)
+                    ? styles.activeStar
+                    : styles.unactiveStar
+                }`}
+                onClick={() => handleStarClick(star)}
+              >
+                <span role="img" aria-label="star">
+                  &#x2605;
+                </span>
+              </button>
+            ))}
           </div>
-         
         </div>
 
         <div className={styles.priceSelect}>
-          <p>Price</p>
+          <p>{t("Filters.price")}</p>
           <div className={styles.inputContainer}>
             <input
               type="number"
@@ -164,7 +191,7 @@ const Filters = () => {
 
         <div className={styles.orderContainer}>
           <div className={styles.orderByContainer}>
-            <p>Order By </p>
+            <p>{t("Filters.order")}</p>
             <select
               name="orderBy"
               value={filters.orderBy || ""}
@@ -172,22 +199,22 @@ const Filters = () => {
               className={styles.select2}
             >
               <option value="" disabled className={styles.option} hidden>
-                Order by
+                {t("Filters.order")}
               </option>
               <option value="countryId" className={styles.option}>
-                Country
+                {t("Filters.countries")}
               </option>
               <option value="stars" className={styles.option}>
-                Stars
+                {t("Filters.stars")}
               </option>
               <option value="price" className={styles.option}>
-                Price
+                {t("Filters.price")}
               </option>
             </select>
           </div>
 
           <div className={styles.directionContainer}>
-            <p>Direction </p>
+            <p>{t("Filters.direction")}</p>
             <select
               name="direction"
               value={filters.direction || ""}
@@ -195,7 +222,7 @@ const Filters = () => {
               className={styles.select2}
             >
               <option value="" disabled hidden className={styles.option}>
-                Direction
+                {t("Filters.direction")}
               </option>
               <option value="ASC" className={styles.option}>
                 ↑
@@ -208,10 +235,10 @@ const Filters = () => {
         </div>
         <div className={styles.buttonsContainer}>
           <button onClick={applyFilters} className={styles.applyButton}>
-            Apply Filters
+            {t("Filters.applyBtn")}
           </button>
           <button onClick={handleReset} className={styles.clearButton}>
-            Clear Filters
+            {t("Filters.resetBtn")}
           </button>
         </div>
       </div>
@@ -219,4 +246,10 @@ const Filters = () => {
   );
 };
 
-export default Filters;
+export default function WrappedApp() {
+  return (
+    <Suspense>
+      <Filters />
+    </Suspense>
+  );
+}
