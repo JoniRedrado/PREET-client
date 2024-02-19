@@ -17,6 +17,20 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.container-detail-button {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #022840;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.container-detail-button:hover {
+  background-color: #6093bf;
+}
+
 .icons {
   display: flex;
   justify-content: space-around;
@@ -114,20 +128,79 @@
   overflow-y: auto;
 }
 
-.modal button {
-  cursor: pointer;
-  margin-bottom: 8px;
-  font-size: 13px;
-  /* font-weight: bold; */
-  color: #fff;
-  background-color: #082c44;
-}
-
-.modal .return {
+.modal .return{
   position: absolute;
   cursor: pointer;
   margin: 10px;
   margin-top: 10px;
   font-size: 25px;
   color: #082c44;
+}
+
+.reviews-title {
+  width: 800px;
+  background-color: #022840;
+  color: white;
+}
+
+.review-box-container {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+
+.stars-buttons-container {
+  display: flex;
+  margin: -30px 0 20px -10px
+}
+
+.star-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.active-star {
+  font-size: 35px;
+  color: #FFBC00
+}
+
+.unactive-star {
+  font-size: 35px;
+  color: grey
+}
+
+.review-stars {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: -30px;
+}
+
+.review-tag {
+  font-size: 20px;
+}
+
+.review-comment-textarea {
+  width: 700px;
+  height: 200px;
+  border-radius: 10px;
+  margin-top: -10px;
+  padding: 20px;
+}
+
+.review-submit-button {
+  width: 100px;
+  margin-top: 10px;
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #022840;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.review-submit-button:hover {
+  background-color: #6093bf;
 }
