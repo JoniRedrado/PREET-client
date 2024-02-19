@@ -1,5 +1,5 @@
 import axios from "axios"
-import NavBarDashboard from "../NavBarDashboard/NavBarDashboard";
+// import NavBarDashboard from "../NavBarDashboard/NavBarDashboard";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./GestionFeedBack.modules.css"
@@ -25,7 +25,7 @@ const GestionFeedBack = () => {
 
     return(
         <div>
-            <NavBarDashboard/>
+            {/* <NavBarDashboard/> */}
             este es el FeedBack
         </div>
     )

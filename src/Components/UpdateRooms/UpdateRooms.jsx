@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, Suspense } from "react";
-import NavBarDashboard from "../Dashboard/NavBarDashboard/NavBarDashboard";
+// import NavBarDashboard from "../Dashboard/NavBarDashboard/NavBarDashboard";
 import { useTranslation } from "react-i18next";
 import "./UpdateRooms.modules.css";
 

@@ -24,33 +24,36 @@ import { useDarkMode } from "./DarkModeContext/DarkModeContext";
 import { useEffect, useState} from "react";
 import UpdateRooms from "./Components/UpdateRooms/UpdateRooms";
 import BookingDetails from "./Pages/BookingDetail/BookingDetails";
+import CreateRooms from "./Components/CreateRooms/CreateRooms"
 // import './App.css'
 
 function App() {
 
   const { darkMode } = useDarkMode();
   const location = useLocation();
-  const [showHeader, setShowHeader] = useState(true)
+  // const [showHeader, setShowHeader] = useState(true)
 
-  useEffect(() =>{
-    setShowHeader(   
-                  location.pathname !== "/admin"  
-                  && location.pathname !== "/dashboard"  
-                  && location.pathname !== "/favorites" 
-                  && location.pathname !== "/dashboard/users"
-                  && location.pathname !== "/dashboard/hotels"
-                  && location.pathname !== "/dashboard/rooms"
-                  && location.pathname !== "/dashboard/feedback"
-                  && location.pathname !== "/update/:id"
-                  && location.pathname !== "/updaterooms/:id"
-                  && location.pathname !== "/create"
+  // useEffect(() =>{
+  //   setShowHeader(   
+                  // location.pathname !== "/admin"  
+                  // && location.pathname !== "/dashboard"  
+                  // && location.pathname !== "/favorites" 
+                  // && location.pathname !== "/dashboard/users"
+                  // && location.pathname !== "/dashboard/hotels"
+                  // && location.pathname !== "/dashboard/rooms"
+                  // && location.pathname !== "/dashboard/feedback"
+                  // && location.pathname !== "/update/:id"
+                  // && location.pathname !== "/updaterooms/:id"
+                  // && location.pathname !== "/create"
 
-                );
-  }, [location.pathname])
+  //               );
+  // }, [location.pathname])
 
   return (
     <div className={`${styles.mainDiv} ${darkMode ? styles.darkMode : ''}`}>
-      {showHeader && <Header />}
+      {/* {showHeader && <Header />} */}
+      <Header />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/detail/:id" element={<Detail />} />
@@ -72,6 +75,7 @@ function App() {
         <Route path="/dashboard/rooms" element={<GestionRooms/>} />
         <Route path="/updaterooms/:id" element={<UpdateRooms/>} />
         <Route path="/bookingDetails/:id" element={<BookingDetails/>} />
+        <Route path="/createrooms" element={<CreateRooms/>} />
       </Routes>
       <Footer/>
     </div>

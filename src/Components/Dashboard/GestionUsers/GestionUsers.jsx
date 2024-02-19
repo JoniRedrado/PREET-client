@@ -1,23 +1,31 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NavBarDashboard from "../NavBarDashboard/NavBarDashboard"
-
-
+// import NavBarDashboard from "../NavBarDashboard/NavBarDashboard"
 import "./GestionUsers.modules.css";
 
 const GestionUsers = () =>{
 
-    const [usersData, setUsersData] = useState([])
-    const [usersDelete, setUsersDelete] = useState([]);
-    const [showDeletedUsers, setShowDeletedUsers] = useState(false);
+  const [usersData, setUsersData] = useState([])
+  const [usersDelete, setUsersDelete] = useState([]);
+  const [showDeletedUsers, setShowDeletedUsers] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
+  const [totalPages, setTotalPages] = useState(0);
+  const [searchInput, setSearchInput] = useState('');
 
-    const getUsers = async() => {
+
+  const getUsers = async(query) => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/users`);
-      console.log(data);
-      setUsersData(data)
-
+      const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/users`,{
+        params: { ...query, page: currentPage, size: pageSize }
+      });
+      if (Array.isArray(data.users)) {
+        setUsersData(data.users);
+    } else {
+        console.error("Data received is not an array:", data);
+    }
+    setTotalPages(Math.ceil(data.total / pageSize));
     } catch (error) {
       console.error(error.message);
     }
@@ -54,76 +62,116 @@ const GestionUsers = () =>{
     }
   };
 
-    useEffect(() => {
-        getUsers()
-    }, [])
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
-    const handleShowDeletedUsers = () => {
-      setShowDeletedUsers(!showDeletedUsers);
-      if (!showDeletedUsers) {
-        getUsersDeleted();
-      }
-    };
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
-    return(
-        <>
-          <NavBarDashboard/>
+  const handleSearchInput = (event) => {
+    setSearchInput(event.target.value);
+  };
 
-          <Link to={"/dashboard"}>
-            <i class="bi bi-arrow-left-circle"></i>
-          </Link>
-          <button onClick={handleShowDeletedUsers} type="button" class="btn btn-primary btn-lg">
-            {showDeletedUsers ? "Hide Deleted Users" : "Show Deleted Users"}
-          </button>
-          {showDeletedUsers && (
-            <table className="table">
-              <thead className="table-dark">
+  const handleSearch = () => {
+    getUsers({ name: searchInput });
+  };
+
+  useEffect(() => {
+    getUsers({})
+  }, [currentPage, pageSize])
+
+  const handleShowDeletedUsers = () => {
+    setShowDeletedUsers(!showDeletedUsers);
+    if (!showDeletedUsers) {
+      getUsersDeleted();
+    }
+  };
+
+  return(
+    <>
+      <div className=".search-dashboard">
+        {/* <NavBarDashboard/> */}
+        <div>
+        <input
+          type="text"
+          placeholder="name"
+          onChange={handleSearchInput}
+          name='name'
+          value={searchInput}
+        />
+        <button onClick={handleSearch}>Search</button>
+        </div>
+      </div>
+        
+        <Link to={"/dashboard"}>
+          <i className="bi bi-arrow-left-circle"></i>
+        </Link>
+        <button onClick={handleShowDeletedUsers} type="button" className="btn btn-primary btn-lg">
+          {showDeletedUsers ? "Hide Deleted Users" : "Show Deleted Users"}
+        </button>
+        {showDeletedUsers && (
+          <table className="table">
+            <thead className="table-dark">
               <tr>
                 <th>Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Actions</th>
                </tr>
-              </thead>
-              <tbody>
+            </thead>
+            <tbody>
               {usersDelete.map((deletedUser) => (
-              <tr key={deletedUser.id}>
-                <td>{deletedUser.name}</td>
-                <td>{deletedUser.last_name}</td>
-                <td>{deletedUser.email}</td>
-                <td>
-                  <i onClick={() => restoreUser(deletedUser.id)} class="bi bi-arrow-counterclockwise"></i>
-                </td>
-              </tr>
-            ))}
-              </tbody>
-            </table>
-          )}
-        
+                <tr key={deletedUser.id}>
+                  <td>{deletedUser.name}</td>
+                  <td>{deletedUser.last_name}</td>
+                  <td>{deletedUser.email}</td>
+                  <td>
+                    <i onClick={() => restoreUser(deletedUser.id)} className="bi bi-arrow-counterclockwise"></i>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
         <table className="table">
-           <thead className="table-dark">
-             <tr>
-               <th>Name</th>
-               <th>Last Name</th>
-               <th>Email</th>
+          <thead className="table-dark">
+            <tr>
+              <th>Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
               <th>Actions</th>
-             </tr>
-           </thead>
-           <tbody>
-             {usersData && usersData.map((user) => (
-              <tr key={user.id}>
-                <td>{user.name}</td>
-                <td>{user.last_name}</td>
-                <td>{user.email}</td>
-                <td>
-                    <i className="bi bi-dash-circle-fill" title="Delete" onClick={() => deleteUser(user.id)}></i>
-                </td>
-              </tr>
-            ))}
+            </tr>
+          </thead>
+          <tbody>
+            {Array.isArray(usersData) && usersData.map((user) => (
+            <tr key={user.id}>
+              <td>{user.name}</td>
+              <td>{user.last_name}</td>
+              <td>{user.email}</td>
+              <td>
+                <i className="bi bi-dash-circle-fill" title="Delete" onClick={() => deleteUser(user.id)}></i>
+              </td>
+            </tr>
+          ))}
           </tbody>
         </table> 
-        </>
-    )
+        <div>
+        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <span>{currentPage}</span>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+          Next
+        </button>
+        </div>
+    </>
+  )
 }
 
 export default GestionUsers

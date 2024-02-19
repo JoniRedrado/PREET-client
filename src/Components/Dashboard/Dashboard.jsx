@@ -4,17 +4,27 @@ import Pagination from "../Pagination/Pagination";
 import axios from "axios";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { useNavigate, Link } from "react-router-dom";
-import NavBarDashboard from "./NavBarDashboard/NavBarDashboard";
+// import RankingChart from "./Metrics/MetricRankings/MetricRankings";
+// import MetricUsers from "./Metrics/MetricUsers/MetricUsers";
+// import IncomesChart from "./Metrics/MetricIncomes/MetricIncomes";
+// import BookingsChart from "./Metrics/MetricBookings/MetricBookings";
+// import NetIncomeChart from "./Metrics/MetricNetIncomes/MetricNetIncomes";
+// import NavBarDashboard from "./NavBarDashboard/NavBarDashboard";
 
 const Dashboard = () => {
   return(
     <div>
-    <NavBarDashboard/>
+    {/* <NavBarDashboard/> */}
     <div className="sidebar-card">
       <ul className="nav flex-column">
       <Link to={"/create"}>
         <li className="nav-item">
           <a className="nav-link active" aria-current="page" href="#">Post your Hotel</a>
+        </li>
+      </Link>
+      <Link to={"/createrooms"}>
+        <li className="nav-item">
+          <a className="nav-link active" aria-current="page" href="#">Post your Room</a>
         </li>
       </Link>
       <Link to={"/"}>
@@ -45,6 +55,11 @@ const Dashboard = () => {
       </Link>
     </ul>
     <div className="card-container">
+      {/* <MetricUsers/> */}
+      {/* <RankingChart/> */}
+      {/* <IncomesChart/> */}
+      {/* <BookingsChart/> */}
+      {/* <NetIncomeChart/> */}
       <div className="card" >
         <div className="card-body">
           <h5 className="card-title">Estadísticas de reservas</h5>
