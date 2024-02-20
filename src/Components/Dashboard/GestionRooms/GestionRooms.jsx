@@ -16,21 +16,15 @@ const GestionRooms = () => {
   const [searchInput, setSearchInput] = useState('');
   const [typeInput, setTypeInput] = useState(''); 
 
-  // const getRooms = async (query) => {
-  //   try {
-  //     const {data} = await axios.get(`${import.meta.env.VITE_BACK_URL}/rooms`,{
-  //       params: { ...query, page: currentPage, size: pageSize, type: typeInput }
-  //     })
-  //     if (Array.isArray(data.rooms)) {
-  //       setRoomsData(data.rooms);
-  //     } else {
-  //       console.error("Data received is not an array:", data);
-  //     }
-  //     setTotalPages(Math.ceil(data.total / pageSize));
-  //     } catch (error) {
-  //       console.error(error.message);  
-  //     }
-  // }
+  const roomsType = [
+    'Estandar',
+    'Superior',
+    'Deluxe',
+    'Junior Suite',
+    'Suite Estandar',
+    'Suite Presidencial'
+  ];
+
 
   const getRooms = async () => {
     try {
@@ -112,14 +106,14 @@ const GestionRooms = () => {
       <i className="bi bi-arrow-left-circle"></i>
     </Link>
     <div>
-      <input
-        type="text"
-        placeholder="Type"
-        onChange={handleTypeInput}
-        value={typeInput}
-      />
-      <button onClick={handleSearch}>Search</button>
-    </div>
+        <select value={typeInput} onChange={handleTypeInput}>
+          <option value="">Select Type</option>
+          {roomsType.map((type) => (
+            <option key={type} value={type}>{type}</option>
+          ))}
+        </select>
+        <button onClick={handleSearch}>Search</button>
+      </div>
     <button onClick={handleShowDeletedRooms} type="button" className="btn btn-primary btn-lg">
       {showDeletedRooms ? "Hide Deleted Rooms" : "Show Deleted Rooms"}   
     </button>

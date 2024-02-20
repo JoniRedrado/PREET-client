@@ -7,6 +7,7 @@ import RankingChart from "./Metrics/MetricRankings/MetricRankings";
 import MetricUsers from "./Metrics/MetricUsers/MetricUsers";
 import BookingsChart from "./Metrics/MetricBookings/MetricBookings";
 import CombinedCharts from "./Metrics/MetricNetIncomes/MetricNetIncomes";
+import DateRangePicker from './Date/Date';
 import logo from "../../assets/logo.jpg"
 import { MdPeople, MdAdd, MdHotel } from "react-icons/md";
 import { FaHotel, FaHome, FaArrowLeft } from "react-icons/fa";
@@ -26,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const classes = useStyles();
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
+
+  const handleDateRangeSelect = (start, end) => {
+    setSelectedStartDate(start);
+    setSelectedEndDate(end);
+    // Aquí puedes realizar cualquier acción adicional, como actualizar tus gráficos con las nuevas fechas seleccionadas
+  };
 
   const handleDrawerOpen = () => {
     setOpenDrawer(true);
@@ -108,6 +117,7 @@ const Dashboard = () => {
         <BookingsChart />
         <CombinedCharts />
       </div>
+      <DateRangePicker onSelectDateRange={handleDateRangeSelect} />
     </div>
   );
 };
