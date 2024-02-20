@@ -1,6 +1,6 @@
 import styles from "./BookingDetails.module.css"
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom'; 
+import { useParams, Link } from 'react-router-dom'; 
 import axios from "axios";
 
 const BookingDetails = () => {
@@ -39,6 +39,9 @@ const BookingDetails = () => {
   }
   return (
     <div className={styles.mainContainer}>
+            <Link to="/myReservations" className={styles.backButton}>
+        &lt; Back
+      </Link>
       <h1 className={styles.title}>Booking Details</h1>
       <div className={styles.bookingInfo}>
         <h2>Booking Information</h2>

@@ -2,7 +2,7 @@ import { useState, Suspense } from "react";
 import { filterParams, filterHotels, specificPage } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import s from "../SearchBar/SearchBar.module.css"
-import { FaSearch } from "react-icons/fa"
+import { FaSearch, FaLocationArrow } from "react-icons/fa"
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -13,7 +13,6 @@ const SearchBar = () => {
 
   const [searchInput, setSearchInput] = useState("");
   const [guest, setGuest] = useState(1);
-
 
   const defaultFilters = {
     name: "",
@@ -47,7 +46,6 @@ const SearchBar = () => {
     navigate(`/search/`);
   }
 
-  //Contador para la cantidad de personas
   const handleDecrease = () => {
     if (guest > 1) {
       setGuest(guest - 1)
@@ -56,21 +54,31 @@ const SearchBar = () => {
   }
 
   const handleIncrease = () => {
-      setGuest(guest + 1)
-      dispatch(filterParams({...filters, guest: guest + 1}))
+      if (guest < 6) { // Limitar el número máximo de personas a 6
+        setGuest(guest + 1)
+        dispatch(filterParams({...filters, guest: guest + 1}))
+      }
   }
 
-  const handleGuest = (e) => {
-    e.preventDefault()
-    setGuest(e.target.value)
-    dispatch(filterParams({...filters, guest: e.target.value}))
-  }
+  // Manejar el cambio en el input del contador de personas
+  const handleGuestChange = (e) => {
+    // Este método evitará que el usuario modifique directamente el valor del input
+    // Utilizamos el valor actual de 'guest' en lugar del valor ingresado por el usuario
+    // Esto asegurará que el valor sea consistente con los botones de incremento y decremento
+    e.preventDefault();
+    const value = parseInt(e.target.value, 10); // Convertir el valor a entero
+    if (!isNaN(value) && value >= 1 && value <= 6) { // Verificar si el valor está en el rango válido
+      setGuest(value);
+      dispatch(filterParams({...filters, guest: value}));
+    }
+  };
 
-  //console.log(filters);
   return (
     <div className={s.container}>
       <div className={s.searchBar}>
-        <FaSearch className={s.searchIcon} />
+        <div className={s.iconContainer}>
+          <FaLocationArrow className={s.searchIcon} />
+        </div>
         <input
           className={s.searchInput}
           type="text"
@@ -82,20 +90,34 @@ const SearchBar = () => {
       </div>
       <div className={s.filters}>
         <div className={s.date}>
-          <p className={s.check}>Check-in</p>
+          <div className={s.checkContainer}>
+            <p className={s.check}>Check-in</p>
+          </div>
           <input type="date" name='startDate' onChange={handleFilters} className={ s.dateInput } />
         </div>
         <div className={s.date}>
-          <p className={s.check}>Check-out</p>
+          <div className={s.checkContainer}>
+            <p className={s.check}>Check-out</p>
+          </div>
           <input type="date" name='endDate' onChange={handleFilters} className={ s.dateInput }/>
         </div>
-        <div>
-          <p>{t("SearchBar.guests")}</p>
+        <div className={s.persons}>
+          <p>Guests: </p>
+          <div className={s.buttonContainer}>
             <button onClick={handleDecrease}> - </button>
-            <input type="text" name="guest" value={guest} onChange={handleGuest} className={s.personsCounterInput} />
+            {/* Utilizamos readOnly para evitar la edición directa del input */}
+            <input 
+              type="text" 
+              name="guest" 
+              value={guest} 
+              readOnly
+              onChange={handleGuestChange} 
+              className={s.personsCounterInput} 
+            />
             <button onClick={handleIncrease}> + </button>
+          </div>
         </div>
-        <button onClick={handleSubmit} className={s.searchButton}>{t("SearchBar.button")}</button>
+        <button onClick={handleSubmit} className={s.searchButton}>Search <FaSearch className={s.buttonIcon}/></button>
       </div>
     </div>
   );

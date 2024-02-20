@@ -1,18 +1,80 @@
 .reservations-container {
-    margin: 20px;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 10px;
 }
 
 .reservations-title {
-    margin-left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .empty-history {
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top:50px;
+    text-align: center;
+    margin-top: 50px;
 }
 
 .empty-history img {
     width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.empty-history h1 {
+    font-size: 20px;
+    color: #555;
+}
+
+.reservation-card {
+    display: flex;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+.reservation-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-container {
+    flex: 0 0 30%;
+    overflow: hidden;
+}
+
+.reservation-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.reservation-info {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.reservation-info h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.reservation-info p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.reservation-info p strong {
+    font-weight: bold;
+}
+
+.reservation-info p span {
+    color: #777;
 }
