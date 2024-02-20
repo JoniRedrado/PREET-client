@@ -54,8 +54,10 @@ const SearchBar = () => {
   }
 
   const handleIncrease = () => {
-      setGuest(guest + 1)
-      dispatch(filterParams({...filters, guest: guest + 1}))
+      if (guest < 6) { // Limitar el número máximo de personas a 6
+        setGuest(guest + 1)
+        dispatch(filterParams({...filters, guest: guest + 1}))
+      }
   }
 
   // Manejar el cambio en el input del contador de personas
@@ -64,7 +66,11 @@ const SearchBar = () => {
     // Utilizamos el valor actual de 'guest' en lugar del valor ingresado por el usuario
     // Esto asegurará que el valor sea consistente con los botones de incremento y decremento
     e.preventDefault();
-    setGuest(e.target.value);
+    const value = parseInt(e.target.value, 10); // Convertir el valor a entero
+    if (!isNaN(value) && value >= 1 && value <= 6) { // Verificar si el valor está en el rango válido
+      setGuest(value);
+      dispatch(filterParams({...filters, guest: value}));
+    }
   };
 
   return (
