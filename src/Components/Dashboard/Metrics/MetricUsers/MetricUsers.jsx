@@ -1,10 +1,10 @@
+import axios from "axios"
 import { useEffect, useState } from 'react';
-import { Bar } from 'react-chartjs-2';
-import axios from 'axios';
-import "./MetricUsers.modules.css"
+import "./MetricUsers.modules.css";
+import * as echarts from 'echarts';
 
 const MetricUsers = () => {
-    const [chartData, setChartData] = useState({});
+    const [chartData, setChartData] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,30 +22,80 @@ const MetricUsers = () => {
                     }
                 });
 
-                    console.log(response.data);
+                console.log(response.data);
+
                 if (response.data) {
                     // Extraer los datos de la respuesta y prepararlos para la gráfica
                     const data = response.data.map(item => ({
-                        nationality: item.nationality,
-                        user_count: item.user_count
+                        value: item.user_count,
+                        name: item.nationality
                     }));
 
-                    // Configurar los datos para la gráfica
-                    const chartData = {
-                        labels: data.map(item => item.nationality),
-                        datasets: [
-                            {
-                                label: 'Número de Usuarios',
-                                data: data.map(item => item.user_count),
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1,
+                    // Configurar los datos para el gráfico de ECharts
+                    const chartDom = document.getElementById('chart');
+                    const myChart = echarts.init(chartDom);
+
+                    const option = {
+                        grid: {
+                            top: 10,
+                            bottom: 30,
+                            left: 150,
+                            right: 80
+                        },
+                        xAxis: {
+                            max: 'dataMax',
+                            axisLabel: {
+                                formatter: function (n) {
+                                    return Math.round(n) + '';
+                                }
+                            }
+                        },
+                        yAxis: {
+                            type: 'category',
+                            inverse: true,
+                            axisLabel: {
+                                show: true,
+                                fontSize: 14,
+                                formatter: function (value) {
+                                    return value;
+                                }
                             },
+                            animationDuration: 300,
+                            animationDurationUpdate: 300
+                        },
+                        series: [
+                            {
+                                realtimeSort: true,
+                                seriesLayoutBy: 'column',
+                                type: 'bar',
+                                itemStyle: {
+                                    color: function (param) {
+                                        return '#5470c6'; // color predeterminado
+                                    }
+                                },
+                                encode: {
+                                    x: 'value',
+                                    y: 'name'
+                                },
+                                label: {
+                                    show: true,
+                                    precision: 1,
+                                    position: 'right',
+                                    valueAnimation: true,
+                                    fontFamily: 'monospace'
+                                }
+                            }
                         ],
+                        animationDuration: 0,
+                        animationDurationUpdate: 2000,
+                        animationEasing: 'linear',
+                        animationEasingUpdate: 'linear'
                     };
 
-                    // Establecer los datos de la gráfica en el estado
-                    setChartData(chartData);
+                    myChart.setOption(option);
+
+                    // Establecer los datos del gráfico en el estado (no es necesario en este caso)
+                    setChartData(option);
                 }
             } catch (error) {
                 console.error('Error fetching user metrics:', error);
@@ -56,27 +106,10 @@ const MetricUsers = () => {
         fetchData();
     }, []);
 
-    if (!chartData || !chartData.datasets || chartData.datasets.length === 0) {
-        return null;
-    }
-
-
     return (
         <div>
-            <h2>Gráfico de Usuarios por Nacionalidad</h2>
-            <div style={{ height: '400px', width: '600px' }}>
-                <Bar 
-                    data={chartData} 
-                    options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: {
-                                type: 'category'
-                            }
-                        }
-                    }} 
-                />
-            </div>
+            <h2>Users by nationality</h2>
+            <div id="chart" style={{ height: '400px', width: '600px' }}></div>
         </div>
     );
 };

@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs-2';
+import * as echarts from 'echarts';
+import { useEffect } from 'react';
 import axios from 'axios';
 
-const NetIncomeChart = () => {
-  const [chartData, setChartData] = useState({});
-
+const CombinedCharts = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -14,37 +12,53 @@ const NetIncomeChart = () => {
         currentDate.setMonth(currentDate.getMonth() - 1); // Restar un mes para obtener la fecha de inicio
         const startDate = currentDate.toISOString(); // Fecha de inicio en formato ISO
 
-        // Realizar la solicitud con las fechas actuales
-        const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/metrics/netIncome`, {
+        // Realizar la solicitud con las fechas actuales para los ingresos brutos
+        const incomesResponse = await axios.get(`${import.meta.env.VITE_BACK_URL}/metrics/incomes`, {
           params: {
             start_date: startDate,
             end_date: endDate
           }
         });
 
-        console.log(response.data);
-
-        const data = response.data;
-
-        // Procesar los datos para configurar el gráfico
-        const hotelNames = data.map(item => item.name);
-        const netIncomes = data.map(item => item.net_incomes);
-
-        // Configurar los datos para el gráfico de barras
-        setChartData({
-          labels: hotelNames,
-          datasets: [
-            {
-              label: 'Ingresos Netos',
-              data: netIncomes,
-              backgroundColor: 'rgba(255, 99, 132, 0.6)',
-              borderColor: 'rgba(255, 99, 132, 1)',
-              borderWidth: 1,
-            },
-          ],
+        // Realizar la solicitud con las fechas actuales para los ingresos netos
+        const netIncomesResponse = await axios.get(`${import.meta.env.VITE_BACK_URL}/metrics/netIncome`, {
+          params: {
+            start_date: startDate,
+            end_date: endDate
+          }
         });
+
+        // Procesar los datos de ingresos brutos
+        const totalIncomesData = incomesResponse.data.map(item => [item.name, item.incomes]);
+
+        // Procesar los datos de ingresos netos
+        const totalNetIncomesData = netIncomesResponse.data.map(item => [item.name, item.net_incomes]);
+
+        const chartDom = document.getElementById('main');
+        const myChart = echarts.init(chartDom);
+
+        const option = {
+          
+          legend: {},
+          tooltip: {},
+          dataset: {
+            source: [
+              ['hotel', 'Total Revenue', 'Net Income'],
+              ...totalIncomesData.map(item => [item[0], item[1], null]), // Insertar ingresos brutos
+              ...totalNetIncomesData.map(item => [item[0], null, item[1]]) // Insertar ingresos netos
+            ]
+          },
+          xAxis: { type: 'category' },
+          yAxis: { type: 'value', axisLabel: { formatter: '{value} $' } }, // Formatear etiquetas del eje y como dinero
+          series: [
+            { type: 'bar' },
+            { type: 'bar' }
+          ],
+        };
+
+        option && myChart.setOption(option);
       } catch (error) {
-        console.error('Error fetching net incomes:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
@@ -52,13 +66,8 @@ const NetIncomeChart = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Ingresos Netos de Hoteles</h2>
-      <div style={{ height: '400px', width: '600px' }}>
-        <Bar data={chartData} options={{ maintainAspectRatio: false }} />
-      </div>
-    </div>
+      <div id="main" style={{ height: '400px', width: '600px' }}></div>
   );
 };
 
-export default NetIncomeChart;
+export default CombinedCharts;
