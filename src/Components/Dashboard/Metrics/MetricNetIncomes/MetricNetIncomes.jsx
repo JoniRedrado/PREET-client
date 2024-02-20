@@ -1,30 +1,26 @@
 import * as echarts from 'echarts';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import axios from 'axios';
 
-const CombinedCharts = () => {
+const CombinedCharts = ({ startDate, endDate }) => {
+  const chartRef = useRef(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Obtener fechas actuales
-        const currentDate = new Date();
-        const endDate = currentDate.toISOString(); // Fecha actual en formato ISO
-        currentDate.setMonth(currentDate.getMonth() - 1); // Restar un mes para obtener la fecha de inicio
-        const startDate = currentDate.toISOString(); // Fecha de inicio en formato ISO
-
         // Realizar la solicitud con las fechas actuales para los ingresos brutos
         const incomesResponse = await axios.get(`${import.meta.env.VITE_BACK_URL}/metrics/incomes`, {
           params: {
-            start_date: startDate,
-            end_date: endDate
+            start_date: startDate.toISOString(),
+            end_date: endDate.toISOString()
           }
         });
 
         // Realizar la solicitud con las fechas actuales para los ingresos netos
         const netIncomesResponse = await axios.get(`${import.meta.env.VITE_BACK_URL}/metrics/netIncome`, {
           params: {
-            start_date: startDate,
-            end_date: endDate
+            start_date: startDate.toISOString(),
+            end_date: endDate.toISOString()
           }
         });
 
@@ -34,11 +30,14 @@ const CombinedCharts = () => {
         // Procesar los datos de ingresos netos
         const totalNetIncomesData = netIncomesResponse.data.map(item => [item.name, item.net_incomes]);
 
-        const chartDom = document.getElementById('main');
-        const myChart = echarts.init(chartDom);
+        // Destruir la instancia del gráfico si ya existe
+        if (chartRef.current) {
+          echarts.dispose(chartRef.current);
+        }
+
+        const myChart = echarts.init(chartRef.current);
 
         const option = {
-          
           legend: {},
           tooltip: {},
           dataset: {
@@ -62,11 +61,20 @@ const CombinedCharts = () => {
       }
     };
 
-    fetchData();
-  }, []);
+    if (startDate && endDate) {
+      fetchData();
+    }
+
+    // Devuelve una función de limpieza para destruir la instancia del gráfico al desmontar el componente
+    return () => {
+      if (chartRef.current) {
+        echarts.dispose(chartRef.current);
+      }
+    };
+  }, [startDate, endDate]);
 
   return (
-      <div id="main" style={{ height: '400px', width: '600px' }}></div>
+    <div ref={chartRef} style={{ height: '400px', width: '600px' }}></div>
   );
 };
 

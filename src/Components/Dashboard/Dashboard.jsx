@@ -27,12 +27,12 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const classes = useStyles();
-  const [selectedStartDate, setSelectedStartDate] = useState(null);
-  const [selectedEndDate, setSelectedEndDate] = useState(null);
+  const [selectedStartDate, setSelectedStartDate] = useState(new Date()); // Inicializa con la fecha actual
+  const [selectedEndDate, setSelectedEndDate] = useState(new Date()); 
 
-  const handleDateRangeSelect = (start, end) => {
-    setSelectedStartDate(start);
-    setSelectedEndDate(end);
+  const handleDateRangeSelect = (startDate, endDate) => {
+    setSelectedStartDate(startDate);
+    setSelectedEndDate(endDate);
     // Aquí puedes realizar cualquier acción adicional, como actualizar tus gráficos con las nuevas fechas seleccionadas
   };
 
@@ -112,10 +112,10 @@ const Dashboard = () => {
         </Drawer>
       </div>
       <div className={styles.cardContainer}>
-        <MetricUsers />
-        <RankingChart />
-        <BookingsChart />
-        <CombinedCharts />
+        <MetricUsers startDate={selectedStartDate} endDate={selectedEndDate} />
+        <RankingChart startDate={selectedStartDate} endDate={selectedEndDate} />
+        <BookingsChart startDate={selectedStartDate} endDate={selectedEndDate} />
+        <CombinedCharts startDate={selectedStartDate} endDate={selectedEndDate} />
       </div>
       <DateRangePicker onSelectDateRange={handleDateRangeSelect} />
     </div>

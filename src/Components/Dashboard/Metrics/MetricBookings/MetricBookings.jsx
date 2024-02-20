@@ -1,22 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import * as echarts from 'echarts';
 
-const BookingsChart = () => {
+const BookingsChart = ({ startDate, endDate }) => {
   useEffect(() => {
+    let myChart = null;
+
     const fetchData = async () => {
       try {
-        // Obtener fechas actuales
-        const currentDate = new Date();
-        const endDate = currentDate.toISOString(); // Fecha actual en formato ISO
-        currentDate.setMonth(currentDate.getMonth() - 1); // Restar un mes para obtener la fecha de inicio
-        const startDate = currentDate.toISOString(); // Fecha de inicio en formato ISO
+        // Si ya hay una instancia de gráfico, destrúyela antes de inicializar una nueva
+        if (myChart) {
+          myChart.dispose();
+        }
 
         // Realizar la solicitud con las fechas actuales
         const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/metrics/bookings`, {
           params: {
-            start_date: startDate,
-            end_date: endDate
+            start_date: startDate.toISOString(),
+            end_date: endDate.toISOString()
           }
         });
 
@@ -30,18 +31,13 @@ const BookingsChart = () => {
 
         // Configurar los datos para el gráfico de ECharts
         const chartDom = document.getElementById('bookings-chart');
-        const myChart = echarts.init(chartDom);
+        myChart = echarts.init(chartDom);
 
         const option = {
           tooltip: {
             trigger: 'item',
             formatter: '{a} <br/>{b}: {c} ({d}%)'
           },
-          // legend: {
-          //   orient: 'vertical',
-          //   left: 10,
-          //   data: hotelNames
-          // },
           series: [
             {
               name: 'Total de Reservas',
@@ -76,8 +72,18 @@ const BookingsChart = () => {
       }
     };
 
-    fetchData();
-  }, []);
+    if (startDate && endDate) {
+      fetchData();
+    }
+
+    // Devuelve una función de limpieza para destruir la instancia del gráfico al desmontar el componente
+    return () => {
+      if (myChart) {
+        myChart.dispose();
+      }
+    };
+
+  }, [startDate, endDate]);
 
   return (
     <div>
@@ -88,4 +94,3 @@ const BookingsChart = () => {
 };
 
 export default BookingsChart;
-
