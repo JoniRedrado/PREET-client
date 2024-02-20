@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs-2';
 import axios from 'axios';
+import * as echarts from 'echarts';
 
 const BookingsChart = () => {
-  const [chartData, setChartData] = useState({});
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,19 +28,49 @@ const BookingsChart = () => {
         const hotelNames = data.map(item => item.name);
         const totalBookings = data.map(item => item.total_bookings);
 
-        // Configurar los datos para el gráfico de barras
-        setChartData({
-          labels: hotelNames,
-          datasets: [
+        // Configurar los datos para el gráfico de ECharts
+        const chartDom = document.getElementById('bookings-chart');
+        const myChart = echarts.init(chartDom);
+
+        const option = {
+          tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b}: {c} ({d}%)'
+          },
+          // legend: {
+          //   orient: 'vertical',
+          //   left: 10,
+          //   data: hotelNames
+          // },
+          series: [
             {
-              label: 'Total de Reservas',
-              data: totalBookings,
-              backgroundColor: 'rgba(75, 192, 192, 0.6)',
-              borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1,
-            },
-          ],
-        });
+              name: 'Total de Reservas',
+              type: 'pie',
+              radius: ['40%', '70%'],
+              avoidLabelOverlap: false,
+              label: {
+                show: false,
+                position: 'center'
+              },
+              emphasis: {
+                label: {
+                  show: false,
+                  fontSize: '20',
+                  fontWeight: 'bold'
+                }
+              },
+              labelLine: {
+                show: false
+              },
+              data: hotelNames.map((name, index) => ({
+                value: totalBookings[index],
+                name: name
+              }))
+            }
+          ]
+        };
+
+        myChart.setOption(option);
       } catch (error) {
         console.error('Error fetching hotel bookings:', error);
       }
@@ -53,12 +81,11 @@ const BookingsChart = () => {
 
   return (
     <div>
-      <h2>Total de Reservas de Hoteles</h2>
-      <div style={{ height: '400px', width: '600px' }}>
-        <Bar data={chartData} options={{ maintainAspectRatio: false }} />
-      </div>
+      <h2>Total Hotel Reservations</h2>
+      <div id="bookings-chart" style={{ height: '400px', width: '600px' }}></div>
     </div>
   );
 };
 
 export default BookingsChart;
+

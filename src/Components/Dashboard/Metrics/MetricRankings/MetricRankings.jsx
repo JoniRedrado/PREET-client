@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs-2';
 import axios from 'axios';
+import * as echarts from 'echarts';
 
 const RankingChart = () => {
-  const [chartData, setChartData] = useState({});
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,19 +28,57 @@ const RankingChart = () => {
           const hotelNames = data.map(item => item.name);
           const scores = data.map(item => item.total_score);
 
-          // Configurar los datos para el gráfico de barras
-          setChartData({
-            labels: hotelNames,
-            datasets: [
+          // Configurar los datos para el gráfico de ECharts
+          const chartDom = document.getElementById('ranking-chart');
+          const myChart = echarts.init(chartDom);
+
+          const option = {
+            // title: {
+            //   // text: 'Dispersion of hotel scores based on total score',
+            //   left: 'center',
+            //   top: 0
+            // },
+            visualMap: {
+              min: Math.min(...scores),
+              max: Math.max(...scores),
+              dimension: 1,
+              orient: 'vertical',
+              right: 10,
+              top: 'center',
+              text: ['HIGH', 'LOW'],
+              calculable: true,
+              inRange: {
+                color: ['#f2c31a', '#24b7f2']
+              }
+            },
+            tooltip: {
+              trigger: 'item',
+              axisPointer: {
+                type: 'cross'
+              }
+            },
+            xAxis: [
               {
-                label: 'Puntuación Promedio',
-                data: scores,
-                backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1,
-              },
+                type: 'category',
+                data: hotelNames
+              }
             ],
-          });
+            yAxis: [
+              {
+                type: 'value'
+              }
+            ],
+            series: [
+              {
+                name: 'hotel-scores',
+                type: 'scatter',
+                symbolSize: 5,
+                data: data.map(item => [item.name, item.total_score])
+              }
+            ]
+          };
+
+          myChart.setOption(option);
         } else {
           console.error('Error fetching hotel ranking: No data returned');
         }
@@ -56,10 +92,8 @@ const RankingChart = () => {
 
   return (
     <div>
-      <h2>Ranking de Hoteles por Puntuación Promedio</h2>
-      <div style={{ height: '400px', width: '600px' }}>
-        <Bar data={chartData} options={{ maintainAspectRatio: false }} />
-      </div>
+      <h2>Hotel Ranking by Average Score</h2>
+      <div id="ranking-chart" style={{ height: '400px', width: '600px' }}></div>
     </div>
   );
 };

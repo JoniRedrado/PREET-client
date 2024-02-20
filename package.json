@@ -23,6 +23,8 @@
     "chart.js": "^4.4.1",
     "cloudinary-core": "^2.13.0",
     "countries-list": "^3.0.6",
+    "echarts": "^5.5.0",
+    "echarts-stat": "^1.2.0",
     "firebase": "^10.7.2",
     "flag-icon-css": "^4.1.7",
     "framer-motion": "^11.0.3",
