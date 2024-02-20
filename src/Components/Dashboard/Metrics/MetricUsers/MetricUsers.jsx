@@ -3,22 +3,22 @@ import { useEffect, useState } from 'react';
 import "./MetricUsers.modules.css";
 import * as echarts from 'echarts';
 
-const MetricUsers = () => {
+const MetricUsers = ({ startDate, endDate }) => {
     const [chartData, setChartData] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 // Calcular fechas de inicio y fin
-                const today = new Date();
-                const startDate = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate()).toISOString();
-                const endDate = today.toISOString();
+                // const today = new Date();
+                // const startDate = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate()).toISOString();
+                // const endDate = today.toISOString();
 
                 // Llamar a la API para obtener los datos de la métrica de usuarios
                 const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/metrics/users`, {
                     params: {
-                        start_date: startDate,
-                        end_date: endDate
+                        start_date: startDate.toISOString(),
+                        end_date: endDate.toISOString()
                     }
                 });
 
@@ -103,8 +103,10 @@ const MetricUsers = () => {
         };
 
         // Llamar a la función fetchData para obtener los datos cuando se monta el componente
-        fetchData();
-    }, []);
+        if (startDate && endDate) {
+            fetchData();
+          }
+    }, [startDate, endDate]);
 
     return (
         <div>

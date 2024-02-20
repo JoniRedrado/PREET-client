@@ -2,21 +2,21 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as echarts from 'echarts';
 
-const RankingChart = () => {
+const RankingChart = ({ startDate, endDate }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Obtener fechas actuales
-        const currentDate = new Date();
-        const endDate = currentDate.toISOString(); // Fecha actual en formato ISO
-        currentDate.setMonth(currentDate.getMonth() - 1); // Restar un mes para obtener la fecha de inicio
-        const startDate = currentDate.toISOString(); // Fecha de inicio en formato ISO
+        // const currentDate = new Date();
+        // const endDate = currentDate.toISOString(); // Fecha actual en formato ISO
+        // currentDate.setMonth(currentDate.getMonth() - 1); // Restar un mes para obtener la fecha de inicio
+        // const startDate = currentDate.toISOString(); // Fecha de inicio en formato ISO
 
         // Realizar la solicitud con las fechas actuales
         const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/metrics/ranking`, {
           params: {
-            start_date: startDate,
-            end_date: endDate
+            start_date: startDate.toISOString(),
+            end_date: endDate.toISOString()
           }
         });
 
@@ -87,8 +87,10 @@ const RankingChart = () => {
       }
     };
 
-    fetchData();
-  }, []);
+    if (startDate && endDate) {
+      fetchData();
+    }
+  }, [startDate, endDate]);
 
   return (
     <div>
