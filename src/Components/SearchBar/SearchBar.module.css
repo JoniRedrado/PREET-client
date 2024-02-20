@@ -70,6 +70,10 @@
 .dateInput{
   height: 100%;
   font-size: 15px;
+  width: 230px;
+  border-radius: 12px;
+  padding: 10px 20px 10px 20px;
+  font-size: 20px;
   font-weight: 500;
   line-height: 24px;
   border-top-right-radius: 16px;

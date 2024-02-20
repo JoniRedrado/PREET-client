@@ -13,9 +13,9 @@ const RoomDetail = ({ room }) => {
   const dispatch = useDispatch();
 
   const filters = useSelector((state) => state.submitFilters);
-  console.log(room);
-  console.log(filters);
 
+  console.log(filters);
+  
   const token = localStorage.getItem("token");
 
   const handleBook = () => {
@@ -27,9 +27,6 @@ const RoomDetail = ({ room }) => {
       dateInit: filters.startDate,
       dateFinal: filters.endDate,
     };
-
-    console.log(bookingInfo);
-    console.log(!token);
 
     const handleLoginClick = () => {
       dispatch(showModal("login", true));

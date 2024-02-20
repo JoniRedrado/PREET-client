@@ -23,10 +23,11 @@ const Detail = () => {
   const { id } = useParams();
   const { t } = useTranslation();
 
-  const [selectedRoom, setSelectedRoom] = useState(null);
+  const [selectedRoom, setSelectedRoom] = useState("Select the room");
   const [isFavorite, setIsFavorite] = useState(false);
   const [selectedStars, setSelectedStars] = useState([])
   const [reviewValues, setReviewValues] = useState({})
+  const [userReservations, setUserReservations] = useState([]);
 
   const renderStars = (count) => {
     const starsArray = Array.from({ length: count }, (_, index) => (
@@ -43,9 +44,20 @@ const Detail = () => {
   const filters = useSelector((state) => state.submitFilters)
 
   useEffect(() => {
-    if (id) dispatch(getDetail(id, filters));
+    dispatch(getDetail(id, filters));
+    getUserReservations()
     window.scrollTo({top: 0, behavior: 'smooth'});
-  }, [dispatch, id]);
+  }, [dispatch, id, filters]);
+
+  const getUserReservations = async () => {
+    try {
+        const {data}  = await axios.get(`${import.meta.env.VITE_BACK_URL}/bookings/user`)
+        
+        setUserReservations(data.bookings)
+    } catch (error) {
+        console.error(error.message)
+    }
+  }
 
   const handleRoomSelect = (roomType) => {
     const selectedRoom = hotel.rooms.find((room) => room.type === roomType);
@@ -66,6 +78,7 @@ const Detail = () => {
 
   const handlePostReviewModal = (option) => {
     dispatch(showModal(option, true));
+    setReviewValues({...reviewValues, roomId: validateUserVSHotel(hotel.id).roomId})
   };
 
   const handleStarClick = (star) => {
@@ -78,20 +91,24 @@ const Detail = () => {
     setReviewValues({...reviewValues, comment: e.target.value})
   };
 
-  const handleSubmitReview = (e) => {
+  const validateUserVSHotel = (hotelId) => userReservations.find((reservation) => reservation.room?.hotel?.id === hotelId)
+
+  const handleSubmitReview = async (e) => {
     e.preventDefault()
     
-    const {score, comment} = reviewValues
+    const {score, comment, roomId} = reviewValues
 
     try {
-      const response = axios.post(`${import.meta.env.VITE_BACK_URL}/feedback/${hotel.id}`, { score, comment,   })
+      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/feedback/${hotel.id}`, { score, comment, roomId })
+      console.log(response.status);
 
       if (response.status === 200) {        
         swal({
-          title: "¡Thanks for your review!",
-          icon: "success",
-          button: null,
-        });
+            title: "Thanks!",
+            text: "We received your review",
+            icon: "success",
+            button: "Go back",
+          });
       }
     } catch (error) {
       console.error(error)
@@ -99,6 +116,9 @@ const Detail = () => {
 
   };
   
+
+
+  console.log(hotel);
   return (
     <motion.div
       className={`container-detail ${darkMode ? "darkMode" : ""}`}
@@ -149,22 +169,26 @@ const Detail = () => {
           <h2>{t("Detail.select")}</h2>
           <select
             className="selectRoom"
-            defaultValue="Select you room"
+            defaultValue={t("Detail.option")}
             onChange={(e) => handleRoomSelect(e.target.value)}
           >
             <option disabled>{t("Detail.option")}</option>
-            {hotel.rooms && hotel.rooms.length > 0 ? (
-              hotel.rooms.map((room) => (
+            {hotel.rooms && hotel.rooms.length > 0
+            
+            ? (hotel.rooms.map((room) => (
                 <option key={room.id} value={room.type}>
                   {room.type}
                 </option>
               ))
-            ) : (
-              <option disabled>{t("Detail.noRooms")}</option>
+            )
+            : (<option disabled>{t("Detail.noRooms")}</option>
             )}
           </select>
             <h2 className="reviews-title">{t("Detail.reviews")}</h2>
-            <button className="container-detail-button" onClick={() => handlePostReviewModal("postReview")}>Leave your review</button>
+            {validateUserVSHotel(hotel.id) ?
+              <button className="container-detail-button" onClick={() => handlePostReviewModal("postReview")}>Leave your review</button>
+            : ""
+            } 
             <CommentsInDetail className="comments"/>
           </div>
         ) : (

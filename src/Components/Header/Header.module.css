@@ -1,12 +1,11 @@
 .header1 {
   position: relative;
-  height: 700px; /* Reducimos la altura para pantallas más pequeñas */
-  background: url("../../assets/header-background.jpg") top/cover no-repeat; 
-  color: #fff ;
+  height: 700px;
+  background: url("../../assets/header-background-light.jpg") top/cover no-repeat;
+  color: #fff;
   display: flex;
   justify-content: center;
 }
-
 
 .header2 {
   background-color: #022840;

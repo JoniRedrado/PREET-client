@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
@@ -12,6 +13,7 @@ const Header = () => {
   const { t } = useTranslation();
 
   const renderHeaderContent = () => {
+    
     if (pathname === "/") {
       return (
         <header
