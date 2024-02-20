@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import './SingleBookingHistory.styles.css'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import swal from 'sweetalert';
 
@@ -8,6 +9,7 @@ const SingleBooking = ({image, hotel, hotelId, room, roomId, amount, nights, dat
 
     const [selectedStars, setSelectedStars] = useState([])
     const [reviewValues, setReviewValues] = useState({})
+    const navigate = useNavigate();
 
     const handleStarClick = (star) => {
         const newSelectedStars = [1, 2, 3, 4, 5].filter((selectedStar) => selectedStar <= star);
@@ -48,6 +50,9 @@ const SingleBooking = ({image, hotel, hotelId, room, roomId, amount, nights, dat
         setReviewValues({...reviewValues, roomId: roomId})
       }, [])
 
+    const handleClick = (id) => {
+        navigate(`/bookingDetails/${id}`)
+    };
     return (
         <div className='reservation-card'>
             <div className='image-container'>
@@ -58,6 +63,7 @@ const SingleBooking = ({image, hotel, hotelId, room, roomId, amount, nights, dat
                 <h3>Type of room: {room}</h3>
                 <p>From <strong>{dateInit.slice(0, 10)}</strong> to <strong>{dateFinal.slice(0,10)}</strong> <span>({nights === 1 ? `${nights} night` : `${nights} nights`})</span></p>
                 <p>Amount paid: <span>${amount}</span></p>
+                <button className='button' onClick={() => handleClick(hotelId)}>Details</button>
             </div>
             {!validateHotelVsUser() ?
                 (<div className="review-box-container">

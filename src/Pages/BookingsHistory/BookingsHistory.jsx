@@ -17,6 +17,7 @@ const BookingsHistory = () => {
             const {data}  = await axios.get(`${import.meta.env.VITE_BACK_URL}/bookings/user`)
             
             setUserReservations(data.bookings)
+            console.log(data.bookings)
         } catch (error) {
             console.error(error.message)
         } finally {
@@ -55,8 +56,8 @@ const BookingsHistory = () => {
                     {userReservations.map((reservation) => {
                         return <SingleBooking 
                         key={reservation.id}
-                        hotel={reservation.room.hotel.name}
-                        hotelId={reservation.room.hotel.id}
+                        hotelName={reservation.room.hotel.name}
+                        hotelId ={reservation.id}
                         image={reservation.room.image[0].image}
                         amount={reservation.amount}
                         nights={reservation.nights}
@@ -64,7 +65,8 @@ const BookingsHistory = () => {
                         dateFinal={reservation.dateFinal}
                         room={reservation.room.type}
                         roomId={reservation.roomId}
-                        reviews={userReviews}/>
+                        reviews={userReviews}
+                        />
                     })}
                 </div>
             )

@@ -1,114 +1,65 @@
 .reservation-card {
     display: flex;
-    align-items: center;
-    margin: 20px;
-    background-color: #d1d1d1;
     border-radius: 10px;
-    border: solid rgb(138, 138, 138) 1px;
-    overflow: hidden;
-    max-height: 250px;
-    width: 1200px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    height: auto;
+}
+
+.reservation-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .image-container {
-    max-width: 300px;
-    height: 300px;
-    overflow: hidden;
-    margin-right: 20px;
+    display: FLEX;
 }
 
 .reservation-image {
-    width: 500px;
-    height: auto;
-    position: relative;
-    right: 80px;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .reservation-info {
-    margin: 20px 10px 20px 10px;
-    width: 400px;
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    
 }
 
 .reservation-info h3 {
-    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
 }
 
 .reservation-info p {
-    font-size: 15px;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-.reservation-info span {
-    font-size: 15px;
-    font-style: italic;
+.reservation-info p strong {
+    font-weight: bold;
 }
 
-.reviews-title {
-    width: 800px;
-    background-color: #022840;
-    color: white;
-  }
-  
-  .review-box-container {
-    display: flex;
-    flex-direction: column;
-    margin: 40px;
-    position: relative;
-    left: 20px;
-  }
-  
-  .stars-buttons-container {
-    display: flex;
-    margin: -30px 0 20px -10px
-  }
-  
-  .star-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-  }
-  
-  .active-star {
-    font-size: 35px;
-    color: #FFBC00
-  }
-  
-  .unactive-star {
-    font-size: 35px;
-    color: grey
-  }
-  
-  .review-stars {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: -30px;
-  }
-  
-  .review-tag {
-    font-size: 15px;
-    margin-top: 5px;
-  }
-  
-  .review-comment-textarea {
-    width: 300px;
-    height: 20px;
-    border-radius: 10px;
-    margin-top: -10px;
-    padding: 20px;
-  }
-  
-  .review-submit-button {
-    width: 100px;
-    margin-top: 5px;
-    cursor: pointer;
-    padding: 10px 20px;
-    background-color: #022840;
+.reservation-info p span {
+    color: #777;
+}
+
+.button {
+    background-color: #01283F;
     color: #fff;
     border: none;
     border-radius: 5px;
-    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  }
-  
-  .review-submit-button:hover {
-    background-color: #6093bf;
-  }
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
