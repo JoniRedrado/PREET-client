@@ -1,0 +1,39 @@
+.mainDiv{
+  display: flex;
+}
+.sidebar{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.nav{
+  width: 20%;
+}
+
+.cardContainer{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.logoContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+.logo{
+  width: 100px;
+  height: 100px;
+}
+.navLink{
+  text-decoration: none;
+  color: white;
+}
+
+
+.icon {
+  margin-right: 10px;
+  font-size: 20px;
+  text-align: center;
+}
