@@ -90,9 +90,6 @@ const Slider = () => {
           <strong>Address:</strong> {hotel.address}
         </Typography>
 
-        <Typography variant="body2" color="textSecondary" paragraph>
-          <strong>Email:</strong> {hotel.email}
-        </Typography>
         <Button onClick={() => handleClick(hotel.id)} variant="contained" className={classes.bookButton}  target="_blank">
           Book Now
         </Button>

@@ -94,7 +94,6 @@ export const getHotelByName = (name) => {
 };
 
 export const getDetail = (id, params) => {
-  console.log(params);
   return async function (dispatch) {
     try {
       const queryParams = {

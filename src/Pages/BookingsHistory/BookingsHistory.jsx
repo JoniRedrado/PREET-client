@@ -17,7 +17,6 @@ const BookingsHistory = () => {
             const {data}  = await axios.get(`${import.meta.env.VITE_BACK_URL}/bookings/user`)
             
             setUserReservations(data.bookings)
-            console.log(data.bookings)
         } catch (error) {
             console.error(error.message)
         } finally {
@@ -25,10 +24,10 @@ const BookingsHistory = () => {
         }
     }
 
-    console.log(userReviews);
     const getUserReviews = async () => {
         try {
             const {data}  = await axios.get(`${import.meta.env.VITE_BACK_URL}/feedback/user`)
+
             setUserReviews(data)
         } catch (error) {
             console.error(error.message)
@@ -39,6 +38,8 @@ const BookingsHistory = () => {
         getUserReservations()
         getUserReviews()
     }, [])
+
+    console.log(userReservations);
 
     return (
         <div className="reservations-container">
@@ -57,7 +58,7 @@ const BookingsHistory = () => {
                         return <SingleBooking 
                         key={reservation.id}
                         hotelName={reservation.room.hotel.name}
-                        hotelId ={reservation.id}
+                        hotelId ={reservation.room.hotel.id}
                         image={reservation.room.image[0].image}
                         amount={reservation.amount}
                         nights={reservation.nights}

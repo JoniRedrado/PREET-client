@@ -1,4 +1,4 @@
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import { filterParams, filterHotels, specificPage } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import s from "../SearchBar/SearchBar.module.css"
@@ -24,6 +24,8 @@ const SearchBar = () => {
 
   const filters = useSelector((state) => state.submitFilters || defaultFilters)
 
+  console.log(filters);
+
   const handleFilters = (e) => {
     e.preventDefault()
     const { name, value } = e.target;
@@ -42,10 +44,10 @@ const SearchBar = () => {
     dispatch(specificPage(1));
     dispatch(filterHotels(filters))
     setSearchInput("")
-    // location.pathname === "/" ? navigate(`/search/${encodeURIComponent(searchInput)}`) : null;
     navigate(`/search/`);
   }
 
+  //Contador para la cantidad de personas
   const handleDecrease = () => {
     if (guest > 1) {
       setGuest(guest - 1)
@@ -73,6 +75,10 @@ const SearchBar = () => {
     }
   };
 
+  useEffect(() => {
+    dispatch(filterParams({...filters, guest: 1}))
+  }, [])
+
   return (
     <div className={s.container}>
       <div className={s.searchBar}>
@@ -91,7 +97,7 @@ const SearchBar = () => {
       <div className={s.filters}>
         <div className={s.date}>
           <div className={s.checkContainer}>
-            <p className={s.check}>Check-in</p>
+          <p className={s.check}>Check-in</p>
           </div>
           <input type="date" name='startDate' onChange={handleFilters} className={ s.dateInput } />
         </div>
@@ -102,7 +108,7 @@ const SearchBar = () => {
           <input type="date" name='endDate' onChange={handleFilters} className={ s.dateInput }/>
         </div>
         <div className={s.persons}>
-          <p>Guests: </p>
+          <p className={s.check}>{t("SearchBar.guests")}</p>
           <div className={s.buttonContainer}>
             <button onClick={handleDecrease}> - </button>
             {/* Utilizamos readOnly para evitar la edición directa del input */}
