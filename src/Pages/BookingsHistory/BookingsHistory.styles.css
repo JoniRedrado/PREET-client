@@ -78,3 +78,9 @@
 .reservation-info p span {
     color: #777;
 }
+
+
+.reservations-container.darkMode{
+    background-color: #333; /* Color de fondo oscuro */
+  color: #fff;
+}

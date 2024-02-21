@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Drawer, List, ListItem, ListItemText } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import styles from "./Dashboard.module.css"
@@ -11,6 +11,8 @@ import DateRangePicker from './Date/Date';
 import logo from "../../assets/logo.jpg"
 import { MdPeople, MdAdd, MdHotel } from "react-icons/md";
 import { FaHotel, FaHome, FaArrowLeft } from "react-icons/fa";
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+import swal from 'sweetalert';
 
 const useStyles = makeStyles((theme) => ({
   drawerList: {
@@ -27,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const classes = useStyles();
+  const navigate = useNavigate();
+  const { darkMode } = useDarkMode();
   const [selectedStartDate, setSelectedStartDate] = useState(new Date()); // Inicializa con la fecha actual
   const [selectedEndDate, setSelectedEndDate] = useState(new Date()); 
 
@@ -44,8 +48,31 @@ const Dashboard = () => {
     setOpenDrawer(false);
   };
 
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const rol = localStorage.getItem('rol');
+
+        if (token && rol === "admin") {
+          // Usuario autenticado y tiene el rol de administrador
+          // Continuar con la renderización del componente
+        } else {
+          swal('Authentication Error', 'You do not have administrator permissions', 'error');
+          navigate("/");
+        }
+      } catch (error) {
+        // Manejar errores de autenticación
+        console.error("Error de autenticación:", error);
+        navigate("/");
+      }
+    };
+    checkAuth();
+  }, []);
+
   return (
-    <div className={styles.mainDiv}>
+    <div className={`${styles.mainDiv} ${darkMode ? styles.darkMode : ""}`}>
       <div className={styles.sidebar}>
         <button className={styles.button} onClick={handleDrawerOpen}>
           Toggle Menu
@@ -117,7 +144,7 @@ const Dashboard = () => {
         <BookingsChart startDate={selectedStartDate} endDate={selectedEndDate} />
         <CombinedCharts startDate={selectedStartDate} endDate={selectedEndDate} />
       </div>
-      <DateRangePicker onSelectDateRange={handleDateRangeSelect} />
+        <DateRangePicker onSelectDateRange={handleDateRangeSelect} />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect, Suspense } from "react";
 import SingleBooking from "../../Components/SingleBookingHistory/SingleBookingHistory";
 import { useTranslation } from "react-i18next";
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 
 import "./BookingsHistory.styles.css";
 
@@ -10,6 +11,7 @@ const BookingsHistory = () => {
   const [userReservations, setUserReservations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation();
+  const { darkMode } = useDarkMode();
   const [userReviews, setUserReviews] = useState({})
 
     const getUserReservations = async () => {
@@ -42,7 +44,7 @@ const BookingsHistory = () => {
     console.log(userReservations);
 
     return (
-        <div className="reservations-container">
+        <div className={`reservations-container ${darkMode ? "darkMode" : ""}`}>
             <h1 className="reservations-title">{t("HistoryBkng.title")}</h1>
             {isLoading ? (
                 <img src="https://cdn.pixabay.com/animation/2023/03/20/02/45/02-45-27-186_512.gif" alt="loading"/>
