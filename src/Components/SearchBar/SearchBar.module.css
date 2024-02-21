@@ -5,12 +5,13 @@
   padding: 10px 10px 10px 10px;
   background-color: #6495ED;
   border-radius: 16px;
+  height:fit-content;
 }
 
 .filters {
   display: flex;
-  align-items: center;
-  margin-top: 8px;
+  align-items: stretch;
+  margin-top: 20px;
 }
 
 .searchBar{
@@ -55,6 +56,7 @@
   height: 65px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   gap: 10px;
 }
 
@@ -62,11 +64,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 280px;
+  width: 300px;
   background-color: white;
   height: 50px;
   border-radius: 16px;
 }
+
 .dateInput{
   height: 100%;
   font-size: 15px;
@@ -81,6 +84,33 @@
   border: none;
   padding: 0px 20px 0px 20px;
 }
+
+.endDate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.startDate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dateInput.error {
+  border-color: #ff0000;
+  margin-bottom: -5px;
+}
+
+.searchBarError {
+  color: #ff0000;
+  font-size: 14px;
+  margin-top: -5px;
+  margin-bottom: 0px;
+  position: relative;
+  top: 5px;
+}
+
 .dateInput:hover{
   cursor: pointer;
 }
@@ -117,6 +147,10 @@
 
 .personsCounterInput:focus{
   outline: none;
+}
+
+.checkContainer {
+  text-align: center;
 }
 
 .check{
@@ -189,4 +223,6 @@
   margin-left: 5px;
   font-size: 14PX;
 }
+
+
 

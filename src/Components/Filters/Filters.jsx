@@ -9,6 +9,7 @@ import {
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { useTranslation } from "react-i18next";
 import styles from "./Filters.module.css";
+import searchValidation from "../../helpers/searchValidation";
 
 const Filters = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const Filters = () => {
   const { t } = useTranslation();
   const [selectedStars, setSelectedStars] = useState([1, 2, 3, 4, 5]);
   const [guest, setGuest] = useState(1);
+  const [errors, setErrors] = useState({});
   const defaultFilters = {
     country: "",
     stars: 5,
@@ -33,8 +35,13 @@ const Filters = () => {
   const allCountries = useSelector((state) => state.countries);
 
   const handleFilters = (e) => {
+    e.preventDefault()
     const { name, value } = e.target;
     dispatch(filterParams({ ...filters, [name]: value }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   };
 
   const handleReset = () => {
@@ -45,9 +52,17 @@ const Filters = () => {
     console.log(defaultFilters);
   };
 
-  const applyFilters = () => {
-    dispatch(filterHotels(filters));
-    dispatch(resetCurrentPage());
+  const applyFilters = (e) => {
+    e.preventDefault()
+
+    const errorsValidation = searchValidation(filters.startDate, filters.endDate)
+
+    if(Object.keys(errorsValidation).length === 0) {
+      dispatch(filterHotels(filters));
+      dispatch(resetCurrentPage());
+    } else {
+      setErrors(errorsValidation)
+    }
   };
 
   const handleStarClick = (star) => {
@@ -103,6 +118,7 @@ const Filters = () => {
               value={filters.startDate || ""}
               className={styles.dateInput}
             />
+            {errors.startDate && <p className={styles.errorFilters}>{errors.startDate}</p>}
           </div>
           <div className={styles.date}>
             <p>{t("Filters.end")}</p>
@@ -113,6 +129,7 @@ const Filters = () => {
               value={filters.endDate || ""}
               className={styles.dateInput}
             />
+            {errors.endDate && <p className={styles.errorFilters}>{errors.endDate}</p>}
           </div>
         </div>
         <div className={styles.countriesContainer}>
