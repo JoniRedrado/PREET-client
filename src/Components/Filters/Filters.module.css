@@ -178,8 +178,7 @@
   /* Media queries para pantallas más grandes */
   @media screen and (min-width: 1400px) {
     .sidebar {
-      width: 30%; /* Aumentamos el ancho de la barra lateral para pantallas más grandes */
-      margin-left: 52px; /* Aumentamos el margen izquierdo para pantallas más grandes */
+      width: 85%; /* Aumentamos el ancho de la barra lateral para pantallas más grandes */
       padding: 20px; /* Aumentamos el padding para pantallas más grandes */
     }
   

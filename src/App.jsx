@@ -25,6 +25,7 @@ import { useEffect, useState} from "react";
 import UpdateRooms from "./Components/UpdateRooms/UpdateRooms";
 import BookingDetails from "./Pages/BookingDetail/BookingDetails";
 import CreateRooms from "./Components/CreateRooms/CreateRooms"
+import NewRegister from "./Pages/NewRegister/NewRegister";
 // import './App.css'
 
 function App() {
@@ -51,33 +52,42 @@ function App() {
 
   return (
     <div className={`${styles.mainDiv} ${darkMode ? styles.darkMode : ''}`}>
-      {/* {showHeader && <Header />} */}
-      <Header />
-
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/create" element={<CreatePage />} />
-        <Route path="/update/:id" element={<UpdatePage />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/settings" element={<Settings/>}/>
-        <Route path="/booked" element={<BookedSuccesfully />} />
-        <Route path="/search/" element={<SearchResult />} />
-        <Route path="/favorites" element={<Favorites/>} />
-        <Route path="/userFavorites" element={<UserFavorites/>} />
-        <Route path="/myreservations" element={<BookingsHistory/>} />
-        <Route path="/admin" element={<LoginAdmin/>} />
-        <Route path="/dashboard/users" element={<GestionUsers/>} />
-        <Route path="/dashboard/hotels" element={<GestionHotels/>} />
-        <Route path="/dashboard/feedback" element={<GestionFeedBack/>} />
-        <Route path="/dashboard/rooms" element={<GestionRooms/>} />
-        <Route path="/updaterooms/:id" element={<UpdateRooms/>} />
-        <Route path="/bookingDetails/:id" element={<BookingDetails/>} />
-        <Route path="/createrooms" element={<CreateRooms/>} />
+        {/* No mostrar el encabezado y el pie de página en la ruta /register1 */}
+        <Route path="/register1" element={<NewRegister />} />
+        <Route
+          path="/*"
+          element={
+            <>
+              <Header />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/detail/:id" element={<Detail />} />
+                <Route path="/create" element={<CreatePage />} />
+                <Route path="/update/:id" element={<UpdatePage />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/booked" element={<BookedSuccesfully />} />
+                <Route path="/search/" element={<SearchResult />} />
+                <Route path="/favorites" element={<Favorites />} />
+                <Route path="/userFavorites" element={<UserFavorites />} />
+                <Route path="/myreservations" element={<BookingsHistory />} />
+                <Route path="/admin" element={<LoginAdmin />} />
+                <Route path="/dashboard/users" element={<GestionUsers />} />
+                <Route path="/dashboard/hotels" element={<GestionHotels />} />
+                <Route path="/dashboard/feedback" element={<GestionFeedBack />} />
+                <Route path="/dashboard/rooms" element={<GestionRooms />} />
+                <Route path="/updaterooms/:id" element={<UpdateRooms />} />
+                <Route path="/bookingDetails/:id" element={<BookingDetails />} />
+                <Route path="/createrooms" element={<CreateRooms />} />
+              </Routes>
+              <Footer />
+            </>
+          }
+        />
       </Routes>
-      <Footer/>
     </div>
   );
 }

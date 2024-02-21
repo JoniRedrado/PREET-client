@@ -91,7 +91,7 @@ const Sidebar = () => {
                         </button>
                     </div>
                     <Drawer 
-                        anchor="right" 
+                        anchor="left" 
                         open={openDrawer} 
                         onClose={handleDrawerClose}
                     >
