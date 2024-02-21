@@ -1,7 +1,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail, postFavorite } from "../../redux/actions";
+import { postFavorite, showModal } from "../../redux/actions";
 import { motion } from "framer-motion";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import RoomDetail from "../RoomDetail/RoomDetail";
@@ -9,7 +9,6 @@ import CommentsInDetail from "../../Components/ComentsInDetail/CommentsInDetail"
 import FiltersForDetail from "../../Components/FiltersForDetail/FiltersForDetail";
 import Modal from "react-modal";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
-import { showModal } from "../../redux/actions";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import swal from "sweetalert";
@@ -25,11 +24,10 @@ const Detail = () => {
 
   const [selectedRoom, setSelectedRoom] = useState("Select the room");
   const [isFavorite, setIsFavorite] = useState(false);
-  const [selectedStars, setSelectedStars] = useState([])
-  const [reviewValues, setReviewValues] = useState({})
+  const [selectedStars, setSelectedStars] = useState([]);
+  const [reviewValues, setReviewValues] = useState({});
   const [userReservations, setUserReservations] = useState([]);
 
-  
   const renderStars = (count) => {
     const starsArray = Array.from({ length: count }, (_, index) => (
       <span key={index} role="img" aria-label="star">
@@ -38,26 +36,27 @@ const Detail = () => {
     ));
     return starsArray;
   };
-  
+
   const hotel = useSelector((state) => state.hotelDetail);
   const modalRoomDetail = useSelector((state) => state.showModal.roomDetail);
   const modalPostReview = useSelector((state) => state.showModal.postReview);
-  const filters = useSelector((state) => state.submitFilters)
-  
+  const filters = useSelector((state) => state.submitFilters);
+
   useEffect(() => {
-    dispatch(getDetail(id, filters));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [dispatch, id]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const getUserReservations = async () => {
     try {
-        const {data}  = await axios.get(`${import.meta.env.VITE_BACK_URL}/bookings/user`)
-        
-        setUserReservations(data.bookings)
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BACK_URL}/bookings/user`
+      );
+
+      setUserReservations(data.bookings);
     } catch (error) {
-        console.error(error.message)
+      console.error(error.message);
     }
-  }
+  };
 
   const handleRoomSelect = (roomType) => {
     const selectedRoom = hotel.rooms.find((room) => room.type === roomType);
@@ -78,52 +77,59 @@ const Detail = () => {
 
   const handlePostReviewModal = (option) => {
     dispatch(showModal(option, true));
-    setReviewValues({...reviewValues, roomId: validateUserVSHotel(hotel.id).roomId})
+    setReviewValues({
+      ...reviewValues,
+      roomId: validateUserVSHotel(hotel.id).roomId,
+    });
   };
 
   const handleStarClick = (star) => {
-    const newSelectedStars = [1, 2, 3, 4, 5].filter((selectedStar) => selectedStar <= star);
-    setSelectedStars(newSelectedStars)
-    setReviewValues({...reviewValues, score: newSelectedStars.length})
+    const newSelectedStars = [1, 2, 3, 4, 5].filter(
+      (selectedStar) => selectedStar <= star
+    );
+    setSelectedStars(newSelectedStars);
+    setReviewValues({ ...reviewValues, score: newSelectedStars.length });
   };
 
   const handleComment = (e) => {
-    setReviewValues({...reviewValues, comment: e.target.value})
+    setReviewValues({ ...reviewValues, comment: e.target.value });
   };
 
-  const validateUserVSHotel = (hotelId) => userReservations.find((reservation) => reservation.room?.hotel?.id === hotelId)
+  const validateUserVSHotel = (hotelId) =>
+    userReservations.find(
+      (reservation) => reservation.room?.hotel?.id === hotelId
+    );
 
   const handleSubmitReview = async (e) => {
-    e.preventDefault()
-    
-    const {score, comment, roomId} = reviewValues
+    e.preventDefault();
+
+    const { score, comment, roomId } = reviewValues;
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/feedback/${hotel.id}`, { score, comment, roomId })
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACK_URL}/feedback/${hotel.id}`,
+        { score, comment, roomId }
+      );
       console.log(response.status);
 
-      if (response.status === 200) {        
+      if (response.status === 200) {
         swal({
-            title: "Thanks!",
-            text: "We received your review",
-            icon: "success",
-            button: "Go back",
-          });
+          title: "Thanks!",
+          text: "We received your review",
+          icon: "success",
+          button: "Go back",
+        });
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-
   };
-  
-
 
   console.log(hotel);
 
   useEffect(() => {
     getUserReservations();
   }, [dispatch, id, filters]);
-
 
   return (
     <motion.div
@@ -141,66 +147,86 @@ const Detail = () => {
             </Link>
             {token ? (
               <>
-                <div className="icon" onClick={isFavorite ? null : handleAddToFavorites}>
-                  {isFavorite ? <i className="bi bi-heart-fill"></i> : <i className="bi bi-heart"> </i>}
+                <div
+                  className="icon"
+                  onClick={isFavorite ? null : handleAddToFavorites}
+                >
+                  {isFavorite ? (
+                    <i className="bi bi-heart-fill"></i>
+                  ) : (
+                    <i className="bi bi-heart"> </i>
+                  )}
                 </div>
               </>
             ) : (
               ""
             )}
           </div>
-        
 
-        {hotel && hotel.name && hotel.image && hotel.ranking && hotel.rooms ? (
-          <div className="informationContainer">
-          <h1>{hotel.name}</h1>
-          <img src={hotel.image} alt={hotel.name} />
-          <div className="scores">
-            <h2>{renderStars(hotel.stars)}</h2>
-            <h2>Score: <span className="ranking-average-score">{hotel.ranking}</span></h2>
-          </div>
+          {hotel &&
+          hotel.name &&
+          hotel.image &&
+          hotel.ranking &&
+          hotel.rooms ? (
+            <div className="informationContainer">
+              <h1>{hotel.name}</h1>
+              <img src={hotel.image} alt={hotel.name} />
+              <div className="scores">
+                <h2>{renderStars(hotel.stars)}</h2>
+                <h2>
+                  Score:
+                  <span className="ranking-average-score">{hotel.ranking}</span>
+                </h2>
+              </div>
 
-          <h2>
-            <FaMapMarkerAlt className="info-icon" />
-            {t("Detail.address")} {hotel.address}
-          </h2>
-          <h2>
-            <FaMapMarkerAlt className="info-icon" />
-            {t("Detail.country")} {hotel.country && hotel.country.name}
-          </h2>
-          <h2>
-            <FaMapMarkerAlt className="info-icon" />
-            {t("Detail.Website")} {hotel.address_url}
-          </h2>
-          <h2>{t("Detail.select")}</h2>
-          <select
-            className="selectRoom"
-            defaultValue={t("Detail.option")}
-            onChange={(e) => handleRoomSelect(e.target.value)}
-          >
-            <option disabled>{t("Detail.option")}</option>
-            {hotel.rooms && hotel.rooms.length > 0
-            
-            ? (hotel.rooms.map((room) => (
-                <option key={room.id} value={room.type}>
-                  {room.type}
+              <h2>
+                <FaMapMarkerAlt className="info-icon" />
+                {t("Detail.address")} {hotel.address}
+              </h2>
+              <h2>
+                <FaMapMarkerAlt className="info-icon" />
+                {t("Detail.country")} {hotel.country && hotel.country.name}
+              </h2>
+              <h2>
+                <FaMapMarkerAlt className="info-icon" />
+                {t("Detail.Website")} {hotel.address_url}
+              </h2>
+              <h2>{t("Detail.select")}</h2>
+              <select
+                className="selectRoom"
+                defaultValue={t("Detail.option")}
+                onChange={(e) => handleRoomSelect(e.target.value)}
+              >
+                <option disabled hidden>
+                  {t("Detail.option")}
                 </option>
-              ))
-            )
-            : (<option disabled>{t("Detail.noRooms")}</option>
-            )}
-          </select>
-            <h2 className="reviews-title">{t("Detail.reviews")}</h2>
-            {validateUserVSHotel(hotel.id) ?
-              <button className="container-detail-button" onClick={() => handlePostReviewModal("postReview")}>Leave your review</button>
-            : ""
-            } 
-            <CommentsInDetail className="comments"/>
-          </div>
-        ) : (
-          <p>{t("Detail.loading")}</p>
-        )}
-      </div>
+                {hotel.rooms && hotel.rooms.length > 0 ? (
+                  hotel.rooms.map((room) => (
+                    <option key={room.id} value={room.type}>
+                      {room.type}
+                    </option>
+                  ))
+                ) : (
+                  <option disabled>{t("Detail.noRooms")}</option>
+                )}
+              </select>
+              <h2 className="reviews-title">{t("Detail.reviews")}</h2>
+              {validateUserVSHotel(hotel.id) ? (
+                <button
+                  className="container-detail-button"
+                  onClick={() => handlePostReviewModal("postReview")}
+                >
+                  Leave your review
+                </button>
+              ) : (
+                ""
+              )}
+              <CommentsInDetail className="comments" />
+            </div>
+          ) : (
+            <p>{t("Detail.loading")}</p>
+          )}
+        </div>
       </div>
       <Modal
         isOpen={modalPostReview}
@@ -219,18 +245,32 @@ const Detail = () => {
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
                   key={star}
-                  className={`star-button ${selectedStars.includes(star) ? "active-star" : "unactive-star"}`}
-                  onClick={() => handleStarClick(star)}>
-                <span role="img" aria-label="star">&#x2605;</span>
+                  className={`star-button ${
+                    selectedStars.includes(star)
+                      ? "active-star"
+                      : "unactive-star"
+                  }`}
+                  onClick={() => handleStarClick(star)}
+                >
+                  <span role="img" aria-label="star">
+                    &#x2605;
+                  </span>
                 </button>
               ))}
             </div>
           </div>
           <div className="review-comments">
             <p className="review-tag">Comment</p>
-            <textarea name="review-comment" value={reviewValues.comment} onChange={handleComment} className="review-comment-textarea"></textarea>
+            <textarea
+              name="review-comment"
+              value={reviewValues.comment}
+              onChange={handleComment}
+              className="review-comment-textarea"
+            ></textarea>
           </div>
-          <button className="review-submit-button" onClick={handleSubmitReview}>Submit</button>
+          <button className="review-submit-button" onClick={handleSubmitReview}>
+            Submit
+          </button>
         </div>
       </Modal>
       <Modal

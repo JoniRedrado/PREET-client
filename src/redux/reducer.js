@@ -30,7 +30,7 @@ let initialState = {
   allHotels: {},
   filteredHotels: {},
   submitFilters: {
-    /* guest: 1 */
+    guest: 1,
   },
   currentPage: 1,
   hotelDetail: {},

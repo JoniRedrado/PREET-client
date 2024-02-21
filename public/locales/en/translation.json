@@ -11,7 +11,7 @@
   "SearchBar": {
     "placeholder": "Explore hotels or countries",
     "guests": "Guests",
-    "button": "Search"
+    "button": "Search "
   },
   "NavBar": {
     "signUp": "Sign Up",
@@ -46,6 +46,7 @@
     "end": "Check-out",
     "price": "Price",
     "guests": "Guests",
+    "option": "Número de huéspedes",
     "applyBtn": "Apply Filters",
     "resetBtn": "Reset Filters"
   },
