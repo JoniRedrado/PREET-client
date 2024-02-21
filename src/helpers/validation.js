@@ -1,7 +1,8 @@
 const validation = (data) => {
+    console.log(data)
     const errors = {};
 
-    const requiredFields = ["name", "address", "address_url", "price", "email", "stars", "countryId", "image"];
+    const requiredFields = ["name", "address", "address_url", "email", "stars", "countryId", "image"];
 
     requiredFields.forEach((field) => {
         const value = data[field];
@@ -14,10 +15,6 @@ const validation = (data) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (data.email && !emailRegex.test(data.email)) {
         errors.email = "Invalid email address.";
-    }
-
-    if (isNaN(parseFloat(data.price)) || !isFinite(data.price) || data.price <= 0) {
-        errors.price = "Price must be a valid positive number.";
     }
 
     return errors;

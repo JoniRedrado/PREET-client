@@ -112,7 +112,7 @@ const CreateRooms = () => {
 
   return (
     <form  className="form" onSubmit={handleSubmit}>
-      <h1>Update Room</h1>
+      <h1>Create Room</h1>
       <label>Type</label>
       <select name="type" value={formData.type} onChange={handleChange}>
         <option value="">Select a type</option>

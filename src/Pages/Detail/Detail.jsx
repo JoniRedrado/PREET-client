@@ -1,7 +1,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { postFavorite, showModal } from "../../redux/actions";
+import { postFavorite, removeFavorite, showModal } from "../../redux/actions";
 import { motion } from "framer-motion";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import RoomDetail from "../RoomDetail/RoomDetail";
@@ -145,22 +145,27 @@ const Detail = () => {
             <Link to="/search">
               <i className="bi bi-arrow-left-circle" title="Return home"></i>
             </Link>
-            {token ? (
-              <>
-                <div
-                  className="icon"
-                  onClick={isFavorite ? null : handleAddToFavorites}
-                >
-                  {isFavorite ? (
-                    <i className="bi bi-heart-fill"></i>
-                  ) : (
-                    <i className="bi bi-heart"> </i>
-                  )}
-                </div>
-              </>
-            ) : (
-              ""
-            )}
+            {token && (
+            <div
+              className="icon"
+              onClick={() => {
+                if (isFavorite) {
+                dispatch(removeFavorite(id));
+                localStorage.removeItem(`favorite_${id}`);
+                } else {
+                dispatch(postFavorite(id));
+                localStorage.setItem(`favorite_${id}`, "true");
+                }
+                setIsFavorite(!isFavorite);
+              }}
+              >
+              {isFavorite ? (
+                <i className="bi bi-heart-fill"></i>
+              ) : (
+                <i className="bi bi-heart"> </i>
+              )}
+    </div>
+  )}
           </div>
 
           {hotel &&
