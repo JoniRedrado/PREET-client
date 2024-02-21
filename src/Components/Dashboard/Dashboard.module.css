@@ -34,7 +34,6 @@
 .cardContainer{
   display: flex;
   flex-direction: column;
-  background-color: coral;
   width: 100%;
 }
 .headerContainer{
