@@ -37,3 +37,24 @@
   font-size: 20px;
   text-align: center;
 }
+
+.calendar.darkMode{
+  background-color: #333; 
+  color: #fff; 
+}
+
+.button.darkMode{
+  background-color: #022840; 
+  color: #fff; 
+}
+
+
+.button:hover.darkMode{
+  background-color:#6093bf; 
+  color: #fff; 
+}
+
+.sidebar.darkMode{
+  background-color: #555;
+  color:#fff;
+}

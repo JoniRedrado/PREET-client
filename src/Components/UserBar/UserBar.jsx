@@ -23,6 +23,7 @@ const UserBar = () => {
   const darkMode = useDarkMode();
   function logout(option) {
     localStorage.removeItem("token");
+    localStorage.removeItem("rol")
     dispatch(showModal(option, false));
     dispatch(userLog());
     navigate("/");

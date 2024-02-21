@@ -1,0 +1,11 @@
+.custom-datepicker.dark-mode .react-datepicker {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .custom-datepicker.dark-mode .react-datepicker__day-name,
+  .custom-datepicker.dark-mode .react-datepicker__day,
+  .custom-datepicker.dark-mode .react-datepicker__time-name {
+    color: #fff;
+  }
+  

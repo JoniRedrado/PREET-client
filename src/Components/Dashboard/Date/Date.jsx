@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import DatePicker from 'react-datepicker';
+import { useDarkMode } from '../../../DarkModeContext/DarkModeContext';
 import 'react-datepicker/dist/react-datepicker.css';
+import  "./Date.module.css"
 
-const DateRangePicker = ({ onSelectDateRange }) => {
+const DateRangePicker = ({ onSelectDateRange}) => {
+
+  const { darkMode } = useDarkMode();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
@@ -14,7 +18,7 @@ const DateRangePicker = ({ onSelectDateRange }) => {
   };
 
   return (
-    <div>
+    <div >
       <DatePicker
         selected={startDate}
         onChange={handleDateRangeChange}
@@ -22,6 +26,7 @@ const DateRangePicker = ({ onSelectDateRange }) => {
         endDate={endDate}
         selectsRange
         inline
+        className={`custom-datepicker`}
       />
     </div>
   );
