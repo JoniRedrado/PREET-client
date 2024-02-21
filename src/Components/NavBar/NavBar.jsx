@@ -111,9 +111,6 @@ function NavBar({ heightNav }) {
                     )}
                 </button>
               </div>
-          {token ? (
-            <>
-
               <div ref={dropdownRef} onMouseLeave={closeMenu}>
                 <button className={style.btnLink} onClick={toggleMenu}>
                   <MdLanguage className={style.icon}/>
@@ -136,13 +133,12 @@ function NavBar({ heightNav }) {
                   </ul>
                 )}
               </div>
+          {token ? (
+            <>
               <Sidebar/>
             </>
           ) : (
             <>
-                <button className={style.btnLink} onClick={toggleMenu}>
-                  <MdLanguage className={style.icon}/>
-                </button>
               <button
                 className={style.buttons}
                 onClick={() => openModal("register")}
@@ -191,35 +187,6 @@ function NavBar({ heightNav }) {
                 >
                   <LoginForm />
                 </Modal>
-              </div>
-              <div ref={dropdownRef} onMouseLeave={closeMenu}>
-                <button className={style.btnLink} onClick={toggleMenu}>
-                  <i className="bi bi-globe2"></i>
-                </button>
-                {showMenu && (
-                  <ul className={style.dropdownMenu}>
-                    {locales.map(({ code, country_code }) => (
-                      <li key={country_code}>
-                        <button className={style.dropdownItem}>
-                          <span
-                            className={`flag-icon flag-icon-${country_code}`}
-                            onClick={() => {
-                              i18n.changeLanguage(code);
-                              closeMenu();
-                            }}
-                          ></span>
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-
-              <div>
-                <i
-                  className={darkMode ? "bi bi-sun" : "bi bi-moon"}
-                  onClick={toggleDarkMode}
-                ></i>
               </div>
             </>
           )}
