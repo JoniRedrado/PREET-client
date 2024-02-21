@@ -7,6 +7,10 @@
   justify-content: center;
 }
 
+.header1.darkMode{
+  background: url("../../assets/header-background-dark.jpg") top/cover no-repeat;
+}
+
 .header2 {
   background-color: #022840;
   height: auto; /* Altura automática para adaptarse al contenido */
@@ -14,10 +18,14 @@
   justify-content: center;
 }
 
-.headerContainer, .headerContainer2, .headerContainer3 {
+.headerContainer, .headerContainer2 {
   width: 90%;
   margin: 0 auto; /* Centramos horizontalmente */
   padding: 20px;
+}
+.headerContainer3{
+  width: 90%;
+
 }
 
 .textContainer {
@@ -43,9 +51,12 @@
 
 .dashboardHeader{
   background-color: #6093C0;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  
 }
 
-  
   body {
     margin: 0;
     padding: 0;

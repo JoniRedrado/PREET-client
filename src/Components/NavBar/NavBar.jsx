@@ -11,13 +11,14 @@ import { FaUserPlus } from "react-icons/fa";
 import { BsLock } from "react-icons/bs";
 import { getAllHotels, resetCurrentPage, showModal } from "../../redux/actions";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
-import { useState, useRef, Suspense } from "react";
+import { useState, useRef, Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import "flag-icon-css/css/flag-icons.min.css";
 import style from "./NavBar.module.css";
 import Logo from "../../assets/logo.jpg"
 import { MdLanguage, MdSunny } from "react-icons/md";
 import { IoMdMoon } from "react-icons/io";
+import axios from "axios";
 
 function NavBar({ heightNav }) {
   const token = localStorage.getItem("token");
@@ -28,6 +29,32 @@ function NavBar({ heightNav }) {
 
   const modalRegister = useSelector((state) => state.showModal.register);
   const modalLogin = useSelector((state) => state.showModal.login);
+
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    lastName: "",
+    profilePicture: "",
+  })
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACK_URL}/users/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setUserInfo({
+          name:response.data.name,
+          lastName: response.data.last_name,
+          profilePicture: response.data.profile_picture,
+        })
+      })
+
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [token]);
 
   const locales = [
     {
@@ -64,8 +91,64 @@ function NavBar({ heightNav }) {
     dispatch(showModal(option, false));
   }
 
-  return (
-    <div
+  const renderNavBar = () => {
+    if (pathname === "/dashboard" || pathname === "/dashboard/"){
+      return (
+        <div 
+          className={`${style.container} ${darkMode ? style.darkMode : ""}`}
+          style={heightNav}
+        >            
+          <div className={style.userButtons}>
+          <Sidebar/> 
+          <div>
+            <button onClick={toggleDarkMode} className={style.darkModeButton}>
+               {darkMode ? (
+                <MdSunny className={style.icon}/>
+                ) : (
+                  <IoMdMoon className={style.icon}/>
+                )}
+            </button>
+          </div>
+          <div ref={dropdownRef} onMouseLeave={closeMenu}>
+            <button className={style.btnLink} onClick={toggleMenu}>
+              <MdLanguage className={style.icon}/>
+            </button>
+            {showMenu && (
+              <ul className={style.dropdownMenu}>
+                {locales.map(({ code, country_code }) => (
+                  <li key={country_code}>
+                    <button className={style.dropdownItem}>
+                      <span
+                        className={`flag-icon flag-icon-${country_code}`}
+                        onClick={() => {
+                          i18n.changeLanguage(code);
+                          closeMenu();
+                        }}
+                      ></span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+            
+          </div>
+          </div>
+          <div className={style.adminInfo}>
+            <div className={style.imageContainer}>
+              {userInfo.profilePicture ? (
+                <img src={userInfo.profilePicture} alt="profile-picture" className={style.picture}/>
+              ) : (
+                <h1 className={style.nameText}>{userInfo.name.charAt(0).toUpperCase()}</h1>
+            )}
+            </div>
+          
+          <p className={style.wrapperText}>{userInfo.name.charAt(0).toUpperCase() + userInfo.name.slice(1)} {userInfo.lastName.charAt(0).toUpperCase() + userInfo.lastName.slice(1)}</p>
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div
       className={`${style.container} ${darkMode ? style.darkMode : ""}`}
       style={heightNav}
     >
@@ -80,16 +163,7 @@ function NavBar({ heightNav }) {
                 className={`${heightNav ? style.imgLogoSmall : style.imgLogo}`}
               />
             </Link>
-          ) : pathname === "/dashboard" || pathname === "/dashboard/" ? (
-            <Link to="/" onClick={handleHomeButton}>
-              <img
-                src={Logo}
-                width="18%"
-                alt="Logo"
-                className={`${heightNav ? style.imgLogoSmall : style.imgLogo}`}
-              />
-            </Link>
-          ): (
+          ) : (
             <Link to="/" onClick={handleHomeButton}>
             <img
               src={template}
@@ -193,7 +267,11 @@ function NavBar({ heightNav }) {
         </div>
       </div>
     </div>
-  );
+      )
+    }
+  }
+ 
+  return renderNavBar();
 }
 
 export default function WrappedApp() {

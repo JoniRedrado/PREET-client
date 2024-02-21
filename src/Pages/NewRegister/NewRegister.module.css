@@ -1,0 +1,54 @@
+.mainDiv{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: white;
+    height: 100%;
+}
+
+.contentContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    background-color: #6093C0;
+}
+
+.carouselContainer{
+    width: 80%;
+}
+
+.textContainer{
+    width: 70%;
+}
+
+.textContainer h2{
+    color: black;
+    font-size: 20px;
+    text-align: center;
+}
+
+.textContainer p {
+    color: #022840;
+    font-size: 15px;
+    text-align: center;
+}
+
+.register{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo{
+    width: 120px;
+    margin-bottom: 20px;
+}
+
+.slideImage{
+    width: 350px;
+    height: 250px;
+}
