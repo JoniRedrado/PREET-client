@@ -5,6 +5,8 @@ import TryAgain from "../../Components/Try again/TryAgain";
 import styles from "./SearchResult.module.css"
 import Filters from "../../Components/Filters/Filters"
 import { getAllHotels } from "../../redux/actions";
+import { FaArrowLeft } from "react-icons/fa"
+import { Link } from "react-router-dom";
 
 function SearchResult() {
 
@@ -55,6 +57,9 @@ function SearchResult() {
             <Filters/>
           </div>
           <div className={styles.cardsContainer}>
+          <Link to="/" className={styles.navLink}>
+            <FaArrowLeft className={styles.icon}/>
+          </Link>
           <h2>{`${totalHotels} Hotels found`}</h2>
           {noResults ? (
             <TryAgain />

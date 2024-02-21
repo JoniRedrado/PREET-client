@@ -14,7 +14,7 @@
   justify-content: center;
 }
 
-.headerContainer, .headerContainer2 {
+.headerContainer, .headerContainer2, .headerContainer3 {
   width: 90%;
   margin: 0 auto; /* Centramos horizontalmente */
   padding: 20px;
@@ -39,6 +39,10 @@
   height: 80px; /* Reducimos la altura para pantallas más pequeñas */
   border-radius: 16px;
   background-color: #ffffff63;
+}
+
+.dashboardHeader{
+  background-color: #6093C0;
 }
 
   

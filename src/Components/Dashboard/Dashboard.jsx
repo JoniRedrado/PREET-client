@@ -9,7 +9,7 @@ import BookingsChart from "./Metrics/MetricBookings/MetricBookings";
 import CombinedCharts from "./Metrics/MetricNetIncomes/MetricNetIncomes";
 import DateRangePicker from './Date/Date';
 import logo from "../../assets/logo.jpg"
-import { MdPeople, MdAdd, MdHotel } from "react-icons/md";
+import { MdPeople, MdAdd, MdHotel, MdMenu } from "react-icons/md";
 import { FaHotel, FaHome, FaArrowLeft } from "react-icons/fa";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import swal from 'sweetalert';
@@ -139,12 +139,20 @@ const Dashboard = () => {
         </Drawer>
       </div>
       <div className={styles.cardContainer}>
-        <MetricUsers startDate={selectedStartDate} endDate={selectedEndDate} />
-        <RankingChart startDate={selectedStartDate} endDate={selectedEndDate} />
-        <BookingsChart startDate={selectedStartDate} endDate={selectedEndDate} />
-        <CombinedCharts startDate={selectedStartDate} endDate={selectedEndDate} />
-      </div>
+        <div className={styles.headerContainer}>
+          <h2>Dashboard</h2>
+        </div>
+        <div className={styles.calendarContainer}>
+        <span>Please, select a date to show</span>
         <DateRangePicker onSelectDateRange={handleDateRangeSelect} />
+        </div>
+        <div className={styles.metricsContainer}>
+          <MetricUsers />
+          <RankingChart />
+          <BookingsChart />
+          <CombinedCharts />
+        </div>
+      </div>
     </div>
   );
 };

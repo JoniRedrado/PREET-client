@@ -5,7 +5,7 @@ import template2 from "../../assets/Logo.svg";
 import Modal from "react-modal";
 import RegisterUser from "../../Pages/Register/Register";
 import LoginForm from "../../Pages/Login/Login";
-import UserBar from "../UserBar/UserBar";
+import Sidebar from "../Sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { FaUserPlus } from "react-icons/fa";
 import { BsLock } from "react-icons/bs";
@@ -15,6 +15,9 @@ import { useState, useRef, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import "flag-icon-css/css/flag-icons.min.css";
 import style from "./NavBar.module.css";
+import Logo from "../../assets/logo.jpg"
+import { MdLanguage, MdSunny } from "react-icons/md";
+import { IoMdMoon } from "react-icons/io";
 
 function NavBar({ heightNav }) {
   const token = localStorage.getItem("token");
@@ -77,26 +80,43 @@ function NavBar({ heightNav }) {
                 className={`${heightNav ? style.imgLogoSmall : style.imgLogo}`}
               />
             </Link>
-          ) : (
+          ) : pathname === "/dashboard" || pathname === "/dashboard/" ? (
             <Link to="/" onClick={handleHomeButton}>
               <img
-                src={template}
+                src={Logo}
                 width="18%"
                 alt="Logo"
                 className={`${heightNav ? style.imgLogoSmall : style.imgLogo}`}
               />
             </Link>
+          ): (
+            <Link to="/" onClick={handleHomeButton}>
+            <img
+              src={template}
+              width="18%"
+              alt="Logo"
+              className={`${heightNav ? style.imgLogoSmall : style.imgLogo}`}
+            />
+          </Link>
           )}
         </div>
 
         <div className={style.userButtons}>
+              <div>
+                <button onClick={toggleDarkMode} className={style.darkModeButton}>
+                   {darkMode ? (
+                    <MdSunny className={style.icon}/>
+                    ) : (
+                      <IoMdMoon className={style.icon}/>
+                    )}
+                </button>
+              </div>
           {token ? (
             <>
-              <UserBar />
 
               <div ref={dropdownRef} onMouseLeave={closeMenu}>
                 <button className={style.btnLink} onClick={toggleMenu}>
-                  <i className="bi bi-globe2"></i>
+                  <MdLanguage className={style.icon}/>
                 </button>
                 {showMenu && (
                   <ul className={style.dropdownMenu}>
@@ -116,16 +136,13 @@ function NavBar({ heightNav }) {
                   </ul>
                 )}
               </div>
-
-              <div>
-                <i
-                  className={darkMode ? "bi bi-sun" : "bi bi-moon"}
-                  onClick={toggleDarkMode}
-                ></i>
-              </div>
+              <Sidebar/>
             </>
           ) : (
             <>
+                <button className={style.btnLink} onClick={toggleMenu}>
+                  <MdLanguage className={style.icon}/>
+                </button>
               <button
                 className={style.buttons}
                 onClick={() => openModal("register")}

@@ -11,19 +11,22 @@
 
 .favoriteIcon{
   color:white;
-  position: absolute;
-  margin: 5px 210px;
+  position: relative;
+  margin: 5px 205px;
 }
 
 
 .cardImage {
   width: 40%;
   height: 100%;
+  padding: 0px 10px 0px 0px;
 }
 
 .mainImage {
-  width: 350px;
-  height: 300px;
+  width: 328px;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   margin-top: -50px;
 }
 
@@ -34,18 +37,18 @@
   align-items: flex-start;
   height: 90%; 
   width: 60%;
-  margin: 10px;
+  margin: 10px 10px 10px -20px;
 }
 
 .cardTitle {
   margin: 0px;
-  font-size: 28px;
+  font-size: 25px;
   font-weight: 600;
   line-height: 48px;
 }
 
 .cardStars {
-  font-size: 14px;
+  font-size: 10px;
   color: #666;
   margin: 0px;
 }
@@ -100,6 +103,7 @@
 .countryDiv{
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 10px;
 }
 .country {
@@ -111,7 +115,7 @@
   text-decoration: underline; 
   cursor: pointer;
   margin-top: 0px;
-  font-size: 15px;
+  font-size: 13px;
 }
 .priceContainer{
   display: flex;
