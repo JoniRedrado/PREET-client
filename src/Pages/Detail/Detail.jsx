@@ -29,6 +29,7 @@ const Detail = () => {
   const [reviewValues, setReviewValues] = useState({})
   const [userReservations, setUserReservations] = useState([]);
 
+  
   const renderStars = (count) => {
     const starsArray = Array.from({ length: count }, (_, index) => (
       <span key={index} role="img" aria-label="star">
@@ -37,17 +38,16 @@ const Detail = () => {
     ));
     return starsArray;
   };
-
+  
   const hotel = useSelector((state) => state.hotelDetail);
   const modalRoomDetail = useSelector((state) => state.showModal.roomDetail);
   const modalPostReview = useSelector((state) => state.showModal.postReview);
   const filters = useSelector((state) => state.submitFilters)
-
+  
   useEffect(() => {
     dispatch(getDetail(id, filters));
-    getUserReservations()
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }, [dispatch, id, filters]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [dispatch, id]);
 
   const getUserReservations = async () => {
     try {
@@ -119,6 +119,12 @@ const Detail = () => {
 
 
   console.log(hotel);
+
+  useEffect(() => {
+    getUserReservations();
+  }, [dispatch, id, filters]);
+
+
   return (
     <motion.div
       className={`container-detail ${darkMode ? "darkMode" : ""}`}
@@ -145,13 +151,13 @@ const Detail = () => {
           </div>
         
 
-        {hotel ? (
+        {/* {hotel && hotel.name && hotel.image && hotel.ranking && hotel.rooms ? ( */}
           <div className="informationContainer">
           <h1>{hotel.name}</h1>
           <img src={hotel.image} alt={hotel.name} />
           <div className="scores">
             <h2>{renderStars(hotel.stars)}</h2>
-            <h2>Ranking PREET: {hotel.ranking}</h2>
+            <h2>Score: <span className="ranking-average-score">{hotel.ranking}</span></h2>
           </div>
 
           <h2>
@@ -191,9 +197,9 @@ const Detail = () => {
             } 
             <CommentsInDetail className="comments"/>
           </div>
-        ) : (
+        {/* ) : (
           <p>{t("Detail.loading")}</p>
-        )}
+        )} */}
       </div>
       </div>
       <Modal

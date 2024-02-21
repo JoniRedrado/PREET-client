@@ -204,3 +204,10 @@
 .review-submit-button:hover {
   background-color: #6093bf;
 }
+
+.ranking-average-score {
+  background-color: #022840;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
