@@ -128,14 +128,24 @@
   },
   "CreateForm": {
     "title": "Registra Tu Hotel",
+    "name": "Nombre",
+    "address": "Dirección",
+    "addressURL": "Dirección URL",
+    "price": "Precio",
+    "email": "Email",
     "stars": "Estrellas",
     "optionSt": "Selecciona una...",
     "country": "País",
     "optionCt": "Selecciona uno...",
     "image": "Imagen principal",
     "remove": "ELIMINAR",
-    "post": "REGISTRAR"
+    "post": "REGISTRAR",
+    "swalTitle": "Error al crear el hotel",
+    "swalText": "Ha ocurrido un error mientras se creaba el hotel. Revisa la información e inténtalo nuevamente.",
+    "successTitle": "¡Hotel creado exitosamente!",
+    "successText": "El hotel está listo para recibir reservas"
   },
+
   "UpdateForm": {
     "title": "Actualiza Tu Hotel",
     "stars": "Estrellas",

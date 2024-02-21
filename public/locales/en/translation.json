@@ -128,13 +128,22 @@
   },
   "CreateForm": {
     "title": "Post Your Hotel",
+    "name": "Name",
+    "address": "Address",
+    "addressURL": "Address URL",
+    "price": "Price",
+    "email": "Email",
     "stars": "Stars",
     "optionSt": "Select one...",
     "country": "Country",
     "optionCt": "Select one...",
     "image": "Main Image",
     "remove": "REMOVE",
-    "post": "POST"
+    "post": "POST",
+    "errorTitle": "Error creating new hotel",
+    "errorText": "An error occurred while creating the Hotel. Check the information and try again",
+    "successTitle": "¡Hotel created succesfully!",
+    "successText": "The hotel is ready to start booking"
   },
   "UpdateForm": {
     "title": "Update Hotel",

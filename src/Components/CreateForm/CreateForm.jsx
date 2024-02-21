@@ -19,7 +19,7 @@ const CreateForm = () => {
   const [hotelData, setHotelData] = useState({
     name: "",
     address: "",
-    address_url: "",
+    addressURL: "",
     price: "",
     email: "",
     image: null,
@@ -119,17 +119,18 @@ const CreateForm = () => {
 
             if (responseBackend.data.name) {
               swal({
-                title: "¡Hotel created succesfully!",
-                text: "The hotel is ready to start booking",
+                title: t("successTitle"),
+                text: t("successText"),
                 icon: "success",
                 button: null,
               });
+
               const createdHotelId = responseBackend.data.id;
               navigate(`/detail/${createdHotelId}`);
               setHotelData({
                 name: "",
                 address: "",
-                address_url: "",
+                addressURL: "",
                 price: "",
                 email: "",
                 image: null,
@@ -153,8 +154,8 @@ const CreateForm = () => {
         }
       } catch (error) {
         swal({
-          title: "Error creating new Hotel",
-          text: "An error occurred while creating the Hotel. Check the information and try again",
+          title: t("CreateForm.errorTitle"),
+          text: t("CreateForm.errorText"),
           icon: "error",
           button: null,
         });
@@ -167,11 +168,11 @@ const CreateForm = () => {
   };
 
   const fieldLabels = {
-    name: "Name",
-    address: "Address",
-    address_url: "Address URL",
-    price: "Price",
-    email: "Email",
+    name: t("CreateForm.name"),
+    address: t("CreateForm.address"),
+    addressURL: t("CreateForm.addressURL"),
+    price: t("CreateForm.price"),
+    email: t("CreateForm.email"),
   };
 
   return (
@@ -187,11 +188,7 @@ const CreateForm = () => {
               <input
                 type="text"
                 name={field}
-                placeholder={
-                  field === "address_url"
-                    ? "Adress Url"
-                    : field.charAt(0).toUpperCase() + field.slice(1)
-                }
+                placeholder={t(`CreateForm.${field}`)}
                 value={hotelData[field] || ""}
                 onChange={handleChange}
                 className={`${styles.input} ${errors[field] && styles.error}`}
