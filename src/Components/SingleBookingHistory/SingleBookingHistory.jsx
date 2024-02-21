@@ -11,6 +11,7 @@ const SingleBooking = ({ bookingId, image, hotelName, hotelId, room, roomId, amo
     const [reviewValues, setReviewValues] = useState({})
     const navigate = useNavigate();
 
+    console.log(reviews);
     const handleStarClick = (star) => {
         const newSelectedStars = [1, 2, 3, 4, 5].filter((selectedStar) => selectedStar <= star);
         setSelectedStars(newSelectedStars)
@@ -21,7 +22,7 @@ const SingleBooking = ({ bookingId, image, hotelName, hotelId, room, roomId, amo
         setReviewValues({...reviewValues, comment: e.target.value})
       };
       
-      const validateHotelVsUser = () => reviews?.find((review) => review.hotelId === hotelId)
+      const validateHotelVsUser = (hotelId) => reviews.find((review) => review.hotelId === hotelId)
 
       const handleSubmitReview = async (e) => {
         e.preventDefault()
@@ -46,7 +47,7 @@ const SingleBooking = ({ bookingId, image, hotelName, hotelId, room, roomId, amo
       };
 
       useEffect(() => {
-        validateHotelVsUser()
+        validateHotelVsUser(hotelId)
         setReviewValues({...reviewValues, roomId: roomId})
       }, [])
 

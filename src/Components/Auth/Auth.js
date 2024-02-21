@@ -1,29 +1,6 @@
 import axios from "axios"
 import swal from "sweetalert";
 
-// Función para iniciar sesión
-// export  async function login(email, password) {
-//     try {
-//         const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/users/login`, { email, password });
-//         if (response.status === 200 && response.data.token && response.data.user && response.data.user.rol) {
-//             // Almacenar el token JWT en el almacenamiento local
-//             localStorage.setItem(`token`, response.data.token );
-
-//             localStorage.setItem(`rol`, response.data.user.rol);
-
-//             return { token: response.data.token, rol: response.data.user.rol };
-//         } else if (response.status === 200 && response.data.message) {
-//             return {message: response.data.message};
-//         }
-//          else {
-//             throw new Error(response.data.message || `Error de inicio de sesión`);
-//         }
-//     } catch (error) {
-//         console.error(`Error de inicio de sesión:`, error);
-//         throw error;
-//     }
-// }
-
 export async function login(email, password) {
     try {
         const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/users/login`, { email, password });

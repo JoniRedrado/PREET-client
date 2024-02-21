@@ -52,16 +52,6 @@ function RegisterUser() {
     }
   };
 
-  // const handleGoogleRegister = async () => {
-  //     try {
-  //       await auth.loginWithGoogle();
-  //       navigate("/")
-  //       dispatch(showModal(option, false))
-  //     } catch (error) {
-  //       setError("Error signing in with Google")
-  //     }
-  // }
-
   return (
     <div className={`${style.register} ${darkMode ? style.darkMode : ""}`}>
       <form className={style.formContainer}>

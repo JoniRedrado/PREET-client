@@ -172,7 +172,7 @@ const Detail = () => {
               <h1>{hotel.name}</h1>
               <img src={hotel.image} alt={hotel.name} />
               <div className="scores">
-                <h2>{renderStars(hotel.stars)}</h2>
+                <h2>Rating  {renderStars(hotel.stars)}</h2>
                 <h2>
                   Score:
                   <span className="ranking-average-score">{hotel.ranking}</span>

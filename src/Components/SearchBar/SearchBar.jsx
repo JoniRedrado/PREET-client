@@ -5,6 +5,7 @@ import s from "../SearchBar/SearchBar.module.css"
 import { FaSearch, FaLocationArrow } from "react-icons/fa"
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import searchValidation from "../../helpers/searchValidation";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const SearchBar = () => {
 
   const [searchInput, setSearchInput] = useState("");
   const [guest, setGuest] = useState(1);
+  const [errors, setErrors] = useState({});
 
   const defaultFilters = {
     name: "",
@@ -30,6 +32,10 @@ const SearchBar = () => {
     e.preventDefault()
     const { name, value } = e.target;
     dispatch(filterParams({ ...filters, [name]: value }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   };
 
   const handleSearchInput = (e) => {
@@ -41,10 +47,17 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(specificPage(1));
-    dispatch(filterHotels(filters))
-    setSearchInput("")
-    navigate(`/search/`);
+
+    const errorsValidation = searchValidation(filters.startDate, filters.endDate)
+
+    if(Object.keys(errorsValidation).length === 0) {
+      dispatch(specificPage(1));
+      dispatch(filterHotels(filters))
+      setSearchInput("")
+      navigate(`/search/`);
+    } else {
+      setErrors(errorsValidation)
+    }
   }
 
   //Contador para la cantidad de personas
@@ -95,17 +108,23 @@ const SearchBar = () => {
         />
       </div>
       <div className={s.filters}>
-        <div className={s.date}>
-          <div className={s.checkContainer}>
-          <p className={s.check}>Check-in</p>
+        <div className={s.startDate}>
+          <div className={s.date}>
+            <div className={s.checkContainer}>
+              <p className={s.check}>Check-in</p>
+            </div>
+            <input type="date" name='startDate' onChange={handleFilters} className={ s.dateInput } />
           </div>
-          <input type="date" name='startDate' onChange={handleFilters} className={ s.dateInput } />
+          {errors.startDate && <p className={s.searchBarError}>{errors.startDate}</p>}
         </div>
-        <div className={s.date}>
-          <div className={s.checkContainer}>
-            <p className={s.check}>Check-out</p>
+        <div className={s.endDate}>
+          <div className={s.date}>
+            <div className={s.checkContainer}>
+              <p className={s.check}>Check-out</p>
+            </div>
+            <input type="date" name='endDate' onChange={handleFilters} className={ s.dateInput }/>
           </div>
-          <input type="date" name='endDate' onChange={handleFilters} className={ s.dateInput }/>
+          {errors.endDate && <p className={s.searchBarError}>{errors.endDate}</p>}
         </div>
         <div className={s.persons}>
           <p className={s.check}>{t("SearchBar.guests")}</p>

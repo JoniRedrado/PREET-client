@@ -5,11 +5,11 @@ import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import styles from "./Cards.module.css";
 import { useRef } from 'react';
 
-const Cards = ({ allHotels }) => {  
+const Cards = ({ hotels }) => {  
   const buttonPage = useRef(false);
   const refCard = useRef();
 
-  const hotelList = allHotels
+  const hotelList = hotels
 
   const { darkMode } = useDarkMode(); 
   
