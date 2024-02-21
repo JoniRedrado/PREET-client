@@ -50,7 +50,6 @@ const SingleBooking = ({ bookingId, image, hotelName, hotelId, room, roomId, amo
         setReviewValues({...reviewValues, roomId: roomId})
       }, [])
 
-      console.log(validateHotelVsUser());
     const handleClick = (id) => {
         navigate(`/bookingDetails/${id}`)
     };
