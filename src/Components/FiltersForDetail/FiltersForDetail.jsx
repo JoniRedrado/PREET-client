@@ -1,15 +1,16 @@
-import { Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetail, DetailFilterParams } from "../../redux/actions";
 import { useParams } from "react-router-dom";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { useTranslation } from "react-i18next";
+import swal from "sweetalert";
 
 import styles from "./FiltersForDetail.module.css";
 
 const FiltersForDetail = () => {
-  const { darkMode } = useDarkMode();
   const dispatch = useDispatch();
+  const { darkMode } = useDarkMode();
   const { id } = useParams();
   const { t } = useTranslation();
 
@@ -19,23 +20,50 @@ const FiltersForDetail = () => {
     guest: "",
   };
 
+  const [localFilters, setLocalFilters] = useState(defaultFilters);
+  const [filtersApplied, setFiltersApplied] = useState(false);
+
   const hotelDetail = useSelector((state) => state.hotelDetail);
 
-  const filters = useSelector((state) => state.submitRoomFilters) || defaultFilters;
+  const filters =
+    useSelector((state) => state.submitRoomFilters) || defaultFilters;
 
   const handleFilters = (e) => {
     const { name, value } = e.target;
-    dispatch(DetailFilterParams({ ...filters, [name]: value }));
-  };
-
-  const handleReset = () => {
-    dispatch(getDetail(id, defaultFilters));
-    dispatch(DetailFilterParams(defaultFilters));
+    setLocalFilters({ ...localFilters, [name]: value });
+    dispatch(DetailFilterParams({ ...localFilters, [name]: value }));
   };
 
   const applyFilters = () => {
     dispatch(getDetail(id, filters));
+    setFiltersApplied(true);
   };
+
+  const handleReset = () => {
+    setLocalFilters(defaultFilters);
+    dispatch(getDetail(id, defaultFilters));
+    dispatch(DetailFilterParams(defaultFilters));
+    setFiltersApplied(false);
+  };
+
+  useEffect(() => {
+    handleReset();
+  }, []);
+
+  useEffect(() => {
+    if (
+      filtersApplied &&
+      Object.keys(hotelDetail).length !== 0 &&
+      !hotelDetail.rooms
+    ) {
+      swal({
+        title: "Not Found",
+        text: "No room meets the requested conditions",
+        icon: "warning",
+        button: "Go back",
+      });
+    }
+  }, [hotelDetail, filtersApplied]);
 
   return (
     <div className={`${styles.sidebar} ${darkMode ? styles.darkMode : ""}`}>
@@ -100,13 +128,16 @@ const FiltersForDetail = () => {
           <p>{t("FiltersForD.guests")}</p>
           <select
             name="guest"
-            value={filters.guest || ""}
+            value={localFilters.guest}
             onChange={handleFilters}
             className={styles.guest}
           >
+            <option value="" disabled hidden>
+              {t("FiltersForD.option")}
+            </option>
             {hotelDetail.rooms &&
-              [...new Set(hotelDetail.rooms.map((room) => room.guest))] // Crear un conjunto de valores únicos
-                .sort((a, b) => a - b) // Ordenar de menor a mayor
+              [...new Set(hotelDetail.rooms.map((room) => room.guest))]
+                .sort((a, b) => a - b)
                 .map((guest, index) => (
                   <option value={guest} key={index}>
                     {guest}

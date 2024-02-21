@@ -192,12 +192,20 @@ function NavBar({ heightNav }) {
                         <button className={style.dropdownItem}>
                           <span
                             className={`flag-icon flag-icon-${country_code}`}
+                            onClick={() => i18n.changeLanguage(code)}
                           ></span>
                         </button>
                       </li>
                     ))}
                   </ul>
                 )}
+              </div>
+
+              <div>
+                <i
+                  className={darkMode ? "bi bi-sun" : "bi bi-moon"}
+                  onClick={toggleDarkMode}
+                ></i>
               </div>
             </>
           )}

@@ -11,7 +11,7 @@
   "SearchBar": {
     "placeholder": "Explora hoteles o países",
     "guests": "Huéspedes",
-    "button": "Buscar"
+    "button": "Buscar "
   },
   "NavBar": {
     "signUp": "Regístrate",
@@ -46,6 +46,7 @@
     "end": "Check-out",
     "price": "Precio",
     "guests": "Huéspedes",
+    "option": "Número de huéspedes",
     "applyBtn": "Aplicar Filtros",
     "resetBtn": "Restablecer"
   },
@@ -64,7 +65,7 @@
     "stars": "Estrellas",
     "price": "Precio",
     "order": "Ordenar por",
-    "directionOpt": "Dirección",
+    "direction": "Dirección",
     "applyBtn": "Aplicar Filtros",
     "resetBtn": "Restablecer"
   },

@@ -123,7 +123,7 @@ const SearchBar = () => {
             <button onClick={handleIncrease}> + </button>
           </div>
         </div>
-        <button onClick={handleSubmit} className={s.searchButton}>Search <FaSearch className={s.buttonIcon}/></button>
+        <button onClick={handleSubmit} className={s.searchButton}>{t("SearchBar.button")}<FaSearch className={s.buttonIcon}/></button>
       </div>
     </div>
   );
