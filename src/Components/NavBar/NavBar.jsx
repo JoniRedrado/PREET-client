@@ -11,7 +11,7 @@ import { FaUserPlus } from "react-icons/fa";
 import { BsLock } from "react-icons/bs";
 import { getAllHotels, resetCurrentPage, showModal } from "../../redux/actions";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
-import { useState, useEffect, useRef, Suspense } from "react";
+import { useState, useRef, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import "flag-icon-css/css/flag-icons.min.css";
 import style from "./NavBar.module.css";
@@ -44,18 +44,9 @@ function NavBar({ heightNav }) {
     setShowMenu(!showMenu);
   };
 
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setShowMenu(false);
-    }
+  const closeMenu = () => {
+    setShowMenu(false);
   };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   const handleHomeButton = () => {
     dispatch(resetCurrentPage());
@@ -103,7 +94,7 @@ function NavBar({ heightNav }) {
             <>
               <UserBar />
 
-              <div ref={dropdownRef}>
+              <div ref={dropdownRef} onMouseLeave={closeMenu}>
                 <button className={style.btnLink} onClick={toggleMenu}>
                   <i className="bi bi-globe2"></i>
                 </button>
@@ -114,7 +105,10 @@ function NavBar({ heightNav }) {
                         <button className={style.dropdownItem}>
                           <span
                             className={`flag-icon flag-icon-${country_code}`}
-                            onClick={() => i18n.changeLanguage(code)}
+                            onClick={() => {
+                              i18n.changeLanguage(code);
+                              closeMenu();
+                            }}
                           ></span>
                         </button>
                       </li>
@@ -181,7 +175,7 @@ function NavBar({ heightNav }) {
                   <LoginForm />
                 </Modal>
               </div>
-              <div ref={dropdownRef}>
+              <div ref={dropdownRef} onMouseLeave={closeMenu}>
                 <button className={style.btnLink} onClick={toggleMenu}>
                   <i className="bi bi-globe2"></i>
                 </button>
@@ -192,7 +186,10 @@ function NavBar({ heightNav }) {
                         <button className={style.dropdownItem}>
                           <span
                             className={`flag-icon flag-icon-${country_code}`}
-                            onClick={() => i18n.changeLanguage(code)}
+                            onClick={() => {
+                              i18n.changeLanguage(code);
+                              closeMenu();
+                            }}
                           ></span>
                         </button>
                       </li>
