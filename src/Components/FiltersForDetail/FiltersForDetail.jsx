@@ -21,8 +21,7 @@ const FiltersForDetail = () => {
 
   const hotelDetail = useSelector((state) => state.hotelDetail);
 
-  const filters =
-    useSelector((state) => state.submitRoomFilters) || defaultFilters;
+  const filters = useSelector((state) => state.submitRoomFilters) || defaultFilters;
 
   const handleFilters = (e) => {
     const { name, value } = e.target;

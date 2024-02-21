@@ -1,9 +1,10 @@
 .reservation-card {
     display: flex;
     border-radius: 10px;
+    align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
-    height: auto;
+    height: 250px;
 }
 
 .reservation-card:hover {
@@ -11,7 +12,8 @@
 }
 
 .image-container {
-    display: FLEX;
+    display: flex;
+    height: 300px;
 }
 
 .reservation-image {
@@ -25,7 +27,7 @@
     flex: 1;
     padding: 20px;
     background-color: #f9f9f9;
-    
+    width: 200px;
 }
 
 .reservation-info h3 {
@@ -62,4 +64,37 @@
 
 .button:hover {
     background-color: #0056b3;
+}
+
+.review-box-container {
+    width: 400px;
+    height: 200px;
+    margin: 0;
+}
+
+.review-tag {
+    font-size: 15px;
+}
+
+.star-button-icon {
+    font-size: 25px;
+}
+
+.stars-buttons-container {
+    margin-bottom: 15px;
+}
+
+.review-comment-textarea {
+    width: 300px;
+    height: 20px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.review-stars {
+    margin-bottom: -30px;
+}
+
+.review-submit-button {
+    margin-top: 0;
 }

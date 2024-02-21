@@ -77,7 +77,7 @@ const SingleBooking = ({image, hotelName, hotelId, room, roomId, amount, nights,
                                 key={star}
                                 className={`star-button ${selectedStars.includes(star) ? "active-star" : "unactive-star"}`}
                                 onClick={() => handleStarClick(star)}>
-                                    <span role="img" aria-label="star">&#x2605;</span>
+                                    <span className="star-button-icon" role="img" aria-label="star">&#x2605;</span>
                                 </button>
                             ))}
                         </div>

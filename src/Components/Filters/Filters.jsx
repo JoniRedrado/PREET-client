@@ -87,7 +87,7 @@ const Filters = () => {
           <input
             type="text"
             name="guest"
-            value={guest}
+            value={filters.guest || ""}
             onChange={handleGuest}
             className={styles.personsCounterInput}
           />

@@ -10,45 +10,42 @@ function CommentsInDetail() {
   const { t } = useTranslation();
   const [hotelComments, setHotelComments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const commentsPerPage = 10;
-  const totalPages = Math.ceil(hotelComments.length / commentsPerPage);
+  const commentsPerPage = 5;
+  const totalPages = Math.ceil(hotelComments.feedback?.count / commentsPerPage);
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACK_URL}/feedback/hotel/${id}`, {
-        params: {
-          page: currentPage,
-          limit: commentsPerPage,
-        },
-      })
+      .get(`${import.meta.env.VITE_BACK_URL}/feedback/hotel/${id}?page=${currentPage}&limit=${commentsPerPage}`)
       .then((response) => {
-        setHotelComments(response.data);
-        /* console.log("Datos de hoteles obtenidos correctamente:", response.data); */
+        setHotelComments(response.data);        
       })
       .catch((error) => {
         console.error("Error al obtener comentarios del hotel:", error);
       });
   }, [currentPage]);
-
+  
+  console.log(hotelComments);
   return (
     <div>
-      {hotelComments && hotelComments.rows?.length > 0 ? (
-        hotelComments.rows.map((comment) => (
-          <div className={style.container} key={comment.id}>
-            <div className={style.comment} key={comment.id}>
-              <div className={style.userInfo}>
-                <h2>{comment.user.name}</h2>
-                <p>{comment.user.nationality}</p>
-              </div>
-              <h4>{comment.comment}</h4>
+      {hotelComments && hotelComments.feedback?.rows?.length > 0 ? (
+        hotelComments.feedback.rows.map((comment) => (
+          <div className={style.reviewsContainer} key={comment.id}>
+            <div className={style.userInfo}>
+              <h2>{comment.user.name}</h2>
+              <p className={style.userNationality}>({comment.user.nationality})</p>
+              <div className={style.reviewScore}>{comment.score}⭐</div>
             </div>
-            <hr className={style.line} />
+            {
+              comment.comment
+              ? <p>{comment.comment}</p>
+              : ""
+            }
           </div>
         ))
       ) : (
         <h4>{t("CommentsInD.message")}</h4>
       )}
-      {hotelComments.length > 0 && (
+      {hotelComments.feedback?.rows?.length > 0 && (
         <div className={style.paginationContainer}>
           <button
             onClick={() => setCurrentPage(currentPage - 1)}

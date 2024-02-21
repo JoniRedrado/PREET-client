@@ -1,5 +1,12 @@
-.container {
-  margin-bottom: 3em;
+.reviewsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+  padding: 0 10px 0 10px;
+  background-color: #eee;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px #888888 ;
 }
 
 .comment {
@@ -9,24 +16,33 @@
 
 .userInfo {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
-.container h4 {
+.userNationality {
+  font-size: 15px;
+  margin-left: 5px;
+  font-style: italic;
+}
+
+.reviewsContainer p {
   text-align: start;
-  margin-left: 4em;
+  font-size: 15px;
 }
 
-.line {
+.reviewScore {
+  margin-left: 20px;
+
+}
+
+.reviewLine {
   border: 1px solid #ddd;
-  width: 90%;
+  width: 100%;
 }
 
 .paginationContainer {
   bottom: 20px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  margin-top: 100px;
 }
 
 .paginationButton {

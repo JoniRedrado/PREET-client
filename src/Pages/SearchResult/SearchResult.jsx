@@ -28,9 +28,6 @@ function SearchResult() {
 
   return (
     <div className={styles.mainContainer}>
-      <div className={styles.searchBarContainer}>
-        <SearchBar/>
-      </div>
         <div className={styles.content}>
           <div className={styles.filtersContainer}>
             <Filters/>

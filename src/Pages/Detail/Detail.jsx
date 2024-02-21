@@ -136,7 +136,7 @@ const Detail = () => {
       <div>
         <div className="information">
           <div className="icons">
-            <Link to="/">
+            <Link to="/search">
               <i className="bi bi-arrow-left-circle" title="Return home"></i>
             </Link>
             {token ? (
@@ -151,7 +151,7 @@ const Detail = () => {
           </div>
         
 
-        {/* {hotel && hotel.name && hotel.image && hotel.ranking && hotel.rooms ? ( */}
+        {hotel && hotel.name && hotel.image && hotel.ranking && hotel.rooms ? (
           <div className="informationContainer">
           <h1>{hotel.name}</h1>
           <img src={hotel.image} alt={hotel.name} />
@@ -197,9 +197,9 @@ const Detail = () => {
             } 
             <CommentsInDetail className="comments"/>
           </div>
-        {/* ) : (
+        ) : (
           <p>{t("Detail.loading")}</p>
-        )} */}
+        )}
       </div>
       </div>
       <Modal

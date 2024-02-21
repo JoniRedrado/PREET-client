@@ -30,6 +30,7 @@ const BookingDetails = () => {
     };
   }, [id]); // Ejecutar useEffect cada vez que id cambie
 
+  console.log(booking);
   if (loading) {
     return <div className={styles.loading}>Loading...</div>;
   }
@@ -55,6 +56,7 @@ const BookingDetails = () => {
       </div>
       <div className={styles.roomInfo}>
         <h2>Room Information</h2>
+        <p><strong>Hotel:</strong> {booking.room.hotel.name}</p>
         <p><strong>Type:</strong> {booking.room.type}</p>
         <p><strong>Numeration:</strong> {booking.room.numeration}</p>
         <p><strong>Guests:</strong> {booking.room.guest}</p>
