@@ -115,7 +115,7 @@ export const getDetail = (id, params) => {
         payload: response.data,
       });
     } catch (error) {
-      window.alert(`Error fetching hotels details`);
+      console.error(error)
     }
   };
 };
