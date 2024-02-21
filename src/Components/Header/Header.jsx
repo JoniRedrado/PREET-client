@@ -32,6 +32,14 @@ const Header = () => {
           </div>
         </header>
       );
+    } else if (pathname === "/dashboard" || pathname === "/dashboard/") {
+      return (
+        <header className={styles.dashboardHeader}>
+          <div className={styles.headerContainer3}>
+            <NavBar heightNav={{ height: "5px" }} />
+          </div>
+        </header>
+      )
     } else {
       return (
         <header className={styles.header2}>

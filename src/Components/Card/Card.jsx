@@ -19,14 +19,6 @@ const Card = (props) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
   const token = localStorage.getItem("token");
-  const cardVariants = {
-    hover: {
-      scale: 1.02,
-      transition: {
-        duration: 0.4,
-      },
-    },
-  };
 
   useEffect(() => {
     const { index, scrollToFirstCard } = dataScroll;
@@ -59,10 +51,8 @@ const Card = (props) => {
   };
 
   return (
-    <motion.div
+    <div
       className={`${styles.card} ${darkMode ? styles.darkMode : ""}`}
-      variants={cardVariants}
-      whileHover="hover"
       ref={dataScroll.index === 0 ? dataScroll.refCard : null}
     >
       <div className={styles.cardImage}>
@@ -123,7 +113,7 @@ const Card = (props) => {
           address={address}
         />
       )}
-    </motion.div>
+    </div>
   );
 };
 

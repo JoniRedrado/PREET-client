@@ -5,15 +5,58 @@
   display: flex;
   flex-direction: row;
   text-align: center;
+  background-color: #01283F;
+  padding: 20px;
 }
 
 .nav{
   width: 20%;
 }
 
+
+
+.menuIcon{
+  font-size: 40px;
+  color: white;
+}
+
+.button{
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+}
+.button:hover{
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+
 .cardContainer{
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  background-color: coral;
+  width: 100%;
+}
+.headerContainer{
+  background-color: brown;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.headerContainer h2{
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 50.5px;
+  margin-left: 20px;
+}
+
+.metricsContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .logoContainer{
@@ -37,6 +80,7 @@
   font-size: 20px;
   text-align: center;
 }
+
 
 .calendar.darkMode{
   background-color: #333; 
