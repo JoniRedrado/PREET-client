@@ -59,7 +59,6 @@ const Sidebar = () => {
             profilePicture: response.data.profile_picture,
             rol: response.data.rol
           })
-          console.log(response.data)
         })
 
         .catch((error) => {
