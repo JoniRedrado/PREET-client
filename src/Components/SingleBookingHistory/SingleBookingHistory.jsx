@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import swal from 'sweetalert';
 
-const SingleBooking = ({image, hotelName, hotelId, room, roomId, amount, nights, dateInit, dateFinal, reviews}) => {
+const SingleBooking = ({ bookingId, image, hotelName, hotelId, room, roomId, amount, nights, dateInit, dateFinal, reviews}) => {
 
     const [selectedStars, setSelectedStars] = useState([])
     const [reviewValues, setReviewValues] = useState({})
@@ -20,7 +20,7 @@ const SingleBooking = ({image, hotelName, hotelId, room, roomId, amount, nights,
       const handleComment = (e) => {
         setReviewValues({...reviewValues, comment: e.target.value})
       };
-
+      
       const validateHotelVsUser = () => reviews?.find((review) => review.hotelId === hotelId)
 
       const handleSubmitReview = async (e) => {
@@ -65,7 +65,7 @@ const SingleBooking = ({image, hotelName, hotelId, room, roomId, amount, nights,
                 <h3>Type of room: {room}</h3>
                 <p>From <strong>{dateInit.slice(0, 10)}</strong> to <strong>{dateFinal.slice(0,10)}</strong> <span>({nights === 1 ? `${nights} night` : `${nights} nights`})</span></p>
                 <p>Amount paid: <span>${amount}</span></p>
-                <button className='button' onClick={() => handleClick(hotelId)}>Details</button>
+                <button className='button' onClick={() => handleClick(bookingId)}>Details</button>
             </div>
             {!validateHotelVsUser() ?
                 (<div className="review-box-container">

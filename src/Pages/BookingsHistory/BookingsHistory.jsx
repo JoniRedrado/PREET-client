@@ -57,6 +57,7 @@ const BookingsHistory = () => {
                     {userReservations.map((reservation) => {
                         return <SingleBooking 
                         key={reservation.id}
+                        bookingId={reservation.id}
                         hotelName={reservation.room.hotel.name}
                         hotelId ={reservation.room.hotel.id}
                         image={reservation.room.image[0].image}
