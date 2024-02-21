@@ -118,10 +118,44 @@ const MetricUsers = ({ startDate, endDate }) => {
     };
   }, [startDate, endDate]);
 
+  const handleDownloadExcel = async () => {
+    swal({
+      title: 'You are sure?',
+      text: 'Do you want to download the report file?',
+      icon: 'warning',
+      buttons: {
+        cancel: true,
+        confirm: 'Yes, download'
+      },
+    }).then(async (confirmed) => {
+      if (confirmed) {
+        try {
+          const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/excel/users`, {
+            params: {
+        start_date: startDate.toISOString(),
+        end_date: endDate.toISOString()
+            },
+            responseType: 'blob'
+          });
+          console.log(response.data);
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', `Number of users from ${startDate} to ${endDate}.xlsx`);
+          document.body.appendChild(link);
+          link.click();
+        } catch (error) {
+          console.error('Error downloading Excel file', error);
+        }
+      }
+    });
+  };
+
   return (
     <div>
       <h2>Users by nationality</h2>
       <div id="chart" style={{ height: '400px', width: '600px' }}></div>
+        <button onClick={handleDownloadExcel}>Download Report</button>
     </div>
   );
 };
