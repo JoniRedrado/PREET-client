@@ -21,7 +21,7 @@ const BookingsChart = ({ startDate, endDate }) => {
           }
         });
 
-        console.log(response.data);
+        // console.log(response.data);
 
         const data = response.data;
 

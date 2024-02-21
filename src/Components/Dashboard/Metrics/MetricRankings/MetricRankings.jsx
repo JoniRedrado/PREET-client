@@ -20,7 +20,7 @@ const RankingChart = ({ startDate, endDate }) => {
           }
         });
 
-        console.log(response);
+        console.log(response.data);
         const data = response.data;
 
         if (Array.isArray(data) && data.length > 0) {
