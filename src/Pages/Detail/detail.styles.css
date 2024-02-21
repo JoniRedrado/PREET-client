@@ -25,6 +25,7 @@
   border: none;
   border-radius: 5px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-bottom: 10px;
 }
 
 .container-detail-button:hover {
@@ -33,7 +34,7 @@
 
 .icons {
   display: flex;
-  justify-content: space-around;
+  justify-content:space-between;
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
