@@ -12,7 +12,7 @@ const BookingsHistory = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation();
   const { darkMode } = useDarkMode();
-  const [userReviews, setUserReviews] = useState({})
+  const [userReviews, setUserReviews] = useState([])
 
     const getUserReservations = async () => {
         try {
@@ -41,8 +41,6 @@ const BookingsHistory = () => {
         getUserReviews()
     }, [])
 
-    console.log(userReservations);
-
     return (
         <div className={`reservations-container ${darkMode ? "darkMode" : ""}`}>
             <h1 className="reservations-title">{t("HistoryBkng.title")}</h1>
@@ -61,7 +59,7 @@ const BookingsHistory = () => {
                         key={reservation.id}
                         bookingId={reservation.id}
                         hotelName={reservation.room.hotel.name}
-                        hotelId ={reservation.room.hotel.id}
+                        reservationHotelId ={reservation.room.hotel.id}
                         image={reservation.room.image[0].image}
                         amount={reservation.amount}
                         nights={reservation.nights}
