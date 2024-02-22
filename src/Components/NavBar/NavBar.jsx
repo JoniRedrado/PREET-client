@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Link, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import template from "../../assets/Logo-White.svg";
 import template2 from "../../assets/Logo.svg";
 import Modal from "react-modal";
-import RegisterUser from "../../Pages/Register/Register";
 import LoginForm from "../../Pages/Login/Login";
 import Sidebar from "../Sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,6 @@ import { useState, useRef, Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import "flag-icon-css/css/flag-icons.min.css";
 import style from "./NavBar.module.css";
-import Logo from "../../assets/logo.jpg"
 import { MdLanguage, MdSunny } from "react-icons/md";
 import { IoMdMoon } from "react-icons/io";
 import axios from "axios";
@@ -26,6 +25,7 @@ function NavBar({ heightNav }) {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const modalRegister = useSelector((state) => state.showModal.register);
   const modalLogin = useSelector((state) => state.showModal.login);
@@ -91,6 +91,14 @@ function NavBar({ heightNav }) {
   function closeModal(option) {
     dispatch(showModal(option, false));
   }
+
+  const handleClickRegister = () => {
+    navigate("/register")
+  };
+
+  const handleClickLogin = () => {
+    navigate("/login")
+  };
 
   const renderNavBar = () => {
     if (pathname === "/dashboard" || pathname === "/dashboard/"){
@@ -214,55 +222,14 @@ function NavBar({ heightNav }) {
             </>
           ) : (
             <>
-              <button
-                className={style.buttons}
-                onClick={() => openModal("register")}
-              >
+              <button className={style.buttons} onClick={handleClickRegister}>
                 <FaUserPlus /> {t("NavBar.signUp")}
               </button>
-              <div className={style.overlayModal}>
-                <Modal
-                  isOpen={modalRegister}
-                  onAfterOpen={undefined}
-                  onRequestClose={() => closeModal("register")}
-                  onAfterClose={() => closeModal("register")}
-                  className={style.modalContent}
-                  style={{
-                    overlay: {
-                      backgroundColor: "rgba(0, 0, 0, 0.5)",
-                    },
-                  }}
-                  ariaHideApp={false}
-                  contentLabel="Login Modal"
-                >
-                  <RegisterUser />
-                </Modal>
-              </div>
-              <button
-                onClick={() => openModal("login")}
-                name="login"
+              <button onClick={handleClickLogin}
                 className={style.buttons}
               >
                 <BsLock /> {t("NavBar.logIn")}
               </button>
-              <div className={style.overlayModal}>
-                <Modal
-                  isOpen={modalLogin}
-                  onAfterOpen={undefined}
-                  onRequestClose={() => closeModal("login")}
-                  onAfterClose={() => closeModal("login")}
-                  className={style.modalContent}
-                  style={{
-                    overlay: {
-                      backgroundColor: "rgba(0, 0, 0, 0.5)",
-                    },
-                  }}
-                  ariaHideApp={false}
-                  contentLabel="Login Modal"
-                >
-                  <LoginForm />
-                </Modal>
-              </div>
             </>
           )}
         </div>

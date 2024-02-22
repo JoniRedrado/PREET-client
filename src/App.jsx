@@ -3,8 +3,6 @@ import Home from "./Pages/Home/Home";
 import Detail from "./Pages/Detail/Detail";
 import CreatePage from "./Pages/Create/CreatePage";
 import UpdatePage from "./Pages/Update/UpdatePage";
-import Register from "./Pages/Register/Register";
-import Login from "./Pages/Login/Login";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Settings from "./Pages/Settings/Settings";
 import BookedSuccesfully from "./Pages/BookedSuccesfully/BookedSuccesfully";
@@ -25,6 +23,7 @@ import UpdateRooms from "./Components/UpdateRooms/UpdateRooms";
 import BookingDetails from "./Pages/BookingDetail/BookingDetails";
 import CreateRooms from "./Components/CreateRooms/CreateRooms"
 import NewRegister from "./Pages/NewRegister/NewRegister";
+import NewLogin from "./Pages/NewLogin/NewLogin";
 // import './App.css'
 
 function App() {
@@ -35,7 +34,8 @@ function App() {
     <div className={`${styles.mainDiv} ${darkMode ? styles.darkMode : ''}`}>
       <Routes>
         {/* No mostrar el encabezado y el pie de página en la ruta /register1 */}
-        <Route path="/register1" element={<NewRegister />} />
+        <Route path="/register" element={<NewRegister />} />
+        <Route path="/login" element={<NewLogin/>} />
         <Route
           path="/*"
           element={
@@ -46,8 +46,6 @@ function App() {
                 <Route path="/detail/:id" element={<Detail />} />
                 <Route path="/create" element={<CreatePage />} />
                 <Route path="/update/:id" element={<UpdatePage />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/booked" element={<BookedSuccesfully />} />

@@ -1,5 +1,7 @@
 /* Estilos para el modo oscuro */
-
+body{
+  height: 100%;
+}
 /* Estilos para el contenedor principal */
 .darkMode {
     background-color: #121212; /* Color de fondo oscuro */

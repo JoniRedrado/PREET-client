@@ -4,7 +4,7 @@ const passRegex = /^(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{6,14}$/;
 const registerValidation = (data) => {
   const errors = {};
 
-  const requiredFields = ["name", "last_name", "email", "password"];
+  const requiredFields = ["name", "last_name", "email", "password", "nationality"];
 
   requiredFields.forEach((field) => {
     const value = data[field];
