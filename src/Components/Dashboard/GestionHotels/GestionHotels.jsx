@@ -94,9 +94,8 @@ const GestionHotels = () => {
   };
 
   return (
-    <>
-      <div className=".search-dashboard">
-        {/* <NavBarDashboard/> */}
+    <div className="main-container">
+      <div className="search-dashboard">
         <div>
         <input
           type="text"
@@ -182,7 +181,7 @@ const GestionHotels = () => {
           Next
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

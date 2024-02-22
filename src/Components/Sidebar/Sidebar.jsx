@@ -1,11 +1,11 @@
 import styles from "./Sidebar.module.css";
 import { useLocation } from "react-router";
-import { FaUser, FaHistory, FaStar, FaSignOutAlt, FaHome, FaArrowLeft, FaHotel } from "react-icons/fa";
+import { FaUser, FaHistory, FaStar, FaSignOutAlt, FaHome, FaArrowLeft, FaHotel, FaCaretRight  } from "react-icons/fa";
 import { MdPeople, MdAdd, MdHotel, MdMenu, MdAdminPanelSettings } from "react-icons/md";
 import { showModal, userLog } from "../../redux/actions";
 import { Drawer, List, ListItem, ListItemText } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
-import logo from "../../assets/logo.jpg"
+import logo from "../../assets/LogoAzulClaro.png"
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -92,11 +92,11 @@ const Sidebar = () => {
                 <div className={styles.mainContainer}>
                     <div className={styles.buttonContainer}>
                         <button className={styles.button} onClick={handleDrawerOpen}>
-                            <MdMenu className={styles.menuIcon}/> 
+                            <FaCaretRight className={styles.menuIcon2}/> 
                         </button>
                     </div>
                     <Drawer 
-                        anchor="left" 
+                        anchor="right" 
                         open={openDrawer} 
                         onClose={handleDrawerClose}
                     >
@@ -105,7 +105,7 @@ const Sidebar = () => {
                                 display: "flex",
                                 flexDirection: "column",
                                 alignItems: "center",
-                                backgroundColor: "#6093C0",
+                                backgroundColor: "#01283F",
                                 height: "100vh",
                                 width: "320px",
                             }}
@@ -113,59 +113,35 @@ const Sidebar = () => {
             <div className={styles.logoContainer}>
               <img src={logo} alt="logo" className={styles.logo} />
             </div>
-            <Link to={"/"} className={styles.navLink}>
-              <ListItem button className={classes.drawerList1}>
-                <FaHome className={styles.icon} />
-                <ListItemText primary="Home" />
-              </ListItem>
-            </Link>
-            {/* <Link to={"/dashboard/graphics"} className={styles.navLink}>
-              <ListItem button className={classes.drawerList1}>
-                <FaHotel className={styles.icon} />
-                <ListItemText primary="Graphics" />
-              </ListItem>
-            </Link> */}
-            <Link to={"/dashboard/graphics"} className={styles.navLink}>
-             <ListItem button className={styles.drawerList1}>
-                <MdAdminPanelSettings className={styles.icon} />
-                <ListItemText primary="Graphics" />
-              </ListItem>
-           </Link>
-            <Link to={"/dashboard/hotels"} className={styles.navLink}>
-              <ListItem button className={classes.drawerList1}>
-                <FaHotel className={styles.icon} />
-                <ListItemText primary="Hotel management" />
-              </ListItem>
-            </Link>
-            <Link to={"/dashboard/rooms"} className={styles.navLink}>
-              <ListItem button className={classes.drawerList1}>
-                <MdHotel className={styles.icon}/>
-                <ListItemText primary="Room management" />
-              </ListItem>
-            </Link>
-            <Link to={"/dashboard/users"} className={styles.navLink}>
-              <ListItem button className={classes.drawerList1}>
-                <MdPeople className={styles.icon} />
-                <ListItemText primary="User management" />
-              </ListItem>
-            </Link>
-            <Link to={"/create"} className={styles.navLink}>
-              <ListItem button className={classes.drawerList1}>
-                <MdAdd className={styles.icon} />
-                <ListItemText primary="Add a new Hotel" />
-              </ListItem>
-            </Link>
-            <Link to={"/createrooms"} className={styles.navLink}>
-              <ListItem button className={classes.drawerList1}>
-                <MdAdd className={styles.icon} />
-                <ListItemText primary="Add a new room" />
-              </ListItem>
-            </Link>
-            <ListItem button onClick={handleDrawerClose} className={classes.drawerList1}>
+                                        <Link to={"/"} className={styles.navLink}>
+                                <ListItem button className={classes.drawerList2} onClick={handleDrawerClose}>
+                                    <FaHome className={styles.icon} />
+                                    <ListItemText primary="Home" />
+                                </ListItem>
+                            </Link>
+                            <Link to="/settings" className={styles.navLink}>
+                                <ListItem button className={classes.drawerList2}>
+                                    <FaUser className={styles.icon}/>
+                                    <ListItemText primary="Manage Account" />
+                                </ListItem>
+                            </Link>
+                            <Link to="/myReservations" className={styles.navLink} onClick={handleDrawerClose}> 
+                                <ListItem button className={classes.drawerList2}> 
+                                    <FaHistory className={styles.icon} />
+                                    <ListItemText primary="Reservation History" />
+                                </ListItem>
+                            </Link>
+                            <Link to="/userFavorites" className={styles.navLink}>
+                                <ListItem button className={classes.drawerList2} onClick={handleDrawerClose}>
+                                    <FaStar className={styles.icon}/>
+                                    <ListItemText primary="Favorites" />
+                                </ListItem>
+                            </Link>
+            <ListItem button onClick={handleDrawerClose} className={classes.drawerList2}>
               <FaArrowLeft className={styles.icon}/>
               <ListItemText primary="Close Menu" />
             </ListItem>
-            <ListItem button className={classes.drawerList1} onClick={() => logout("login")}>
+            <ListItem button className={classes.drawerList2} onClick={() => logout("login")}>
                 <FaSignOutAlt className={styles.icon} />
                 <ListItemText primary="Log Out" />
             </ListItem>

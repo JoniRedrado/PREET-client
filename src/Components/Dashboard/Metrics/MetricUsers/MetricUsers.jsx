@@ -1,6 +1,7 @@
 import * as echarts from 'echarts';
 import axios from 'axios';
 import { useEffect } from 'react';
+import styles from "./MetricUsers.module.css"
 
 const MetricUsers = ({ startDate, endDate }) => {
   
@@ -153,10 +154,10 @@ const MetricUsers = ({ startDate, endDate }) => {
   };
 
   return (
-    <div>
+    <div className={styles.mainDiv}>
       <h2>Users by nationality</h2>
-      <div id="chart" style={{ height: '400px', width: '600px' }}></div>
-        <button onClick={handleDownloadExcel}>Download Report</button>
+      <div id="chart" style={{ height: '300px', width: '100%' }}></div>
+        <button onClick={handleDownloadExcel} className={styles.button}>Download Report</button>
     </div>
   );
 };

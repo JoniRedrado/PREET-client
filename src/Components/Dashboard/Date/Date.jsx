@@ -18,7 +18,7 @@ const DateRangePicker = ({ onSelectDateRange}) => {
   };
 
   return (
-    <div >
+    <div>
       <DatePicker
         selected={startDate}
         onChange={handleDateRangeChange}
@@ -26,7 +26,7 @@ const DateRangePicker = ({ onSelectDateRange}) => {
         endDate={endDate}
         selectsRange
         inline
-        className={`custom-datepicker`}
+        className={"custom-datepicker"}
       />
     </div>
   );
