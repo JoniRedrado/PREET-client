@@ -93,19 +93,8 @@ function NavBar({ heightNav }) {
         <div 
           className={`${style.container2} ${darkMode ? style.darkMode : ""}`}
           style={heightNav}
-        >            
-          <div className={style.adminInfo}>
-            <div className={style.imageContainer2}>
-              {userInfo.profilePicture ? (
-                <img src={userInfo.profilePicture} alt="profile-picture" className={style.picture}/>
-              ) : (
-                <h1 className={style.nameText}>{userInfo.name.charAt(0).toUpperCase()}</h1>
-            )}
-            </div>
-          
-          <p className={style.wrapperText}>{userInfo.name.charAt(0).toUpperCase() + userInfo.name.slice(1)} {userInfo.lastName.charAt(0).toUpperCase() + userInfo.lastName.slice(1)}</p>
-          <Sidebar/> 
-          <div className={style.userButtons}>
+        >   
+                  <div className={style.userButtons}>
           <div>
             <button onClick={toggleDarkMode} className={style.darkModeButton}>
                {darkMode ? (
@@ -140,7 +129,18 @@ function NavBar({ heightNav }) {
             </div>
             
           </div>
-          </div>
+          </div>           
+          <div className={style.adminInfo}>
+            <div className={style.imageContainer2}>
+              {userInfo.profilePicture ? (
+                <img src={userInfo.profilePicture} alt="profile-picture" className={style.picture}/>
+              ) : (
+                <h1 className={style.nameText}>{userInfo.name.charAt(0).toUpperCase()}</h1>
+            )}
+            </div>
+          
+          <p className={style.wrapperText}>{userInfo.name.charAt(0).toUpperCase() + userInfo.name.slice(1)} {userInfo.lastName.charAt(0).toUpperCase() + userInfo.lastName.slice(1)}</p>
+          <Sidebar/> 
           </div>
         </div>
         

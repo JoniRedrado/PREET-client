@@ -103,15 +103,11 @@ const GestionRooms = () => {
     if (!showDeletedRooms) {
       getRoomsDeleted();
     }
-  };
+  };  
 
-  return (
-    <>
-      {/* <NavBarDashboard/> */}
-      <Link to={"/dashboard"}>
-        <i className="bi bi-arrow-left-circle"></i>
-      </Link>
-      <div>
+  return(
+  <div className="table-container">
+    <div>
         <select value={typeInput} onChange={handleTypeInput}>
           <option value="">{t("dashboard.selectType")}</option>
           {roomsType.map((type) => (
@@ -226,14 +222,8 @@ const GestionRooms = () => {
           Next
         </button>
       </div>
-    </>
-  );
-};
-
-export default function WrappedApp() {
-  return (
-    <Suspense>
-      <GestionRooms />
-    </Suspense>
-  );
+  </div>
+)
 }
+
+export default GestionRooms;
