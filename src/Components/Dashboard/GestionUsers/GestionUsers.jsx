@@ -98,8 +98,8 @@ const GestionUsers = () => {
     }
   };
 
-  return (
-    <>
+  return(
+    <div className="table-container">
       <div className=".search-dashboard">
         {/* <NavBarDashboard/> */}
         <div>
@@ -186,10 +186,10 @@ const GestionUsers = () => {
         <button onClick={handleNextPage} disabled={currentPage === totalPages}>
           Next
         </button>
-      </div>
-    </>
-  );
-};
+        </div>
+    </div>
+  )
+}
 
 export default function WrappedApp() {
   return (

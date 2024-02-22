@@ -1,77 +1,156 @@
 .main-container{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   width: 100%;
+  min-height: 100vh;
+  justify-content: center;
 }
 
 .search-dashboard{
   display: flex;
-  background-color: red;
+  width: 100%;
+  margin-left: 10%;
+}
+
+.search-bar{
+  display: flex;
+  align-items: center;
+  width: 40%;
+  height: 35px;
+  gap: 10px;
+}
+
+.search-input{
+  width: 70%;
+  border-radius: 8px;
+  height: 100%;
+  padding-left: 10px;
+  font-size: 16px;
+}
+.search-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  padding: 5px 15px 5px 15px;
+  background-color: #01283F;
+  color: white;
+  border-radius: 16px;
+  border: none;
+}
+
+.search-button:hover{
+  background-color: #6093C0;
+  cursor: pointer;
+}
+
+.btn-deleted-container{
+  display: flex;
+  height: 100%;
+  width: 20%;
+  justify-content: center;
+  align-items: center;
+}
+
+.button1{
+  width: 80%;
+  height: 100%;
+  padding: 5px 15px 5px 15px;
+  background-color: #01283F;
+  color: white;
+  border-radius: 16px;
+  border: none;
+}
+
+.button1:hover{
+  background-color: #6093C0;
+  cursor: pointer;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente la tabla */
+  margin-top: 20px; /* Espacio superior */
+  width: 100%;
+  margin-left: 10%;
+}
+
+/* Estilos para la tabla */
+.actual-table {
+  width: 100%;
+  overflow-x: auto; /* Habilita el desplazamiento horizontal si la tabla es más ancha que el contenedor */
+  transition: opacity 0.3s ease;
 }
 
 .table {
-    width: 80%;
-    max-width: 100%;
-    margin-bottom: 1rem;
-    background-color: transparent;
-    border-collapse: collapse;
-  }
-
-.imagen-hotel{
-  width: 70%;
-  max-height: 100px;
+  width: 100%;
+  border-collapse: collapse;
 }
-  .table th,
-  .table td {
-    padding: 0.75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
-  }
+
+/* Estilos para las celdas de la tabla */
+.table th,
+.table td {
+  padding: 10px;
+  border: 1px solid #ddd; /* Borde de las celdas */
+  text-align: center; /* Alineación del texto al centro horizontalmente */
+  vertical-align: middle; /* Centra verticalmente el contenido */
+}
+
+/* Estilos para las filas impares de la tabla */
+.table tbody tr:nth-child(odd) {
+  background-color: #f2f2f2; /* Color de fondo de las filas impares */
+}
+.table tbody tr {
+  transition: opacity 0.3s ease; /* Transición de opacidad para suavizar el cambio de página */
+}
+
+/* Estilos para la imagen de los hoteles */
+.imagen-hotel {
+  width: 150px; /* Ancho de la imagen */
+  height: 100px; /* Altura automática para mantener la proporción */
+}
+
+/* Estilos para los botones de paginación */
+.button-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente los botones */
+  margin-top: 20px; /* Espacio superior */
+}
+
+.button-container button {
+  margin: 0 5px; /* Espacio entre los botones */
+}
   
-  .table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
-  }
   
-  /* Estilos para los botones */
-  .btn {
-    display: inline-block;
-    font-weight: 200;
-    color: #212529;
-    text-align: center;
-    vertical-align: middle;
-    user-select: none;
-    background-color: transparent;
-    border: 1px solid transparent;
-    padding: 0.575rem 1.0rem;
-    font-size: 1rem;
-    line-height: 2.5;
-    border-radius: 0.25rem;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  }
-  
-  .btn-primary {
-    color: #fff;
-    background-color: #022840;
-    border-color: #022840;
-  }
-  
-  .btn-primary:hover {
-    color: #fff;
-    background-color: #0069d9;
-    border-color: #0062cc;
-  }
-  
-  .btn-danger {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
-  }
-  
-  .btn-danger:hover {
-    color: #fff;
-    background-color: #c82333;
-    border-color: #bd2130;
-  }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Estilos para los botones de la paginación */
+.pagination-button {
+  background-color: #01283F;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 5px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-button:hover {
+  background-color: #6093C0;
+}
+
+/* Estilos para el número de página */
+.pagination span {
+  font-size: 18px;
+  transition: color 0.3s ease;
+  margin: 0 10px;
+}
