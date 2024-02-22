@@ -116,6 +116,18 @@ const Sidebar = () => {
                 <ListItemText primary="Home" />
               </ListItem>
             </Link>
+            {/* <Link to={"/dashboard/graphics"} className={styles.navLink}>
+              <ListItem button className={classes.drawerList1}>
+                <FaHotel className={styles.icon} />
+                <ListItemText primary="Graphics" />
+              </ListItem>
+            </Link> */}
+            <Link to={"/dashboard/graphics"} className={styles.navLink}>
+             <ListItem button className={styles.drawerList1}>
+                <MdAdminPanelSettings className={styles.icon} />
+                <ListItemText primary="Graphics" />
+              </ListItem>
+           </Link>
             <Link to={"/dashboard/hotels"} className={styles.navLink}>
               <ListItem button className={classes.drawerList1}>
                 <FaHotel className={styles.icon} />

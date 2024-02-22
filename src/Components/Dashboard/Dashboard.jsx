@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Dashboard.module.css"
-import RankingChart from "./Metrics/MetricRankings/MetricRankings";
-import MetricUsers from "./Metrics/MetricUsers/MetricUsers";
-import BookingsChart from "./Metrics/MetricBookings/MetricBookings";
-import CombinedCharts from "./Metrics/MetricNetIncomes/MetricNetIncomes";
-import DateRangePicker from './Date/Date';
+// import RankingChart from "./Metrics/MetricRankings/MetricRankings";
+// import MetricUsers from "./Metrics/MetricUsers/MetricUsers";
+// import BookingsChart from "./Metrics/MetricBookings/MetricBookings";
+// import CombinedCharts from "./Metrics/MetricNetIncomes/MetricNetIncomes";
+// import DateRangePicker from './Date/Date';
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import swal from 'sweetalert';
+// import Graphics from "./Metrics/Graphics";
 
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { darkMode } = useDarkMode();
-  const [selectedStartDate, setSelectedStartDate] = useState(null); // Inicializa con la fecha actual
-  const [selectedEndDate, setSelectedEndDate] = useState(null); 
+  // const [selectedStartDate, setSelectedStartDate] = useState(null); // Inicializa con la fecha actual
+  // const [selectedEndDate, setSelectedEndDate] = useState(null); 
 
   const handleDateRangeSelect = (startDate, endDate) => {
     setSelectedStartDate(startDate);
@@ -51,10 +52,10 @@ const Dashboard = () => {
       }
     };
 
-    const today = new Date();
-    const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
-    setSelectedStartDate(lastMonth);
-    setSelectedEndDate(today);
+    // const today = new Date();
+    // const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+    // setSelectedStartDate(lastMonth);
+    // setSelectedEndDate(today);
 
     checkAuth();
   }, [navigate]);
@@ -67,13 +68,16 @@ const Dashboard = () => {
         </div>
         <div className={styles.calendarContainer}>
         <span>Please, select a date to show</span>
-        <DateRangePicker onSelectDateRange={handleDateRangeSelect} />
+        {/* <DateRangePicker onSelectDateRange={handleDateRangeSelect} /> */}
         </div>
         <div className={styles.metricsContainer}>
-          <MetricUsers startDate={selectedStartDate} endDate={selectedEndDate}/>
-          <RankingChart startDate={selectedStartDate} endDate={selectedEndDate}/>
-          <BookingsChart startDate={selectedStartDate} endDate={selectedEndDate}/>
-          <CombinedCharts startDate={selectedStartDate} endDate={selectedEndDate}/>
+        {/* <Graphics 
+          selectedStartDate={selectedStartDate} 
+          selectedEndDate={selectedEndDate} 
+          // defaultStartDate={lastMonth} 
+          // defaultEndDate={today} 
+          handleDateRangeSelect={handleDateRangeSelect} 
+        /> */}
         </div>
       </div>
     </div>
