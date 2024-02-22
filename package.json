@@ -47,6 +47,7 @@
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0",
     "slick-carousel": "^1.8.1",
+    "socket.io-client": "^4.7.4",
     "sweetalert": "^2.1.2"
   },
   "devDependencies": {

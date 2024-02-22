@@ -27,6 +27,8 @@ import {
   REMOVE_FAVORITE,
   DETAIL_FILTER_PARAMS,
   SET_SELECTED_OPTION,
+  ADD_WEBSOCKET,
+  SET_WEBSOCKET
 } from "./actions-types";
 
 let initialState = {
@@ -54,6 +56,9 @@ let initialState = {
   hotelFavorites: [],
   submitRoomFilters: {},
   selectedOption:"Graphics",
+  webSocket:{
+    chat: [],
+  }
 };
 
 function rootReducer(state = initialState, action) {
@@ -251,11 +256,40 @@ function rootReducer(state = initialState, action) {
         submitRoomFilters: action.payload,
       };
 
-    case SET_SELECTED_OPTION:
+      case SET_SELECTED_OPTION:
       return{
         ...state,
         selectedOption: action.payload,
       }
+
+    case ADD_WEBSOCKET:
+      const lenghtMessages = state.webSocket.chat.length;
+      const newMessage = [...state.webSocket.chat];
+
+      lenghtMessages === 0 ? newMessage.push(action.payload) : 
+
+      !(newMessage[lenghtMessages-1].messages === action.payload.message && 
+      newMessage[lenghtMessages-1].rol === action.payload.rol) &&
+
+      !(action.payload.rol === 'bot' &&
+      action.payload.message === "¡Hola! ¿En que te puedo ayudar?") &&
+      
+      newMessage.push(action.payload);
+
+      return{
+        ...state,
+        webSocket:{ 
+          chat: newMessage
+        }
+      }
+    
+      case SET_WEBSOCKET:
+        return{
+          ...state,
+          webSocket:{ 
+            messages: [action.payload]
+          }
+        }
 
     default:
       return state;

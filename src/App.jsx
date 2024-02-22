@@ -25,6 +25,7 @@ import CreateRooms from "./Components/CreateRooms/CreateRooms"
 import NewRegister from "./Pages/NewRegister/NewRegister";
 import NewLogin from "./Pages/NewLogin/NewLogin";
 import Graphics from "./Components/Dashboard/Metrics/Graphics"
+import ChatBotBottom from "./Components/ChatBotBottom/ChatBotBottom";
 // import './App.css'
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
                 <Route path="/createrooms" element={<CreateRooms />} />
               </Routes>
               <Footer />
+              <ChatBotBottom/>
             </>
           }
         />

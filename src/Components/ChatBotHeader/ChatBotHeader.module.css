@@ -1,0 +1,16 @@
+.divHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+}
+
+.divIconClose{
+    color: blue;
+    cursor: pointer;
+    padding: 6px 5px 0 10px;
+
+    &:hover{
+        color: rgb(6, 6, 141);
+    }
+}

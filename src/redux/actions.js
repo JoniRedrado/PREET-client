@@ -29,6 +29,8 @@ import {
   REMOVE_FAVORITE,
   DETAIL_FILTER_PARAMS,
   SET_SELECTED_OPTION,
+  ADD_WEBSOCKET,
+  SET_WEBSOCKET
 } from "./actions-types";
 
 export const getAllHotels = () => {
@@ -425,6 +427,19 @@ export const DetailFilterParams = (params) => {
   };
 };
 
+export const addWebSocketData = (message, rol) => {
+  return{
+    type: ADD_WEBSOCKET,
+    payload: {message, rol}
+  }
+}
+
+export const setWebSocketData = (data) => {
+  return{
+    type: SET_WEBSOCKET,
+    payload: data
+  }
+}
 
 export const setSelectedOption = (option) => {
   return function (dispatch){
