@@ -1,7 +1,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { postFavorite, removeFavorite, showModal } from "../../redux/actions";
+import { postFavorite, removeFavorite, showModal, getUserReviews } from "../../redux/actions";
 import { motion } from "framer-motion";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import RoomDetail from "../RoomDetail/RoomDetail";
@@ -27,6 +27,7 @@ const Detail = () => {
   const [selectedStars, setSelectedStars] = useState([]);
   const [reviewValues, setReviewValues] = useState({});
   const [userReservations, setUserReservations] = useState([]);
+  const [hotelInUserReviews, setHotelInUserReviews] = useState([])
 
   const renderStars = (count) => {
     const starsArray = Array.from({ length: count }, (_, index) => (
@@ -41,6 +42,7 @@ const Detail = () => {
   const modalRoomDetail = useSelector((state) => state.showModal.roomDetail);
   const modalPostReview = useSelector((state) => state.showModal.postReview);
   const filters = useSelector((state) => state.submitFilters);
+  const userReviews = useSelector((state) => state.userReviews) 
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -81,6 +83,7 @@ const Detail = () => {
     setIsFavorite(!isFavorite); // Se actualiza el estado de favoritos
   };
 
+  
   const handlePostReviewModal = (option) => {
     dispatch(showModal(option, true));
     setReviewValues({
@@ -89,6 +92,8 @@ const Detail = () => {
     });
   };
 
+  console.log(reviewValues);
+  
   const handleStarClick = (star) => {
     const newSelectedStars = [1, 2, 3, 4, 5].filter(
       (selectedStar) => selectedStar <= star
@@ -96,27 +101,36 @@ const Detail = () => {
     setSelectedStars(newSelectedStars);
     setReviewValues({ ...reviewValues, score: newSelectedStars.length });
   };
-
+  
   const handleComment = (e) => {
     setReviewValues({ ...reviewValues, comment: e.target.value });
   };
+  
+  const validateHotelInUserReviews = async (idHotel, userReviews) => {
+    const foundHotel = userReviews.filter(review => review.hotelId === idHotel)
+    
+    setHotelInUserReviews(foundHotel)
+  }
+  
+  console.log(hotel);
+  console.log(userReservations);
 
   const validateUserVSHotel = (hotelId) =>
-    userReservations.find(
-      (reservation) => reservation.room?.hotel?.id === hotelId
+  userReservations.find(reservation => reservation.room.hotel.id === hotelId
     );
-
-  const handleSubmitReview = async (e) => {
-    e.preventDefault();
-
-    const { score, comment, roomId } = reviewValues;
-
-    try {
-      const response = await axios.post(
+  
+  console.log(validateUserVSHotel(hotel.id)?.roomId);
+    
+    const handleSubmitReview = async (e) => {
+      e.preventDefault();
+      
+      const { score, comment, roomId } = reviewValues;
+      
+      try {
+        const response = await axios.post(
         `${import.meta.env.VITE_BACK_URL}/feedback/${hotel.id}`,
         { score, comment, roomId }
       );
-      console.log(response.status);
 
       if (response.status === 200) {
         swal({
@@ -131,11 +145,18 @@ const Detail = () => {
     }
   };
 
-  console.log(hotel);
-
   useEffect(() => {
+    dispatch(getUserReviews(token))
     getUserReservations();
-  }, [dispatch, id, filters]);
+  
+    return (() =>
+    setHotelInUserReviews([]))
+  }, [dispatch, hotel.id, token]);
+
+  useEffect(() => {    
+    validateHotelInUserReviews(hotel.id, userReviews)
+
+  }, [hotel.id, userReviews]);
 
   return (
     <motion.div
@@ -216,7 +237,7 @@ const Detail = () => {
                 )}
               </select>
               <h2 className="reviews-title">{t("Detail.reviews")}</h2>
-              {validateUserVSHotel(hotel.id) ? (
+              {!hotelInUserReviews.length ? (
                 <button
                   className="container-detail-button"
                   onClick={() => handlePostReviewModal("postReview")}
