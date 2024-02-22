@@ -175,10 +175,12 @@ const Detail = () => {
               <img src={hotel.image} alt={hotel.name} />
               <div className="scores">
                 <h2>Rating  {renderStars(hotel.stars)}</h2>
-                <h2>
-                  Score:
-                  <span className="ranking-average-score">{hotel.ranking}</span><span> /5</span>
-                </h2>
+                <h2 className="avg">Score
+                  <div className="ranking-average-container">
+                    <div className="ranking-average-fill" style={{ width: `${(hotel.ranking / 5) * 100}%` }}></div>
+                    <span className="ranking-average-score">{hotel.ranking}</span>
+                  </div>
+</h2>
               </div>
 
               <h2>
