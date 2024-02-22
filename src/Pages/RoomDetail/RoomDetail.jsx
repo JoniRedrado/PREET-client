@@ -16,54 +16,68 @@ const RoomDetail = ({ room }) => {
 
   const filters = useSelector((state) => state.submitFilters);
 
-  console.log(filters);
-
   const token = localStorage.getItem("token");
 
+  console.log(filters);
+
+  console.log(!filters.startDate || !filters.endDate);
+  
   const handleBook = () => {
-    setIsBooking(true);
-    const bookingInfo = {
-      roomId: room.id,
-      user: localStorage.getItem("token"),
-      price: room.price,
-      dateInit: filters.startDate,
-      dateFinal: filters.endDate,
-    };
 
-    const handleLoginClick = () => {
-      dispatch(showModal("login", true));
-      dispatch(showModal("roomDetail", false));
-    };
-
-    if (!token) {
+    if (!filters.startDate || !filters.endDate) {
       swal({
-        title: "Please login",
-        text: "In order to complete your payment and get your reservation confirmation",
-        icon: "error",
-        buttons: {
-          cancel: "Cancel",
-          login: {
-            text: "Login",
-            value: "login",
-          },
-        },
-      }).then((value) => {
-        if (value === "login") {
-          handleLoginClick();
-        }
-      });
+        title: "Hold on!",
+        text: "In order to proceed you need to set your check-in and check-out dates",
+        icon: "warning",
+        button: "OK",
+      })
+      dispatch(showModal("roomDetail", false));
     } else {
-      axios
-        .post(
-          `${import.meta.env.VITE_BACK_URL}/payment/create-order`,
-          bookingInfo
-        )
-        .then((res) => {
-          window.location.href = res.data.links[1].href;
-        })
-        .catch((error) => {
-          console.error("Error creating order:", error);
+      setIsBooking(true);
+      const bookingInfo = {
+        roomId: room.id,
+        user: localStorage.getItem("token"),
+        price: room.price,
+        dateInit: filters.startDate,
+        dateFinal: filters.endDate,
+      };
+  
+      const handleLoginClick = () => {
+        dispatch(showModal("login", true));
+        dispatch(showModal("roomDetail", false));
+      };
+  
+      if (!token) {
+        swal({
+          title: "Please login",
+          text: "In order to complete your payment and get your reservation confirmation",
+          icon: "error",
+          buttons: {
+            cancel: "Cancel",
+            login: {
+              text: "Login",
+              value: "login",
+            },
+          },
+        }).then((value) => {
+          if (value === "login") {
+            handleLoginClick();
+          }
         });
+      } else {
+        axios
+          .post(
+            `${import.meta.env.VITE_BACK_URL}/payment/create-order`,
+            bookingInfo
+          )
+          .then((res) => {
+            window.location.href = res.data.links[1].href;
+          })
+          .catch((error) => {
+            console.error("Error creating order:", error);
+          });
+      }
+      
     }
   };
 
