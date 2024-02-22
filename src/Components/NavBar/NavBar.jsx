@@ -9,7 +9,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { FaUserPlus } from "react-icons/fa";
 import { BsLock } from "react-icons/bs";
-import { getAllHotels, resetCurrentPage, showModal } from "../../redux/actions";
+import { getAllHotels, resetCurrentPage, showModal, resetFiltersParams } from "../../redux/actions";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { useState, useRef, Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -80,6 +80,7 @@ function NavBar({ heightNav }) {
 
   const handleHomeButton = () => {
     dispatch(resetCurrentPage());
+    dispatch(resetFiltersParams())
     dispatch(getAllHotels());
   };
 

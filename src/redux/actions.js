@@ -17,6 +17,7 @@ import {
   FILTER_HOTELS,
   RESET_CURRENT_PAGE,
   HANDLE_FILTERS,
+  RESET_FILTERS,
   GET_ALL_COUNTRIES,
   SHOW_MODAL,
   USER_LOG,
@@ -198,6 +199,13 @@ export const filterParams = (params) => {
       type: HANDLE_FILTERS,
       payload: params,
     });
+  };
+};
+
+export const resetFiltersParams = () => {
+
+  return {
+      type: RESET_FILTERS,
   };
 };
 

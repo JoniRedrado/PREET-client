@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import swal from 'sweetalert';
 
-const SingleBooking = ({ bookingId, image, hotelName, hotelId, room, roomId, amount, nights, dateInit, dateFinal, reviews}) => {
+const SingleBooking = ({ bookingId, image, hotelName, reservationHotelId, room, roomId, amount, nights, dateInit, dateFinal, reviews}) => {
 
     const [selectedStars, setSelectedStars] = useState([])
     const [reviewValues, setReviewValues] = useState({})
+    const [hotelInUserReviews, setHotelInUserReviews] = useState([])
     const navigate = useNavigate();
 
-    console.log(reviews);
     const handleStarClick = (star) => {
         const newSelectedStars = [1, 2, 3, 4, 5].filter((selectedStar) => selectedStar <= star);
         setSelectedStars(newSelectedStars)
@@ -22,7 +22,18 @@ const SingleBooking = ({ bookingId, image, hotelName, hotelId, room, roomId, amo
         setReviewValues({...reviewValues, comment: e.target.value})
       };
       
-      const validateHotelVsUser = (hotelId) => reviews.find((review) => review.hotelId === hotelId)
+      console.log(reservationHotelId);
+
+      const validateHotelInUserReviews = async (reservationHotelId) => {
+            console.log(reviews);
+            const foundHotel = await reviews.filter(review => review.hotelId === reservationHotelId);
+            console.log(foundHotel);
+            setHotelInUserReviews(foundHotel)
+ 
+      }
+
+      console.log(hotelInUserReviews);
+
 
       const handleSubmitReview = async (e) => {
         e.preventDefault()
@@ -30,7 +41,7 @@ const SingleBooking = ({ bookingId, image, hotelName, hotelId, room, roomId, amo
         const {score, comment, roomId} = reviewValues
         
         try {
-          const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/feedback/${hotelId}`, { score, comment, roomId  })
+          const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/feedback/${reservationHotelId}`, { score, comment, roomId  })
       
           if (response.status === 200) {        
             swal({
@@ -47,9 +58,12 @@ const SingleBooking = ({ bookingId, image, hotelName, hotelId, room, roomId, amo
       };
 
       useEffect(() => {
-        validateHotelVsUser(hotelId)
+        validateHotelInUserReviews(reservationHotelId)
         setReviewValues({...reviewValues, roomId: roomId})
-      }, [])
+
+        return (() =>
+        setHotelInUserReviews([]))
+      }, [reviews])
 
     const handleClick = (id) => {
         navigate(`/bookingDetails/${id}`)
@@ -67,7 +81,8 @@ const SingleBooking = ({ bookingId, image, hotelName, hotelId, room, roomId, amo
                 <p>Amount paid: <span>${amount}</span></p>
                 <button className='button' onClick={() => handleClick(bookingId)}>Details</button>
             </div>
-            {!validateHotelVsUser() ?
+            {console.log(hotelInUserReviews)}
+            {!hotelInUserReviews.length ?
                 (<div className="review-box-container">
                     <div className="review-stars">
                         <p className="review-tag">Score from 1 to 5</p>

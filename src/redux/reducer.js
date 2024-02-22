@@ -15,6 +15,7 @@ import {
   FILTER_HOTELS,
   RESET_CURRENT_PAGE,
   HANDLE_FILTERS,
+  RESET_FILTERS,
   GET_ALL_COUNTRIES,
   SHOW_MODAL,
   USER_LOG,
@@ -164,6 +165,14 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         submitFilters: action.payload,
+      };
+
+    case RESET_FILTERS:
+      return {
+        ...state,
+        submitFilters: {
+          guest: 1,
+        },
       };
 
     case GET_ALL_COUNTRIES:
