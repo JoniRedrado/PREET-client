@@ -174,13 +174,19 @@ const Detail = () => {
               <h1>{hotel.name}</h1>
               <img src={hotel.image} alt={hotel.name} />
               <div className="scores">
-                <h2>Rating  {renderStars(hotel.stars)}</h2>
-                <h2 className="avg">Score
+                <h2>Rating {renderStars(hotel.stars)}</h2>
+                <h2 className="avg">
+                  {t("Detail.score")}
                   <div className="ranking-average-container">
-                    <div className="ranking-average-fill" style={{ width: `${(hotel.ranking / 5) * 100}%` }}></div>
-                    <span className="ranking-average-score">{hotel.ranking}</span>
+                    <div
+                      className="ranking-average-fill"
+                      style={{ width: `${(hotel.ranking / 5) * 100}%` }}
+                    ></div>
+                    <span className="ranking-average-score">
+                      {hotel.ranking}
+                    </span>
                   </div>
-</h2>
+                </h2>
               </div>
 
               <h2>
@@ -220,7 +226,7 @@ const Detail = () => {
                   className="container-detail-button"
                   onClick={() => handlePostReviewModal("postReview")}
                 >
-                  Leave your review
+                  {t("Detail.leaveReview")}
                 </button>
               ) : (
                 ""
@@ -244,7 +250,7 @@ const Detail = () => {
       >
         <div className="review-box-container">
           <div className="review-stars">
-            <p className="review-tag">Score from 1 to 5</p>
+            <p className="review-tag">{t("SingleBooking.score")}</p>
             <div className="stars-buttons-container">
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
@@ -264,7 +270,7 @@ const Detail = () => {
             </div>
           </div>
           <div className="review-comments">
-            <p className="review-tag">Comment</p>
+            <p className="review-tag">{t("SingleBooking.comment")}</p>
             <textarea
               name="review-comment"
               value={reviewValues.comment}
@@ -273,7 +279,7 @@ const Detail = () => {
             ></textarea>
           </div>
           <button className="review-submit-button" onClick={handleSubmitReview}>
-            Submit
+            {t("SingleBooking.submitBtn")}
           </button>
         </div>
       </Modal>

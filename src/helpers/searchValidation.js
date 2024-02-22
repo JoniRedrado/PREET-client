@@ -1,17 +1,16 @@
-
-const searchValidation = (startDate, endDate) => {
+const searchValidation = (startDate, endDate, t) => {
   const errors = {};
 
   if (startDate === undefined) {
-    errors.startDate = "Check-in date is required"
+    errors.startDate = t("searchValidation.start_date");
   }
 
   if (endDate === undefined) {
-    errors.endDate = "Check-out date is required"
+    errors.endDate = t("searchValidation.end_date");
   }
 
-  if (startDate && endDate && (startDate >= endDate )) {
-    errors.endDate = "Check-out must be after check-in"
+  if (startDate && endDate && startDate >= endDate) {
+    errors.endDate = t("searchValidation.order_date");
   }
 
   return errors;

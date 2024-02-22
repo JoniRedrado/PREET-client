@@ -86,7 +86,7 @@ const UpdateForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = validation(hotelData);
+    const validationErrors = validation(hotelData, t);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
@@ -161,10 +161,10 @@ const UpdateForm = () => {
   };
 
   const fieldLabels = {
-    name: "Name ",
-    address: "Address ",
-    address_url: "Address URL ",
-    price: "Price ",
+    name: t("UpdateForm.name"),
+    address: t("UpdateForm.address"),
+    address_url: t("UpdateForm.addressURL"),
+    price: t("UpdateForm.price"),
     email: "Email ",
   };
 
@@ -181,7 +181,7 @@ const UpdateForm = () => {
               <input
                 type="text"
                 name={field}
-                placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                placeholder={fieldLabels[field]}
                 value={hotelData[field] || ""}
                 onChange={handleChange}
                 className={`${styles.input} ${errors[field] && styles.error}`}
@@ -221,7 +221,7 @@ const UpdateForm = () => {
               onChange={handleChange}
             >
               <option value={hotelData.country}>
-                {`Current country: ${hotelData.country.name}`}
+                {`${t("UpdateForm.current")} ${hotelData.country.name}`}
               </option>
               {countries.map((country) => (
                 <option key={country} value={country}>

@@ -11,7 +11,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  
+
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const auth = useAuth();
@@ -21,7 +21,7 @@ function LoginForm() {
     try {
       const data = await login(email, password);
       if (data.message) {
-        setError("Invalid Email or Password");
+        setError(t("Login.error"));
       } else {
         if (data.rol === "admin") {
           navigate("/dashboard");
@@ -31,7 +31,7 @@ function LoginForm() {
         dispatch(showModal("login", false));
       }
     } catch (error) {
-      setError("Invalid Email or Password");
+      setError(t("Login.error"));
     }
   };
 
@@ -69,10 +69,10 @@ function LoginForm() {
           className={`${styles.input} ${error && styles.error}`}
         />
         <button type="button" onClick={handleLogin}>
-        {t("Login.logInBtn")}
+          {t("Login.logInBtn")}
         </button>
         <button type="button" onClick={handleGoogleLogin}>
-        {t("Login.GlgLogInBtn")} <i className="bi bi-google"></i>{" "}
+          {t("Login.GlgLogInBtn")} <i className="bi bi-google"></i>{" "}
         </button>
       </form>
       {error && <span className={styles.error}>{error}</span>}

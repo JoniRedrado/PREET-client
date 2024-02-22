@@ -110,7 +110,7 @@ const CreateForm = () => {
   
     console.log("Submitting form...");
   
-    const validationErrors = validation(formData);
+    const validationErrors = validation(formData, t);
   
     console.log("Validation errors:", validationErrors);
   
