@@ -416,7 +416,7 @@ export const removeFavorite = (id) => {
 // };
 
 export const DetailFilterParams = (params) => {
-  console.log(params);
+  
   return function (dispatch) {
     dispatch({
       type: DETAIL_FILTER_PARAMS,

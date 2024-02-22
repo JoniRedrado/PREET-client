@@ -1,9 +1,10 @@
 import { useState, useEffect, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail, DetailFilterParams } from "../../redux/actions";
+import { getDetail, filterParams } from "../../redux/actions";
 import { useParams } from "react-router-dom";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { useTranslation } from "react-i18next";
+import searchValidation from "../../helpers/searchValidation";
 import swal from "sweetalert";
 
 import styles from "./FiltersForDetail.module.css";
@@ -20,35 +21,43 @@ const FiltersForDetail = () => {
     guest: "",
   };
 
-  const [localFilters, setLocalFilters] = useState(defaultFilters);
   const [filtersApplied, setFiltersApplied] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const hotelDetail = useSelector((state) => state.hotelDetail);
+  const filters = useSelector((state) => state.submitFilters) || defaultFilters;
 
-  const filters =
-    useSelector((state) => state.submitRoomFilters) || defaultFilters;
+  console.log(filters);
 
   const handleFilters = (e) => {
+    e.preventDefault()
     const { name, value } = e.target;
-    setLocalFilters({ ...localFilters, [name]: value });
-    dispatch(DetailFilterParams({ ...localFilters, [name]: value }));
+    dispatch(filterParams({ ...filters, [name]: value }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   };
 
-  const applyFilters = () => {
-    dispatch(getDetail(id, filters));
-    setFiltersApplied(true);
+  const applyFilters = (e) => {
+
+    e.preventDefault()
+
+    const errorsValidation = searchValidation(filters.startDate, filters.endDate)
+
+    if(Object.keys(errorsValidation).length === 0) {
+      dispatch(getDetail(id, filters));
+      setFiltersApplied(true);
+    } else {
+      setErrors(errorsValidation)
+    }
   };
 
   const handleReset = () => {
-    setLocalFilters(defaultFilters);
     dispatch(getDetail(id, defaultFilters));
-    dispatch(DetailFilterParams(defaultFilters));
+    dispatch(filterParams(defaultFilters));
     setFiltersApplied(false);
   };
-
-  useEffect(() => {
-    handleReset();
-  }, []);
 
   useEffect(() => {
     if (
@@ -79,6 +88,7 @@ const FiltersForDetail = () => {
               name="startDate"
               value={filters.startDate || ""}
             />
+            {errors.startDate && <p className={styles.errorFilters}>{errors.startDate}</p>}
           </div>
           <div>
             <p>{t("FiltersForD.end")}</p>
@@ -88,6 +98,7 @@ const FiltersForDetail = () => {
               name="endDate"
               value={filters.endDate || ""}
             />
+            {errors.endDate && <p className={styles.errorFilters}>{errors.endDate}</p>}
           </div>
         </div>
 
@@ -128,7 +139,7 @@ const FiltersForDetail = () => {
           <p>{t("FiltersForD.guests")}</p>
           <select
             name="guest"
-            value={localFilters.guest}
+            value={filters.guest}
             onChange={handleFilters}
             className={styles.guest}
           >
