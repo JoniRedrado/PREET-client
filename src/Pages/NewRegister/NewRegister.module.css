@@ -1,3 +1,4 @@
+
 .mainDiv{
     display: flex;
     flex-direction: row;
@@ -25,13 +26,13 @@
 }
 
 .textContainer h2{
-    color: black;
+    color: white;
     font-size: 20px;
     text-align: center;
 }
 
 .textContainer p {
-    color: #022840;
+    color: white;
     font-size: 15px;
     text-align: center;
 }
@@ -45,10 +46,187 @@
 
 .logo{
     width: 120px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
-.slideImage{
-    width: 350px;
-    height: 250px;
+.logo2{
+    display: none;
+}
+
+.slideImage {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    animation: fadeIn 0.5s ease-out; 
+  }
+  
+  .slideImage:hover {
+    opacity: 0.8;
+  }
+
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 60%;
+    height: auto;
+}
+
+.formHeader{
+    width: 90%;
+}
+.formHeader h2 {
+    font-size: 30px;
+    border-bottom: 2px solid #022840;
+}
+
+.formHeader p{
+    font-size: 15px;
+    margin-top: -20px;
+}
+
+.fullNameContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 40px;
+    gap: 10px;
+}
+
+
+.inputName{
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    padding-left: 5px;
+    border: 1px solid #ccc; 
+}
+
+.nameContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.inputLastName{
+    display: flex;
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    padding-left: 10px;
+    border: 1px solid #ccc; 
+}
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;   
+  }
+  
+  .input {
+    width: calc(100% - 20px); 
+    height: 40px;
+    padding-left: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+  }
+
+.button{
+    color: white;
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    background-color:#022840;
+    border: none;
+    border-radius: 5px;
+}
+
+.button:hover{
+    cursor: pointer;
+    background-color: #6093C0;
+}
+
+.formContainer p.error {
+    font-size: 14px;
+    color: #ff0000;
+    margin-top: 5px; 
+    margin-bottom: 0px;
+  }
+
+  .formContainer p.error2 {
+    font-size: 14px;
+    color: #ff0000;
+    margin-top: -8px; 
+  }
+
+  .inputError {
+    border-color: #ff0000; 
+  }
+
+  .footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 4px;
+  }
+
+  .footer p{
+    font-size: 14px;
+  }
+
+  .link{
+    color: black;
+    font-weight: bold;
+  }
+
+  .select{
+    width: 99%;
+    height: 40px;
+    padding-left: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+  }
+  .select.inputError{
+    border-color: #ff0000;
+  }
+
+    /* Media queries para pantallas más grandes */
+@media screen and (min-width: 1380px) {
+    .mainDiv{
+        height: 750px;
+    }
+}
+
+/* Media queries para pantallas más pequeñas */
+@media screen and (max-width: 767px) {
+    .mainDiv {
+        flex-direction: column-reverse;
+        align-items: center;
+        background-color: #6093C0;
+    }
+
+    .contentContainer {
+        display: none;
+    }
+
+    .logo2{
+        display: flex;
+        width: 100px;
+        margin-left: 40%;
+    }
+    .formContainer {
+        width: 80%;
+    }
+    .formHeader{
+        color: white;
+    }
+    .register{
+        width: 100%;
+    }
+    .button1:hover{
+        background-color: #033d61;
+    }
+    
 }
