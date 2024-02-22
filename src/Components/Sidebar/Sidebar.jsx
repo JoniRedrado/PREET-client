@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     drawerList1: {
@@ -34,7 +35,9 @@ const useStyles = makeStyles((theme) => ({
 const Sidebar = () => {
     const { pathname } = useLocation();
     const classes = useStyles();
-    const [openDrawer, setOpenDrawer] = useState(false);
+    const [openDrawer, setOpenDrawer] = useState(false);    
+    const { t } = useTranslation();
+    
     const [userInfo, setUserInfo] = useState({
       name: "",
       profilePicture: "",
@@ -218,28 +221,28 @@ const Sidebar = () => {
                             <Link to="/settings" className={styles.navLink}>
                                 <ListItem button className={classes.drawerList2}>
                                     <FaUser className={styles.icon}/>
-                                    <ListItemText primary="Manage Account" />
+                                    <ListItemText primary={t("UserBar.manage")} />
                                 </ListItem>
                             </Link>
                             <Link to="/myReservations" className={styles.navLink} onClick={handleDrawerClose}> 
                                 <ListItem button className={classes.drawerList2}> 
                                     <FaHistory className={styles.icon} />
-                                    <ListItemText primary="Reservation History" />
+                                    <ListItemText primary={t("UserBar.history")} />
                                 </ListItem>
                             </Link>
                             <Link to="/userFavorites" className={styles.navLink}>
                                 <ListItem button className={classes.drawerList2} onClick={handleDrawerClose}>
                                     <FaStar className={styles.icon}/>
-                                    <ListItemText primary="Favorites" />
+                                    <ListItemText primary={t("UserBar.favorites")} />
                                 </ListItem>
                             </Link>
                             <ListItem button onClick={handleDrawerClose} className={classes.drawerList2}>
                                 <FaArrowLeft className={styles.icon}/>
-                                <ListItemText primary="Close Menu" />
+                                <ListItemText primary={t("UserBar.close")} />
                             </ListItem>
                             <ListItem button className={classes.drawerList2} onClick={() => logout("login")}>
                                 <FaSignOutAlt className={styles.icon} />
-                                <ListItemText primary="Log Out" />
+                                <ListItemText primary={t("UserBar.out")} />
                             </ListItem>
                         </List>
 
