@@ -13,7 +13,7 @@ import UserFavorites from "./Pages/Favorites/userFavorites/userFavorites";
 import styles from "./App.module.css"
 import SearchResult from "./Pages/SearchResult/SearchResult";
 import BookingsHistory from "./Pages/BookingsHistory/BookingsHistory";
-import LoginAdmin from "./Pages/LoginAdmin/LoginAdmin";
+// import LoginAdmin from "./Pages/LoginAdmin/LoginAdmin";
 import GestionUsers from "./Components/Dashboard/GestionUsers/GestionUsers";
 import GestionHotels from "./Components/Dashboard/GestionHotels/GestionHotels";
 import GestionRooms from "./Components/Dashboard/GestionRooms/GestionRooms";
@@ -54,7 +54,7 @@ function App() {
                 {/* <Route path="/favorites" element={<Favorites />} /> */}
                 <Route path="/userFavorites" element={<UserFavorites />} />
                 <Route path="/myreservations" element={<BookingsHistory />} />
-                <Route path="/admin" element={<LoginAdmin />} />
+                {/* <Route path="/admin" element={<LoginAdmin />} /> */}
                 <Route path="/dashboard/users" element={<GestionUsers />} />
                 <Route path="/dashboard/hotels" element={<GestionHotels />} />
                 <Route path="/dashboard/feedback" element={<GestionFeedBack />} />

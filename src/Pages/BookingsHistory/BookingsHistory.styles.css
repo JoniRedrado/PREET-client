@@ -80,12 +80,6 @@
 }
 
 
-.reservations-container.darkMode{
-    background-color: #333; /* Color de fondo oscuro */
-  color: #fff;
-}
-
-.empty-history.darkMode{
-    background-color: #333; /* Color de fondo oscuro */
-    color: #fff;
+.reservation-info.darkMode{
+    color:#333;
 }

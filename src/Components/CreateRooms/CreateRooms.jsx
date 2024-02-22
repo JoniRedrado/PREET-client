@@ -33,11 +33,11 @@ const CreateRooms = () => {
 
   const fetchHotels = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels`,{
+      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels/all`,{
         params: { page: currentPage, size: pageSize }
       });
 
-      setHotels(prevHotels => [...prevHotels, ...response.data.Hotel]); // Agrega los nuevos hoteles al estado
+      setHotels(prevHotels => [...prevHotels, ...response.data]); // Agrega los nuevos hoteles al estado
       setTotalPages(Math.ceil(response.data.total / pageSize));
     } catch (error) {
       console.error("Error fetching hotels:", error);

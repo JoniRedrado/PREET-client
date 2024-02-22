@@ -78,3 +78,12 @@
       transform: scale(1);
     }
   }
+
+.mainContainer.darkMode{
+  background-color: #555;
+  color: #fff;
+}
+
+.title.darkMode .bookingInfo.darkMode{
+  color:#fff;
+}
