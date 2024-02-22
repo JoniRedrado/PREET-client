@@ -24,9 +24,9 @@ const Card = (props) => {
     const { index, scrollToFirstCard } = dataScroll;
     index === 1 && scrollToFirstCard();
 
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    const isCurrentlyFavorite = favorites.some((favorite) => favorite.id === id);
-    setIsFavorite(isCurrentlyFavorite);
+    // const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    // const isCurrentlyFavorite = favorites.some((favorite) => favorite.id === id);
+    // setIsFavorite(isCurrentlyFavorite);
   }, []);
 
   const handleAddressClick = () => {

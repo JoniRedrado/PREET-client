@@ -58,7 +58,7 @@ const BookingsHistory = () => {
           <h1>{t("HistoryBkng.message")}</h1>
         </div>
       ) : (
-        <div>
+        <div className="dates">
           {userReservations.map((reservation) => {
             return (
               <SingleBooking

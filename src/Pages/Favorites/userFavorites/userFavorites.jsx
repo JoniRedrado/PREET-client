@@ -15,10 +15,11 @@ const UserFavorites = () => {
   const { darkMode } = useDarkMode();
   const { t } = useTranslation();
   const favorites = useSelector((state) => state.userFavorites);
+
   const token = localStorage.getItem('token')
 
-  const handleRemoveFavorite = (id) => {
-    dispatch(removeFavorite(id)).then(() => {
+  const handleRemoveFavorite = (hotelId) => {
+    dispatch(removeFavorite(hotelId)).then(() => {
       dispatch(userFavorites());
     });
   };
@@ -48,7 +49,7 @@ const UserFavorites = () => {
                 <div key={index} className={`card ${darkMode ? "darkMode" : ""}`}>
                   <div
                     className="favorite-icon"
-                    onClick={() => handleRemoveFavorite(favorite.id)}
+                    onClick={() => handleRemoveFavorite(favorite.hotelId)}
                   >
                     {favorite.isFavorite ? (
                       <img src={notFavorite} alt="notFavorite" className="fav" />

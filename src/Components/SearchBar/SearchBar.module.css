@@ -226,3 +226,62 @@
 
 
 
+.container.darkMode{
+  background-color: #333;
+  color:#fff;
+}
+
+.searchBar.darkMode{
+  background-color: #333;
+  color:#fff;
+}
+
+.iconContainer.darkMode{
+  background-color: #333;
+  color:#fff;
+}
+
+.searchIcon.darkMode{
+  background-color: #333;
+  color:#fff;
+}
+
+.filters.darkMode{
+  background-color: #333;
+  color:#fff;
+}
+
+.startDate.darkMode{
+  background-color: #333;
+  color:#fff;
+}
+
+.date.darkMode{
+  background-color: #333;
+  color:#fff;
+}
+
+.checkContainer.darkMode{
+  background-color: #333;
+  color:#fff;
+}
+
+.check.darkMode{
+  background-color: #333;
+  color:#fff;
+}
+
+.dateInput.darkMode{
+  background-color: #333;
+  color:#fff;
+}
+
+.persons.darkMode{
+  background-color: #333;
+  color:#fff;
+}
+
+.endDate.darkMode{
+  background-color: #333;
+  color:#fff;
+}

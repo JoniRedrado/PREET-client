@@ -80,6 +80,10 @@
 }
 
 
-.reservation-info.darkMode{
-    color:#333;
+.reservations-container .darkMode{
+    color:#555;
+}
+
+.dates.darkMode{
+    background-color:#555
 }
