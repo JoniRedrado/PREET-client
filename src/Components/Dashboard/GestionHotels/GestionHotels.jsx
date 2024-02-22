@@ -16,11 +16,16 @@ const GestionHotels = () => {
 
   const getHotels = async (query) => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels`,{
-        params: { ...query, page: currentPage, size: pageSize }
+      const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels/all`,{
+        params: { 
+          ...query, 
+          pagination:true , 
+          page: currentPage, 
+          size: pageSize }
       });
-      setHotelsData(data.Hotel);
-      setTotalPages(Math.ceil(data.total / pageSize));
+      console.log(data);
+      setHotelsData(data.rows);
+      setTotalPages(Math.ceil(data.count / pageSize));
     } catch (error) {
       console.error(error.message);
     }
@@ -38,9 +43,9 @@ const GestionHotels = () => {
   const getHotelsDeleted = async (query) => {
     try {
       const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/hotels/deleted`, {
-        params: { ...query, page: currentPage, size: pageSize }
+        params: { ...query, page: currentPage, size: pageSize, pagination: true }
       });
-      setHotelDelete(data.hotels || []);
+      setHotelDelete(data.hotels);
       setTotalPages(Math.ceil(data.total / pageSize));
     } catch (error) {
       console.error(error.message);
@@ -151,10 +156,10 @@ const GestionHotels = () => {
         <tbody>
           {hotelsData && hotelsData.map((hotel) => (
             <tr key={hotel.id}>
-              <td><img  className="imagen-hotel" src={hotel.image} alt={hotel.type}/></td>
+              <td><img  className="imagen-hotel" src={hotel.image[0].image} alt={hotel.name}/></td>
               <td>{hotel.name}</td>
               <td>{hotel.stars}</td>
-              <td>{hotel.country.name}</td>
+              <td>{hotel.country && hotel.country.name}</td>
               <td>
                   <i title="Delete" onClick={() => deleteHotel(hotel.id)} class="bi bi-dash-circle-fill"></i>
 

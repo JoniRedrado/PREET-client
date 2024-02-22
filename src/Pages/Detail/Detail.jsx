@@ -40,6 +40,7 @@ const Detail = () => {
   };
 
   const hotel = useSelector((state) => state.hotelDetail);
+  console.log(hotel);
   const modalRoomDetail = useSelector((state) => state.showModal.roomDetail);
   const modalPostReview = useSelector((state) => state.showModal.postReview);
   const filters = useSelector((state) => state.submitFilters);
@@ -63,6 +64,7 @@ const Detail = () => {
 
   const handleRoomSelect = (roomType) => {
     const selectedRoom = hotel.rooms.find((room) => room.type === roomType);
+    console.log("Selected Room:", selectedRoom);
     setSelectedRoom(selectedRoom);
     dispatch(showModal("roomDetail", true));
   };
@@ -192,7 +194,6 @@ const Detail = () => {
           {hotel &&
           hotel.name &&
           hotel.image &&
-          hotel.ranking &&
           hotel.rooms ? (
             <div className="informationContainer">
               <h1>{hotel.name}</h1>
@@ -203,7 +204,7 @@ const Detail = () => {
                   {t("Detail.score")}
                   <div className="ranking-average-container">
                     <div className="ranking-average-fill" style={{ width: `${(hotel.ranking / 5) * 100}%` }}></div>
-                    <span className="ranking-average-score">{hotel.ranking}</span>
+                    <span className="ranking-average-score">{hotel.ranking ? hotel.ranking: "N/A"}</span>
                   </div>
                 </h2>
               </div>

@@ -17,11 +17,11 @@ const Dashboard = () => {
   // const [selectedStartDate, setSelectedStartDate] = useState(null); // Inicializa con la fecha actual
   // const [selectedEndDate, setSelectedEndDate] = useState(null); 
 
-  const handleDateRangeSelect = (startDate, endDate) => {
-    setSelectedStartDate(startDate);
-    setSelectedEndDate(endDate);
-    // Aquí puedes realizar cualquier acción adicional, como actualizar tus gráficos con las nuevas fechas seleccionadas
-  };
+  // const handleDateRangeSelect = (startDate, endDate) => {
+  //   setSelectedStartDate(startDate);
+  //   setSelectedEndDate(endDate);
+  //   // Aquí puedes realizar cualquier acción adicional, como actualizar tus gráficos con las nuevas fechas seleccionadas
+  // };
 
   const handleDrawerOpen = () => {
     setOpenDrawer(true);
