@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import axios from 'axios';
 import * as echarts from 'echarts';
+import styles from "./MetricRankings.module.css"
 
 const RankingChart = ({ startDate, endDate }) => {
   useEffect(() => {
@@ -127,10 +128,10 @@ const RankingChart = ({ startDate, endDate }) => {
   };
 
   return (
-    <div>
+    <div className={styles.mainDiv}>
       <h2>Hotel Ranking by Average Score</h2>
-      <div id="ranking-chart" style={{ height: '400px', width: '600px' }}></div>
-      <button onClick={handleDownloadExcel}>Download Report</button>
+      <div id="ranking-chart" style={{ height: '500px', width: '90%' }}></div>
+      <button onClick={handleDownloadExcel} className={styles.button}>Download Report</button>
 
     </div>
   );

@@ -28,6 +28,7 @@ import {
   POST_FAVORITE,
   REMOVE_FAVORITE,
   DETAIL_FILTER_PARAMS,
+  SET_SELECTED_OPTION,
 } from "./actions-types";
 
 export const getAllHotels = () => {
@@ -423,3 +424,13 @@ export const DetailFilterParams = (params) => {
     });
   };
 };
+
+
+export const setSelectedOption = (option) => {
+  return function (dispatch){
+    dispatch({
+      type:SET_SELECTED_OPTION,
+      payload:option,
+    })
+  }
+}

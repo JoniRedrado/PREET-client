@@ -37,6 +37,7 @@ function App() {
         {/* No mostrar el encabezado y el pie de página en la ruta /register1 */}
         <Route path="/register" element={<NewRegister />} />
         <Route path="/login" element={<NewLogin/>} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route
           path="/*"
           element={
@@ -47,7 +48,6 @@ function App() {
                 <Route path="/detail/:id" element={<Detail />} />
                 <Route path="/create" element={<CreatePage />} />
                 <Route path="/update/:id" element={<UpdatePage />} />
-                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/booked" element={<BookedSuccesfully />} />
                 <Route path="/search/" element={<SearchResult />} />

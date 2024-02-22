@@ -1,6 +1,7 @@
 .logo{
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: auto;
+    margin-bottom: 30px;
   }
   .navLink{
     text-decoration: none;
@@ -32,9 +33,14 @@
     font-size: 30px;
     color: white;
   }
+
+  .menuIcon2{
+    color: white;
+    font-size: 15px;
+  }
   
   .imageContainer{
-    background-color: #01283F;
+    background-color: #6093C0;
     width: 90px;
     height: 90px;
     display:flex;

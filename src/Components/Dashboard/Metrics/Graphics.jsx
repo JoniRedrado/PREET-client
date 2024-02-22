@@ -4,6 +4,7 @@ import RankingChart from "../Metrics/MetricRankings/MetricRankings";
 import MetricUsers from "../Metrics/MetricUsers/MetricUsers";
 import BookingsChart from "../Metrics/MetricBookings/MetricBookings";
 import CombinedCharts from "../Metrics/MetricNetIncomes/MetricNetIncomes";
+import styles from "./Graphics.module.css"
 
 const Graphics = () => {
     const [startDate, setStartDate] = useState(null);
@@ -23,16 +24,20 @@ const Graphics = () => {
     };
 
     return (
-        <div>
-            <div>
+        <div className={styles.mainDiv}>
+            <div className={styles.statementDiv}>
                 <span>Please, select a date to show</span>
                 <DateRangePicker onSelectDateRange={handleDateRangeSelect} />
             </div>
-            <div>
-                <MetricUsers startDate={startDate} endDate={endDate}/>
-                <RankingChart startDate={startDate} endDate={endDate}/>
-                <BookingsChart startDate={startDate} endDate={endDate}/>
-                <CombinedCharts startDate={startDate} endDate={endDate}/>
+            <div className={styles.graphicsDiv}>
+                <div className={styles.graphics1}>
+                    <MetricUsers startDate={startDate} endDate={endDate}/>
+                    <CombinedCharts startDate={startDate} endDate={endDate}/>
+                </div>
+                <div className={styles.graphics2}>
+                    <BookingsChart startDate={startDate} endDate={endDate}/>
+                    <RankingChart startDate={startDate} endDate={endDate}/>
+                </div>
             </div>
         </div>
     );

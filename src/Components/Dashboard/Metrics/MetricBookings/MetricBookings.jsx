@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import axios from 'axios';
 import * as echarts from 'echarts';
-
+import styles from "./MetricBookings.module.css"
 const BookingsChart = ({ startDate, endDate }) => {
   useEffect(() => {
     let myChart = null;
@@ -118,10 +118,10 @@ const BookingsChart = ({ startDate, endDate }) => {
     });
   };
   return (
-    <div>
+    <div className={styles.mainDiv}>
       <h2>Total Hotel Reservations</h2>
-      <div id="bookings-chart" style={{ height: '400px', width: '600px' }}></div>
-      <button onClick={handleDownloadExcel}>Download Report</button>
+      <div id="bookings-chart" style={{ height: '350px', width: '100%', marginTop:"-50px"}}></div>
+      <button onClick={handleDownloadExcel} className={styles.button}>Download Report</button>
 
     </div>
   );

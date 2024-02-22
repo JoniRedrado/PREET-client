@@ -26,6 +26,7 @@ import {
   POST_FAVORITE,
   REMOVE_FAVORITE,
   DETAIL_FILTER_PARAMS,
+  SET_SELECTED_OPTION,
 } from "./actions-types";
 
 let initialState = {
@@ -52,6 +53,7 @@ let initialState = {
   userReviews: [],
   hotelFavorites: [],
   submitRoomFilters: {},
+  selectedOption:"Graphics",
 };
 
 function rootReducer(state = initialState, action) {
@@ -248,6 +250,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         submitRoomFilters: action.payload,
       };
+
+    case SET_SELECTED_OPTION:
+      return{
+        ...state,
+        selectedOption: action.payload,
+      }
 
     default:
       return state;

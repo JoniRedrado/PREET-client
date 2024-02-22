@@ -104,26 +104,37 @@ function NavBar({ heightNav }) {
     if (pathname === "/dashboard" || pathname === "/dashboard/"){
       return (
         <div 
-          className={`${style.container} ${darkMode ? style.darkMode : ""}`}
+          className={`${style.container2} ${darkMode ? style.darkMode : ""}`}
           style={heightNav}
         >            
-          <div className={style.userButtons}>
+          <div className={style.adminInfo}>
+            <div className={style.imageContainer2}>
+              {userInfo.profilePicture ? (
+                <img src={userInfo.profilePicture} alt="profile-picture" className={style.picture}/>
+              ) : (
+                <h1 className={style.nameText}>{userInfo.name.charAt(0).toUpperCase()}</h1>
+            )}
+            </div>
+          
+          <p className={style.wrapperText}>{userInfo.name.charAt(0).toUpperCase() + userInfo.name.slice(1)} {userInfo.lastName.charAt(0).toUpperCase() + userInfo.lastName.slice(1)}</p>
           <Sidebar/> 
+          <div className={style.userButtons}>
           <div>
             <button onClick={toggleDarkMode} className={style.darkModeButton}>
                {darkMode ? (
-                <MdSunny className={style.icon}/>
+                <MdSunny className={style.icon2}/>
                 ) : (
-                  <IoMdMoon className={style.icon}/>
+                  <IoMdMoon className={style.icon2}/>
                 )}
             </button>
           </div>
           <div ref={dropdownRef} onMouseLeave={closeMenu}>
             <button className={style.btnLink} onClick={toggleMenu}>
-              <MdLanguage className={style.icon}/>
+              <MdLanguage className={style.icon2}/>
             </button>
+            <div className={style.language}>
             {showMenu && (
-              <ul className={style.dropdownMenu}>
+              <ul className={style.dropdownMenu2}>
                 {locales.map(({ code, country_code }) => (
                   <li key={country_code}>
                     <button className={style.dropdownItem}>
@@ -139,21 +150,13 @@ function NavBar({ heightNav }) {
                 ))}
               </ul>
             )}
+            </div>
             
           </div>
           </div>
-          <div className={style.adminInfo}>
-            <div className={style.imageContainer}>
-              {userInfo.profilePicture ? (
-                <img src={userInfo.profilePicture} alt="profile-picture" className={style.picture}/>
-              ) : (
-                <h1 className={style.nameText}>{userInfo.name.charAt(0).toUpperCase()}</h1>
-            )}
-            </div>
-          
-          <p className={style.wrapperText}>{userInfo.name.charAt(0).toUpperCase() + userInfo.name.slice(1)} {userInfo.lastName.charAt(0).toUpperCase() + userInfo.lastName.slice(1)}</p>
           </div>
         </div>
+        
       )
     } else {
       return (

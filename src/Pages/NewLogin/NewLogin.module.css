@@ -4,7 +4,7 @@
     flex-direction: row;
     width: 100%;
     background-color: white;
-    height: 100%;
+    min-height: 100vh;
 }
 .contentContainer{
     display: flex;
@@ -154,6 +154,7 @@
 
 .button2:hover{
     background-color: #e8eaef;
+    cursor: pointer;
 }
 
 .google{

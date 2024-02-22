@@ -1,6 +1,7 @@
 import * as echarts from 'echarts';
 import { useEffect, useRef } from 'react';
 import axios from 'axios';
+import styles from "./MetricNetIncomes.module.css"
 
 const CombinedCharts = ({ startDate, endDate }) => {
   const chartRef = useRef(null);
@@ -107,10 +108,10 @@ const CombinedCharts = ({ startDate, endDate }) => {
   };
 
   return (
-    <div>
+    <div className={styles.mainDiv}>
       <h2>Incomes Hotels</h2>
-    <div ref={chartRef} style={{ height: '400px', width: '600px' }}></div>
-    <button onClick={handleDownloadExcel}>Download Report</button>
+    <div ref={chartRef} style={{ height: '500px', width: '90%' }}></div>
+    <button onClick={handleDownloadExcel} className={styles.button}>Download Report</button>
     </div>
   );
 };
