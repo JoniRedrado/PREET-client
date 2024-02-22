@@ -82,3 +82,8 @@
 .BtnLeft {
   margin-right: 1em;
 } */
+
+.root.darkMode {
+  background-color:#555;
+  color: #ffffff;
+}

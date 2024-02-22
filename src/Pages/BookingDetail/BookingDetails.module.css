@@ -79,3 +79,12 @@
   background-color: #333;
   color: #fff;
 }
+
+.bookingInfo.darkMode{
+  color: #fff;
+}
+
+.infor.darkMode{
+  color: #fff;
+  background-color: #333;
+} 

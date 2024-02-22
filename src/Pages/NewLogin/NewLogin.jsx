@@ -51,6 +51,7 @@ const NewLogin = () => {
   const handleGoogleLogin = async () => {
     try {
       await auth.loginWithGoogle();
+      navigate("/")
     } catch (error) {
       setError("Error signing in with Google");
       console.log("Error");

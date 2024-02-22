@@ -6,11 +6,13 @@ import { FaSearch, FaLocationArrow } from "react-icons/fa"
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import searchValidation from "../../helpers/searchValidation";
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const {darkMode} = useDarkMode()
 
   const [searchInput, setSearchInput] = useState("");
   const [guest, setGuest] = useState(1);
@@ -117,7 +119,7 @@ const SearchBar = () => {
   }, [])
 
   return (
-    <div className={s.container}>
+    <div className={`${s.container} ${darkMode ? s.darkMode : ""}`}>
       <div className={s.searchBar}>
         <div className={s.iconContainer}>
           <FaLocationArrow className={s.searchIcon} />

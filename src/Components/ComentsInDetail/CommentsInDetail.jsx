@@ -2,12 +2,14 @@ import { useState, useEffect, Suspense } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import {useDarkMode} from "../../DarkModeContext/DarkModeContext"
 
 import style from "./CommentsInDetail.module.css";
 
 function CommentsInDetail() {
   const { id } = useParams();
   const { t } = useTranslation();
+  const {darkMode} = useDarkMode()
   const [hotelComments, setHotelComments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const commentsPerPage = 5;
@@ -29,7 +31,7 @@ function CommentsInDetail() {
     <div>
       {hotelComments && hotelComments.feedback?.rows?.length > 0 ? (
         hotelComments.feedback.rows.map((comment) => (
-          <div className={style.reviewsContainer} key={comment.id}>
+          <div className={`${style.reviewsContainer} ${darkMode ? style.darkMode : ""}`} key={comment.id}>
             <div className={style.userInfo}>
               <h2>{comment.user.name}</h2>
               <p className={style.userNationality}>({comment.user.nationality})</p>

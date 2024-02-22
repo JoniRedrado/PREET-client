@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import { NavigateBefore, NavigateNext } from "@material-ui/icons";
 import { useTranslation } from "react-i18next";
+import {useDarkMode} from "../../DarkModeContext/DarkModeContext"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,6 +62,8 @@ const Slider = () => {
   const { t } = useTranslation();
   const classes = useStyles();
   const [rankedHotels, setRankedHotels] = useState([]);
+
+  const {darkMode} = useDarkMode()
 
   useEffect(() => {
     axios
@@ -114,7 +117,7 @@ const Slider = () => {
   return (
     <Carousel
       animation="slide"
-      className={classes.root}
+      className={`${classes.root} ${darkMode ? "darkMode" : ""}`} 
       indicators={false}
       navButtonsAlwaysVisible
       NextIcon={
