@@ -1,0 +1,29 @@
+.divGeneral{
+    display: flex;
+    height: 50px;
+    border-top: 1px solid rgb(206, 204, 204);
+}
+
+.inputStyle{
+    flex: 1;
+    padding-left: 10px;
+    border-color: transparent;
+
+    &:focus{
+        outline: none;
+    }
+}
+
+.divSendStyle{
+    width: 60px;
+    height: 100%;
+    display: flex;
+    color: blue;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+
+    &:hover{
+        color: rgb(6, 6, 141);
+    }
+}

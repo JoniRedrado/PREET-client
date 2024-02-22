@@ -1,0 +1,40 @@
+
+.divGeneral{
+    position: relative;
+    border-radius: 8px;
+    background-color: white;
+    padding: 5px 20px 5px 20px;
+    margin: 10px 20px 10px 20px;
+    border: 1px solid rgb(209, 206, 206);
+}
+
+.divIcon{
+    top: 0px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    color: white;
+    position: absolute;
+    border-radius: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.divIconUser{
+    right: -15px;
+    background-color: green;
+}
+
+.divIconBot{
+    left: -15px;
+    background-color: blue;
+}
+
+.nameUser{
+    font-weight: bold;
+    font-size: small;
+}
+
+.message{
+    font-size: smaller;
+}

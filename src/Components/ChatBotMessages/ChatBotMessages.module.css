@@ -1,0 +1,6 @@
+
+.divMessage{
+    flex: 1;
+    overflow-y: scroll;
+    background-color: rgb(236, 234, 234);
+}

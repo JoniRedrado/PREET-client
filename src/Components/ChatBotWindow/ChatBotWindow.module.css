@@ -1,0 +1,13 @@
+.divWindow{
+    right: 5px;
+    bottom: 20px;
+    width: 320px;
+    height: 65vh;
+    z-index: 100;
+    display: flex;
+    position: fixed;
+    border-radius: 5px;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+}
