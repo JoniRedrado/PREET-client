@@ -177,7 +177,7 @@ const Detail = () => {
                 <h2>Rating  {renderStars(hotel.stars)}</h2>
                 <h2>
                   Score:
-                  <span className="ranking-average-score">{hotel.ranking}</span>
+                  <span className="ranking-average-score">{hotel.ranking}</span><span> /5</span>
                 </h2>
               </div>
 
@@ -233,7 +233,7 @@ const Detail = () => {
       <Modal
         isOpen={modalPostReview}
         onRequestClose={() => closeModal("postReview")}
-        className="modal"
+        className="modal-post-review"
         style={{
           overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.5)",

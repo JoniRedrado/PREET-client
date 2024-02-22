@@ -278,9 +278,11 @@ export const userFavorites = (token) => {
           },
         }
       );
+
+      console.log(response.data.favorites);
       return dispatch({
         type: USER_FAVORITES,
-        payload: response.data,
+        payload: response.data.favorites,
       });
     } catch (error) {
       console.error(error);

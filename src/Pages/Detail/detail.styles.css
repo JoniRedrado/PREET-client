@@ -116,14 +116,14 @@
   color: #fff;
 }
 
-.modal {
+.modal-post-review {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 800px;
+  width: 400px;
   transform: translate(-50%, -50%);
   background: #fff;
-  padding: 0px;
+  padding: 25px;
   margin: 0px;
   border-radius: 8px;
   overflow-y: auto;
@@ -211,4 +211,11 @@
   color: white;
   padding: 5px;
   border-radius: 5px;
+  margin-left: 5px;
+}
+
+.ranking-average-score-base {
+  color: rgb(37, 37, 37);
+  font-size: 15px;
+  margin-left: 5px;
 }
