@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Detail from "./Pages/Detail/Detail";
 import CreatePage from "./Pages/Create/CreatePage";
@@ -10,7 +10,7 @@ import Settings from "./Pages/Settings/Settings";
 import BookedSuccesfully from "./Pages/BookedSuccesfully/BookedSuccesfully";
 import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
-import Favorites from "./Pages/Favorites/Favorites";
+// import Favorites from "./Pages/Favorites/Favorites";
 import UserFavorites from "./Pages/Favorites/userFavorites/userFavorites";
 import styles from "./App.module.css"
 import SearchResult from "./Pages/SearchResult/SearchResult";
@@ -21,7 +21,6 @@ import GestionHotels from "./Components/Dashboard/GestionHotels/GestionHotels";
 import GestionRooms from "./Components/Dashboard/GestionRooms/GestionRooms";
 import GestionFeedBack from "./Components/Dashboard/GestionFeedback/GestionFeedBack";
 import { useDarkMode } from "./DarkModeContext/DarkModeContext";
-import { useEffect, useState} from "react";
 import UpdateRooms from "./Components/UpdateRooms/UpdateRooms";
 import BookingDetails from "./Pages/BookingDetail/BookingDetails";
 import CreateRooms from "./Components/CreateRooms/CreateRooms"
@@ -31,25 +30,7 @@ import NewRegister from "./Pages/NewRegister/NewRegister";
 function App() {
 
   const { darkMode } = useDarkMode();
-  const location = useLocation();
-  // const [showHeader, setShowHeader] = useState(true)
-
-  // useEffect(() =>{
-  //   setShowHeader(   
-                  // location.pathname !== "/admin"  
-                  // && location.pathname !== "/dashboard"  
-                  // && location.pathname !== "/favorites" 
-                  // && location.pathname !== "/dashboard/users"
-                  // && location.pathname !== "/dashboard/hotels"
-                  // && location.pathname !== "/dashboard/rooms"
-                  // && location.pathname !== "/dashboard/feedback"
-                  // && location.pathname !== "/update/:id"
-                  // && location.pathname !== "/updaterooms/:id"
-                  // && location.pathname !== "/create"
-
-  //               );
-  // }, [location.pathname])
-
+  
   return (
     <div className={`${styles.mainDiv} ${darkMode ? styles.darkMode : ''}`}>
       <Routes>
@@ -71,7 +52,7 @@ function App() {
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/booked" element={<BookedSuccesfully />} />
                 <Route path="/search/" element={<SearchResult />} />
-                <Route path="/favorites" element={<Favorites />} />
+                {/* <Route path="/favorites" element={<Favorites />} /> */}
                 <Route path="/userFavorites" element={<UserFavorites />} />
                 <Route path="/myreservations" element={<BookingsHistory />} />
                 <Route path="/admin" element={<LoginAdmin />} />

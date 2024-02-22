@@ -2,12 +2,15 @@ import styles from "./BookingDetails.module.css"
 import { useState, useEffect } from "react";
 import { useParams, Link } from 'react-router-dom'; 
 import axios from "axios";
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+
 
 const BookingDetails = () => {
   const [booking, setBooking] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams(); // Obtener el id de la URL
+  const { darkMode } = useDarkMode();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +42,7 @@ const BookingDetails = () => {
     return <div className={styles.error}>Error: {error.message}</div>;
   }
   return (
-    <div className={styles.mainContainer}>
+    <div className={`${styles.mainContainer} ${darkMode ? styles.darkMode: ""}`}>
             <Link to="/myReservations" className={styles.backButton}>
         &lt; Back
       </Link>

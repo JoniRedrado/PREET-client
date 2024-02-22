@@ -73,3 +73,9 @@
   .backButton:hover {
     background-color: #0056b3; /* Cambia de color al mismo azul oscuro que usamos antes */
   }
+
+
+.mainContainer.darkMode{
+  background-color: #333;
+  color: #fff;
+}

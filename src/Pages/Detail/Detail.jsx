@@ -70,9 +70,15 @@ const Detail = () => {
   }
 
   const handleAddToFavorites = () => {
-    dispatch(postFavorite(id));
-    setIsFavorite(!isFavorite);
-    localStorage.setItem(`favorite_${id}`, "true");
+    // Se maneja la acción para agregar o eliminar favoritos
+    if (isFavorite) {
+      dispatch(removeFavorite(id));
+      localStorage.removeItem(`favorite_${id}`);
+    } else {
+      dispatch(postFavorite(id));
+      localStorage.setItem(`favorite_${id}`, "true");
+    }
+    setIsFavorite(!isFavorite); // Se actualiza el estado de favoritos
   };
 
   const handlePostReviewModal = (option) => {
@@ -146,26 +152,17 @@ const Detail = () => {
               <i className="bi bi-arrow-left-circle" title="Return home"></i>
             </Link>
             {token && (
-            <div
-              className="icon"
-              onClick={() => {
-                if (isFavorite) {
-                dispatch(removeFavorite(id));
-                localStorage.removeItem(`favorite_${id}`);
-                } else {
-                dispatch(postFavorite(id));
-                localStorage.setItem(`favorite_${id}`, "true");
-                }
-                setIsFavorite(!isFavorite);
-              }}
+              <div
+                className="icon"
+                onClick={handleAddToFavorites} // Aquí se maneja el clic en el ícono de favoritos
               >
-              {isFavorite ? (
-                <i className="bi bi-heart-fill"></i>
-              ) : (
-                <i className="bi bi-heart"> </i>
-              )}
-    </div>
-  )}
+                {isFavorite ? (
+                  <i className="bi bi-heart-fill"></i>
+                ) : (
+                  <i className="bi bi-heart"> </i>
+                )}
+              </div>
+            )}
           </div>
 
           {hotel &&
