@@ -43,6 +43,7 @@ const Sidebar = () => {
     // const [name, setName] = useState('');
     // const [profilePicture, setProfilePicture] = useState('')
     const token = localStorage.getItem("token");
+    const rol = localStorage.getItem("rol");
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -68,6 +69,7 @@ const Sidebar = () => {
 
     function logout(option) {
         localStorage.removeItem("token");
+        localStorage.removeItem("rol");
         dispatch(showModal(option, false));
         dispatch(userLog());
         navigate("/");

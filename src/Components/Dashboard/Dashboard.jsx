@@ -13,8 +13,8 @@ import swal from 'sweetalert';
 const Dashboard = () => {
   const navigate = useNavigate();
   const { darkMode } = useDarkMode();
-  const [selectedStartDate, setSelectedStartDate] = useState(new Date()); // Inicializa con la fecha actual
-  const [selectedEndDate, setSelectedEndDate] = useState(new Date()); 
+  const [selectedStartDate, setSelectedStartDate] = useState(null); // Inicializa con la fecha actual
+  const [selectedEndDate, setSelectedEndDate] = useState(null); 
 
   const handleDateRangeSelect = (startDate, endDate) => {
     setSelectedStartDate(startDate);
@@ -50,8 +50,14 @@ const Dashboard = () => {
         navigate("/");
       }
     };
+
+    const today = new Date();
+    const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+    setSelectedStartDate(lastMonth);
+    setSelectedEndDate(today);
+
     checkAuth();
-  }, []);
+  }, [navigate]);
 
   return (
     <div className={`${styles.mainDiv} ${darkMode ? styles.darkMode : ""}`}>

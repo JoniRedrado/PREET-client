@@ -4,6 +4,8 @@ import { userFavorites, removeFavorite } from "../../../redux/actions";
 import { useDarkMode } from "../../../DarkModeContext/DarkModeContext";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Favorite from "../../../assets/Favorite.png";
+import notFavorite from "../../../assets/notFavorite.png";
 import "./userFavorites.modules.css";
 
 const UserFavorites = () => {
@@ -43,7 +45,11 @@ const UserFavorites = () => {
                 className="favorite-icon"
                 onClick={() => handleRemoveFavorite(favorite.id)}
               >
-                <i className="bi bi-heart-fill heart"></i>
+                {favorite.isFavorite ? (
+                  <img src={notFavorite} alt="notFavorite" className="fav" />
+                    ) : (
+                  <img src={Favorite} alt="Favorite" className="fav" />
+                )}
               </div>
               <Link to={`/detail/${favorite.hotelId}`} className="link">
                 <div className="card-image">

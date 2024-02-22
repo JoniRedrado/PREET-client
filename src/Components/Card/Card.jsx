@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { postFavorite } from "../../redux/actions";
+import { postFavorite, removeFavorite} from "../../redux/actions";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import styles from "./Card.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
 import { useState, useEffect } from "react";
 import notFavorite from "../../assets/notFavorite.png";
 import Favorite from "../../assets/Favorite.png";
@@ -23,6 +23,10 @@ const Card = (props) => {
   useEffect(() => {
     const { index, scrollToFirstCard } = dataScroll;
     index === 1 && scrollToFirstCard();
+
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const isCurrentlyFavorite = favorites.some((favorite) => favorite.id === id);
+    setIsFavorite(isCurrentlyFavorite);
   }, []);
 
   const handleAddressClick = () => {
@@ -41,8 +45,13 @@ const Card = (props) => {
     return starsArray;
   };
 
-  const handleAddToFavorites = () => {
-    dispatch(postFavorite(id));
+  const handleFavoriteToggle = () => {
+    // Alternar entre agregar y eliminar favoritos
+    if (isFavorite) {
+      dispatch(removeFavorite(id));
+    } else {
+      dispatch(postFavorite(id));
+    }
     setIsFavorite(!isFavorite);
   };
 
@@ -59,12 +68,12 @@ const Card = (props) => {
         {token ? (
           <div
             className={styles.favoriteIcon}
-            onClick={isFavorite ? null : handleAddToFavorites}
+            onClick={handleFavoriteToggle}
           >
             {isFavorite ? (
               <img src={Favorite} alt="Favorite" className={styles.fav} />
             ) : (
-              <img src={notFavorite} alt="notFavorite" className={styles.fav} />
+              <img  src={notFavorite} alt="notFavorite" className={styles.fav} />
             )}
           </div>
         ) : (

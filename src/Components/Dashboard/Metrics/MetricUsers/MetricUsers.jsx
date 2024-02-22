@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 
 const MetricUsers = ({ startDate, endDate }) => {
+  
   useEffect(() => {
     let myChart = null;
 

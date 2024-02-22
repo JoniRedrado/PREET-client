@@ -304,6 +304,28 @@ export const hotelFavorites = (hotelId) => {
   };
 };
 
+// export const postFavorite = (id, token) => {
+//   return async function (dispatch) {
+//     try {
+//       const response = await axios.post(
+//         `${import.meta.env.VITE_BACK_URL}/favorites/${id}`,
+//         {},
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         }
+//       );
+//       return dispatch({
+//         type: POST_FAVORITE,
+//         payload: response.data,
+//       });
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+// };
+
 export const postFavorite = (id, token) => {
   return async function (dispatch) {
     try {
@@ -316,6 +338,12 @@ export const postFavorite = (id, token) => {
           },
         }
       );
+      
+      // Almacena el favorito en el localStorage
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      favorites.push(response.data); // Suponiendo que la respuesta contiene el favorito creado
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+
       return dispatch({
         type: POST_FAVORITE,
         payload: response.data,
@@ -329,10 +357,18 @@ export const postFavorite = (id, token) => {
 export const removeFavorite = (id) => {
   return async function (dispatch) {
     try {
+      // Envía una solicitud DELETE al servidor para eliminar el favorito
       const response = await axios.delete(
         `${import.meta.env.VITE_BACK_URL}/favorites/${id}`
       );
+      
       if (response.status === 200) {
+        // Elimina el favorito del localStorage
+        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        const updatedFavorites = favorites.filter(favorite => favorite.id !== id);
+        localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+        
+        // Despacha la acción para eliminar el favorito del estado
         dispatch({
           type: REMOVE_FAVORITE,
           payload: id,
@@ -345,6 +381,26 @@ export const removeFavorite = (id) => {
     }
   };
 };
+
+// export const removeFavorite = (id) => {
+//   return async function (dispatch) {
+//     try {
+//       const response = await axios.delete(
+//         `${import.meta.env.VITE_BACK_URL}/favorites/${id}`
+//       );
+//       if (response.status === 200) {
+//         dispatch({
+//           type: REMOVE_FAVORITE,
+//           payload: id,
+//         });
+//       } else {
+//         console.error("Error al eliminar el favorito");
+//       }
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+// };
 
 export const DetailFilterParams = (params) => {
   console.log(params);
