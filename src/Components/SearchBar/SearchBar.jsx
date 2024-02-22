@@ -15,6 +15,8 @@ const SearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
   const [guest, setGuest] = useState(1);
   const [errors, setErrors] = useState({});
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
 
   const defaultFilters = {
     name: "",
@@ -37,6 +39,28 @@ const SearchBar = () => {
       [name]: "",
     }));
   };
+
+  const handleDateInputs = (e) => {
+    e.preventDefault()
+    
+    if(e.target.name === 'startDate') {
+      setStartDate(e.target.value)
+    } else if (e.target.name === 'endDate') {
+      setEndDate(e.target.value)
+    }
+  };
+
+  const getCurrentDate = () => {
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = now.getMonth() + 1
+    const day = now.getDate()
+
+    const formattedMont = month < 10 ? `0${month}` : `${month}`
+    const formattedDay = day < 10 ? `0${day}` : `${day}`
+
+    return `${year}-${formattedMont}-${formattedDay}`
+  }
 
   const handleSearchInput = (e) => {
     e.preventDefault()
@@ -113,7 +137,7 @@ const SearchBar = () => {
             <div className={s.checkContainer}>
               <p className={s.check}>Check-in</p>
             </div>
-            <input type="date" name='startDate' onChange={handleFilters} className={ s.dateInput } />
+            <input type="date" name='startDate' onChange={handleFilters} min={getCurrentDate()} className={ s.dateInput } />
           </div>
           {errors.startDate && <p className={s.searchBarError}>{errors.startDate}</p>}
         </div>
@@ -122,7 +146,7 @@ const SearchBar = () => {
             <div className={s.checkContainer}>
               <p className={s.check}>Check-out</p>
             </div>
-            <input type="date" name='endDate' onChange={handleFilters} className={ s.dateInput }/>
+            <input type="date" name='endDate' onChange={handleFilters} min={getCurrentDate()} className={ s.dateInput }/>
           </div>
           {errors.endDate && <p className={s.searchBarError}>{errors.endDate}</p>}
         </div>
