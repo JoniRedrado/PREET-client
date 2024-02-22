@@ -10,8 +10,11 @@ import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { useTranslation } from "react-i18next";
 import styles from "./Filters.module.css";
 import searchValidation from "../../helpers/searchValidation";
+import { useNavigate } from "react-router-dom";
 
 const Filters = () => {
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { darkMode } = useDarkMode();
   const { t } = useTranslation();
@@ -60,10 +63,23 @@ const Filters = () => {
     if(Object.keys(errorsValidation).length === 0) {
       dispatch(filterHotels(filters));
       dispatch(resetCurrentPage());
+      navigate("/search")
     } else {
       setErrors(errorsValidation)
     }
   };
+
+  const getCurrentDate = () => {
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = now.getMonth() + 1
+    const day = now.getDate()
+
+    const formattedMont = month < 10 ? `0${month}` : `${month}`
+    const formattedDay = day < 10 ? `0${day}` : `${day}`
+
+    return `${year}-${formattedMont}-${formattedDay}`
+  }
 
   const handleStarClick = (star) => {
     const newSelectedStars = [1, 2, 3, 4, 5].filter(
@@ -92,6 +108,8 @@ const Filters = () => {
     dispatch(filterParams({ ...filters, guest: e.target.value }));
   };
 
+  console.log(filters);
+
   return (
     <div className={`${styles.sidebar} ${darkMode ? styles.darkMode : ""}`}>
       <div className={styles.filterContainer}>
@@ -117,6 +135,7 @@ const Filters = () => {
               name="startDate"
               value={filters.startDate || ""}
               className={styles.dateInput}
+              min={getCurrentDate()}
             />
             {errors.startDate && <p className={styles.errorFilters}>{errors.startDate}</p>}
           </div>
@@ -128,6 +147,7 @@ const Filters = () => {
               name="endDate"
               value={filters.endDate || ""}
               className={styles.dateInput}
+              min={getCurrentDate()}
             />
             {errors.endDate && <p className={styles.errorFilters}>{errors.endDate}</p>}
           </div>

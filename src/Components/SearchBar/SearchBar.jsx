@@ -17,8 +17,6 @@ const SearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
   const [guest, setGuest] = useState(1);
   const [errors, setErrors] = useState({});
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
 
   const defaultFilters = {
     name: "",
@@ -40,16 +38,6 @@ const SearchBar = () => {
       ...prevErrors,
       [name]: "",
     }));
-  };
-
-  const handleDateInputs = (e) => {
-    e.preventDefault()
-    
-    if(e.target.name === 'startDate') {
-      setStartDate(e.target.value)
-    } else if (e.target.name === 'endDate') {
-      setEndDate(e.target.value)
-    }
   };
 
   const getCurrentDate = () => {
@@ -86,7 +74,6 @@ const SearchBar = () => {
     }
   }
 
-  //Contador para la cantidad de personas
   const handleDecrease = () => {
     if (guest > 1) {
       setGuest(guest - 1)
@@ -95,7 +82,7 @@ const SearchBar = () => {
   }
 
   const handleIncrease = () => {
-      if (guest < 6) { // Limitar el número máximo de personas a 6
+      if (guest < 6) {
         setGuest(guest + 1)
         dispatch(filterParams({...filters, guest: guest + 1}))
       }

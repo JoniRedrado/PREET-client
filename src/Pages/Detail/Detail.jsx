@@ -14,7 +14,6 @@ import axios from "axios";
 import swal from "sweetalert";
 
 import "./detail.styles.css";
-import { LogarithmicScale } from "chart.js";
 
 const Detail = () => {
   const token = localStorage.getItem("token");
@@ -40,7 +39,6 @@ const Detail = () => {
   };
 
   const hotel = useSelector((state) => state.hotelDetail);
-  console.log(hotel);
   const modalRoomDetail = useSelector((state) => state.showModal.roomDetail);
   const modalPostReview = useSelector((state) => state.showModal.postReview);
   const filters = useSelector((state) => state.submitFilters);
@@ -85,8 +83,6 @@ const Detail = () => {
     }
     setIsFavorite(!isFavorite); // Se actualiza el estado de favoritos
   };
-
-  console.log(filters);
   
   const handlePostReviewModal = (option) => {
     dispatch(showModal(option, true));  
@@ -95,8 +91,6 @@ const Detail = () => {
       roomId: validateUserVSHotel(hotel.id).roomId,
     });
   };
-
-  console.log(reviewValues);
   
   const handleStarClick = (star) => {
     const newSelectedStars = [1, 2, 3, 4, 5].filter(
@@ -114,17 +108,12 @@ const Detail = () => {
     const foundHotel = userReviews.filter(review => review.hotelId === idHotel)
     
     setHotelInUserReviews(foundHotel)
-    console.log(hotelInUserReviews);
+
   }
-  
-  console.log(hotel);
-  console.log(userReservations);
 
   const validateUserVSHotel = (hotelId) =>
   userReservations && userReservations.find(reservation => reservation.room.hotel.id === hotelId
     );
-  
-  console.log(validateUserVSHotel(hotel.id)?.roomId);
     
     const handleSubmitReview = async (e) => {
       e.preventDefault();

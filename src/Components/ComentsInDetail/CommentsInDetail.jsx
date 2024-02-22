@@ -26,7 +26,6 @@ function CommentsInDetail() {
       });
   }, [currentPage]);
   
-  console.log(hotelComments);
   return (
     <div>
       {hotelComments && hotelComments.feedback?.rows?.length > 0 ? (
