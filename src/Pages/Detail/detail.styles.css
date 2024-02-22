@@ -206,16 +206,38 @@
   background-color: #6093bf;
 }
 
-.ranking-average-score {
-  background-color: #022840;
-  color: white;
-  padding: 5px;
+.ranking-average-container {
+  position: relative;
+  width: 130px;
+  height: 25px; /* Ajusta la altura según tus preferencias */
+  background-color: #92bef0; /* Color de fondo para la barra sin llenar */
   border-radius: 5px;
-  margin-left: 5px;
+  overflow: hidden; /* Evita que el contenido salga del contenedor */
+  margin-left: 10px;
 }
 
-.ranking-average-score-base {
-  color: rgb(37, 37, 37);
-  font-size: 15px;
-  margin-left: 5px;
+.ranking-average-fill {
+  background-color: #022840;
+  height: 100%;
+  transition: width 0.5s ease; /* Agrega una transición suave al cambio de ancho */
+  z-index: 1; /* Coloca la barra sobre el promedio */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  color: white; /* Hace que el texto sea blanco */
+  text-shadow: 1px 1px 2px black;
+}
+
+.ranking-average-score {
+  position: absolute;
+  top: 50%;
+  left: 50%; /* Centra horizontalmente el número */
+  transform: translate(-50%, -50%); /* Centra vertical y horizontalmente el número */
+  z-index: 2; /* Coloca el promedio sobre la barra */
+  color: white; /* Hace que el valor del promedio sea blanco */
+  text-shadow: 1px 1px 1px black; 
+}
+.avg{
+  display: flex;
+  align-items: center;
 }
