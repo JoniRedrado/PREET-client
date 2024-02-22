@@ -14,6 +14,7 @@ import axios from "axios";
 import swal from "sweetalert";
 
 import "./detail.styles.css";
+import { LogarithmicScale } from "chart.js";
 
 const Detail = () => {
   const token = localStorage.getItem("token");
@@ -83,9 +84,10 @@ const Detail = () => {
     setIsFavorite(!isFavorite); // Se actualiza el estado de favoritos
   };
 
+  console.log(filters);
   
   const handlePostReviewModal = (option) => {
-    dispatch(showModal(option, true));
+    dispatch(showModal(option, true));  
     setReviewValues({
       ...reviewValues,
       roomId: validateUserVSHotel(hotel.id).roomId,
@@ -110,13 +112,14 @@ const Detail = () => {
     const foundHotel = userReviews.filter(review => review.hotelId === idHotel)
     
     setHotelInUserReviews(foundHotel)
+    console.log(hotelInUserReviews);
   }
   
   console.log(hotel);
   console.log(userReservations);
 
   const validateUserVSHotel = (hotelId) =>
-  userReservations.find(reservation => reservation.room.hotel.id === hotelId
+  userReservations && userReservations.find(reservation => reservation.room.hotel.id === hotelId
     );
   
   console.log(validateUserVSHotel(hotel.id)?.roomId);
@@ -237,7 +240,7 @@ const Detail = () => {
                 )}
               </select>
               <h2 className="reviews-title">{t("Detail.reviews")}</h2>
-              {!hotelInUserReviews.length ? (
+              {!hotelInUserReviews ? (
                 <button
                   className="container-detail-button"
                   onClick={() => handlePostReviewModal("postReview")}
