@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import DateRangePicker from '../Date/Date';
 import RankingChart from "../Metrics/MetricRankings/MetricRankings";
 import MetricUsers from "../Metrics/MetricUsers/MetricUsers";
 import BookingsChart from "../Metrics/MetricBookings/MetricBookings";
 import CombinedCharts from "../Metrics/MetricNetIncomes/MetricNetIncomes";
 import styles from "./Graphics.module.css"
+import { useTranslation } from "react-i18next";
 
 const Graphics = () => {
+    const { t } = useTranslation();
+
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
@@ -26,7 +29,7 @@ const Graphics = () => {
     return (
         <div className={styles.mainDiv}>
             <div className={styles.statementDiv}>
-                <span>Please, select a date to show</span>
+                <span>{t("dashboard.selectDate")}</span>
                 <DateRangePicker onSelectDateRange={handleDateRangeSelect} />
             </div>
             <div className={styles.graphicsDiv}>
@@ -43,4 +46,10 @@ const Graphics = () => {
     );
 }
 
-export default Graphics;
+export default function WrappedApp() {
+    return (
+      <Suspense>
+        <Graphics />
+      </Suspense>
+    );
+  }

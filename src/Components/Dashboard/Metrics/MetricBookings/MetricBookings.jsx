@@ -1,8 +1,11 @@
-import { useEffect } from 'react';
-import axios from 'axios';
-import * as echarts from 'echarts';
+import { useEffect } from "react";
+import axios from "axios";
+import * as echarts from "echarts";
+import { useTranslation } from "react-i18next";
 import styles from "./MetricBookings.module.css"
 const BookingsChart = ({ startDate, endDate }) => {
+  const { t } = useTranslation();
+
   useEffect(() => {
     let myChart = null;
 
@@ -14,61 +17,64 @@ const BookingsChart = ({ startDate, endDate }) => {
         }
 
         // Realizar la solicitud con las fechas actuales
-        const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/metrics/bookings`, {
-          params: {
-            start_date: startDate.toISOString(),
-            end_date: endDate.toISOString()
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACK_URL}/metrics/bookings`,
+          {
+            params: {
+              start_date: startDate.toISOString(),
+              end_date: endDate.toISOString(),
+            },
           }
-        });
+        );
 
         // console.log(response.data);
 
         const data = response.data;
 
         // Procesar los datos para configurar el gráfico
-        const hotelNames = data.map(item => item.name);
-        const totalBookings = data.map(item => item.total_bookings);
+        const hotelNames = data.map((item) => item.name);
+        const totalBookings = data.map((item) => item.total_bookings);
 
         // Configurar los datos para el gráfico de ECharts
-        const chartDom = document.getElementById('bookings-chart');
+        const chartDom = document.getElementById("bookings-chart");
         myChart = echarts.init(chartDom);
 
         const option = {
           tooltip: {
-            trigger: 'item',
-            formatter: '{a} <br/>{b}: {c} ({d}%)'
+            trigger: "item",
+            formatter: "{a} <br/>{b}: {c} ({d}%)",
           },
           series: [
             {
-              name: 'Total de Reservas',
-              type: 'pie',
-              radius: ['40%', '70%'],
+              name: t("dashboard.totalBookings"),
+              type: "pie",
+              radius: ["40%", "70%"],
               avoidLabelOverlap: false,
               label: {
                 show: false,
-                position: 'center'
+                position: "center",
               },
               emphasis: {
                 label: {
                   show: false,
-                  fontSize: '20',
-                  fontWeight: 'bold'
-                }
+                  fontSize: "20",
+                  fontWeight: "bold",
+                },
               },
               labelLine: {
-                show: false
+                show: false,
               },
               data: hotelNames.map((name, index) => ({
                 value: totalBookings[index],
-                name: name
-              }))
-            }
-          ]
+                name: name,
+              })),
+            },
+          ],
         };
 
         myChart.setOption(option);
       } catch (error) {
-        console.error('Error fetching hotel bookings:', error);
+        console.error("Error fetching hotel bookings:", error);
       }
     };
 
@@ -82,46 +88,51 @@ const BookingsChart = ({ startDate, endDate }) => {
         myChart.dispose();
       }
     };
-
   }, [startDate, endDate]);
 
   const handleDownloadExcel = async () => {
     swal({
-      title: 'You are sure?',
-      text: 'Do you want to download the report file?',
-      icon: 'warning',
+      title: t("dashboard.swalTitle"),
+      text: t("dashboard.swalText"),
+      icon: "warning",
       buttons: {
         cancel: true,
-        confirm: 'Yes, download'
+        confirm: t("dashboard.swalBtn"),
       },
     }).then(async (confirmed) => {
       if (confirmed) {
         try {
-          const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/excel/bookings`, {
-            params: {
-        start_date: startDate.toISOString(),
-        end_date: endDate.toISOString()
-            },
-            responseType: 'blob'
-          });
+          const response = await axios.get(
+            `${import.meta.env.VITE_BACK_URL}/excel/bookings`,
+            {
+              params: {
+                start_date: startDate.toISOString(),
+                end_date: endDate.toISOString(),
+              },
+              responseType: "blob",
+            }
+          );
           console.log(response.data);
           const url = window.URL.createObjectURL(new Blob([response.data]));
-          const link = document.createElement('a');
+          const link = document.createElement("a");
           link.href = url;
-          link.setAttribute('download', `Bookings from ${startDate} to ${endDate}.xlsx`);
+          link.setAttribute(
+            "download",
+            `${t("dashboard.excelBooking")} ${startDate} ${t("dashboard.excelTo")} ${endDate}.xlsx`
+          );
           document.body.appendChild(link);
           link.click();
         } catch (error) {
-          console.error('Error downloading Excel file', error);
+          console.error("Error downloading Excel file", error);
         }
       }
     });
   };
   return (
     <div className={styles.mainDiv}>
-      <h2>Total Hotel Reservations</h2>
+      <h2>{t("dashboard.reservations")}</h2>
       <div id="bookings-chart" style={{ height: '350px', width: '100%', marginTop:"-50px"}}></div>
-      <button onClick={handleDownloadExcel} className={styles.button}>Download Report</button>
+      <button onClick={handleDownloadExcel} className={styles.button}>{t("dashboard.download")}</button>
 
     </div>
   );

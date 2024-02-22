@@ -43,7 +43,7 @@ const NewRegister = () => {
     }));
   };
   const handleRegister = async (option) => {
-    const validationErrors = registerValidation(registerData);
+    const validationErrors = registerValidation(registerData, t);
 
     if (Object.keys(validationErrors).length === 0) {
       try {

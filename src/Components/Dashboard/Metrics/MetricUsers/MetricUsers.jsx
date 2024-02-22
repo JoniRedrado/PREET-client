@@ -1,34 +1,39 @@
-import * as echarts from 'echarts';
-import axios from 'axios';
-import { useEffect } from 'react';
+import * as echarts from "echarts";
+import axios from "axios";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import styles from "./MetricUsers.module.css"
 
 const MetricUsers = ({ startDate, endDate }) => {
-  
+  const { t } = useTranslation();
+
   useEffect(() => {
     let myChart = null;
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/metrics/users`, {
-          params: {
-            start_date: startDate.toISOString(),
-            end_date: endDate.toISOString()
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACK_URL}/metrics/users`,
+          {
+            params: {
+              start_date: startDate.toISOString(),
+              end_date: endDate.toISOString(),
+            },
           }
-        });
+        );
 
         if (response.data) {
-          const data = response.data.map(item => ({
+          const data = response.data.map((item) => ({
             value: item.user_count,
             name: item.nationality,
-            flag: `https://www.countryflags.io/${item.country_code}/flat/64.png`
+            flag: `https://www.countryflags.io/${item.country_code}/flat/64.png`,
           }));
 
           if (myChart) {
             myChart.dispose();
           }
 
-          const chartDom = document.getElementById('chart');
+          const chartDom = document.getElementById("chart");
           myChart = echarts.init(chartDom);
 
           const option = {
@@ -36,18 +41,18 @@ const MetricUsers = ({ startDate, endDate }) => {
               top: 10,
               bottom: 30,
               left: 150,
-              right: 80
+              right: 80,
             },
             xAxis: {
-              max: 'dataMax',
+              max: "dataMax",
               axisLabel: {
                 formatter: function (n) {
-                  return Math.round(n) + '';
-                }
-              }
+                  return Math.round(n) + "";
+                },
+              },
             },
             yAxis: {
-              type: 'category',
+              type: "category",
               inverse: true,
               axisLabel: {
                 show: true,
@@ -59,53 +64,54 @@ const MetricUsers = ({ startDate, endDate }) => {
                   flag: {
                     width: 30,
                     height: 20,
-                    align: 'center',
+                    align: "center",
                     backgroundColor: {
                       image: function (params) {
-                        return data.find(item => item.name === params.value).flag;
-                      }
-                    }
-                  }
-                }
+                        return data.find((item) => item.name === params.value)
+                          .flag;
+                      },
+                    },
+                  },
+                },
               },
-              data: data.map(item => item.name),
+              data: data.map((item) => item.name),
               animationDuration: 300,
-              animationDurationUpdate: 300
+              animationDurationUpdate: 300,
             },
             series: [
               {
                 realtimeSort: true,
-                seriesLayoutBy: 'column',
-                type: 'bar',
+                seriesLayoutBy: "column",
+                type: "bar",
                 itemStyle: {
                   color: function (param) {
-                    return '#5470c6';
-                  }
+                    return "#5470c6";
+                  },
                 },
                 encode: {
-                  x: 'value',
-                  y: 'name'
+                  x: "value",
+                  y: "name",
                 },
                 label: {
                   show: true,
                   precision: 1,
-                  position: 'right',
+                  position: "right",
                   valueAnimation: true,
-                  fontFamily: 'monospace'
+                  fontFamily: "monospace",
                 },
-                data: data
-              }
+                data: data,
+              },
             ],
             animationDuration: 0,
             animationDurationUpdate: 2000,
-            animationEasing: 'linear',
-            animationEasingUpdate: 'linear'
+            animationEasing: "linear",
+            animationEasingUpdate: "linear",
           };
 
           myChart.setOption(option);
         }
       } catch (error) {
-        console.error('Error fetching user metrics:', error);
+        console.error("Error fetching user metrics:", error);
       }
     };
 
@@ -122,32 +128,38 @@ const MetricUsers = ({ startDate, endDate }) => {
 
   const handleDownloadExcel = async () => {
     swal({
-      title: 'You are sure?',
-      text: 'Do you want to download the report file?',
-      icon: 'warning',
+      title: t("dashboard.swalTitle"),
+      text: t("dashboard.swalText"),
+      icon: "warning",
       buttons: {
         cancel: true,
-        confirm: 'Yes, download'
+        confirm: t("dashboard.swalBtn"),
       },
     }).then(async (confirmed) => {
       if (confirmed) {
         try {
-          const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/excel/users`, {
-            params: {
-        start_date: startDate.toISOString(),
-        end_date: endDate.toISOString()
-            },
-            responseType: 'blob'
-          });
+          const response = await axios.get(
+            `${import.meta.env.VITE_BACK_URL}/excel/users`,
+            {
+              params: {
+                start_date: startDate.toISOString(),
+                end_date: endDate.toISOString(),
+              },
+              responseType: "blob",
+            }
+          );
           console.log(response.data);
           const url = window.URL.createObjectURL(new Blob([response.data]));
-          const link = document.createElement('a');
+          const link = document.createElement("a");
           link.href = url;
-          link.setAttribute('download', `Number of users from ${startDate} to ${endDate}.xlsx`);
+          link.setAttribute(
+            "download",
+            `${t("dashboard.excelUsers")} ${startDate} ${t("dashboard.excelTo")} ${endDate}.xlsx`
+          );
           document.body.appendChild(link);
           link.click();
         } catch (error) {
-          console.error('Error downloading Excel file', error);
+          console.error("Error downloading Excel file", error);
         }
       }
     });
@@ -155,9 +167,9 @@ const MetricUsers = ({ startDate, endDate }) => {
 
   return (
     <div className={styles.mainDiv}>
-      <h2>Users by nationality</h2>
-      <div id="chart" style={{ height: '300px', width: '100%' }}></div>
-        <button onClick={handleDownloadExcel} className={styles.button}>Download Report</button>
+      <h2>{t("dashboard.nationality")}</h2>
+      <div id="chart" style={{ height: "300px", width: "100%" }}></div>
+      <button onClick={handleDownloadExcel} className={styles.button}>{t("dashboard.download")}</button>
     </div>
   );
 };
