@@ -55,7 +55,7 @@ const Filters = () => {
   const applyFilters = (e) => {
     e.preventDefault()
 
-    const errorsValidation = searchValidation(filters.startDate, filters.endDate)
+    const errorsValidation = searchValidation(filters.startDate, filters.endDate, t)
 
     if(Object.keys(errorsValidation).length === 0) {
       dispatch(filterHotels(filters));

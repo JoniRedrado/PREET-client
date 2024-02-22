@@ -1,23 +1,44 @@
-const validation = (data) => {
-    console.log(data)
-    const errors = {};
+const validation = (data, t) => {
+  const errors = {};
 
-    const requiredFields = ["name", "address", "address_url", "email", "stars", "countryId", "image"];
+  if (!data.name) {
+    errors.name = `${t("registerValidation.name")} ${t(
+      "registerValidation.required"
+    )}`;
+  }
+  if (!data.address) {
+    errors.address = `${t("CreateForm.address")} ${t(
+      "validation.isRequiredF"
+    )}`;
+  }
+  if (!data.address_url) {
+    errors.address_url = `${t("CreateForm.addressURL")} ${t(
+      "validation.isRequiredF"
+    )}`;
+  }
+  if (!data.email) {
+    errors.email = "Email" + t("registerValidation.required");
+  }
+  if (!data.stars) {
+    errors.stars = `${t("CreateForm.stars")} ${t("validation.areRequired")}`;
+  }
+  if (!data.countryId) {
+    errors.countryId = `${t("CreateForm.country")} ${t(
+      "registerValidation.required"
+    )}`;
+  }
+  if (!data.image) {
+    errors.image = `${t("validation.image")} ${t(
+      "registerValidation.required"
+    )}`;
+  }
 
-    requiredFields.forEach((field) => {
-        const value = data[field];
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (data.email && !emailRegex.test(data.email)) {
+    errors.email = t("registerValidation.messageEmail");
+  }
 
-        if (!value ) {
-            errors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`;
-        }
-    });
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (data.email && !emailRegex.test(data.email)) {
-        errors.email = "Invalid email address.";
-    }
-
-    return errors;
+  return errors;
 };
 
 export default validation;

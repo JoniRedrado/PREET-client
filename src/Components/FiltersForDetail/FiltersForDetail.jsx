@@ -58,7 +58,7 @@ const FiltersForDetail = () => {
     ) {
       swal({
         title: "Not Found",
-        text: "No room meets the requested conditions",
+        text: t("FiltersForD.swalText"),
         icon: "warning",
         button: "Go back",
       });

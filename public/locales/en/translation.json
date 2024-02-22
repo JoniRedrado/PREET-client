@@ -1,8 +1,7 @@
 {
   "Slider": {
-    "title": "TOP HOTELS OF THE SEASON",
-    "button": "Book Now!!",
-    "subtitle": "Ranked by our users"
+    "address": "Address:",
+    "button": "Book Now!!"
   },
   "Trending": {
     "title": "Latin America trending destinations",
@@ -27,6 +26,59 @@
   "Header": {
     "phrase": "Book a hotel, get wonderful memories"
   },
+  "BookedSuccesfully": {
+    "success": "¡Booking Successfully Completed!",
+    "title": "Booking Information",
+    "name": "Name:",
+    "amount": "Amount:",
+    "init": "Date init:",
+    "final": "Date final:",
+    "nights": "Nights:",
+    "payment": "Payment reference:",
+    "button": "Booking details"
+  },
+  "BookingDetails": {
+    "load": "Loading...",
+    "back": "Back",
+    "title": "Booking Details",
+    "subtitle1": "Booking information",
+    "init": "Date init:",
+    "final": "Date final:",
+    "nights": "Nights:",
+    "payment": "Payment reference:",
+    "subtitle2": "Room Information",
+    "type": "Type:",
+    "numeration": "Numeration:",
+    "guests": "Guests:",
+    "description": "Description:"
+  },
+  "CreateRooms": {
+    "title": "Create Room",
+    "type": "Type",
+    "selectType": "Select a type",
+    "numeration": "Numeration",
+    "price": "Price",
+    "guest": "Guests",
+    "description": "Description",
+    "hotel": "Select Hotel",
+    "selectHotel": "Select a hotel",
+    "load": "Cargar more...",
+    "image": "Main Image"
+  },
+  "SingleBooking": {
+    "swalTitle": "Thanks!",
+    "swalText": "We received your review",
+    "type": "Type of room: ",
+    "from": "From ",
+    "to": " to ",
+    "night": " night",
+    "nightS": " nights",
+    "amount": "Amount paid: ",
+    "detailsBtn": "Details",
+    "score": "Score from 1 to 5",
+    "comment": "Comment",
+    "submitBtn": "Submit"
+  },
   "Detail": {
     "address": "Address:",
     "country": "Country:",
@@ -35,7 +87,9 @@
     "option": "Select you room",
     "noRooms": "No rooms available",
     "reviews": "Guests Reviews:",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "score": "Score: ",
+    "leaveReview": "Leave your review"
   },
   "CommentsInD": {
     "message": "There are no comments for this hotel yet"
@@ -46,9 +100,10 @@
     "end": "Check-out",
     "price": "Price",
     "guests": "Guests",
-    "option": "Número de huéspedes",
+    "option": "Number of guests",
     "applyBtn": "Apply Filters",
-    "resetBtn": "Reset Filters"
+    "resetBtn": "Reset Filters",
+    "swalText": "No room meets the requested conditions"
   },
   "Card": {
     "map": "Show in map",
@@ -121,7 +176,8 @@
   "Login": {
     "title": "Sign In",
     "logInBtn": "Sign in",
-    "GlgLogInBtn": "Sign in with Google"
+    "GlgLogInBtn": "Sign in with Google",
+    "error": "Invalid Email or Password"
   },
   "TryAgain": {
     "message": "Hotel not found, try with another search."
@@ -147,8 +203,13 @@
   },
   "UpdateForm": {
     "title": "Update Hotel",
+    "name": "Name ",
+    "address": "Address ",
+    "addressURL": "Address_url ",
+    "price": "Price ",
     "stars": "Stars",
     "country": "Country",
+    "current": "Current country: ",
     "upload": "Upload Image",
     "remove": "Remove",
     "post": "POST"
@@ -161,12 +222,32 @@
   "UpdateRooms": {
     "title": "Update Room",
     "types": "Types",
-    "SelectType": "Select a room type",
+    "selectType": "Select a room type",
     "description": "Description",
     "price": "Price",
     "numeration": "Numeration",
     "crntImage": "Current Image: ",
     "newImage": "New Image: ",
     "update": "Update"
+  },
+  "registerValidation": {
+    "name": "Name",
+    "lastName": "Last name",
+    "password": "Password",
+    "required": " is required.",
+    "messageName": "Name should be a maximum of 50 characters and contain only letters.",
+    "messageLastName": " should be a maximum of 50 characters and contain only letters.",
+    "messageEmail": "Invalid email address.",
+    "messagePassword": "Password should have 6 to 14 characters and include at least one number and one special character."
+  },
+  "searchValidation": {
+    "start_date": "Check-in date is required",
+    "end_date": "Check-out date is required",
+    "order_date": "Check-out must be after check-in"
+  },
+  "validation": {
+    "image": "Image",
+    "areRequired": "are required.",
+    "isRequiredF": "is required."
   }
 }

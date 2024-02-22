@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import axios from 'axios'
 import Loading from '../../assets/Loading.gif'
 import { FaCheckCircle } from 'react-icons/fa';
 import styles from "./BookedSuccesfully.module.css";
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 const BookedSuccesfully = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const [booking, setBooking] = useState(null)
+
     const getUserReservations = async () => {
       try {
         const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/bookings/last`);
@@ -33,20 +36,26 @@ const BookedSuccesfully = () => {
   return (
     <div className={styles.mainContainer}>
       <FaCheckCircle className={`${styles.icon} ${styles.tickIcon}`} />
-    <h2 className={styles.title}>¡Booking Succesfully Completed!</h2>
+    <h2 className={styles.title}>{t("BookedSuccesfully.success")}</h2>
     <div className={styles.bookingInfo}>
-        <h2>Booking Information</h2>
-        <p><strong>Name:</strong> {booking.user.name} {booking.user.last_name}</p>
+        <h2>{t("BookedSuccesfully.title")}</h2>
+        <p><strong>{t("BookedSuccesfully.name")}</strong> {booking.user.name} {booking.user.last_name}</p>
         <p><strong>Email:</strong> {booking.user.email}</p>
-        <p><strong>Amount:</strong> ${booking.amount}</p>
-        <p><strong>Date Init:</strong> {new Date(booking.dateInit).toLocaleDateString()}</p>
-        <p><strong>Date Final:</strong> {new Date(booking.dateFinal).toLocaleDateString()}</p>
-        <p><strong>Nights:</strong> {booking.nights}</p>
-        <p><strong>Payment Reference:</strong> {booking.pay}</p>
+        <p><strong>{t("BookedSuccesfully.amount")}</strong> ${booking.amount}</p>
+        <p><strong>{t("BookedSuccesfully.init")}</strong> {new Date(booking.dateInit).toLocaleDateString()}</p>
+        <p><strong>{t("BookedSuccesfully.final")}</strong> {new Date(booking.dateFinal).toLocaleDateString()}</p>
+        <p><strong>{t("BookedSuccesfully.nights")}</strong> {booking.nights}</p>
+        <p><strong>{t("BookedSuccesfully.payment")}</strong> {booking.pay}</p>
     </div>
-    <button className={styles.button} onClick={handleClick}>Booking Details</button>
+    <button className={styles.button} onClick={handleClick}>{t("BookedSuccesfully.button")}</button>
   </div>
 );
 }
 
-export default BookedSuccesfully;
+export default function WrappedApp() {
+  return (
+    <Suspense>
+      <BookedSuccesfully />
+    </Suspense>
+  );
+}

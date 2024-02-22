@@ -1,8 +1,7 @@
 {
   "Slider": {
-    "title": "TOP HOTELES DE LA TEMPORADA",
-    "button": "Reserva ahora!!",
-    "subtitle": "Rankeado por nuestros usuarios"
+    "address": "Dirección:",
+    "button": "Reservar"
   },
   "Trending": {
     "title": "Destinos que marcan tendencia",
@@ -27,6 +26,60 @@
   "Header": {
     "phrase": "Reserva tu hotel y obtén recuerdos maravillosos"
   },
+  "BookedSuccesfully": {
+    "success": "¡Reserva Completada Exitosamente!",
+    "title": "Información De Reserva",
+    "name": "Nombre:",
+    "amount": "Importe:",
+    "init": "Fecha inicial:",
+    "final": "Fecha final:",
+    "nights": "Noches:",
+    "payment": "Referencia de pago:",
+    "button": "Detalles de reserva"
+  },
+  "BookingDetails": {
+    "load": "Cargando...",
+    "back": "Volver",
+    "title": "Detalles De Reserva",
+    "subtitle1": "Información de la reserva",
+    "init": "Fecha inicial:",
+    "final": "Fecha final:",
+    "nights": "Noches:",
+    "payment": "Referencia de pago:",
+    "button": "Detalles de reserva",
+    "subtitle2": "Información de la habitación",
+    "type": "Tipo:",
+    "numeration": "Numeración:",
+    "guests": "Huéspedes:",
+    "description": "Descripción:"
+  },
+  "CreateRooms": {
+    "title": "Crear Habitación",
+    "type": "Tipo",
+    "selectType": "Seleccionar un tipo",
+    "numeration": "Numeración",
+    "price": "Precio",
+    "guest": "Huéspedes",
+    "description": "Descripción",
+    "hotel": "Seleccionar Hotel",
+    "selectHotel": "Selecciona un hotel",
+    "load": "Cargar más...",
+    "image": "Imagen principal"
+  },
+  "SingleBooking": {
+    "swalTitle": "Gracias!",
+    "swalText": "Hemos recibido su reseña",
+    "type": "Tipo de habitación: ",
+    "from": "Desde ",
+    "to": " hasta ",
+    "night": " noche",
+    "nightS": " noches",
+    "amount": "Monto pagado: ",
+    "detailsBtn": "Detalles",
+    "score": "Ranking del 1 al 5",
+    "comment": "Comentario",
+    "submitBtn": "Enviar"
+  },
   "Detail": {
     "address": "Dirección:",
     "country": "País:",
@@ -35,7 +88,9 @@
     "option": "Elige tu habitación",
     "noRooms": "No hay disponibilidad",
     "reviews": "Reseñas:",
-    "loading": "Cargando..."
+    "loading": "Cargando...",
+    "score": "Puntaje: ",
+    "leaveReview": "Has tu reseña"
   },
   "CommentsInD": {
     "message": "Aún no hay comentarios para este hotel"
@@ -48,7 +103,8 @@
     "guests": "Huéspedes",
     "option": "Número de huéspedes",
     "applyBtn": "Aplicar Filtros",
-    "resetBtn": "Restablecer"
+    "resetBtn": "Restablecer",
+    "swalText": "Ninguna habitación cumple con los filtros solicitados"
   },
   "Card": {
     "map": "Ver en mapa",
@@ -121,7 +177,8 @@
   "Login": {
     "title": "Inicia Sesión",
     "logInBtn": "Iniciar sesión",
-    "GlgLogInBtn": "Iniciar sesión con Google"
+    "GlgLogInBtn": "Iniciar sesión con Google",
+    "error": "Email o Contraseña Invalidos"
   },
   "TryAgain": {
     "message": "Hotel no encontrado, prueba con otra búsqueda."
@@ -145,11 +202,15 @@
     "successTitle": "¡Hotel creado exitosamente!",
     "successText": "El hotel está listo para recibir reservas"
   },
-
   "UpdateForm": {
     "title": "Actualiza Tu Hotel",
-    "stars": "Estrellas",
-    "country": "País",
+    "name": "Nombre ",
+    "address": "Dirección ",
+    "addressURL": "Dirección URL ",
+    "price": "Precio ",
+    "stars": "Estrellas ",
+    "country": "País ",
+    "current": "País actual: ",
     "upload": "Cargar imagen",
     "remove": "Eliminar",
     "post": "REGISTRAR"
@@ -162,12 +223,32 @@
   "UpdateRooms": {
     "title": "Actualiza Tu Habitación",
     "types": "Tipos",
-    "SelectType": "Selecciona un tipo de habitación",
+    "selectType": "Selecciona un tipo de habitación",
     "description": "Descripción",
     "price": "Precio",
     "numeration": "Numeración",
     "crntImage": "Imagen Actual: ",
     "newImage": "Nueva Imagen: ",
     "update": "Actualizar"
+  },
+  "registerValidation": {
+    "name": "Nombre",
+    "lastName": "Apellido",
+    "password": "Contraseña",
+    "required": " es requerido.",
+    "messageName": "El nombre debe tener un máximo de 50 caracteres y contener letras únicamente.",
+    "messageLastName": " debe tener un máximo de 50 caracteres y contener letras únicamente.",
+    "messageEmail": "Email inválido.",
+    "messagePassword": "La contraseña debe tener entre 6 y 14 caracteres e incluir por lo menos un número y un carácter especial."
+  },
+  "searchValidation": {
+    "start_date": "Fecha de check-in es requerida",
+    "end_date": "Fecha de check-out es requerida",
+    "order_date": "Check-out debe estar después de check-in"
+  },
+  "validation": {
+    "image": "Imagen",
+    "areRequired": "son requeridas.",
+    "isRequiredF": "es requerida."
   }
 }

@@ -155,9 +155,11 @@ const Settings = () => {
                       <option value="">{t("Settings.gendSelect")}</option>
                       <option value="Male">{t("Settings.male")}</option>
                       <option value="Female">{t("Settings.female")}</option>
-                      <option value="Non-binary">{t("Settings.NonBinary")}</option>
+                      <option value="Non-binary">
+                        {t("Settings.NonBinary")}
+                      </option>
                       <option value="I prefer not to say">
-                      {t("Settings.nothing")}
+                        {t("Settings.nothing")}
                       </option>
                     </select>
                   ) : field === "phone_number" ? (
@@ -210,7 +212,7 @@ const Settings = () => {
                 <span className={styles.actualInfo}>
                   {userInfo[field]
                     ? userInfo[field]
-                    : `Add a ${
+                    : `${t("Settings.addA")} ${
                         field.charAt(0).toUpperCase() +
                         field.slice(1).replace(/_/g, " ")
                       }`}
@@ -227,7 +229,7 @@ const Settings = () => {
                       {t("Settings.cancel")}
                     </button>
                     <button type="submit" className={styles.saveButton}>
-                    {t("Settings.save")}
+                      {t("Settings.save")}
                     </button>
                   </div>
                 ) : (

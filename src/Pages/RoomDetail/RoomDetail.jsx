@@ -5,17 +5,19 @@ import swal from "sweetalert";
 import { showModal } from "../../redux/actions";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import "./RoomDetail.styles.css";
 
 const RoomDetail = ({ room }) => {
   const [isBooking, setIsBooking] = useState(false);
   const { darkMode } = useDarkMode();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const filters = useSelector((state) => state.submitFilters);
 
   console.log(filters);
-  
+
   const token = localStorage.getItem("token");
 
   const handleBook = () => {
@@ -80,9 +82,11 @@ const RoomDetail = ({ room }) => {
       <div className="card-body">
         <h1 className="card-title">{room.type}</h1>
         <p className="card-text">{room.description}</p>
-        <p className="card-text">Price {room.price} $</p>
+        <p className="card-text">
+          {t("CreateRooms.price")} {room.price} $
+        </p>
         <button onClick={handleBook}>
-          Book now
+          {t("Card.book")}
           <i className="bi bi-paypal paypal"></i>
         </button>
       </div>

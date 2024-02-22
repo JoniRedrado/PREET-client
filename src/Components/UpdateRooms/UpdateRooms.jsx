@@ -139,7 +139,7 @@ const UpdateRooms = () => {
         <h1>{t("UpdateRooms.title")}</h1>
         <label>{t("UpdateRooms.types")}</label>
         <select name="type" value={roomsData.type} onChange={handleChange}>
-          <option value="">{t("UpdateRooms.SelectType")}</option>
+          <option value="">{t("UpdateRooms.selectType")}</option>
           {roomsTypes.map((roomType, index) => (
             <option key={index} value={roomType}>
               {roomType}

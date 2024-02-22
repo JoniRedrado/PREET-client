@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const roomsType = [
   'Estandar',
@@ -13,6 +14,7 @@ const roomsType = [
 
 const CreateRooms = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [formData, setFormData] = useState({
     type: "",
@@ -112,42 +114,48 @@ const CreateRooms = () => {
 
   return (
     <form  className="form" onSubmit={handleSubmit}>
-      <h1>Create Room</h1>
-      <label>Type</label>
+      <h1>{t("CreateRooms.title")}</h1>
+      <label>{t("CreateRooms.type")}</label>
       <select name="type" value={formData.type} onChange={handleChange}>
-        <option value="">Select a type</option>
+        <option value="">{t("CreateRooms.selectType")}</option>
         {roomsType.map((type) => (
           <option key={type} value={type}>
             {type}
           </option>
         ))}
       </select>
-      <label>Numeration</label>
-      <input type="text" name="numeration" placeholder="Numeration" value={formData.numeration} onChange={handleChange} />
-      <label>Price</label>
-      <input type="number" name="price" placeholder="Price" value={formData.price} onChange={handleChange} />
-      <label>Guest</label>
-      <input type="number" name="guest" placeholder="Guest" value={formData.guest} onChange={handleChange} />
-      <label>Description</label>
-      <input type="text" name="description" placeholder="Description" value={formData.description} onChange={handleChange} />
-      <label>Select Hotel</label>
+      <label>{t("CreateRooms.numeration")}</label>
+      <input type="text" name="numeration" placeholder={t("CreateRooms.numeration")} value={formData.numeration} onChange={handleChange} />
+      <label>{t("CreateRooms.price")}</label>
+      <input type="number" name="price" placeholder={t("CreateRooms.price")} value={formData.price} onChange={handleChange} />
+      <label>{t("CreateRooms.guest")}</label>
+      <input type="number" name="guest" placeholder={t("CreateRooms.guest")} value={formData.guest} onChange={handleChange} />
+      <label>{t("CreateRooms.description")}</label>
+      <input type="text" name="description" placeholder={t("CreateRooms.description")} value={formData.description} onChange={handleChange} />
+      <label>{t("CreateRooms.hotel")}</label>
       <select value={formData.selectedHotelId} onChange={handleHotelChange}>
-        <option value="">Select a hotel</option>
+        <option value="">{t("CreateRooms.selectHotel")}</option>
         {hotels.map((hotel) => (
           <option key={hotel.id} value={hotel.id}>
             {hotel.name}
           </option>
         ))}
         {currentPage < totalPages && (
-          <option value="loadMore">Load More...</option>
+          <option value="loadMore">{t("CreateRooms.load")}</option>
         )}
       </select>
       
-      <label>Into Image</label>
+      <label>{t("CreateRooms.image")}</label>
       <input type="file" accept="image/*" onChange={handleImageChange} />
-      <button type="submit">Create Room</button>
+      <button type="submit">{t("CreateRooms.title")}</button>
     </form>
   );
 };
 
-export default CreateRooms;
+export default function WrappedApp() {
+  return (
+    <Suspense>
+      <CreateRooms />
+    </Suspense>
+  );
+}
