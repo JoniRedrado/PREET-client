@@ -23,6 +23,7 @@ import {
   USER_LOG,
   GET_ALL_FAVORITES,
   USER_FAVORITES,
+  USER_REVIEWS,
   HOTEL_FAVORITES,
   POST_FAVORITE,
   REMOVE_FAVORITE,
@@ -298,6 +299,29 @@ export const userFavorites = (token) => {
   };
 };
 
+export const getUserReviews = (token) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACK_URL}/feedback/user`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(response.data);
+      return dispatch({
+        type: USER_REVIEWS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
 export const hotelFavorites = (hotelId) => {
   return async function (dispatch) {
     try {
@@ -313,28 +337,6 @@ export const hotelFavorites = (hotelId) => {
     }
   };
 };
-
-// export const postFavorite = (id, token) => {
-//   return async function (dispatch) {
-//     try {
-//       const response = await axios.post(
-//         `${import.meta.env.VITE_BACK_URL}/favorites/${id}`,
-//         {},
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }
-//       );
-//       return dispatch({
-//         type: POST_FAVORITE,
-//         payload: response.data,
-//       });
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-// };
 
 export const postFavorite = (id, token) => {
   return async function (dispatch) {

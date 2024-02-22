@@ -21,6 +21,7 @@ import {
   USER_LOG,
   GET_ALL_FAVORITES,
   USER_FAVORITES,
+  USER_REVIEWS,
   HOTEL_FAVORITES,
   POST_FAVORITE,
   REMOVE_FAVORITE,
@@ -48,6 +49,7 @@ let initialState = {
   userChanged: false,
   allFavorites: {},
   userFavorites: [],
+  userReviews: [],
   hotelFavorites: [],
   submitRoomFilters: {},
 };
@@ -205,6 +207,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         userFavorites: action.payload,
+      };
+
+    case USER_REVIEWS:
+      return {
+        ...state,
+        userReviews: action.payload,
       };
 
     case HOTEL_FAVORITES:
