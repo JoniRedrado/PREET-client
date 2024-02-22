@@ -56,6 +56,9 @@ const Filters = () => {
   };
 
   const applyFilters = (e) => {
+
+    window.scrollTo(0, 0);
+    
     e.preventDefault()
 
     const errorsValidation = searchValidation(filters.startDate, filters.endDate, t)

@@ -54,6 +54,16 @@
   margin-top: 40px;
 }
 
+.errorFilters {
+  color: #ff0000;
+  font-size: 10px !important;
+  margin-top: -5px;
+  margin-bottom: 0px;
+  position: relative;
+  top: 5px;
+  width: 100px;
+}
+
 .applyButton,
 .clearButton {
   width: 50%;

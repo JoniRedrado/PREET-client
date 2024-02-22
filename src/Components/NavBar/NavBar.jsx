@@ -3,13 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import template from "../../assets/Logo-White.svg";
 import template2 from "../../assets/Logo.svg";
-import Modal from "react-modal";
-import LoginForm from "../../Pages/Login/Login";
 import Sidebar from "../Sidebar/Sidebar";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FaUserPlus } from "react-icons/fa";
 import { BsLock } from "react-icons/bs";
-import { getAllHotels, resetCurrentPage, showModal, resetFiltersParams } from "../../redux/actions";
+import { getAllHotels, resetCurrentPage, resetFiltersParams } from "../../redux/actions";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { useState, useRef, Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,9 +24,6 @@ function NavBar({ heightNav }) {
   const { pathname } = useLocation();
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-
-  const modalRegister = useSelector((state) => state.showModal.register);
-  const modalLogin = useSelector((state) => state.showModal.login);
 
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -83,14 +78,6 @@ function NavBar({ heightNav }) {
     dispatch(resetFiltersParams())
     dispatch(getAllHotels());
   };
-
-  function openModal(option) {
-    dispatch(showModal(option, true));
-  }
-
-  function closeModal(option) {
-    dispatch(showModal(option, false));
-  }
 
   const handleClickRegister = () => {
     navigate("/register")
@@ -169,7 +156,7 @@ function NavBar({ heightNav }) {
           {pathname === "/" ? (
             <Link to="/" onClick={handleHomeButton}>
               <img
-                src={template2}
+                src={template}
                 width="18%"
                 alt="Logo"
                 className={`${heightNav ? style.imgLogoSmall : style.imgLogo}`}

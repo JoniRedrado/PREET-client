@@ -30,9 +30,9 @@ const TrendingCountries = () => {
   const { t } = useTranslation();
 
   const handleCountryClick = (countryName) => {
-    dispatch(filterParams({ name: countryName })); 
+    dispatch(filterParams({ name: countryName, guest: 1 })); 
     dispatch(specificPage(1)); 
-    dispatch(filterHotels({ name: countryName })); 
+    dispatch(filterHotels({ name: countryName, guest: 1 })); 
     navigate(`/search/`)
   };
 

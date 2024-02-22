@@ -1,7 +1,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { postFavorite, removeFavorite, showModal, getUserReviews } from "../../redux/actions";
+import { postFavorite, removeFavorite, showModal, getUserReviews, getDetail } from "../../redux/actions";
 import { motion } from "framer-motion";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import RoomDetail from "../RoomDetail/RoomDetail";
@@ -46,6 +46,7 @@ const Detail = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    dispatch(getDetail(id, filters))
   }, []);
 
   const getUserReservations = async () => {

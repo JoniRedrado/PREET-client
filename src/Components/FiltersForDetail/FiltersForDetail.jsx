@@ -27,8 +27,6 @@ const FiltersForDetail = () => {
   const hotelDetail = useSelector((state) => state.hotelDetail);
   const filters = useSelector((state) => state.submitFilters) || defaultFilters;
 
-  console.log(filters);
-
   const handleFilters = (e) => {
     e.preventDefault()
     const { name, value } = e.target;
@@ -39,11 +37,25 @@ const FiltersForDetail = () => {
     }));
   };
 
+  const getCurrentDate = () => {
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = now.getMonth() + 1
+    const day = now.getDate()
+
+    const formattedMont = month < 10 ? `0${month}` : `${month}`
+    const formattedDay = day < 10 ? `0${day}` : `${day}`
+
+    return `${year}-${formattedMont}-${formattedDay}`
+  }
+
+  console.log(filters);
+
   const applyFilters = (e) => {
 
     e.preventDefault()
 
-    const errorsValidation = searchValidation(filters.startDate, filters.endDate)
+    const errorsValidation = searchValidation(filters.startDate, filters.endDate, t)
 
     if(Object.keys(errorsValidation).length === 0) {
       dispatch(getDetail(id, filters));
@@ -87,6 +99,7 @@ const FiltersForDetail = () => {
               type="date"
               name="startDate"
               value={filters.startDate || ""}
+              min={getCurrentDate()}
             />
             {errors.startDate && <p className={styles.errorFilters}>{errors.startDate}</p>}
           </div>
@@ -97,6 +110,7 @@ const FiltersForDetail = () => {
               type="date"
               name="endDate"
               value={filters.endDate || ""}
+              min={getCurrentDate()}
             />
             {errors.endDate && <p className={styles.errorFilters}>{errors.endDate}</p>}
           </div>

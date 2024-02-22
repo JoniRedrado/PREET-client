@@ -21,7 +21,7 @@ function SearchResult() {
   const allHotels = useSelector((state) => state.allHotels)
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    
     
     const fetchdata = async () => {
 
