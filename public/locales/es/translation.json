@@ -19,9 +19,10 @@
   "UserBar": {
     "welcome": "Bienvenido",
     "manage": "Configuración de cuenta",
-    "history": "Historial",
+    "history": "Historial de reservas",
     "favorites": "Favoritos",
-    "out": "Cerrar Sesión"
+    "close": "Cerrar menú",
+    "out": "Cerrar sesión"
   },
   "Header": {
     "phrase": "Reserva tu hotel y obtén recuerdos maravillosos"
@@ -167,18 +168,25 @@
     "addA": "Agregar"
   },
   "Register": {
-    "title": "Registrar Usuario",
+    "title": "Únete a PREET!",
+    "subtitle": "Regístrate para comenzar a interactuar.",
     "name": "Nombre",
     "lastName": "Apellido",
+    "countSelect": "Selecciona tu país de residencia",
     "email": "Email",
     "password": "Contraseña",
-    "registerBtn": "Registrarse"
+    "registerBtn": "Registrarse",
+    "question": "Ya tienes una cuenta?"
   },
   "Login": {
+    "sliderTitle": "Descubre tu próximo destino con PREET!",
+    "sliderText": "Explora, reserva y vive experiencias únicas en hoteles de ensueño en toda América Latina. Inicia sesión ahora y sigue creando recuerdos inolvidables.",
     "title": "Inicia Sesión",
+    "subtitle": "Continúa tu experiencia",
     "logInBtn": "Iniciar sesión",
     "GlgLogInBtn": "Iniciar sesión con Google",
-    "error": "Email o Contraseña Invalidos"
+    "error": "Email o Contraseña Invalidos",
+    "question": "Nuevo en PREET?"
   },
   "TryAgain": {
     "message": "Hotel no encontrado, prueba con otra búsqueda."

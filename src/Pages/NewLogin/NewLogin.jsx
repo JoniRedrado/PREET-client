@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { login } from "../../Components/Auth/Auth";
 import { useAuth } from "../../context/authContext";
 import { useNavigate, Link } from "react-router-dom";
@@ -7,12 +7,12 @@ import { Paper } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import styles from "./NewLogin.module.css";
 import Logo from "../../assets/logo.jpg";
-import Logo2 from "../../assets/logo.jpg"
+import Logo2 from "../../assets/logo.jpg";
 import image1 from "../../assets/slider1.jpg";
 import image2 from "../../assets/slider2.jpg";
 import image3 from "../../assets/slider3.jpg";
 import image4 from "../../assets/slider4.jpg";
-import google from "../../assets/google.png"
+import google from "../../assets/google.png";
 
 const images = [image1, image2, image3, image4];
 
@@ -29,12 +29,12 @@ const NewLogin = () => {
     try {
       const data = await login(email, password);
       if (!data || data.error) {
-        setError("Invalid Email or Password");
+        setError(t("Login.error"));
       } else {
         navigate(data.rol === "admin" ? "/dashboard" : "/");
       }
     } catch (error) {
-      setError("Invalid Email or Password");
+      setError(t("Login.error"));
     }
   };
 
@@ -53,7 +53,7 @@ const NewLogin = () => {
       await auth.loginWithGoogle();
     } catch (error) {
       setError("Error signing in with Google");
-      console.log("Error")
+      console.log("Error");
     }
   };
 
@@ -95,25 +95,21 @@ const NewLogin = () => {
           </Carousel>
         </div>
         <div className={styles.textContainer}>
-          <h2>Discover your next destination with PREET!</h2>
-          <p>
-            Explore, book, and live unique experiences in dreamy hotels
-            throughout Latin America. Log in now and keep creating
-            unforgettable memories.
-          </p>
+          <h2>{t("Login.sliderTitle")}</h2>
+          <p>{t("Login.sliderText")}</p>
         </div>
       </div>
       <div className={styles.login}>
         <form className={styles.formContainer}>
           <div className={styles.formHeader}>
-            <img src={Logo2} alt="logo2" className={styles.logo2}/>
-            <h2>Welcome back to PREET!</h2>
-            <p>Continue your experience</p>
+            <img src={Logo2} alt="logo2" className={styles.logo2} />
+            <h2>{t("Login.title")}</h2>
+            <p>{t("Login.subtitle")}</p>
           </div>
           <div className={styles.inputContainer}>
             <input
               type="email"
-              placeholder={t("Register.email")}
+              placeholder="Email"
               name="email"
               value={email}
               onChange={handleChange}
@@ -144,19 +140,26 @@ const NewLogin = () => {
               onClick={handleGoogleLogin}
               className={styles.button2}
             >
-              <img src={google} alt="google" className={styles.google}/> {" "} {t("Login.GlgLogInBtn")} 
+              <img src={google} alt="google" className={styles.google} />{" "}
+              {t("Login.GlgLogInBtn")}
             </button>
           </div>
           <div className={styles.footer}>
-            <p>New in PREET?</p>
+            <p>{t("Login.question")}</p>
             <Link to="/register" className={styles.link}>
-                <p>Sign in</p>
+              <p>{t("Login.logInBtn")}</p>
             </Link>
-        </div>
+          </div>
         </form>
       </div>
     </div>
   );
 };
 
-export default NewLogin;
+export default function WrappedApp() {
+  return (
+    <Suspense>
+      <NewLogin />
+    </Suspense>
+  );
+}

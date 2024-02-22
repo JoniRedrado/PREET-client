@@ -17,11 +17,11 @@
     "logIn": "Sign In"
   },
   "UserBar": {
-    "welcome": "Welcome",
-    "manage": "Manage Account",
-    "history": "History",
+    "manage": "Manage account",
+    "history": "Reservation history",
     "favorites": "Favorites",
-    "out": "Sign Out"
+    "close": "Close menu",
+    "out": "Log out"
   },
   "Header": {
     "phrase": "Book a hotel, get wonderful memories"
@@ -156,28 +156,35 @@
     "save": "Save",
     "edit": "Edit",
     "phoneOpt": "Phone number",
-    "name": "name",
-    "lastName": "last_name",
+    "name": "Name",
+    "lastName": "Last name",
     "email": "email",
-    "birth": "birth_date",
-    "gender": "gender",
-    "phone": "phone_number",
-    "nationality": "nationality",
+    "birth": "Birth date",
+    "gender": "Gender",
+    "phone": "Phone number",
+    "nationality": "Nationality",
     "addA": "Add a"
   },
   "Register": {
-    "title": "Register User",
+    "title": "Join PREET!",
+    "subtitle": "Sign up to start interacting.",
     "name": "Name",
     "lastName": "Last Name",
+    "countSelect": "Select your residency country",
     "email": "Email",
     "password": "Password",
-    "registerBtn": "Register"
+    "registerBtn": "Register",
+    "question": "Already have an account?"
   },
   "Login": {
-    "title": "Sign In",
+    "sliderTitle": "Discover your next destination with PREET!",
+    "sliderText": "Explore, book, and live unique experiences in dreamy hotels throughout Latin America. Log in now and keep creating unforgettable memories.",
+    "title": "Welcome back to PREET!",
+    "subtitle": "Continue your experience",
     "logInBtn": "Sign in",
     "GlgLogInBtn": "Sign in with Google",
-    "error": "Invalid Email or Password"
+    "error": "Invalid Email or Password",
+    "question": "New in PREET?"
   },
   "TryAgain": {
     "message": "Hotel not found, try with another search."
