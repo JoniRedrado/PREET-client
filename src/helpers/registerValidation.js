@@ -5,13 +5,12 @@ const passRegex = /^(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{6,14}$/;
 const registerValidation = (data, t) => {
   const errors = {};
 
-
   if (data.name && (data.name.length > 50 || !/^[a-zA-Z]+$/.test(data.name))) {
     errors.name = t("registerValidation.messageName");
   }
 
-  if (!data.last_Name) {
-    errors.last_Name = `${t("registerValidation.lastName")} ${t(
+  if (!data.name) {
+    errors.name = `${t("registerValidation.name")} ${t(
       "registerValidation.required"
     )}`;
   }
@@ -28,6 +27,12 @@ const registerValidation = (data, t) => {
 
   if (!data.last_name) {
     errors.last_name = `${t("registerValidation.lastName")} ${t(
+      "registerValidation.required"
+    )}`;
+  }
+
+  if (!data.nationality) {
+    errors.nationality = `${t("Filters.countries")} ${t(
       "registerValidation.required"
     )}`;
   }

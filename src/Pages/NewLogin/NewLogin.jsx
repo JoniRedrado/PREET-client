@@ -4,6 +4,7 @@ import { useAuth } from "../../context/authContext";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Paper } from "@mui/material";
+import registerValidation from "../../helpers/registerValidation";
 import Carousel from "react-material-ui-carousel";
 import styles from "./NewLogin.module.css";
 import Logo from "../../assets/logo.jpg";
