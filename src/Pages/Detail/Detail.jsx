@@ -178,13 +178,8 @@ const Detail = () => {
                 <h2 className="avg">
                   {t("Detail.score")}
                   <div className="ranking-average-container">
-                    <div
-                      className="ranking-average-fill"
-                      style={{ width: `${(hotel.ranking / 5) * 100}%` }}
-                    ></div>
-                    <span className="ranking-average-score">
-                      {hotel.ranking}
-                    </span>
+                    <div className="ranking-average-fill" style={{ width: `${(hotel.ranking / 5) * 100}%` }}></div>
+                    <span className="ranking-average-score">{hotel.ranking}</span>
                   </div>
                 </h2>
               </div>

@@ -24,6 +24,7 @@ import BookingDetails from "./Pages/BookingDetail/BookingDetails";
 import CreateRooms from "./Components/CreateRooms/CreateRooms"
 import NewRegister from "./Pages/NewRegister/NewRegister";
 import NewLogin from "./Pages/NewLogin/NewLogin";
+import Graphics from "./Components/Dashboard/Metrics/Graphics"
 // import './App.css'
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/dashboard/hotels" element={<GestionHotels />} />
                 <Route path="/dashboard/feedback" element={<GestionFeedBack />} />
                 <Route path="/dashboard/rooms" element={<GestionRooms />} />
+                <Route path="/dashboard/graphics" element={<Graphics/>} />
                 <Route path="/updaterooms/:id" element={<UpdateRooms />} />
                 <Route path="/bookingDetails/:id" element={<BookingDetails />} />
                 <Route path="/createrooms" element={<CreateRooms />} />
