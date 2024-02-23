@@ -163,7 +163,7 @@ const GestionHotels = () => {
   }
 
   return (
-    <div className="main-container">
+    <div className="main-container3">
       <div className="search-dashboard">
         <div className="search-bar">
         <input

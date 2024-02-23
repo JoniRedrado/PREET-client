@@ -1,10 +1,8 @@
-// Settings.js
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, Suspense } from "react";
 import axios from "axios";
 import { countries } from "countries-list";
 import { useTranslation } from "react-i18next";
 import styles from "./Settings.module.css";
-import FileInput from "../../Components/FileInput/FileInput";
 
 const allCountries = Object.values(countries).map((country) => country.name);
 
@@ -36,16 +34,12 @@ const Settings = () => {
     nationality: false,
   });
 
-  const [editablePhoto, setEditablePhoto] = useState(false);
   const [phoneData, setPhoneData] = useState({
     codeArea: "",
     number: "",
   });
 
-  const [profilePicture, setProfilePicture] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null);
-  const fileInputRef = useRef(null);
-
+  const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -56,19 +50,12 @@ const Settings = () => {
         },
       })
       .then((response) => {
-        setUserInfo({
-          name: response.data.name,
-          last_name: response.data.last_name,
-          email: response.data.email,
-          birth_date: response.data.birth_date,
-          gender: response.data.gender,
-          phone_number: response.data.phone_number,
-          nationality: response.data.nationality,
-        });
-        setProfilePicture(response.data.profile_picture);
+        setUserInfo(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error(error);
+        setLoading(false);
       });
   }, [token]);
 
@@ -86,14 +73,6 @@ const Settings = () => {
     });
   };
 
-  const handleCancelClickPhoto = () => {
-    setEditablePhoto(false);
-  };
-
-  const handleEditPhoto = () => {
-    setEditablePhoto(true);
-  };
-
   const handleChange = (e, field) => {
     setUserInfo({
       ...userInfo,
@@ -109,106 +88,51 @@ const Settings = () => {
     });
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedImage(file);
-    const reader = new FileReader();
-    reader.onload = () => {
-      setProfilePicture(reader.result);
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleSubmit = async () => {
-    if (selectedImage) {
-      const formDataCloudinary = new FormData();
-      formDataCloudinary.append("file", selectedImage);
-      formDataCloudinary.append("upload_preset", "PREET2024");
-
-      try {
-        console.log("Uploading image to Cloudinary...");
-        const responseCloudinary = await fetch(
-          "https://api.cloudinary.com/v1_1/drntvj4ut/image/upload",
-          {
-            method: "POST",
-            body: formDataCloudinary,
-          }
-        );
-
-        const cloudinaryData = await responseCloudinary.json();
-
-        if (cloudinaryData.secure_url) {
-          const updatedUserInfo = {
-            ...userInfo,
-            profile_picture: cloudinaryData.secure_url,
-          };
-
-          axios
-            .put(`${import.meta.env.VITE_BACK_URL}/users/profile`, updatedUserInfo, {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            })
-            .then((response) => {
-              setEditableFields({
-                ...editableFields,
-                phone_number: false,
-              });
-              setEditablePhoto(false)
-              window.location.reload();
-            })
-            .catch((error) => {
-              console.error("Error updating user information", error);
-            });
-        } else {
-          console.error("Error: No 'secure_url' found in Cloudinary response");
-        }
-      } catch (error) {
-        console.error("Error uploading image to Cloudinary:", error);
-      }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let updatedUserInfo;
+    if (phoneData.number) {
+      updatedUserInfo = {
+        ...userInfo,
+        phone_number: `${phoneData.codeArea} ${phoneData.number}`,
+      };
+    } else {
+      updatedUserInfo = userInfo;
     }
+
+    axios
+      .put(`${import.meta.env.VITE_BACK_URL}/users/profile`, updatedUserInfo, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setEditableFields({
+          ...editableFields,
+          phone_number: false,
+        });
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Error updating user information", error);
+      });
   };
+
+  if (loading) {
+    return <div>{t("Favorites.loading")}</div>;
+  }
 
   return (
     <div className={styles.mainContainer}>
-      <div className={styles.header}>
-        <div className={styles.titleContainer}>
-          <h2 className={styles.mainTitle}>{t("Settings.title")}</h2>
-          <h4>{t("Settings.subtitle")}</h4>
-        </div>
-        <div className={styles.imageContainer}>
-          {profilePicture ? (
-            <img src={profilePicture} alt="profile" className={styles.picture} />
-          ) : (
-            <h1 className={styles.nameText}>{userInfo.name.charAt(0).toUpperCase()}</h1>
-          )}
-        </div>
-        <div className={styles.side}>
-          {editablePhoto ? (
-            <div className={styles.editableDiv}>
-              <button onClick={handleCancelClickPhoto} className={styles.cancelImage}>
-                Cancel
-              </button>
-              <FileInput onChange={handleImageChange} ref={fileInputRef} />
-              <button onClick={handleSubmit} className={styles.imageButton}>
-                Upload
-              </button>
-            </div>
-          ) : (
-            <div className={styles.noEditableDiv}>
-              <button onClick={handleEditPhoto} className={styles.editImage}>
-                Edit
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
+      <h2 className={styles.mainTitle}>{t("Settings.title")}</h2>
+      <h4>{t("Settings.subtitle")}</h4>
       <div className={styles.formContainer}>
-        <form>
+        <form onSubmit={handleSubmit}>
           {Object.keys(userInfo).map((field) => (
             <div key={field} className={styles.fieldContainer}>
               <p className={styles.fieldName}>
-                {field.charAt(0).toUpperCase() + field.slice(1).replace(/_/g, " ")}
+                {field.charAt(0).toUpperCase() +
+                  field.slice(1).replace(/_/g, " ")}
               </p>
               {editableFields[field] ? (
                 <div className={styles.editableField}>
@@ -229,10 +153,9 @@ const Settings = () => {
                       className={styles.select}
                     >
                       <option value="">{t("Settings.gendSelect")}</option>
-                      <option value="Male">{t("Settings.male")}</option>
-                      <option value="Female">{t("Settings.female")}</option>
-                      <option value="Non-binary">{t("Settings.NonBinary")}</option>
-                      <option value="I prefer not to say">{t("Settings.nothing")}</option>
+                      <option value="male">{t("Settings.male")}</option>
+                      <option value="female">{t("Settings.female")}</option>
+                    
                     </select>
                   ) : field === "phone_number" ? (
                     <div className={styles.phoneInputContainer}>
@@ -282,9 +205,12 @@ const Settings = () => {
                 </div>
               ) : (
                 <span className={styles.actualInfo}>
-                  {userInfo[field] ? userInfo[field] : `${t("Settings.addA")} ${
-                      field.charAt(0).toUpperCase() + field.slice(1).replace(/_/g, " ")
-                    }`}
+                  {userInfo[field]
+                    ? userInfo[field]
+                    : `${t("Settings.addA")} ${
+                        field.charAt(0).toUpperCase() +
+                        field.slice(1).replace(/_/g, " ")
+                      }`}
                 </span>
               )}
               <div className={styles.buttonContainer}>
@@ -319,4 +245,10 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default function WrappedApp() {
+  return (
+    <Suspense>
+      <Settings />
+    </Suspense>
+  );
+}
