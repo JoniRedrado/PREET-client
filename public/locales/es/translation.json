@@ -1,12 +1,13 @@
 {
   "Slider": {
-    "title": "TOP HOTELES DE LA TEMPORADA ",
+    "title": "Hoteles populares de la temporada",
+    "subtitle": "Basado en las experiencias de nuestros usuarios.",
     "address": "Dirección:",
     "button": "Reservar"
   },
   "Trending": {
     "title": "Destinos que marcan tendencia",
-    "subtitle": "Los países más vistados por gente de América Latina"
+    "subtitle": "Los países más vistados por gente de América Latina."
   },
   "SearchBar": {
     "placeholder": "Explora hoteles o países",
