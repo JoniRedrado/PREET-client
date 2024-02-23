@@ -1,7 +1,7 @@
 import styles from "./Sidebar.module.css";
 import { useLocation } from "react-router";
 import { FaUser, FaHistory, FaStar, FaSignOutAlt, FaHome, FaArrowLeft, FaHotel, FaCaretRight  } from "react-icons/fa";
-import { MdPeople, MdAdd, MdHotel, MdMenu, MdAdminPanelSettings } from "react-icons/md";
+import { MdMenu, MdAdminPanelSettings } from "react-icons/md";
 import { showModal, userLog } from "../../redux/actions";
 import { Drawer, List, ListItem, ListItemText } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';

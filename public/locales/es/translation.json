@@ -1,5 +1,6 @@
 {
   "Slider": {
+    "title": "TOP HOTELES DE LA TEMPORADA ",
     "address": "Dirección:",
     "button": "Reservar"
   },
@@ -186,7 +187,8 @@
     "logInBtn": "Iniciar sesión",
     "GlgLogInBtn": "Iniciar sesión con Google",
     "error": "Email o Contraseña Invalidos",
-    "question": "Nuevo en PREET?"
+    "question": "Nuevo en PREET?",
+    "register": "Regístrate"
   },
   "TryAgain": {
     "message": "Hotel no encontrado, prueba con otra búsqueda."
@@ -208,7 +210,11 @@
     "swalTitle": "Error al crear el hotel",
     "swalText": "Ha ocurrido un error mientras se creaba el hotel. Revisa la información e inténtalo nuevamente.",
     "successTitle": "¡Hotel creado exitosamente!",
-    "successText": "El hotel está listo para recibir reservas"
+    "successText": "El hotel está listo para recibir reservas",
+    "enterName": "Ingresar nombre",
+    "enterAddress": "Ingresar dirección",
+    "enterURL": "Ingresar dirección URL",
+    "enterEmail": "Ingresar email"
   },
   "UpdateForm": {
     "title": "Actualiza Tu Hotel",
@@ -221,7 +227,11 @@
     "current": "País actual: ",
     "upload": "Cargar imagen",
     "remove": "Eliminar",
-    "post": "REGISTRAR"
+    "post": "REGISTRAR",
+    "successTitle": "¡Hotel exitosamente actualizado!",
+    "successText": "El hotel ha sido actualizado y está listo para recibir reservas",
+    "errorTitle": "Error al actualizar hotel",
+    "errorText": "Ha ocurrido un error mientras actualizabamos el hotel. Revisa la información e intentalo de nuevo"
   },
   "LoginAdmin": {
     "title": "Inicia Sesión",
@@ -260,7 +270,7 @@
     "isRequiredF": "es requerida."
   },
   "dashboard": {
-    "selectDate": "Por favor, seleccine una fecha para ver",
+    "selectDate": "Por favor, seleccione una fecha para ver",
     "nationality": "Usuarios por Nacionalidad",
     "ranking": "Ranking de Hoteles por Puntuación Media",
     "reservations": "Total de Reservas de los Hoteles",
@@ -284,12 +294,31 @@
     "hideRooms": "Ocultar Habitaciones Eliminadas",
     "showRooms": "Mostrar Habitaciones Eliminadas",
     "hideUsers": "Ocultar Usuarios Eliminados",
-    "showUsers": "Mostrar Usuarios Eliminados",    
+    "showUsers": "Mostrar Usuarios Eliminados",
     "restore": "Reintegrar",
     "selectType": "Seleccionar Tipo",
     "hotelName": "Nombre del Hotel",
     "action": "Acción",
     "swalErrorTitle": "Error de Autenticación",
     "swalErrorText": "No tienes permisos de administrator"
+  },
+  "Home" : {
+    "span1" : "Bienvenido ",
+    "span2" : ", ¿Listo para explorar?",
+    "p": "Encuentra tu destino ideal aquí."
+  },
+  "RoomDetail": {
+    "swalWarningTitle": "Espera!",
+    "swalWarningText": "Para proceder debes elegir tus fechas de check-in y check-out",
+    "swalErrorTitle": "Debes iniciar sesión",
+    "swalErrorText": "Inicia sesión para completar el pago y recibir tu confirmación de reserva"
+  },
+  "Auth": {
+    "swalWarningTitle": "Alerta",
+    "swalWarningText": "Tu sesión está a punto de expirar. Por favor, cierra sesión si has terminado.",
+    "swalErrorTitle": "Email ya registrado",
+    "swalErrorText": "Inicia sesión y empieza a buscar tu próximo hotel",
+    "swalSuccessTitle": "¡Registrado exitosamente!",
+    "swalSuccessText": "Inicia sesión y reserva tu próximo PREET"
   }
 }

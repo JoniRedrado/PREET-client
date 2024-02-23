@@ -26,9 +26,6 @@ const Header = () => {
             <div className={styles.textContainer}>
               <h1>{t("Header.phrase")}</h1>
             </div>
-            <div>
-              <SearchBar/>
-            </div>
           </div>
         </header>
       );

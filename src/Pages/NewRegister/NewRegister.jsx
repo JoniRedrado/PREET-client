@@ -8,7 +8,7 @@ import { Paper } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import { countries } from "countries-list";
 import styles from "./NewRegister.module.css";
-import Logo from "../../assets/logo.jpg";
+import Logo from "../../assets/Logo.svg";
 import image1 from "../../assets/slider1.jpg";
 import image2 from "../../assets/slider2.jpg";
 import image3 from "../../assets/slider3.jpg";

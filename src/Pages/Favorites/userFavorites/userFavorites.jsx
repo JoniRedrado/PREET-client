@@ -40,56 +40,57 @@ const UserFavorites = () => {
   return (
     <div className="favorites-main-container">
       <h1 className="centered-text">{t("UserFavs.title")}</h1>
-      {console.log(favorites)}
-      {
-        favorites.length >= 1
-        ? (<div className={`card-container ${darkMode ? "darkMode" : ""}`}>
-            {favorites &&
-              favorites.map((favorite, index) => (
-                <div key={index} className={`card ${darkMode ? "darkMode" : ""}`}>
-                  <div
-                    className="favorite-icon"
-                    onClick={() => handleRemoveFavorite(favorite.hotelId)}
-                  >
-                    {favorite.isFavorite ? (
-                      <img src={notFavorite} alt="notFavorite" className="fav" />
-                        ) : (
-                      <img src={Favorite} alt="Favorite" className="fav" />
-                    )}
-                  </div>
-                  <Link to={`/detail/${favorite.hotelId}`} className="link">
-                    <div className="card-image">
-                      {favorite.hotel.image &&
-                        favorite.hotel.image.length > 0 &&
-                        favorite.hotel.image[0].image && (
-                          <img
-                            src={favorite.hotel.image[0].image}
-                            alt={favorite.hotel.name}
-                          />
-                        )}
-                    </div>
-                    <div>
-                      <h1 className="card-title">{favorite.hotel.name}</h1>
-                      <div className="card-title">
-                        {renderStars(favorite.hotel.stars)}
-                      </div>
-                      {favorite.hotel.country && (
-                        <h3 className="card-title">
-                          <i class="bi bi-geo-alt-fill"></i>
-                          {favorite.hotel.country.name}
-                        </h3>
+      <div className="favorites-container">
+        {
+          favorites.length >= 1
+          ? (<div className={`card-container ${darkMode ? "darkMode" : ""}`}>
+              {favorites &&
+                favorites.map((favorite, index) => (
+                  <div key={index} className={`card ${darkMode ? "darkMode" : ""}`}>
+                    <div
+                      className="favorite-icon"
+                      onClick={() => handleRemoveFavorite(favorite.hotelId)}
+                    >
+                      {favorite.isFavorite ? (
+                        <img src={notFavorite} alt="notFavorite" className="fav" />
+                          ) : (
+                        <img src={Favorite} alt="Favorite" className="fav" />
                       )}
                     </div>
-                  </Link>
-                </div>
-              ))}
-          </div>
-        )
-        : (<div className="not-favorites-found">
-            <h2>You don`t have any favorites yet</h2>
-            <img src={notFavoritesFound} alt="notFavoritesFound" />
-          </div>)
-      }
+                    <Link to={`/detail/${favorite.hotelId}`} className="link">
+                      <div className="card-image">
+                        {favorite.hotel.image &&
+                          favorite.hotel.image.length > 0 &&
+                          favorite.hotel.image[0].image && (
+                            <img
+                              src={favorite.hotel.image[0].image}
+                              alt={favorite.hotel.name}
+                            />
+                          )}
+                      </div>
+                      <div>
+                        <h1 className="card-title">{favorite.hotel.name}</h1>
+                        <div className="card-title">
+                          {renderStars(favorite.hotel.stars)}
+                        </div>
+                        {favorite.hotel.country && (
+                          <h3 className="card-title">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            {favorite.hotel.country.name}
+                          </h3>
+                        )}
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+            </div>
+          )
+          : (<div className="not-favorites-found">
+              <h2>You don`t have any favorites yet</h2>
+              <img src={notFavoritesFound} alt="notFavoritesFound" />
+            </div>)
+        }
+      </div>
     </div>
   );
 };

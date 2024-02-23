@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { postFavorite, removeFavorite} from "../../redux/actions";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import styles from "./Card.module.css";
@@ -9,6 +8,10 @@ import Favorite from "../../assets/Favorite.png";
 import { useNavigate } from "react-router-dom";
 import Map from "../Map/Map";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
+import icon1 from "../../assets/icon1.png"
+import icon2 from "../../assets/icon2.png"
+import icon3 from "../../assets/icon3.png"
 
 const Card = (props) => {
   const { id, name, address, image, country, rooms, stars, dataScroll } = props;
@@ -17,10 +20,26 @@ const Card = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(false);
+  const [ranking, setRanking] = useState({
+    count: "",
+    avarage: ""
+  })
   const [isMapOpen, setIsMapOpen] = useState(false);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
+    axios
+    .get(`${import.meta.env.VITE_BACK_URL}/feedback/hotel/${id}`)
+    .then((response) =>{
+      console.log(response.data)
+      setRanking({
+        count: response.data.feedback.count,
+        avarage:response.data.avgScore.avgScore
+      })
+    })
+    .catch((error) => {
+      console.error(error);
+    });
     const { index, scrollToFirstCard } = dataScroll;
     index === 1 && scrollToFirstCard();
 
@@ -80,19 +99,23 @@ const Card = (props) => {
         ) : (
           ""
         )}
-        <motion.img
+        <img
           src={image}
           className={styles.mainImage}
           alt="hotel"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
         />
       </div>
 
       <div className={styles.cardBody}>
         <div className={styles.cardTexts}>
-          <h5 className={styles.cardTitle}>{name ? name : "N/A"}</h5>
+          <div className={styles.header}>
+            <h5 className={styles.cardTitle}>{name ? name : "N/A"}</h5>
+            {ranking && (            
+            <div className={styles.rankingDiv}>
+            <p className={styles.ranking}>{ranking.avarage} of 5</p>
+            <span className={styles.reviews}>({ranking.count} reviews)</span>
+            </div>)}
+          </div>
           <p className={styles.cardStars}>
             {stars ? renderStars(stars) : "N/A"}
           </p>
@@ -102,7 +125,22 @@ const Card = (props) => {
               {t("Card.map")}
             </p>
           </div>
+
         </div>
+        <div className={styles.services}>
+          <div className={styles.iconContainer}>
+          <img src={icon1} alt="services" className={styles.icon}/>
+          <p>Free wifi</p>
+          </div>
+          <div className={styles.iconContainer}>
+          <img src={icon2} alt="services" className={styles.icon}/>
+          <p>Gym</p>
+          </div>
+          <div className={styles.iconContainer}>
+          <img src={icon3} alt="services" className={styles.icon}/>
+          <p>Room service</p>
+          </div>
+          </div>
         <div className={styles.cardFooter}>
           <div className={styles.priceContainer}>
             <p className={styles.priceText}>{t("Card.price")}</p>
@@ -110,7 +148,6 @@ const Card = (props) => {
               ${rooms.length > 0 ? rooms[0].price : "N/A"}
             </p>
           </div>
-
           <button className={styles.button} onClick={handleClick}>
             {t("Card.book")}
           </button>

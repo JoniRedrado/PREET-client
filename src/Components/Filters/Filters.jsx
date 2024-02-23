@@ -53,7 +53,6 @@ const Filters = () => {
     dispatch(getAllHotels());
     setSelectedStars([1, 2, 3, 4, 5]);
     navigate("/search")
-    console.log(defaultFilters);
   };
 
   const applyFilters = (e) => {
@@ -112,13 +111,12 @@ const Filters = () => {
     dispatch(filterParams({ ...filters, guest: e.target.value }));
   };
 
-  console.log(filters);
 
   return (
     <div className={`${styles.sidebar} ${darkMode ? styles.darkMode : ""}`}>
       <div className={styles.filterContainer}>
         <h2>{t("Filters.title")}</h2>
-        <div>
+        <div className={styles.guests}>
           <p>{t("Filters.guests")}</p>
           <button onClick={handleDecrease}> - </button>
           <input
