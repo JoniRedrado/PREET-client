@@ -289,6 +289,11 @@
     "action": "Action",
     "swalErrorTitle": "Authentication Error",
     "swalErrorText": "You do not have administrator permissions"
+  },
+  "Home" : {
+    "span1" : "Welcome ",
+    "span2" : ", ready to explore?",
+    "p": "Find your ideal destination here."
   }
   
 }
