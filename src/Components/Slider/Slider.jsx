@@ -13,10 +13,11 @@ import {
 import { NavigateBefore, NavigateNext } from "@material-ui/icons";
 import { useTranslation } from "react-i18next";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+import styles from "./Slider.module.css"
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "80%", // Hace que el slider ocupe todo el ancho disponible
+    width: "100%", // Hace que el slider ocupe todo el ancho disponible
     margin: theme.spacing(2, 0), // Margen arriba y abajo
   },
   card: {
@@ -24,31 +25,34 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "80%", // Ajusta el ancho de las tarjetas
-    margin: "auto", // Centra las tarjetas dentro del slider
+    width: "100%", 
+    height: "100%",
     padding: theme.spacing(2),
     borderRadius: theme.spacing(1),
-    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-    backgroundColor: "white", // Color de fondo de las tarjetas
+    backgroundColor:"transparent"
   },
-  info: { display: "flex", flexDirection: "row" },
+  info: { display: "flex", 
+  flexDirection: "row", 
+  width: "90%",
+  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+  },
   cardContent: {
     flex: 1,
     marginLeft: theme.spacing(2),
     paddingTop: "50px",
+    width: "70%",
+    backgroundColor:"#f0f0f0"
   },
   image: {
-    width: "400px", // Ancho fijo para todas las imágenes
+    width: "50%", // Ancho fijo para todas las imágenes
     height: "300px", // Altura automática para mantener la proporción
     borderRadius: theme.spacing(1),
   },
   controlButton: {
     color: "white", // Color de los íconos de control
-    backgroundColor: "#022840", // Color de fondo de los botones de control
     borderRadius: "50%", // Radio para los controles
-    width: "40px", // Ajusta el ancho de los controles
-    height: "40px", // Ajusta la altura de los controles
-    boxShadow: "none", // Elimina cualquier sombra alrededor del botón
+    width: "20px", // Ajusta el ancho de los controles
+    height: "20px", // Ajusta la altura de los controles
   },
   bookButton: {
     backgroundColor: "#022840", // Color de fondo del botón "Book Now"
@@ -72,6 +76,7 @@ const Slider = () => {
       .get(`${import.meta.env.VITE_BACK_URL}/hotels/range`)
       .then((response) => {
         setRankedHotels(response.data);
+
       })
       .catch((error) => {
         console.error("Error al obtener datos de hoteles:", error);
@@ -87,9 +92,6 @@ const Slider = () => {
   };
   const renderHotelCard = (hotel) => (
     <Card key={hotel.id} className={classes.card}>
-      <Typography variant="h4" align="center" color="inherit" paragraph>
-        {t("Slider.title")}✨
-      </Typography>
       <div className={classes.info}>
         <CardMedia
           className={classes.image}
@@ -98,13 +100,13 @@ const Slider = () => {
           alt={hotel.name}
         />
         <CardContent className={classes.cardContent}>
-          <Typography variant="h5" color="inherit" paragraph>
+          <Typography variant="h4" color="black" paragraph>
             {hotel.name}
           </Typography>
-          <Typography variant="body2" color="textSecondary" paragraph>
+          <Typography variant="body2" color="yellow" paragraph>
             {renderStars(hotel.stars)}
           </Typography>
-          <Typography variant="body2" color="textSecondary" paragraph>
+          <Typography variant="body2" color="black" paragraph>
             <strong>{t("Slider.address")}</strong> {hotel.address}
           </Typography>
 
@@ -122,7 +124,13 @@ const Slider = () => {
   );
 
   return (
-    <Carousel
+    <div className={styles.mainDiv}>
+      <div className={styles.titleContainer}>
+      <span className={styles.title}>{t("Slider.title")}</span>
+      <p>{t("Slider.subtitle")}</p>
+      </div>
+      <div className={styles.caruselContainer}>
+      <Carousel
       animation="slide"
       className={`${classes.root} ${darkMode ? "darkMode" : ""}`}
       indicators={false}
@@ -142,6 +150,8 @@ const Slider = () => {
     >
       {rankedHotels.map((hotel) => renderHotelCard(hotel))}
     </Carousel>
+      </div>
+    </div>
   );
 };
 

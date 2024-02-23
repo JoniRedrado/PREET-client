@@ -47,26 +47,7 @@ const UpdateRooms = () => {
 
   const [roomsTypes, setRoomsTypes] = useState([]);
 
-  // const getTypes = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${import.meta.env.VITE_BACK_URL}/rooms`
-  //     );
-
-  //     console.log(response.data.rooms)
-  //     const data = response.data;
   
-  //     if (Array.isArray(data.rooms)) {
-  //       const roomTypes = data.map((room) => room.type);
-  //       const uniqueRoomTypes = [...new Set(roomTypes)];
-  //       setRoomsTypes(uniqueRoomTypes);
-  //     } else {
-  //       console.error("Error: Data is not an array");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching rooms types:", error);
-  //   }
-  // };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRoomsData((prevData) => ({
@@ -74,10 +55,6 @@ const UpdateRooms = () => {
       [name]: value,
     }));
   };
-
-  // useEffect(() => {
-  //   getTypes();
-  // }, []);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
