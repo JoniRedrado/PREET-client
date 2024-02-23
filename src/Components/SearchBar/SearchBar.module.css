@@ -23,7 +23,7 @@
   justify-content: center;
   background-color: WHITE;
   width: 30px;
-  height: 53px;
+  height: 55px;
   padding-bottom: 2px;
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
@@ -368,12 +368,13 @@
     gap: 20px;
   }
 
-  .iconContainer,
-  .searchIcon {
+  .iconContainer{
     width: 40px;
-    height: 70px;
+    height: 55px;
   }
-
+  .searchIcon {
+    font-size: 25px;
+  }
   .searchInput {
     font-size: 18px;
   }

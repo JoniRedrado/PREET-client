@@ -45,8 +45,9 @@
 }
 
 .logo{
-    width: 120px;
-    margin-bottom: 10px;
+    width: 140px;
+    margin-bottom: 40px;
+    margin-top: 12px;
 }
 
 .logo2{
@@ -196,6 +197,11 @@
 @media screen and (min-width: 1380px) {
     .mainDiv{
         height: 750px;
+    }
+    .logo{
+        width: 200px;
+        margin-bottom: 50px;
+        margin-top: 0px;
     }
 }
 
