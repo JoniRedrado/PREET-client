@@ -28,6 +28,7 @@ const Detail = () => {
   const [reviewValues, setReviewValues] = useState({});
   const [userReservations, setUserReservations] = useState([]);
   const [hotelInUserReviews, setHotelInUserReviews] = useState([])
+  const [userVsHotel, setUserVsHotel] = useState([])
   const [hotelAvgRanking, setHotelAvgRanking] = useState([])
 
   const renderStars = (count) => {
@@ -49,6 +50,8 @@ const Detail = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     dispatch(getDetail(id, filters))
     getHotelAvgRanking(id)
+    validateUserVSHotel(hotel.id)
+    validateHotelInUserReviews(hotel.id, userVsHotel)
   }, []);
 
   const getHotelAvgRanking = async () => {
@@ -126,9 +129,15 @@ const Detail = () => {
 
   }
 
-  const validateUserVSHotel = (hotelId) =>
-  userReservations && userReservations.find(reservation => reservation.room.hotel.id === hotelId
-    );
+  console.log(userReservations);
+  console.log(userVsHotel);
+  console.log(hotelInUserReviews);
+
+  const validateUserVSHotel = (hotelId) => {
+    const userHasHotel = userReservations.filter(reservation => reservation.room.hotel.id === hotelId)
+    console.log(userHasHotel);
+    setUserVsHotel(userHasHotel)
+  }
     
     const handleSubmitReview = async (e) => {
       e.preventDefault();
@@ -163,11 +172,6 @@ const Detail = () => {
     return (() =>
     setHotelInUserReviews([]))
   }, [dispatch, hotel.id, token]);
-
-  useEffect(() => {    
-    validateHotelInUserReviews(hotel.id, userReviews)
-
-  }, [hotel.id, userReviews]);
 
   console.log(hotel);
   return (
@@ -248,7 +252,8 @@ const Detail = () => {
               </select>
               <h2 className="reviews-title">{t("Detail.reviews")}</h2>
               {console.log(hotelInUserReviews)}
-              {hotelInUserReviews.length === 0 ? (
+              {console.log(userVsHotel.length !== 0)}
+              {userVsHotel.length !== 0 && hotelInUserReviews.length === 0 ? (
                 <button
                   className="container-detail-button"
                   onClick={() => handlePostReviewModal("postReview")}
