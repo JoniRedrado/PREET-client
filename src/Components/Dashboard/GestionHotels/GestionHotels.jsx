@@ -77,20 +77,35 @@ const GestionHotels = () => {
   };
 
   useEffect(() => {
-    getHotels({});
-  }, [currentPage, pageSize]);
+    if (!showDeletedHotels) {
+      getHotels({});
+    } else {
+      getHotelsDeleted({});
+    }
+  }, [currentPage, pageSize, showDeletedHotels]);
+
+  // const handleShowDeletedHotels = () => {
+  //   setShowDeletedHotels(!showDeletedHotels);
+  //   if (!showDeletedHotels) {
+  //     getHotelsDeleted();
+  //   }
+  //   setCurrentPage(1)
+  // };
 
   const handleShowDeletedHotels = () => {
     setShowDeletedHotels(!showDeletedHotels);
-    if (!showDeletedHotels) {
-      getHotelsDeleted();
-    }
-    setCurrentPage(1)
+    setCurrentPage(1);
   };
 
   const renderTables = () => {
     if (showDeletedHotels) {
       return (
+<<<<<<< Updated upstream
+=======
+        <div className="table-container">
+          <div className="actual-table">
+                {/* {showDeletedHotels && ( */}
+>>>>>>> Stashed changes
         <table className="table">
           <thead className="table-dark">
             <tr>
@@ -115,7 +130,13 @@ const GestionHotels = () => {
             ))}
           </tbody>
         </table>
+<<<<<<< Updated upstream
 
+=======
+      {/* )} */}
+        </div>
+        </div>
+>>>>>>> Stashed changes
 
       )
     } else{
