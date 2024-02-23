@@ -93,15 +93,17 @@ const GestionRooms = () => {
     getRooms({ type: typeInput });
   };
 
-  useEffect(() => {
-    getRooms({});
-  }, [currentPage, pageSize]);
+   useEffect(() => {
+    if (!showDeletedRooms) {
+      getRooms({});
+    } else {
+      getRoomsDeleted({});
+    }
+  }, [currentPage, pageSize, showDeletedRooms]);
 
   const handleShowDeletedRooms = () => {
     setShowDeletedRooms(!showDeletedRooms);
-    if (!showDeletedRooms) {
-      getRoomsDeleted();
-    }
+    setCurrentPage(1);
   };  
 
   const renderContent = () => {
