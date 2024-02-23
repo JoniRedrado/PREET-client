@@ -54,3 +54,7 @@
 .button:hover{
     background-color: #6093C0;
 }
+.imageContainer img {
+  margin-bottom: 20px;
+  width: 500px;
+}
