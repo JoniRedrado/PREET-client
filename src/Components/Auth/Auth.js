@@ -56,9 +56,9 @@ export  async function loginFireBase({email, firstName, lastName}) {
 }
 
 //Función para registrar un usuario
-export  async function register({name, last_name, email, password}) {
+export  async function register({name, last_name, email, password, nationality}) {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/users/register`, { name, last_name, email, password });
+      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/users/register`, { name, last_name, email, password, nationality });
 
       if (response.status === 200) {        
         swal({

@@ -52,6 +52,7 @@ const Filters = () => {
     dispatch(resetCurrentPage());
     dispatch(getAllHotels());
     setSelectedStars([1, 2, 3, 4, 5]);
+    navigate("/search")
     console.log(defaultFilters);
   };
 
