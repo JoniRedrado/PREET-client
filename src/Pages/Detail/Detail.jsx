@@ -92,7 +92,7 @@ const Detail = () => {
       roomId: validateUserVSHotel(hotel.id).roomId,
     });
   };
-  
+  console.log(selectedRoom);
   const handleStarClick = (star) => {
     const newSelectedStars = [1, 2, 3, 4, 5].filter(
       (selectedStar) => selectedStar <= star
@@ -231,7 +231,8 @@ const Detail = () => {
                 )}
               </select>
               <h2 className="reviews-title">{t("Detail.reviews")}</h2>
-              {!hotelInUserReviews ? (
+              {console.log(hotelInUserReviews)}
+              {hotelInUserReviews.length === 0 ? (
                 <button
                   className="container-detail-button"
                   onClick={() => handlePostReviewModal("postReview")}

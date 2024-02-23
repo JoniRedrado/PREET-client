@@ -7,20 +7,18 @@ import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import "./RoomDetail.styles.css";
+import { useNavigate } from "react-router-dom";
 
 const RoomDetail = ({ room }) => {
   const [isBooking, setIsBooking] = useState(false);
   const { darkMode } = useDarkMode();
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const filters = useSelector((state) => state.submitFilters);
 
   const token = localStorage.getItem("token");
-
-  console.log(filters);
-
-  console.log(!filters.startDate || !filters.endDate);
   
   const handleBook = () => {
 
@@ -43,8 +41,7 @@ const RoomDetail = ({ room }) => {
       };
   
       const handleLoginClick = () => {
-        dispatch(showModal("login", true));
-        dispatch(showModal("roomDetail", false));
+        navigate("/login");
       };
   
       if (!token) {
@@ -84,7 +81,7 @@ const RoomDetail = ({ room }) => {
   if (!room) {
     return null; //Al cerrar el modal ocurría un error porque se establece selectedRoom
   } //como null en la const closeModal (Detail.jsx). Esto arregla el error.
-
+  console.log(room);
   return (
     <div className={`card-room ${darkMode ? "darkMode" : ""}`}>
       <img
