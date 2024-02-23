@@ -169,3 +169,104 @@
   margin-top: 5px;
   box-sizing: border-box;
 }
+
+.imageContainer{
+  background-color: #6093C0;
+  width: 90px;
+  height: 90px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.nameText{
+  color: white;
+  font-size: 60px;
+  font-weight: 500;
+}
+.picture{
+  width: 100%;
+  border-radius: 50%;
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+.titleContainer{
+  width: 40%;
+}
+
+.side{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 40%;
+}
+
+.inputDiv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  height: auto;
+}
+.cancelImage{
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #ddd;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+.cancelImage:hover {
+  background-color: #bbb;
+}
+
+.noEditableDiv{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.editableDiv{
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+}
+.editImage{
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color:#022840;
+  color: white;
+}
+
+.editImage:hover{
+  background-color: #6093C0;
+  cursor: pointer;
+}
+
+.imageButton{
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color:#022840;
+  color: white;
+}
+
+.imageButton:hover{
+  background-color: #6093C0;
+  cursor: pointer;
+}

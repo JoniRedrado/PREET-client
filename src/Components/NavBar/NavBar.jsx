@@ -93,43 +93,7 @@ function NavBar({ heightNav }) {
         <div 
           className={`${style.container2} ${darkMode ? style.darkMode : ""}`}
           style={heightNav}
-        >   
-                  <div className={style.userButtons}>
-          <div>
-            <button onClick={toggleDarkMode} className={style.darkModeButton}>
-               {darkMode ? (
-                <MdSunny className={style.icon2}/>
-                ) : (
-                  <IoMdMoon className={style.icon2}/>
-                )}
-            </button>
-          </div>
-          <div ref={dropdownRef} onMouseLeave={closeMenu}>
-            <button className={style.btnLink} onClick={toggleMenu}>
-              <MdLanguage className={style.icon2}/>
-            </button>
-            <div className={style.language}>
-            {showMenu && (
-              <ul className={style.dropdownMenu2}>
-                {locales.map(({ code, country_code }) => (
-                  <li key={country_code}>
-                    <button className={style.dropdownItem}>
-                      <span
-                        className={`flag-icon flag-icon-${country_code}`}
-                        onClick={() => {
-                          i18n.changeLanguage(code);
-                          closeMenu();
-                        }}
-                      ></span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
-            </div>
-            
-          </div>
-          </div>           
+        >         
           <div className={style.adminInfo}>
             <div className={style.imageContainer2}>
               {userInfo.profilePicture ? (

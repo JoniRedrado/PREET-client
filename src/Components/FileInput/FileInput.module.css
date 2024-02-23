@@ -1,0 +1,32 @@
+.fileInput {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .fileInputLabel {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color:#022840;
+    color: white;
+  }
+  .fileInputLabel:hover{
+    background-color: #6093bf;
+  }
+  
+  .fileInputHidden {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  
+  .fileName {
+    margin-top: 10px;
+  }
+  
+  .noFileSelected {
+    color: #999;
+  }

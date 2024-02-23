@@ -132,51 +132,64 @@ const UpdateRooms = () => {
   };
 
   return (
-    <div>
+    <div className="main-container">
       <form className="form" onSubmit={handleSubmit}>
-        <h1>{t("UpdateRooms.title")}</h1>
-        <label>{t("UpdateRooms.types")}</label>
-        <select name="type" value={roomsData.type} onChange={handleChange}>
-          <option value="">{t("UpdateRooms.selectType")}</option>
-          {roomsType.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-        <label>{t("UpdateRooms.description")}</label>
-        <input
-          type="text"
-          name="description"
-          value={roomsData.description}
-          onChange={handleChange}
-        ></input>
-        <label>{t("UpdateRooms.price")}</label>
-        <input
-          type="number"
-          name="price"
-          value={roomsData.price}
-          onChange={handleChange}
-        ></input>
-        <label>{t("UpdateRooms.numeration")}</label>
-        <input
-          type="text"
-          name="numeration"
-          value={roomsData.numeration}
-          onChange={handleChange}
-        ></input>
-        <div>
+        <h1 className="form-title">{t("UpdateRooms.title")}</h1>
+        <div className="form-group">
+          <label className="form-label">{t("UpdateRooms.types")}</label>
+          <select className="form-select" name="type" value={roomsData.type} onChange={handleChange}>
+            <option value="">{t("UpdateRooms.selectType")}</option>
+            {roomsType.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label className="form-label1">{t("UpdateRooms.description")}</label>
+          <textarea
+            className="form-input1"
+            type="text"
+            name="description"
+            value={roomsData.description}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">{t("UpdateRooms.price")}</label>
+          <input
+            className="form-input"
+            type="number"
+            name="price"
+            value={roomsData.price}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">{t("UpdateRooms.numeration")}</label>
+          <input
+            className="form-input"
+            type="text"
+            name="numeration"
+            value={roomsData.numeration}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
           {roomsData.imagePreview && (
-            <div>
+            <div className="image-preview">
               <h3>{t("UpdateRooms.crntImage")}</h3>
               <img src={roomsData.imagePreview} alt="Preview" />
-              <button onClick={handleImageRemove}>{t("Remove Image")}</button>
+              <button className="remove-image-btn" onClick={handleImageRemove}>
+                {t("Remove Image")}
+              </button>
             </div>
           )}
-          <label>{t("UpdateRooms.newImage")}</label>
-          <input type="file" accept="image/*" onChange={handleImageChange} />
+          <label className="form-label">{t("UpdateRooms.newImage")}</label>
+          <input className="form-input" type="file" accept="image/*" onChange={handleImageChange} />
         </div>
-        <button type="submit">{t("UpdateRooms.update")}</button>
+        <button className="submit-btn" type="submit">{t("UpdateRooms.update")}</button>
       </form>
     </div>
   );
