@@ -30,6 +30,7 @@ const CreateRooms = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1); // Inicializado en 1
   const [pageSize] = useState(6); // Tamaño de la página
+  const [imagePreview, setImagePreview] = useState(null);
 
   const fetchHotels = async () => {
     try {
@@ -56,6 +57,21 @@ const CreateRooms = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setFormData({ ...formData, image: file });
+
+    if (file) {
+      try {
+        const imagePreviewURL = URL.createObjectURL(file);
+        setImagePreview(imagePreviewURL);
+      } catch (error) {
+        console.error("Error creating object URL for image:", error);
+      }
+    }
+
+  };
+
+  const handleImageRemove = () => {
+    setFormData({ ...formData, image: null });
+    setImagePreview(null);
   };
 
   const handleHotelChange = (e) => {
@@ -105,8 +121,8 @@ const CreateRooms = () => {
 
     try {
       await axios.post(`${import.meta.env.VITE_BACK_URL}/rooms/${formData.selectedHotelId}`, roomData);
-      window.alert("room create ")
       navigate("/dashboard")
+      swal("Success!", "Room created successfully", "success");
     } catch (error) {
       console.error("Error creating room:", error);
     }
@@ -144,9 +160,17 @@ const CreateRooms = () => {
           <option value="loadMore">{t("CreateRooms.load")}</option>
         )}
       </select>
-      
+      <div>
+      {imagePreview && (
+        <div>
+          <h3>Preview</h3>
+          <img src={imagePreview} alt="Preview" />
+          <button onClick={handleImageRemove}>Remove Image</button>
+        </div>
+      )}
       <label>{t("CreateRooms.image")}</label>
       <input type="file" accept="image/*" onChange={handleImageChange} />
+      </div>
       <button type="submit">{t("CreateRooms.title")}</button>
     </form>
   );

@@ -108,9 +108,11 @@ const CreateForm = () => {
     try {
       console.log("Sending request to create hotel...");
       await axios.post(`${import.meta.env.VITE_BACK_URL}/hotels`, hotelData);
-      console.log("Hotel created successfully!");
-      window.alert("Hotel created successfully!");
-      // Lógica adicional después de crear el hotel, por ejemplo, redireccionamiento
+      navigate("/createrooms")
+      swal("Hotel created successfully!", {
+        icon: "success",
+      });
+
     } catch (error) {
       console.error("Error creating hotel:", error);
     }
@@ -212,7 +214,7 @@ const CreateForm = () => {
         {formData.image && (
           <>
             <img
-              src={formData.image}
+              src={URL.createObjectURL(formData.image)}
               alt="Preview"
               className={styles.imagePreview}
             />

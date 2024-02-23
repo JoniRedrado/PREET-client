@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, Suspense } from "react";
-// import NavBarDashboard from "../Dashboard/NavBarDashboard/NavBarDashboard";
 import { useTranslation } from "react-i18next";
+import swal from "sweetalert";
 import "./UpdateRooms.modules.css";
 
 const UpdateRooms = () => {
@@ -17,6 +17,7 @@ const UpdateRooms = () => {
     guest: "",
     numeration: "",
     image: null,
+    imagePreview: null,
   });
 
   useEffect(() => {
@@ -74,12 +75,21 @@ const UpdateRooms = () => {
 
         setRoomsData((prevData) => ({
           ...prevData,
-          image: imagePreviewURL,
+          // image: file,
+          imagePreview: imagePreviewURL,
         }));
       } catch (error) {
         console.error("Error creating object URL for image:", error);
       }
     }
+  };
+
+  const handleImageRemove = () => {
+    setRoomsData((prevData) => ({
+      ...prevData,
+      image: null,
+      // imagePreview: null,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -127,6 +137,7 @@ const UpdateRooms = () => {
         updatedData
       );
       navigate("/dashboard/rooms");
+      swal("Success!", "Room created successfully", "success");
     } catch (error) {
       console.error("Error updating room:", error);
     }
@@ -134,7 +145,6 @@ const UpdateRooms = () => {
 
   return (
     <div>
-      {/* <NavBarDashboard/> */}
       <form className="form" onSubmit={handleSubmit}>
         <h1>{t("UpdateRooms.title")}</h1>
         <label>{t("UpdateRooms.types")}</label>
@@ -168,10 +178,11 @@ const UpdateRooms = () => {
           onChange={handleChange}
         ></input>
         <div>
-          {roomsData.image && (
+          {roomsData.imagePreview && (
             <div>
               <h3>{t("UpdateRooms.crntImage")}</h3>
-              <img src={roomsData.image} alt="Imagen Actual" />
+              <img src={roomsData.imagePreview} alt="Preview" />
+              <button onClick={handleImageRemove}>{t("Remove Image")}</button>
             </div>
           )}
           <label>{t("UpdateRooms.newImage")}</label>
