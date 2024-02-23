@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import "./RoomDetail.styles.css";
 import { useNavigate } from "react-router-dom";
 
-const RoomDetail = ({ room }) => {
+const RoomDetail = ({ room, closeModal }) => {
   const [isBooking, setIsBooking] = useState(false);
   const { darkMode } = useDarkMode();
   const { t } = useTranslation();
@@ -81,7 +81,7 @@ const RoomDetail = ({ room }) => {
   if (!room) {
     return null; //Al cerrar el modal ocurría un error porque se establece selectedRoom
   } //como null en la const closeModal (Detail.jsx). Esto arregla el error.
-  console.log(room);
+  
   return (
     <div className={`card-room ${darkMode ? "darkMode" : ""}`}>
       <img
@@ -93,7 +93,7 @@ const RoomDetail = ({ room }) => {
       <div className="card-body">
         <h1 className="card-title">{room.type}</h1>
         <p className="card-text">{room.description}</p>
-        <p className="card-text">
+        <p className="card-price">
           {t("CreateRooms.price")} {room.price} $
         </p>
         <button onClick={handleBook}>

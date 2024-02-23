@@ -1,18 +1,29 @@
 .card-room {
   width: 100%; /* Ocupar todo el ancho disponible dentro del modal */
-  max-height: 100%; /* Ocupar todo el alto disponible dentro del modal */
+  height: 100%; /* Ocupar todo el alto disponible dentro del modal */
   display: flex; /* Para que los elementos internos se distribuyan correctamente */
   flex-direction: column; /* Alinear los elementos verticalmente */
-  justify-content: center; /* Centrar verticalmente los elementos */
-  align-items: center; /* Centrar horizontalmente los elementos */
+  justify-content: center; /* Centrar verticalmente los elementos */ /* Centrar horizontalmente los elementos */
+  background-color: rgb(221, 221, 221);
 }
 
 .room-image{
-  max-width: 100%;
+  width: 100%;
+  height: auto;
 }
 
-.card-body h1,p,i{
+.card-body {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body h1 {
   font-size: 25px;
+}
+
+.card-body p,i{
+  font-size: 20px;
 }
 
 .card-body button{
@@ -23,7 +34,17 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 350px;
+  align-self: center;
+}
+
+.card-price {
+  font-weight: 1000;
+  align-self: center;
+}
+
+.card-text {
+  text-align: center;
+  align-self: center;
 }
 
 .card-room.darkMode{
