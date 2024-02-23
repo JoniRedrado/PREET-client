@@ -77,10 +77,10 @@ const UpdateForm = () => {
   };
 
   const handleImageRemove = () => {
-    setUpdateHotel((prevData) => ({
+    setUpdateHotel(prevData => ({
       ...prevData,
-      image: null,
-      // imagePreview: null,
+      // image: null,
+      imagePreview: null,
     }));
   };
 
@@ -176,7 +176,7 @@ const UpdateForm = () => {
         type="text" 
         name="email" 
         placeholder="Enter email" 
-        valaue={updateHotel.email} 
+        value={updateHotel.email} 
         onChange={handleChange} 
         className={styles.input}
         />

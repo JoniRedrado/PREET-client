@@ -74,10 +74,10 @@ const UpdateRooms = () => {
   };
 
   const handleImageRemove = () => {
-    setRoomsData((prevData) => ({
+    setRoomsData(prevData => ({
       ...prevData,
       image: null,
-      // imagePreview: null,
+      imagePreview: null,
     }));
   };
 

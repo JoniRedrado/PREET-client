@@ -79,8 +79,9 @@
   background-color: #0056b3;
 }
 
-.imageContainer {
+.imageContainer img{
   margin-bottom: 20px;
+  width: 450px;
 }
 
 .imageContainer label {
