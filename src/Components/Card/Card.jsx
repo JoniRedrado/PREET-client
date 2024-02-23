@@ -56,6 +56,7 @@ const Card = (props) => {
   };
 
   const handleClick = () => {
+    
     navigate(`/detail/${id}`);
   };
 
