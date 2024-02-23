@@ -301,11 +301,16 @@ const Detail = () => {
         style={{
           overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.5)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
           },
         }}
-      >
-        <i onClick={closeModal} className="bi bi-arrow-left-circle return"></i>
-        <RoomDetail room={selectedRoom} />
+      > 
+        <div className="return-button-container">
+          <i onClick={() => closeModal("roomDetail")} className="bi bi-arrow-left-circle"></i>
+        </div>
+        <RoomDetail room={selectedRoom}/>
       </Modal>
     </motion.div>
   );
