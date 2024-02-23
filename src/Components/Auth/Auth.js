@@ -3,7 +3,7 @@ import swal from "sweetalert";
 import { useTranslation } from "react-i18next";
 import { t } from "i18next";
 
-export async function login(email, password) {
+/*export async function login(email, password) {
   const { t } = useTranslation();
   try {
     const response = await axios.post(
@@ -38,6 +38,35 @@ export async function login(email, password) {
   } catch (error) {
     console.error(`Error de inicio de sesión:`, error);
     throw error;
+  }
+}*/
+export async function login(email, password) {
+  try {
+      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/users/login`, { email, password });
+      if (response.status === 200 && response.data.token && response.data.user && response.data.user.rol) {
+          const expirationDate = new Date();
+          expirationDate.setSeconds(expirationDate.getSeconds() + 7200); // 2 horas de expiración
+          localStorage.setItem('token', response.data.token );
+          localStorage.setItem(expirationDate, expirationDate.getTime()); // Guardar la fecha de expiración en milisegundos
+
+          localStorage.setItem('rol', response.data.user.rol);
+
+          // Establecer temporizador para la alerta de expiración
+          const alertTime = new Date(expirationDate.getTime() - 60000); // Mostrar alerta 1 minuto antes de la expiración
+          setTimeout(() => {
+              swal("Alerta", "Tu sesión está a punto de expirar. Por favor, cierra sesión si has terminado.", "warning");
+          }, alertTime.getTime() - Date.now());
+
+          return { token: response.data.token, rol: response.data.user.rol };
+      } else if (response.status === 200 && response.data.message) {
+          return {message: response.data.message};
+      }
+       else {
+          throw new Error(response.data.message || 'Error de inicio de sesión');
+      }
+  } catch (error) {
+      console.error('Error de inicio de sesión:', error);
+      throw error;
   }
 }
 
