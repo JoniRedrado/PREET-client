@@ -28,8 +28,6 @@ const SearchBar = () => {
 
   const filters = useSelector((state) => state.submitFilters || defaultFilters)
 
-  console.log(filters);
-
   const handleFilters = (e) => {
     e.preventDefault()
     const { name, value } = e.target;
@@ -108,8 +106,8 @@ const SearchBar = () => {
   return (
     <div className={`${s.container} ${darkMode ? s.darkMode : ""}`}>
       <div className={s.searchBar}>
-        <div className={s.iconContainer}>
-          <FaLocationArrow className={s.searchIcon} />
+        <div className={`${s.iconContainer} ${darkMode ? s.darkMode : ""}`}>
+          <FaLocationArrow className={`${s.searchIcon} ${darkMode ? s.darkMode : ""}`}/>
         </div>
         <input
           className={s.searchInput}
@@ -140,22 +138,25 @@ const SearchBar = () => {
           {errors.endDate && <p className={s.searchBarError}>{errors.endDate}</p>}
         </div>
         <div className={s.persons}>
-          <p className={s.check}>{t("SearchBar.guests")}</p>
-          <div className={s.buttonContainer}>
+          <div className={s.guests}>
+            <p className={s.check2}>{t("SearchBar.guests")}</p>
+          </div>
+          <div className={`${s.buttonContainer} ${darkMode ? s.darkMode : ""}`}>
             <button onClick={handleDecrease}> - </button>
-            {/* Utilizamos readOnly para evitar la edición directa del input */}
             <input 
               type="text" 
               name="guest" 
               value={guest} 
               readOnly
               onChange={handleGuestChange} 
-              className={s.personsCounterInput} 
+              className={`${s.personsCounterInput} ${darkMode ? s.darkMode : ""}`} 
             />
             <button onClick={handleIncrease}> + </button>
           </div>
         </div>
-        <button onClick={handleSubmit} className={s.searchButton}>{t("SearchBar.button")}<FaSearch className={s.buttonIcon}/></button>
+        <div className={s.buttonContainer2}>
+          <button onClick={handleSubmit} className={s.searchButton}>{t("SearchBar.button")}<FaSearch className={s.buttonIcon}/></button>
+        </div>
       </div>
     </div>
   );

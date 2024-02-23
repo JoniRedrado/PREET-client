@@ -1,21 +1,19 @@
 .container{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   padding: 10px 10px 10px 10px;
-  background-color: #6495ED;
+  background-color: #6093C0;
   border-radius: 16px;
   height:fit-content;
+  height: 70px;
+  gap: 10px;
+  width: 100%;
 }
 
-.filters {
-  display: flex;
-  align-items: stretch;
-  margin-top: 20px;
-}
 
 .searchBar{
-  width: 99%;
+  width: 40%;
   height: 100%;
   display: flex;
 }
@@ -25,7 +23,7 @@
   justify-content: center;
   background-color: WHITE;
   width: 30px;
-  height: 40px;
+  height: 55px;
   padding-bottom: 2px;
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
@@ -39,7 +37,7 @@
   width: 100%;
   border-top-right-radius: 16px;
   border-bottom-right-radius: 16px;
-  height: 40px;
+  height: 55px;
   border: none;
   padding-left: 10px;
   font-size: 16px;
@@ -52,49 +50,51 @@
 }
 
 .filters{
-  width: 100%;
-  height: 65px;
+  width: 60%;
+  height: 50px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  gap: 10px;
+  align-items: center;
+  margin-top: 4px;
+  gap: 10PX;
 }
 
 .date{
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 300px;
-  background-color: white;
+  width: 100%;
   height: 50px;
   border-radius: 16px;
 }
 
 .dateInput{
-  height: 100%;
+  height: 55px;
   font-size: 15px;
-  width: 230px;
-  border-radius: 12px;
-  padding: 10px 20px 10px 20px;
-  font-size: 20px;
+  width: 100%;
   font-weight: 500;
   line-height: 24px;
-  border-top-right-radius: 16px;
-  border-bottom-right-radius: 16px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   border: none;
-  padding: 0px 20px 0px 20px;
+  padding: 0px 5px 0px 3px;
+  text-align: center;
 }
 
 .endDate {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 50px;
+  width: 30%;
 }
 
 .startDate {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 30%;
+  height: 50px;
 }
 
 .dateInput.error {
@@ -104,7 +104,7 @@
 
 .searchBarError {
   color: #ff0000;
-  font-size: 14px;
+  font-size: 12px;
   margin-top: -5px;
   margin-bottom: 0px;
   position: relative;
@@ -117,60 +117,73 @@
 .dateInput:focus {
   outline: none;
 }
+
+.buttonContainer2{
+  width: 15%;
+  margin-left: 10px;
+}
 .searchButton{
-  width: 174px;
-  height: 48px;
-  border-radius: 12px;
+  width: 100%;
+  height: 55px;
+  border-radius: 10px;
   background-color: #01283F;
   color: white;
   font-size: 18px;
   cursor: pointer;
   border: none;
-  margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .searchButton:hover{
-  background-color: #015C7F;
+  background-color:  #0b4665;
 }
 
 
 
+
+
+.checkContainer{
+  background-color: #01283F;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  text-align: center;
+}
+
+.check{
+  font-size: 15px;
+  width: 100px;
+  color:white;
+}
+
+.persons{
+  height: 36px;
+  display: flex;
+  align-items: center;
+  background-color: #01283F;
+  border-radius: 10px;
+  padding: 10px 0px 10px 15px;
+  justify-content: space-between;
+  margin-right: 10px;
+  width: 16%;
+  gap: 10px;
+}
+
 .personsCounterInput {
-  width: 30px;
-  height: 20px;
+  width: 10px;
+  height: 50px;
   text-align: center;
   border-color: transparent;
 }
 
 .personsCounterInput:focus{
   outline: none;
-}
-
-.checkContainer {
-  text-align: center;
-}
-
-.check{
-  font-size: 16px;
-  width: 100px;
-  color:white;
-}
-
-.persons{
-  margin: 0px;
-  width: 225px;
-  height: 30px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  background-color: #01283F;
-  border-radius: 16px;
-  padding: 10px 0px 10px 15px;
-  justify-content: space-between;
-  margin-right: 10px;
 }
 
 .persons p{
@@ -193,39 +206,31 @@
   background-color: #6093bf62;
   cursor: pointer;
 }
-
+.guests{
+  width: 50%;
+}
 .buttonContainer{
-  width: 100%;
+  width: 60%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 0.5px solid grey;
-  padding: 12px 15px 12px 25px;
   background-color: white;
-  border-top-right-radius: 16px;
-  border-bottom-right-radius: 16px;
-  height: 26px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 56px;
 }
 
-.checkContainer{
-  background-color: #01283F;
-  border-right: 0.5px solid grey;
-  width: 140px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  border-top-left-radius: 16px;
-  border-bottom-left-radius: 16px;
-}
+
 
 .buttonIcon{
   margin-left: 5px;
   font-size: 14PX;
 }
 
-
-
+.buttonContainer.darkMode{
+  background-color: #484444;
+  color:#fff;
+}
 .container.darkMode{
   background-color: #333;
   color:#fff;
@@ -239,6 +244,7 @@
 .iconContainer.darkMode{
   background-color: #333;
   color:#fff;
+  border: 1px solid rgb(75, 73, 73);
 }
 
 .searchIcon.darkMode{
@@ -280,8 +286,106 @@
   background-color: #333;
   color:#fff;
 }
-
+.buttonContainer.darkMode button{
+  color: white;
+}
 .endDate.darkMode{
   background-color: #333;
   color:#fff;
+}
+.personsCounterInput.darkMode{
+  background-color: transparent;
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    padding: 10px 5px;
+  }
+
+
+
+  .iconContainer,
+  .searchIcon {
+    width: 20px;
+    height: 45px;
+  }
+
+  .searchInput {
+    font-size: 10px;
+  }
+
+  .guests{
+    width: 10%;
+  }
+  .check{
+    margin-top: 50%;
+  }
+
+  .dateInput {
+    font-size: 10px;
+    
+  }
+
+  .persons {
+    width: 20%;
+  }
+
+  .buttonContainer,
+  .buttonContainer2,
+  .checkContainer {
+    width: 60%;
+  }
+
+  .check {
+    font-size: 10px;
+    height: 45px;
+  }
+
+  .buttonContainer2{
+    margin-left: -20px;
+  }
+  .persons p {
+    font-size: 10px;
+  }
+
+  .persons button {
+    width: 25px;
+    height: 25px;
+    font-size: 10px;
+  }
+
+  .buttonIcon {
+    font-size: 10px;
+  }
+
+  .searchBarError{
+    font-size: 9px;
+  }
+}
+
+@media screen and (min-width: 1380px) {
+  .container {
+    gap: 20px;
+  }
+
+  .iconContainer{
+    width: 40px;
+    height: 55px;
+  }
+  .searchIcon {
+    font-size: 25px;
+  }
+  .searchInput {
+    font-size: 18px;
+  }
+
+  .persons button {
+    width: 35px;
+    height: 35px;
+    font-size: 22px;
+  }
+
+  .buttonIcon {
+    font-size: 18px;
+  }
 }

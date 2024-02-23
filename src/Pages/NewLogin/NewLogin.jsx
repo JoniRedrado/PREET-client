@@ -7,7 +7,7 @@ import { Paper } from "@mui/material";
 import registerValidation from "../../helpers/registerValidation";
 import Carousel from "react-material-ui-carousel";
 import styles from "./NewLogin.module.css";
-import Logo from "../../assets/logo.jpg";
+import Logo from "../../assets/Logo.svg";
 import Logo2 from "../../assets/logo.jpg";
 import image1 from "../../assets/slider1.jpg";
 import image2 from "../../assets/slider2.jpg";
@@ -149,7 +149,7 @@ const NewLogin = () => {
           <div className={styles.footer}>
             <p>{t("Login.question")}</p>
             <Link to="/register" className={styles.link}>
-              <p>{t("Login.logInBtn")}</p>
+              <p>{t("Login.register")}</p>
             </Link>
           </div>
         </form>

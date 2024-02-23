@@ -5,6 +5,7 @@
     width: 100%;
     background-color: white;
     min-height: 100vh;
+    height: 600px;
 }
 .contentContainer{
     display: flex;
@@ -44,8 +45,8 @@
 }
 
 .logo{
-    width: 120px;
-    margin-bottom: 10px;
+    width: 140px;
+    margin-bottom: 30px;
 }
 
 .logo2{
@@ -182,6 +183,10 @@
     .mainDiv{
         height: 750px;
     }
+    .logo{
+        width: 200px;
+        margin-bottom: 50px;
+    }
 }
 
 /* Media queries para pantallas más pequeñas */
@@ -198,8 +203,8 @@
 
     .logo2{
         display: flex;
-        width: 100px;
-        margin-left: 40%;
+        width: 120px;
+        margin-left: 30%;
     }
     .formContainer {
         width: 80%;

@@ -28,6 +28,7 @@ const Detail = () => {
   const [reviewValues, setReviewValues] = useState({});
   const [userReservations, setUserReservations] = useState([]);
   const [hotelInUserReviews, setHotelInUserReviews] = useState([])
+  const [hotelAvgRanking, setHotelAvgRanking] = useState([])
 
   const renderStars = (count) => {
     const starsArray = Array.from({ length: count }, (_, index) => (
@@ -47,7 +48,20 @@ const Detail = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     dispatch(getDetail(id, filters))
+    getHotelAvgRanking(id)
   }, []);
+
+  const getHotelAvgRanking = async () => {
+    axios
+      .get(`${import.meta.env.VITE_BACK_URL}/feedback/hotel/${id}`)
+      .then((response) => {
+        console.log(response.data.avgScore);
+        setHotelAvgRanking(response.data.avgScore.avgScore);        
+      })
+      .catch((error) => {
+        console.error("Error al obtener comentarios del hotel:", error);
+      });
+  }
 
   const getUserReservations = async () => {
     try {
@@ -129,8 +143,8 @@ const Detail = () => {
 
       if (response.status === 200) {
         swal({
-          title: "Thanks!",
-          text: "We received your review",
+          title: t("SingleBooking.swalTitle"),
+          text: t("SingleBooking.swalText"),
           icon: "success",
           button: "Go back",
         });
@@ -139,6 +153,8 @@ const Detail = () => {
       console.error(error);
     }
   };
+
+  console.log(hotel);
 
   useEffect(() => {
     dispatch(getUserReviews(token))
@@ -153,6 +169,7 @@ const Detail = () => {
 
   }, [hotel.id, userReviews]);
 
+  console.log(hotel);
   return (
     <motion.div
       className={`container-detail ${darkMode ? "darkMode" : ""}`}
@@ -183,8 +200,7 @@ const Detail = () => {
 
           {hotel &&
           hotel.name &&
-          hotel.image &&
-          hotel.rooms ? (
+          hotel.image ? (
             <div className="informationContainer">
               <h1>{hotel.name}</h1>
               <img src={hotel.image} alt={hotel.name} />
@@ -193,8 +209,8 @@ const Detail = () => {
                 <h2 className="avg">
                   {t("Detail.score")}
                   <div className="ranking-average-container">
-                    <div className="ranking-average-fill" style={{ width: `${(hotel.ranking / 5) * 100}%` }}></div>
-                    <span className="ranking-average-score">{hotel.ranking ? hotel.ranking: "N/A"}</span>
+                    <div className="ranking-average-fill" style={{ width: `${(hotelAvgRanking / 5) * 100}%` }}></div>
+                    <span className="ranking-average-score">{hotelAvgRanking ? hotelAvgRanking: "N/A"}</span>
                   </div>
                 </h2>
               </div>
@@ -301,11 +317,16 @@ const Detail = () => {
         style={{
           overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.5)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
           },
         }}
-      >
-        <i onClick={closeModal} className="bi bi-arrow-left-circle return"></i>
-        <RoomDetail room={selectedRoom} />
+      > 
+        <div className="return-button-container">
+          <i onClick={() => closeModal("roomDetail")} className="bi bi-arrow-left-circle"></i>
+        </div>
+        <RoomDetail room={selectedRoom}/>
       </Modal>
     </motion.div>
   );

@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { NavigateBefore, NavigateNext } from "@material-ui/icons";
 import { useTranslation } from "react-i18next";
-import {useDarkMode} from "../../DarkModeContext/DarkModeContext"
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
     width: "80%", // Ajusta el ancho de las tarjetas
@@ -31,9 +31,11 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
     backgroundColor: "white", // Color de fondo de las tarjetas
   },
+  info: { display: "flex", flexDirection: "row" },
   cardContent: {
     flex: 1,
     marginLeft: theme.spacing(2),
+    paddingTop: "50px",
   },
   image: {
     width: "400px", // Ancho fijo para todas las imágenes
@@ -63,7 +65,7 @@ const Slider = () => {
   const classes = useStyles();
   const [rankedHotels, setRankedHotels] = useState([]);
 
-  const {darkMode} = useDarkMode()
+  const { darkMode } = useDarkMode();
 
   useEffect(() => {
     axios
@@ -85,39 +87,44 @@ const Slider = () => {
   };
   const renderHotelCard = (hotel) => (
     <Card key={hotel.id} className={classes.card}>
-      <CardMedia
-        className={classes.image}
-        component="img"
-        image={hotel.image}
-        alt={hotel.name}
-      />
-      <CardContent className={classes.cardContent}>
-        <Typography variant="h5" component="h2" gutterBottom>
-          {hotel.name}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" paragraph>
-          {renderStars(hotel.stars)}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" paragraph>
-          <strong>{t("Slider.address")}</strong> {hotel.address}
-        </Typography>
+      <Typography variant="h4" align="center" color="inherit" paragraph>
+        {t("Slider.title")}✨
+      </Typography>
+      <div className={classes.info}>
+        <CardMedia
+          className={classes.image}
+          component="img"
+          image={hotel.image}
+          alt={hotel.name}
+        />
+        <CardContent className={classes.cardContent}>
+          <Typography variant="h5" color="inherit" paragraph>
+            {hotel.name}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" paragraph>
+            {renderStars(hotel.stars)}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" paragraph>
+            <strong>{t("Slider.address")}</strong> {hotel.address}
+          </Typography>
 
-        <Button
-          onClick={() => handleClick(hotel.id)}
-          variant="contained"
-          className={classes.bookButton}
-          target="_blank"
-        >
-          {t("Slider.button")}
-        </Button>
-      </CardContent>
+          <Button
+            onClick={() => handleClick(hotel.id)}
+            variant="contained"
+            className={classes.bookButton}
+            target="_blank"
+          >
+            {t("Slider.button")}
+          </Button>
+        </CardContent>
+      </div>
     </Card>
   );
 
   return (
     <Carousel
       animation="slide"
-      className={`${classes.root} ${darkMode ? "darkMode" : ""}`} 
+      className={`${classes.root} ${darkMode ? "darkMode" : ""}`}
       indicators={false}
       navButtonsAlwaysVisible
       NextIcon={
