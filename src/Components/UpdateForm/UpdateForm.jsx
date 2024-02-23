@@ -42,7 +42,7 @@ const UpdateForm = () => {
           `${import.meta.env.VITE_BACK_URL}/hotels/detail/${id}`,
           updateHotel
         );
-        // console.log(response.data);
+        console.log(response.data);
         setUpdateHotel(response.data);
       } catch (error) {
         console.error("Error fetching Hotels data:", error);
@@ -86,7 +86,7 @@ const UpdateForm = () => {
     setRoomsData((prevData) => ({
       ...prevData,
       image: null,
-      // imagePreview: null,
+      imagePreview: null,
     }));
   };
 

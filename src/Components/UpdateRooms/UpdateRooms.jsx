@@ -85,7 +85,6 @@ const UpdateRooms = () => {
     if (file) {
       try {
         const imagePreviewURL = URL.createObjectURL(file);
-
         setRoomsData((prevData) => ({
           ...prevData,
           // image: file,
@@ -110,27 +109,27 @@ const UpdateRooms = () => {
 
     let imageUpdate = roomsData.image;
 
-    if (roomsData.image && roomsData.image.startsWith("blob:")) {
+    if (roomsData.imagePreview && roomsData.imagePreview.startsWith("blob:")) {
       const formData = new FormData();
       formData.append(
         "file",
         e.target.querySelector('input[type="file"]').files[0]
-      );
-      formData.append("upload_preset", "PREET2024");
-
-      try {
-        const responseCloudinary = await fetch(
-          "https://api.cloudinary.com/v1_1/drntvj4ut/image/upload",
-          {
-            method: "POST",
-            body: formData,
-          }
         );
-
-        const cloudinaryData = await responseCloudinary.json();
-
-        if (cloudinaryData.secure_url) {
-          imageUpdate = cloudinaryData.secure_url;
+        formData.append("upload_preset", "PREET2024");
+        try {
+          const responseCloudinary = await fetch(
+            "https://api.cloudinary.com/v1_1/drntvj4ut/image/upload",
+            {
+              method: "POST",
+              body: formData,
+            }
+            );
+            
+            const cloudinaryData = await responseCloudinary.json();
+            
+            
+            if (cloudinaryData.secure_url) {
+              imageUpdate = cloudinaryData.secure_url;
         } else {
           console.error("Error: No 'secure_url' found in Cloudinary response");
         }
@@ -143,7 +142,6 @@ const UpdateRooms = () => {
       ...roomsData,
       image: imageUpdate,
     };
-
     try {
       await axios.put(
         `${import.meta.env.VITE_BACK_URL}/rooms/update/${id}`,
