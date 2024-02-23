@@ -168,7 +168,7 @@ const CreateRooms = () => {
           )}
         </select>
         </div>
-      <div>
+      <div className={styles.imageContainer}>
       {imagePreview && (
         <div>
           <h3>Preview</h3>
