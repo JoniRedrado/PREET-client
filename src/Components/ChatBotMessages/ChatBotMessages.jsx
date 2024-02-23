@@ -1,10 +1,16 @@
+import ChatBotMessageHome from "../ChatBotMessageHome/ChatBotMessageHome";
 import ChatBotMessage from "../ChatBotMessage/ChatBotMessage";
 import style from "./ChatBotMessages.module.css";
 import { useSelector} from "react-redux";
 import { useRef } from "react";
 
-const ChatBotMessages = () => {
-    const messages = useSelector((state) => state.webSocket.chat);
+const ChatBotMessages = ({ socket }) => {
+    const { chatItem, newChat, chat, record } = useSelector((state) => state.webSocket);
+
+    const chats = chatItem === 1 ? newChat : 
+                  chatItem === 2 ? chat :
+                  chatItem === 3 ? record : null;
+
     const divRef = useRef();
 
     const scrollMoveDown = () => {
@@ -13,19 +19,22 @@ const ChatBotMessages = () => {
 
     return(<>
         <div className={style.divMessage} ref={divRef}>
-            {messages?.length > 0 && messages.map((data, index) => {
-                return(
-                    <ChatBotMessage 
-                        moveScroll={{
-                            scrollMoveDown,
-                            indexMessage: index,
-                            totalMesages: messages.length - 1
-                        }}
-                        message={data.message} 
-                        key={`chat_${index}`} 
-                        rol={data.rol}/>
-                )
-            })}
+            {chats ? 
+                chats.length > 0 ? chats.map((data, index) => {
+                    return(
+                        <ChatBotMessage 
+                            moveScroll={{
+                                scrollMoveDown,
+                                indexMessage: index,
+                                totalMesages: chats.length - 1
+                            }}
+                            message={data.message} 
+                            key={`chat_${index}`} 
+                            rol={data.rol}/>
+                    )
+                }) : 
+                <ChatBotMessageHome socket={socket}/> : 
+            <div className={style.loadingDots}>Wait . . .</div>}
         </div>
     </>)
 }

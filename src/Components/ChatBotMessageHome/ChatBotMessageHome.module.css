@@ -1,0 +1,37 @@
+
+.divGeneral{
+    position: relative;
+    padding: 0px 15px 0px 45px;
+}
+
+.divIcon{
+    top: 0px;
+    left: -40px;
+    color: blue;
+    position: absolute;
+}
+
+.textP{
+    font-size: small;
+}
+
+.bottomDiv{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bottomStyle{
+    padding: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: small;
+    border-radius: 5px;
+    margin: 8px 0px 8px 0px;
+    background-color: rgb(66, 66, 250);
+
+    &:hover{
+        background-color: blue;
+    }
+}

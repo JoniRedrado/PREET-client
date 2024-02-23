@@ -18,12 +18,19 @@
     width: 60px;
     height: 100%;
     display: flex;
-    color: blue;
-    cursor: pointer;
     align-items: center;
     justify-content: center;
+}
+
+.SendActivate{
+    color: blue;
+    cursor: pointer;
 
     &:hover{
         color: rgb(6, 6, 141);
     }
+}
+
+.SendInActivate{
+    color: rgb(136, 136, 136);
 }
