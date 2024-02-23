@@ -21,14 +21,13 @@ const RoomDetail = ({ room, closeModal }) => {
   const token = localStorage.getItem("token");
   
   const handleBook = () => {
-
     if (!filters.startDate || !filters.endDate) {
       swal({
-        title: "Hold on!",
-        text: "In order to proceed you need to set your check-in and check-out dates",
+        title: t("RoomDetail.swalWarningTitle"),
+        text: t("RoomDetail.swalWarningText"),
         icon: "warning",
         button: "OK",
-      })
+      });
       dispatch(showModal("roomDetail", false));
     } else {
       setIsBooking(true);
@@ -39,15 +38,15 @@ const RoomDetail = ({ room, closeModal }) => {
         dateInit: filters.startDate,
         dateFinal: filters.endDate,
       };
-  
+
       const handleLoginClick = () => {
         navigate("/login");
       };
-  
+
       if (!token) {
         swal({
-          title: "Please login",
-          text: "In order to complete your payment and get your reservation confirmation",
+          title: t("RoomDetail.swalErrorTitle"),
+          text: t("RoomDetail.swalErrorText"),
           icon: "error",
           buttons: {
             cancel: "Cancel",
@@ -74,7 +73,6 @@ const RoomDetail = ({ room, closeModal }) => {
             console.error("Error creating order:", error);
           });
       }
-      
     }
   };
 

@@ -134,8 +134,8 @@ const UpdateForm = () => {
 
         if (responseBackend.data.name) {
           swal({
-            title: "¡Hotel succesfully updated!",
-            text: "The hotel has been updated and it's ready to start booking",
+            title: t("UpdateForm.successTitle"),
+            text: t("UpdateForm.successText"),
             icon: "success",
             button: null,
           });
@@ -147,8 +147,8 @@ const UpdateForm = () => {
         setLoading(false);
       } catch (error) {
         swal({
-          title: "Error updating Hotel",
-          text: "An error occurred while updating the Hotel. Check the information and try again",
+          title: t("UpdateForm.errorTitle"),
+          text: t("UpdateForm.errorText"),
           icon: "error",
           button: null,
         });

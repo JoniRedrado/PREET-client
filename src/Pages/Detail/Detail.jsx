@@ -129,8 +129,8 @@ const Detail = () => {
 
       if (response.status === 200) {
         swal({
-          title: "Thanks!",
-          text: "We received your review",
+          title: t("SingleBooking.swalTitle"),
+          text: t("SingleBooking.swalText"),
           icon: "success",
           button: "Go back",
         });
