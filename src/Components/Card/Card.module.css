@@ -36,8 +36,39 @@
   justify-content: space-between;
   align-items: flex-start;
   height: 90%; 
-  width: 60%;
+  width: 100%;
   margin: 10px 10px 10px -20px;
+}
+
+.header{
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.rankingDiv{
+  display: flex;
+  flex-direction: column;
+  background-color: #FFBD00;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 10px;
+  height: 50px;
+  margin-top: 50px;
+  width: 15%;
+}
+.ranking{
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 0px;
+  color: white;
+}
+.reviews{
+  font-size: 10px;
+  margin-top: -25px;
+  font-weight: 600;
 }
 
 .cardTitle {
@@ -50,11 +81,15 @@
 .cardStars {
   font-size: 10px;
   color: #666;
-  margin: 0px;
+  margin-top: 10px;
 }
 
-.cardText{
-  margin-top: 0px;
+.cardTexts{
+  margin-bottom: 0px;
+  height: 80px;
+  width: 100%;
+  gap: 10px;
+
 }
 
 .cardFooter{
@@ -76,6 +111,7 @@
   align-items: center;
   left: 75px;
   top: 7px;
+  cursor: pointer;
 }
 
 .fav{
@@ -112,11 +148,29 @@
   margin-top: 0px;
 }
 .address{
-  color: blue; 
+  color: #0023A1;
   text-decoration: underline; 
   cursor: pointer;
   margin-top: 0px;
   font-size: 13px;
+}
+.services{
+  display: flex;
+justify-content: space-around;
+  width: 100%;
+}
+.iconContainer{
+  display: flex;
+  width: 33%;
+  gap: 10px;
+  align-items: center;
+}
+.iconContainer p {
+  font-size: 12px;
+}
+.icon{
+  width: 25px;
+  height: 25px;
 }
 .priceContainer{
   display: flex;
@@ -138,4 +192,46 @@ line-height: 42px;
 .card.darkMode {
   background-color: #333; 
   color: #fff; 
+}
+
+
+@media screen and (max-width: 1000PX) {
+  .card {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .cardImage {
+    width: 100%;
+    padding: 0;
+  }
+
+  .mainImage {
+    width: 100%;
+    height: 200px;
+    margin-top: 0;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .cardBody {
+    margin: 10px;
+  }
+
+  .rankingDiv {
+    width: 20%;
+    margin:20PX;
+  }
+  .cardTitle{
+    font-size: 15px;
+  }
+
+  .button{
+    font-size: 10px;
+    width: 100px;
+    margin-right: 20px;
+  }
+  .favoriteIcon{
+    top: 60px;
+    left: 130px;
+  }
 }

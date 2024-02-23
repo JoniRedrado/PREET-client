@@ -49,3 +49,17 @@
   margin-top: 10px;
   align-self: center;
 }
+
+@media screen and (max-width: 1000PX) {
+  .content{
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .filtersContainer{
+    width: 100%;
+  }
+  .cardsContainer{
+    width: 90%;
+  }
+}

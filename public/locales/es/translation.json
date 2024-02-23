@@ -270,7 +270,7 @@
     "isRequiredF": "es requerida."
   },
   "dashboard": {
-    "selectDate": "Por favor, seleccine una fecha para ver",
+    "selectDate": "Por favor, seleccione una fecha para ver",
     "nationality": "Usuarios por Nacionalidad",
     "ranking": "Ranking de Hoteles por Puntuación Media",
     "reservations": "Total de Reservas de los Hoteles",

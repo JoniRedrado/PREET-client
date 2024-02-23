@@ -56,7 +56,7 @@ const Map = ({ isOpen, onRequestClose, address, children}) => {
             googleMapsApiKey={import.meta.env.VITE_MAPS_API} // Reemplaza 'YOUR_API_KEY' con tu clave de API de Google Maps
           >
             <GoogleMap
-              mapContainerStyle={{ width: '100%', height: '400px' }}
+              mapContainerStyle={{ width: '100%', height: '480px' }}
               center={position || { lat: 0, lng: 0 }}
               zoom={position ? 10 : 1}
             >
