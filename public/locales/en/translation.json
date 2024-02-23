@@ -1,12 +1,13 @@
 {
   "Slider": {
-    "title": "TOP HOTELS OF THE SEASON ",
+    "title": "Most popular hotels of season",
+    "subtitle": "Based on our user's experiences.",
     "address": "Address:",
     "button": "Book Now!!"
   },
   "Trending": {
     "title": "Latin America trending destinations",
-    "subtitle": "The most visited countries by people from Latin America"
+    "subtitle": "The most visited countries by people from Latin America."
   },
   "SearchBar": {
     "placeholder": "Explore hotels or countries",
