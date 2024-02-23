@@ -131,42 +131,43 @@ const CreateRooms = () => {
 
   return (
     <div className={styles.mainContainer}>
-<form  className={styles.form} onSubmit={handleSubmit}>
-      <h1>{t("CreateRooms.title")}</h1>
-      <div className={styles.inputContainer}>
-      <select name="type" value={formData.type} onChange={handleChange}>
-        <option value="">{t("CreateRooms.selectType")}</option>
-        {roomsType.map((type) => (
-          <option key={type} value={type}>
-            {type}
-          </option>
-        ))}
-      </select>
-      </div >
-      <div className={styles.inputContainer}>
-      <input type="text" name="numeration" placeholder={t("CreateRooms.numeration")} value={formData.numeration} onChange={handleChange} />
-      </div>
-      <div className={styles.inputContainer}>
-      <input type="number" name="price" placeholder={t("CreateRooms.price")} value={formData.price} onChange={handleChange} />
-      </div>
-      <div className={styles.inputContainer}>
-      <input type="number" name="guest" placeholder={t("CreateRooms.guest")} value={formData.guest} onChange={handleChange} />
-      </div>
-      <div className={styles.inputContainer}>
-      <input type="text" name="description" placeholder={t("CreateRooms.description")} value={formData.description} onChange={handleChange} />
-      </div>
-      <div className={styles.inputContainer}>
-      <select value={formData.selectedHotelId} onChange={handleHotelChange}>
-        <option value="">{t("CreateRooms.selectHotel")}</option>
-        {hotels.map((hotel) => (
-          <option key={hotel.id} value={hotel.id}>
-            {hotel.name}
-          </option>
-        ))}
-        {currentPage < totalPages && (
-          <option value="loadMore">{t("CreateRooms.load")}</option>
-        )}
-      </select>
+      <form  className={styles.form} onSubmit={handleSubmit}>
+        <h1>{t("CreateRooms.title")}</h1>
+        <div className={styles.inputContainer}>
+          <select name="type" value={formData.type} onChange={handleChange}>
+            <option value="">{t("CreateRooms.selectType")}</option>
+              {roomsType.map((type) => (
+            <option key={type} value={type}>
+               {type}
+            </option>
+            ))}
+          </select>
+        </div>
+        <div className={styles.inputContainer}>
+          <input type="text" name="numeration" placeholder={t("CreateRooms.numeration")} value={formData.numeration} onChange={handleChange} />
+        </div>
+        <div className={styles.inputContainer}>
+          <input type="number" name="price" placeholder={t("CreateRooms.price")} value={formData.price} onChange={handleChange} />
+        </div>
+        <div className={styles.inputContainer}>
+          <input type="number" name="guest" placeholder={t("CreateRooms.guest")} value={formData.guest} onChange={handleChange} />
+        </div>
+        <div className={styles.inputContainer}>
+          <input type="text" name="description" placeholder={t("CreateRooms.description")} value={formData.description} onChange={handleChange} />
+        </div>
+        <div className={styles.inputContainer}>
+          <select value={formData.selectedHotelId} onChange={handleHotelChange}>
+            <option value="">{t("CreateRooms.selectHotel")}</option>
+           {hotels.map((hotel) => (
+              <option key={hotel.id} value={hotel.id}>
+                {hotel.name}
+              </option>
+            ))}
+          {currentPage < totalPages && (
+            <option value="loadMore">{t("CreateRooms.load")}</option>
+          )}
+        </select>
+        </div>
       <div>
       {imagePreview && (
         <div>

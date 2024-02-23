@@ -100,12 +100,6 @@ const GestionHotels = () => {
   const renderTables = () => {
     if (showDeletedHotels) {
       return (
-<<<<<<< Updated upstream
-=======
-        <div className="table-container">
-          <div className="actual-table">
-                {/* {showDeletedHotels && ( */}
->>>>>>> Stashed changes
         <table className="table">
           <thead className="table-dark">
             <tr>
@@ -129,16 +123,7 @@ const GestionHotels = () => {
               </tr>
             ))}
           </tbody>
-        </table>
-<<<<<<< Updated upstream
-
-=======
-      {/* )} */}
-        </div>
-        </div>
->>>>>>> Stashed changes
-
-      )
+        </table>)
     } else{
       return (
           <table className="table">

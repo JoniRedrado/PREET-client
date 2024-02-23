@@ -88,8 +88,14 @@ const GestionUsers = () => {
     setShowDeletedUsers(!showDeletedUsers);
     setCurrentPage(1);
   };
+  useEffect(() => {
+    if (showDeletedUsers) {
+      getUsersDeleted();
+    } else {
+      getUsers({});
+    }
+  }, [currentPage, pageSize, showDeletedUsers]);
 
-<<<<<<< Updated upstream
   const renderContent = () => {
     if (showDeletedUsers){
       return (
@@ -122,68 +128,6 @@ const GestionUsers = () => {
     } else {
       return (
 <table className="table2">
-=======
-  useEffect(() => {
-    if (showDeletedUsers) {
-      getUsersDeleted();
-    } else {
-      getUsers({});
-    }
-  }, [currentPage, pageSize, showDeletedUsers]);
-
-  return (
-    <div className="table-container">
-      <div className=".search-dashboard">
-        <div>
-          <input
-            type="text"
-            placeholder={t("dashboard.name")}
-            onChange={handleSearchInput}
-            name="name"
-            value={searchInput}
-          />
-          <button onClick={handleSearch}>{t("dashboard.search")}</button>
-        </div>
-      </div>
-
-      <button
-        onClick={handleShowDeletedUsers}
-        type="button"
-        className="btn btn-primary btn-lg"
-      >
-        {showDeletedUsers ? t("dashboard.hideUsers") : t("dashboard.showUsers")}
-      </button>
-
-      {showDeletedUsers && (
-        <table className="table">
-          <thead className="table-dark">
-            <tr>
-              <th>{t("registerValidation.name")}</th>
-              <th>{t("Register.lastName")}</th>
-              <th>{t("Register.email")}</th>
-              <th>{t("dashboard.action")}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {usersDelete.map((deletedUser) => (
-              <tr key={deletedUser.id}>
-                <td>{deletedUser.name}</td>
-                <td>{deletedUser.last_name}</td>
-                <td>{deletedUser.email}</td>
-                <td>
-                  <i
-                    onClick={() => restoreUser(deletedUser.id)}
-                    className="bi bi-arrow-counterclockwise"
-                  ></i>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-
-      <table className="table">
->>>>>>> Stashed changes
         <thead className="table-dark">
           <tr>
             <th>{t("registerValidation.name")}</th>
@@ -193,7 +137,8 @@ const GestionUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {usersData.map((user) => (
+          {usersData && 
+            usersData.map((user) => (
             <tr key={user.id}>
               <td>{user.name}</td>
               <td>{user.last_name}</td>
@@ -209,7 +154,6 @@ const GestionUsers = () => {
           ))}
         </tbody>
       </table>
-<<<<<<< Updated upstream
       )
     }
   };
@@ -241,12 +185,6 @@ const GestionUsers = () => {
       <div className="pagination">
         <button onClick={handlePreviousPage} disabled={currentPage === 1} className="pagination-button">
           Prev
-=======
-
-      <div>
-        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
-          Previous
->>>>>>> Stashed changes
         </button>
         <span>{currentPage}</span>
         <button onClick={handleNextPage} disabled={currentPage === totalPages} className="pagination-button">
