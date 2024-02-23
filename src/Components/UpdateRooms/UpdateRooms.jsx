@@ -5,6 +5,15 @@ import { useTranslation } from "react-i18next";
 import swal from "sweetalert";
 import "./UpdateRooms.modules.css";
 
+const roomsType = [
+  'Estandar',
+  'Superior',
+  'Deluxe',
+  'Junior Suite',
+  'Suite Estandar',
+  'Suite Presidencial'
+];
+
 const UpdateRooms = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -38,22 +47,7 @@ const UpdateRooms = () => {
 
   const [roomsTypes, setRoomsTypes] = useState([]);
 
-  const getTypes = async () => {
-    try {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_BACK_URL}/rooms`
-      );
-      console.log(data);
-
-      const roomTypes = data.map((room) => room.type);
-      const uniqueRoomTypes = [...new Set(roomTypes)];
-
-      console.log(uniqueRoomTypes);
-      setRoomsTypes(uniqueRoomTypes);
-    } catch (error) {
-      console.error("Error fetching rooms types:", error);
-    }
-  };
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRoomsData((prevData) => ({
@@ -62,17 +56,12 @@ const UpdateRooms = () => {
     }));
   };
 
-  useEffect(() => {
-    getTypes();
-  }, []);
-
   const handleImageChange = (e) => {
     const file = e.target.files[0];
 
     if (file) {
       try {
         const imagePreviewURL = URL.createObjectURL(file);
-
         setRoomsData((prevData) => ({
           ...prevData,
           // image: file,
@@ -97,27 +86,27 @@ const UpdateRooms = () => {
 
     let imageUpdate = roomsData.image;
 
-    if (roomsData.image && roomsData.image.startsWith("blob:")) {
+    if (roomsData.imagePreview && roomsData.imagePreview.startsWith("blob:")) {
       const formData = new FormData();
       formData.append(
         "file",
         e.target.querySelector('input[type="file"]').files[0]
-      );
-      formData.append("upload_preset", "PREET2024");
-
-      try {
-        const responseCloudinary = await fetch(
-          "https://api.cloudinary.com/v1_1/drntvj4ut/image/upload",
-          {
-            method: "POST",
-            body: formData,
-          }
         );
-
-        const cloudinaryData = await responseCloudinary.json();
-
-        if (cloudinaryData.secure_url) {
-          imageUpdate = cloudinaryData.secure_url;
+        formData.append("upload_preset", "PREET2024");
+        try {
+          const responseCloudinary = await fetch(
+            "https://api.cloudinary.com/v1_1/drntvj4ut/image/upload",
+            {
+              method: "POST",
+              body: formData,
+            }
+            );
+            
+            const cloudinaryData = await responseCloudinary.json();
+            
+            
+            if (cloudinaryData.secure_url) {
+              imageUpdate = cloudinaryData.secure_url;
         } else {
           console.error("Error: No 'secure_url' found in Cloudinary response");
         }
@@ -130,13 +119,12 @@ const UpdateRooms = () => {
       ...roomsData,
       image: imageUpdate,
     };
-
     try {
       await axios.put(
         `${import.meta.env.VITE_BACK_URL}/rooms/update/${id}`,
         updatedData
       );
-      navigate("/dashboard/rooms");
+      navigate("/dashboard");
       swal("Success!", "Room created successfully", "success");
     } catch (error) {
       console.error("Error updating room:", error);
@@ -150,9 +138,9 @@ const UpdateRooms = () => {
         <label>{t("UpdateRooms.types")}</label>
         <select name="type" value={roomsData.type} onChange={handleChange}>
           <option value="">{t("UpdateRooms.selectType")}</option>
-          {roomsTypes.map((roomType, index) => (
-            <option key={index} value={roomType}>
-              {roomType}
+          {roomsType.map((type) => (
+            <option key={type} value={type}>
+              {type}
             </option>
           ))}
         </select>

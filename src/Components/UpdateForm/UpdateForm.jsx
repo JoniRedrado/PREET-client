@@ -1,65 +1,63 @@
-import { useState, useEffect, Suspense } from "react";
 import axios from "axios";
-import validation from "../../helpers/validation";
+// import Loading from "../../assets/Loading.gif";
+// import validation from "../../helpers/validation";
 import { useParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Loading from "../../assets/Loading.gif";
-import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
-import swal from "sweetalert";
+import { useState, useEffect, Suspense  } from "react"
+import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next";
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import styles from "./UpdateForm.module.css";
+import swal from "sweetalert";
+
 
 const UpdateForm = () => {
-  const navigate = useNavigate();
+
   const { id } = useParams();
-  const { darkMode } = useDarkMode();
   const { t } = useTranslation();
-
-  const countries = useSelector((state) => state.countries);
-
-  const [hotelData, setHotelData] = useState({
-    name: "",
-    address: "",
-    address_url: "",
-    price: "",
-    email: "",
-    image: null,
-    country: "",
-    countryId: null,
-    stars: 1,
-  });
-
-  const [errors, setErrors] = useState({});
+  const countries = useSelector((state) => state.countries)
+  const { darkMode } = useDarkMode();
   const [loading, setLoading] = useState(false);
 
+
+  const navigate = useNavigate();
+
+  const [updateHotel, setUpdateHotel] = useState({
+    name:"",
+    address:"",
+    address_url:"",
+    email:"",
+    country:"",
+    countryId:"",
+    stars:1,
+    image:null,
+    imagePreview:null
+  })
+
+
   useEffect(() => {
-    const fetchHotelData = async () => {
+    const fecthUpdateData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BACK_URL}/hotels/detail/${id}`
+          `${import.meta.env.VITE_BACK_URL}/hotels/detail/${id}`,
+          updateHotel
         );
-        setHotelData(response.data);
+        // console.log(response.data);
+        setUpdateHotel(response.data);
       } catch (error) {
-        console.error("Error fetching hotel data:", error);
+        console.error("Error fetching Hotels data:", error);
       }
     };
-
-    fetchHotelData();
+    fecthUpdateData();
   }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setHotelData((prevData) => ({
+    setUpdateHotel((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: "",
-    }));
   };
-
+  
   const handleImageChange = (e) => {
     const file = e.target.files[0];
 
@@ -67,9 +65,10 @@ const UpdateForm = () => {
       try {
         const imagePreviewURL = URL.createObjectURL(file);
 
-        setHotelData((prevData) => ({
+        setUpdateHotel((prevData) => ({
           ...prevData,
-          image: imagePreviewURL,
+          // image: file,
+          imagePreview: imagePreviewURL,
         }));
       } catch (error) {
         console.error("Error creating object URL for image:", error);
@@ -78,206 +77,162 @@ const UpdateForm = () => {
   };
 
   const handleImageRemove = () => {
-    setHotelData((prevData) => ({
+    setUpdateHotel((prevData) => ({
       ...prevData,
       image: null,
+      // imagePreview: null,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = validation(hotelData, t);
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length === 0) {
+  
+    let imageUpdate = updateHotel.image;
+  
+    if (updateHotel.imagePreview && updateHotel.imagePreview.startsWith('blob:')) {
+       const formData = new FormData();
+      formData.append(
+        "file",
+        e.target.querySelector('input[type="file"]').files[0]
+      );
+      formData.append("upload_preset", "PREET2024");
+  
       try {
-        setLoading(true);
-
-        let imageUpdate = hotelData.image;
-
-        if (hotelData.image && hotelData.image.startsWith("blob:")) {
-          const formData = new FormData();
-          formData.append(
-            "file",
-            e.target.querySelector('input[type="file"]').files[0]
-          );
-          formData.append("upload_preset", "PREET2024");
-
-          const responseCloudinary = await fetch(
-            "https://api.cloudinary.com/v1_1/drntvj4ut/image/upload",
-            {
-              method: "POST",
-              body: formData,
-            }
-          );
-
-          const cloudinaryData = await responseCloudinary.json();
-
-          if (cloudinaryData.secure_url) {
-            imageUpdate = cloudinaryData.secure_url;
-          } else {
-            console.error(
-              "Error: No 'secure_url' found in Cloudinary response"
-            );
+        const responseCloudinary = await fetch(
+          "https://api.cloudinary.com/v1_1/drntvj4ut/image/upload",
+          {
+            method: "POST",
+            body: formData,
           }
-        }
-
-        const updatedData = {
-          ...hotelData,
-          image: imageUpdate,
-        };
-
-        const responseBackend = await axios.put(
-          `${import.meta.env.VITE_BACK_URL}/hotels/${id}`,
-          updatedData
         );
-
-        if (responseBackend.data.name) {
-          swal({
-            title: t("UpdateForm.successTitle"),
-            text: t("UpdateForm.successText"),
-            icon: "success",
-            button: null,
-          });
-          navigate(`/detail/${id}`);
+  
+        const cloudinaryData = await responseCloudinary.json();
+  
+        if (cloudinaryData.secure_url) {
+          imageUpdate = cloudinaryData.secure_url;
         } else {
-          console.error("Error updating hotel:", responseBackend.data.message);
+          console.error("Error: No 'secure_url' found in Cloudinary response");
         }
-
-        setLoading(false);
       } catch (error) {
-        swal({
-          title: t("UpdateForm.errorTitle"),
-          text: t("UpdateForm.errorText"),
-          icon: "error",
-          button: null,
-        });
-        console.error("Error:", error);
-        setLoading(false);
+        console.error("Error uploading image to Cloudinary:", error);
       }
-    } else {
-      setErrors(validationErrors);
+    }
+  
+    const updatedData = {
+      ...updateHotel,
+      image: imageUpdate,
+    };
+    
+    try {
+      await axios.put(
+        `${import.meta.env.VITE_BACK_URL}/hotels/${id}`,
+        updatedData
+      );
+      navigate("/dashboard");
+      swal("Success!", "Hotel created successfully", "success");
+    } catch (error) {
+      console.error("Error updating room:", error);
     }
   };
-
-  const fieldLabels = {
-    name: t("UpdateForm.name"),
-    address: t("UpdateForm.address"),
-    address_url: t("UpdateForm.addressURL"),
-    price: t("UpdateForm.price"),
-    email: "Email ",
-  };
-
-  return (
-    <div
-      className={`${styles.formContainer} ${darkMode ? styles.darkMode : ""}`}
-    >
+  
+  return(
+    <div className={`${styles.formContainer} ${darkMode ? styles.darkMode : ""}`}>
       <h1>{t("UpdateForm.title")}</h1>
-      <form onSubmit={handleSubmit}>
-        {Object.keys(fieldLabels).map((field) => (
-          <div key={field} className={styles.fieldContainer}>
-            <label>
-              {fieldLabels[field]}
-              <input
-                type="text"
-                name={field}
-                placeholder={fieldLabels[field]}
-                value={hotelData[field] || ""}
-                onChange={handleChange}
-                className={`${styles.input} ${errors[field] && styles.error}`}
-              />
-              {errors[field] && (
-                <span className={styles.errors}>{errors[field]}</span>
-              )}
-            </label>
-          </div>
-        ))}
-
-        <div className={styles.fieldContainer}>
-          <label>
-            {t("UpdateForm.stars")}
-            <select
-              className={styles.starsSelect}
-              name="stars"
-              value={hotelData.stars}
-              onChange={handleChange}
+      <form onSubmit={handleSubmit} >
+      <div  className={styles.fieldContainer}>
+        <div className={styles.inputContainer}>
+        <input 
+        type="text" 
+        name="name" 
+        placeholder="Enter name" 
+        value={updateHotel.name} 
+        onChange={handleChange}
+        className={styles.input}
+        />
+        </div>
+        <div className={styles.inputContainer}>
+        <input 
+        type="text" 
+        name="address" 
+        placeholder="Enter address" 
+        value={updateHotel.address} 
+        onChange={handleChange} 
+        className={styles.input} 
+        />
+        </div>
+        <div className={styles.inputContainer}>
+        <input 
+        type="text" 
+        name="address_url" 
+        placeholder="Enter address URL" 
+        value={updateHotel.address_url} 
+        onChange={handleChange} 
+        className={styles.input}
+        />
+       
+        </div>
+        <div className={styles.inputContainer}>
+        <input 
+        type="text" 
+        name="email" 
+        placeholder="Enter email" 
+        valaue={updateHotel.email} 
+        onChange={handleChange} 
+        className={styles.input}
+        />
+        </div>
+        
+        <div className={styles.inputContainer}>
+        <select 
+          className={styles.starsSelect}
+          name="stars"
+         value={updateHotel.stars} 
+         onChange={handleChange}>
+          <option value="" disabled>Stars</option>
+          {[1, 2, 3, 4, 5].map((star) => (
+            <option key={star} value={star}>
+              {star}
+            </option>
+          ))}
+        </select>
+        </div>
+        <div className={styles.inputContainer}>
+          <select
+            className={styles.countrySelect}
+            name="countryId" 
+            value={updateHotel.countryId} 
+            onChange={handleChange}
             >
-              {[1, 2, 3, 4, 5].map((star) => (
-                <option key={star} value={star}>
-                  {star}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-
-        <div className={styles.fieldContainer}>
-          <label>
-            {t("UpdateForm.country")}
-            <select
-              className={styles.countrySelect}
-              name="countryId"
-              value={hotelData.countryId}
-              onChange={handleChange}
-            >
-              <option value={hotelData.country}>
-                {`${t("UpdateForm.current")} ${hotelData.country.name}`}
-              </option>
-              {countries.map((country) => (
-                <option key={country} value={country}>
-                  {country}
-                </option>
-              ))}
-            </select>
-            {errors.country && (
-              <span className={styles.errors}>{errors.country}</span>
-            )}
-          </label>
-        </div>
-
-        <div className={styles.imageContainer}>
-          <label>
-            {t("UpdateForm.upload")}
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className={`${styles.input} ${errors.image && styles.error}`}
-            />
-            {errors.image && (
-              <span className={styles.errors}>{errors.image}</span>
-            )}
-          </label>
-          {hotelData.image && (
-            <>
-              <img
-                src={hotelData.image}
-                alt="Preview"
-                className={styles.imagePreview}
-              />
-              <button
-                type="button"
-                onClick={handleImageRemove}
-                className={styles.removeButton}
-              >
-                {t("UpdateForm.remove")}
-              </button>
-            </>
+             <option value="" disabled>
+               Country
+             </option>
+             {countries.map((country) => (
+               <option key={country} value={country}>
+                 {country}
+               </option>
+             ))}
+           </select>
+         </div>
+         </div>
+         <div className={styles.imageContainer}> 
+         {updateHotel.imagePreview && (
+            <div>
+              <h3>{t("UpdateRooms.crntImage")}</h3>
+              <img src={updateHotel.imagePreview} alt="Preview" />
+              <button onClick={handleImageRemove}>{t("Remove Image")}</button>
+            </div>
           )}
+          <label>{t("UpdateRooms.newImage")}</label>
+          <input type="file" accept="image/*" onChange={handleImageChange} />
         </div>
-
-        <div className={styles.sendContainer}>
-          <button className={styles.formButton} type="submit">
-            {t("UpdateForm.post")}
-          </button>
-          {loading && (
-            <img src={Loading} alt="Loading" className={styles.loading} />
-          )}
-        </div>
+        <button type="submit">{t("UpdateRooms.update")}</button>
+     
+        
       </form>
     </div>
-  );
-};
+  )
+
+}
 
 export default function WrappedApp() {
   return (
