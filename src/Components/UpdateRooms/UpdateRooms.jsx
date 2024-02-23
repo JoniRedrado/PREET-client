@@ -5,6 +5,15 @@ import { useTranslation } from "react-i18next";
 import swal from "sweetalert";
 import "./UpdateRooms.modules.css";
 
+const roomsType = [
+  'Estandar',
+  'Superior',
+  'Deluxe',
+  'Junior Suite',
+  'Suite Estandar',
+  'Suite Presidencial'
+];
+
 const UpdateRooms = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -38,22 +47,26 @@ const UpdateRooms = () => {
 
   const [roomsTypes, setRoomsTypes] = useState([]);
 
-  const getTypes = async () => {
-    try {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_BACK_URL}/rooms`
-      );
-      console.log(data);
+  // const getTypes = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `${import.meta.env.VITE_BACK_URL}/rooms`
+  //     );
 
-      const roomTypes = data.map((room) => room.type);
-      const uniqueRoomTypes = [...new Set(roomTypes)];
-
-      console.log(uniqueRoomTypes);
-      setRoomsTypes(uniqueRoomTypes);
-    } catch (error) {
-      console.error("Error fetching rooms types:", error);
-    }
-  };
+  //     console.log(response.data.rooms)
+  //     const data = response.data;
+  
+  //     if (Array.isArray(data.rooms)) {
+  //       const roomTypes = data.map((room) => room.type);
+  //       const uniqueRoomTypes = [...new Set(roomTypes)];
+  //       setRoomsTypes(uniqueRoomTypes);
+  //     } else {
+  //       console.error("Error: Data is not an array");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching rooms types:", error);
+  //   }
+  // };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRoomsData((prevData) => ({
@@ -62,9 +75,9 @@ const UpdateRooms = () => {
     }));
   };
 
-  useEffect(() => {
-    getTypes();
-  }, []);
+  // useEffect(() => {
+  //   getTypes();
+  // }, []);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -136,7 +149,7 @@ const UpdateRooms = () => {
         `${import.meta.env.VITE_BACK_URL}/rooms/update/${id}`,
         updatedData
       );
-      navigate("/dashboard/rooms");
+      navigate("/dashboard");
       swal("Success!", "Room created successfully", "success");
     } catch (error) {
       console.error("Error updating room:", error);
@@ -150,9 +163,9 @@ const UpdateRooms = () => {
         <label>{t("UpdateRooms.types")}</label>
         <select name="type" value={roomsData.type} onChange={handleChange}>
           <option value="">{t("UpdateRooms.selectType")}</option>
-          {roomsTypes.map((roomType, index) => (
-            <option key={index} value={roomType}>
-              {roomType}
+          {roomsType.map((type) => (
+            <option key={type} value={type}>
+              {type}
             </option>
           ))}
         </select>
