@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState, Suspense } from "react";
 import { Link } from "react-router-dom";
-// import NavBarDashboard from "../NavBarDashboard/NavBarDashboard";
 import { useTranslation } from "react-i18next";
+import "./GestionRooms.modules.css"
 
 const GestionRooms = () => {
   const { t } = useTranslation();

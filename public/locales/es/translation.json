@@ -291,5 +291,10 @@
     "action": "Acción",
     "swalErrorTitle": "Error de Autenticación",
     "swalErrorText": "No tienes permisos de administrator"
+  },
+  "Home" : {
+    "span1" : "Bienvenido ",
+    "span2" : ", ¿Listo para explorar?",
+    "p": "Encuentra tu destino ideal aquí."
   }
 }
