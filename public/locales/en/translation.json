@@ -1,5 +1,6 @@
 {
   "Slider": {
+    "title": "TOP HOTELS OF THE SEASON ",
     "address": "Address:",
     "button": "Book Now!!"
   },
@@ -184,7 +185,8 @@
     "logInBtn": "Sign in",
     "GlgLogInBtn": "Sign in with Google",
     "error": "Invalid Email or Password",
-    "question": "New in PREET?"
+    "question": "New in PREET?",
+    "register": "Register"
   },
   "TryAgain": {
     "message": "Hotel not found, try with another search."
@@ -206,7 +208,11 @@
     "errorTitle": "Error creating new hotel",
     "errorText": "An error occurred while creating the Hotel. Check the information and try again",
     "successTitle": "¡Hotel created succesfully!",
-    "successText": "The hotel is ready to start booking"
+    "successText": "The hotel is ready to start booking",
+    "enterName": "Enter name",
+    "enterAddress": "Enter address",
+    "enterURL": "Enter address URL",
+    "enterEmail": "Enter email"
   },
   "UpdateForm": {
     "title": "Update Hotel",
@@ -219,7 +225,11 @@
     "current": "Current country: ",
     "upload": "Upload Image",
     "remove": "Remove",
-    "post": "POST"
+    "post": "POST",
+    "successTitle": "¡Hotel succesfully updated!",
+    "successText": "The hotel has been updated and it's ready to start booking",
+    "errorTitle": "Error updating hotel",
+    "errorText": "An error occurred while updating the hotel. Check the information and try again"
   },
   "LoginAdmin": {
     "title": "Login",
@@ -294,6 +304,20 @@
     "span1" : "Welcome ",
     "span2" : ", ready to explore?",
     "p": "Find your ideal destination here."
+  },
+  "RoomDetail": {
+    "swalWarningTitle": "Hold on!",
+    "swalWarningText": "In order to proceed you need to set your check-in and check-out dates",
+    "swalErrorTitle": "Please login",
+    "swalErrorText": "In order to complete your payment and get your reservation confirmation"
+  },
+  "Auth": {
+    "swalWarningTitle": "Warning",
+    "swalWarningText": "Your session is about to expire. Please log out if you are finished.",
+    "swalErrorTitle": "Email already registered",
+    "swalErrorText": "Login and start searching your next hotel",
+    "swalSuccessTitle": "¡Succesfully registered!",
+    "swalSuccessText": "Now login and book your next PREET"
   }
   
 }

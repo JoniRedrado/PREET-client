@@ -149,7 +149,7 @@ const NewLogin = () => {
           <div className={styles.footer}>
             <p>{t("Login.question")}</p>
             <Link to="/register" className={styles.link}>
-              <p>{t("Login.logInBtn")}</p>
+              <p>{t("Login.register")}</p>
             </Link>
           </div>
         </form>

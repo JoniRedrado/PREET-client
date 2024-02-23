@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect, Suspense} from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,7 +27,7 @@ const CreateForm = () => {
     address_url: "",
     email: "",
     image: null,
-//  country: "",
+    //  country: "",
     countryId: "",
     stars: "",
   });
@@ -39,19 +39,19 @@ const CreateForm = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    setErrors({...errors, [name]:""})
+    setErrors({ ...errors, [name]: "" });
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setFormData({ ...formData, image: file });
 
-    setErrors({...errors, image:"" })
+    setErrors({ ...errors, image: "" });
   };
 
-  const handleImageRemove = () =>{
+  const handleImageRemove = () => {
     setFormData({ ...formData, image: null });
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,14 +64,14 @@ const CreateForm = () => {
       setErrors(validationErrors);
       return;
     }
-  
+
     let imageUpload = formData.image;
-  
+
     if (formData.image) {
       const formDataCloudinary = new FormData();
       formDataCloudinary.append("file", formData.image);
       formDataCloudinary.append("upload_preset", "PREET2024");
-  
+
       try {
         console.log("Uploading image to Cloudinary...");
         const responseCloudinary = await fetch(
@@ -81,9 +81,9 @@ const CreateForm = () => {
             body: formDataCloudinary,
           }
         );
-  
+
         const cloudinaryData = await responseCloudinary.json();
-  
+
         if (cloudinaryData.secure_url) {
           imageUpload = cloudinaryData.secure_url;
           console.log("Image uploaded successfully:", imageUpload);
@@ -94,14 +94,14 @@ const CreateForm = () => {
         console.error("Error uploading image to Cloudinary:", error);
       }
     }
-  
+
     const hotelData = {
       ...formData,
       image: imageUpload,
     };
-  
+
     console.log("Sending hotel data to server:", hotelData);
-  
+
     try {
       console.log("Sending request to create hotel...");
       await axios.post(`${import.meta.env.VITE_BACK_URL}/hotels`, hotelData);
@@ -117,7 +117,7 @@ const CreateForm = () => {
 
   return (
     <div
-    className={`${styles.formContainer} ${darkMode ? styles.darkMode : ""}`}
+      className={`${styles.formContainer} ${darkMode ? styles.darkMode : ""}`}
     >
       <h1 className={styles.title}>{t("CreateForm.title")}</h1>
       <form onSubmit={handleSubmit}>
@@ -126,7 +126,7 @@ const CreateForm = () => {
         <input 
         type="text" 
         name="name" 
-        placeholder="Enter name" 
+        placeholder={t("CreateForm.enterName")} 
         value={formData.name} 
         onChange={handleChange}
         className={`${styles.input} ${
@@ -141,7 +141,7 @@ const CreateForm = () => {
         <input 
         type="text" 
         name="address" 
-        placeholder="Enter address" 
+        placeholder={t("CreateForm.enterAddress")} 
         value={formData.address} 
         onChange={handleChange} 
         className={`${styles.input} ${
@@ -156,7 +156,7 @@ const CreateForm = () => {
         <input 
         type="text" 
         name="address_url" 
-        placeholder="Enter address URL" 
+        placeholder={t("CreateForm.enterURL")} 
         value={formData.address_url} 
         onChange={handleChange} 
         className={`${styles.input} ${
@@ -171,7 +171,7 @@ const CreateForm = () => {
         <input 
         type="text" 
         name="email" 
-        placeholder="Enter email" 
+        placeholder={t("CreateForm.enterEmail")}
         value={formData.email} 
         onChange={handleChange} 
         className={`${styles.input} ${
@@ -191,7 +191,7 @@ const CreateForm = () => {
           name="stars"
          value={formData.stars} 
          onChange={handleChange}>
-          <option value="" disabled>Stars</option>
+          <option value="" disabled>{t("CreateForm.stars")}</option>
           {[1, 2, 3, 4, 5].map((star) => (
             <option key={star} value={star}>
               {star}
@@ -212,7 +212,7 @@ const CreateForm = () => {
             onChange={handleChange}
             >
              <option value="" disabled>
-               Country
+             {t("CreateForm.optionCt")}
              </option>
              {countries.map((country) => (
                <option key={country} value={country}>
@@ -256,12 +256,12 @@ const CreateForm = () => {
         )}
         </div>
         <div className={styles.sendContainer}>
-        <button  className={styles.formButton} type="submit">
-          {t("CreateForm.post")}
-        </button>
-        {loading && (
-            <img src={Loading} alt="Loading"  className={styles.loading} />
-        )}
+          <button className={styles.formButton} type="submit">
+            {t("CreateForm.post")}
+          </button>
+          {loading && (
+            <img src={Loading} alt="Loading" className={styles.loading} />
+          )}
         </div>
       </form>
     </div>
