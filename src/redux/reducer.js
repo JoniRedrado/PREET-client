@@ -57,6 +57,9 @@ let initialState = {
   submitRoomFilters: {},
   selectedOption:"Graphics",
   webSocket:{
+    chatItem: null,
+    newChat: [],
+    record: [],
     chat: [],
   }
 };
@@ -263,31 +266,25 @@ function rootReducer(state = initialState, action) {
       }
 
     case ADD_WEBSOCKET:
-      const lenghtMessages = state.webSocket.chat.length;
-      const newMessage = [...state.webSocket.chat];
-
-      lenghtMessages === 0 ? newMessage.push(action.payload) : 
-
-      !(newMessage[lenghtMessages-1].messages === action.payload.message && 
-      newMessage[lenghtMessages-1].rol === action.payload.rol) &&
-
-      !(action.payload.rol === 'bot' &&
-      action.payload.message === "¡Hola! ¿En que te puedo ayudar?") &&
-      
-      newMessage.push(action.payload);
+      const chatItem = state.webSocket.chatItem;
 
       return{
         ...state,
         webSocket:{ 
-          chat: newMessage
+          ...state.webSocket,
+          chat: chatItem === 2 ? [...state.webSocket.chat, action.payload] : [...state.webSocket.chat],
+          newChat: chatItem === 1 ? [...state.webSocket.newChat, action.payload] : [...state.webSocket.newChat]
         }
       }
     
       case SET_WEBSOCKET:
         return{
           ...state,
-          webSocket:{ 
-            messages: [action.payload]
+          webSocket:{
+            ...state.webSocket,
+            chatItem:  action.payload.chat.length === 0 ? 1 : 2,
+            record: action.payload.record,
+            chat: action.payload.chat
           }
         }
 

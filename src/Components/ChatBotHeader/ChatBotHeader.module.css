@@ -1,8 +1,7 @@
 .divHeader{
+    height: 40px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    height: 40px;
 }
 
 .divIconClose{
@@ -13,4 +12,53 @@
     &:hover{
         color: rgb(6, 6, 141);
     }
+}
+
+.divNav{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    font-size: small;
+}
+
+.navBar{
+    width: 100%;
+    display: flex;
+}
+
+.navbarNav{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.liItem{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.liItemAcivate{
+    color: black;
+    cursor: pointer;
+
+    &:hover{
+        color: white;
+        border-radius: 6px;
+        background-color: rgb(152, 171, 255);
+    }
+}
+
+.liItemInAcivate{
+    color: rgb(133, 133, 133);
+}
+
+.itemSelected{
+    color: blue;
 }

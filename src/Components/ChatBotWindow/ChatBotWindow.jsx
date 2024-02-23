@@ -1,7 +1,7 @@
+import { addWebSocketData, setWebSocketData } from "../../redux/actions";
 import ChatBotMessages from "../ChatBotMessages/ChatBotMessages";
 import ChatBotHeader from "../ChatBotHeader/ChatBotHeader";
 import ChatBotInput from "../ChatBotInput/ChatBotInput";
-import { addWebSocketData } from "../../redux/actions";
 import style from "./ChatBotWindow.module.css";
 import { useDispatch } from "react-redux";
 import io from "socket.io-client";
@@ -17,17 +17,23 @@ const ChatBotWindow = ({setCloseWindow}) => {
     });
 
     socket?.on("connect", () => {
-        console.log("webSocket conectado");
-        dispatch(addWebSocketData('¡Hola! ¿En que te puedo ayudar?', 'bot'));
-    });
-
-    socket?.on("message", (data) => {
-    
+        //console.log("webSocket conectado");
     });
 
     socket?.on("disconnect", (data) => {
-        console.log("socket desconectado");
+        //console.log("socket desconectado");
     });
+
+    socket?.on("set_Chats", (data) => {
+        //console.log(data);
+        dispatch(setWebSocketData(data));
+    });
+
+    socket?.on("chat_message", (data) => {
+        //console.log(data);
+        dispatch(addWebSocketData(data, 'bot'));
+    });
+
 
     const setCloseWindowAndSocket = () => {
         setCloseWindow();
@@ -42,7 +48,7 @@ const ChatBotWindow = ({setCloseWindow}) => {
     return(
         <div className={style.divWindow}>
             <ChatBotHeader setCloseWindow={setCloseWindowAndSocket}/>
-            <ChatBotMessages />
+            <ChatBotMessages socket={socket}/>
             <ChatBotInput sendData={sendData}/>
         </div>
     )
