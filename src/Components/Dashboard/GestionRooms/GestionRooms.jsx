@@ -3,7 +3,6 @@ import { useEffect, useState, Suspense } from "react";
 import { Link } from "react-router-dom";
 // import NavBarDashboard from "../NavBarDashboard/NavBarDashboard";
 import { useTranslation } from "react-i18next";
-import "./GestionRooms.modules.css";
 
 const GestionRooms = () => {
   const { t } = useTranslation();
@@ -105,69 +104,53 @@ const GestionRooms = () => {
     }
   };  
 
-  return(
-  <div className="table-container">
-    <div>
-        <select value={typeInput} onChange={handleTypeInput}>
-          <option value="">{t("dashboard.selectType")}</option>
-          {roomsType.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-        <button onClick={handleSearch}>{t("dashboard.search")}</button>
-      </div>
-      <button
-        onClick={handleShowDeletedRooms}
-        type="button"
-        className="btn btn-primary btn-lg"
-      >
-        {showDeletedRooms ? t("dashboard.hideRooms") : t("dashboard.showRooms")}
-      </button>
-      {showDeletedRooms && (
-        <table className="table">
-          <thead className="table-dark">
-            <tr>
-              <th>{t("validation.image")}</th>
-              <th>{t("CreateRooms.numeration")}</th>
-              <th>{t("CreateRooms.type")}</th>
-              <th>{t("CreateRooms.description")}</th>
-              <th>{t("CreateRooms.price")}</th>
-              <th>{t("CreateRooms.guest")}</th>
-              <th>{t("dashboard.hotelName")}</th>
-              <th>{t("dashboard.action")}</th>
+  const renderContent = () => {
+    if (showDeletedRooms) {
+      return (
+        <table className="table3">
+        <thead className="table-dark">
+          <tr>
+            <th>{t("validation.image")}</th>
+            <th>{t("CreateRooms.numeration")}</th>
+            <th>{t("CreateRooms.type")}</th>
+            <th>{t("CreateRooms.description")}</th>
+            <th>{t("CreateRooms.price")}</th>
+            <th>{t("CreateRooms.guest")}</th>
+            <th>{t("dashboard.hotelName")}</th>
+            <th>{t("dashboard.action")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {roomsDelete.map((deletedRooms) => (
+            <tr key={deletedRooms.id}>
+              <td>
+                <img
+                  img
+                  className="imagen-rooms"
+                  src={deletedRooms.image[0].image}
+                  alt={deletedRooms.type}
+                />
+              </td>
+              <td>{deletedRooms.numeration}</td>
+              <td>{deletedRooms.type}</td>
+              <td>{deletedRooms.description}</td>
+              <td>{deletedRooms.price}$</td>
+              <td>{deletedRooms.guest}</td>
+              <td>{deletedRooms.hotel && deletedRooms.hotel.name}</td>
+              <td>
+                <i
+                  onClick={() => restoreRooms(deletedRooms.id)}
+                  className="bi bi-arrow-counterclockwise"
+                ></i>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {roomsDelete.map((deletedRooms) => (
-              <tr key={deletedRooms.id}>
-                <td>
-                  <img
-                    img
-                    className="imagen-rooms"
-                    src={deletedRooms.image[0].image}
-                    alt={deletedRooms.type}
-                  />
-                </td>
-                <td>{deletedRooms.numeration}</td>
-                <td>{deletedRooms.type}</td>
-                <td>{deletedRooms.description}</td>
-                <td>{deletedRooms.price}$</td>
-                <td>{deletedRooms.guest}</td>
-                <td>{deletedRooms.hotel && deletedRooms.hotel.name}</td>
-                <td>
-                  <i
-                    onClick={() => restoreRooms(deletedRooms.id)}
-                    className="bi bi-arrow-counterclockwise"
-                  ></i>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-      <table className="table">
+          ))}
+        </tbody>
+      </table>
+      )
+    } else {
+      return (
+<table className="table3">
         <thead className="table-dark">
           <tr>
             <th>{t("validation.image")}</th>
@@ -213,14 +196,44 @@ const GestionRooms = () => {
             ))}
         </tbody>
       </table>
+      )
+    }
+  };
+  return(
+  <div className="table-container2">
+    <div className="header">
+      <div className="search-users">
+        <select value={typeInput} onChange={handleTypeInput}>
+          <option value="">{t("dashboard.selectType")}</option>
+          {roomsType.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+        <button onClick={handleSearch} className="button-users">{t("dashboard.search")}</button>
+      </div>
+        <div className="btn-deleted-container">
+        <button
+        onClick={handleShowDeletedRooms}
+        type="button"
+        className="button-users2"
+      >
+        {showDeletedRooms ? t("dashboard.hideRooms") : t("dashboard.showRooms")}  
+      </button>
+        </div>
+      </div>
       <div>
-        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
-          Previous
+      {renderContent()}
+      <div className="pagination">
+        <button onClick={handlePreviousPage} disabled={currentPage === 1} className="pagination-button">
+          Prev
         </button>
         <span>{currentPage}</span>
-        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages} className="pagination-button">
           Next
         </button>
+      </div>
       </div>
   </div>
 )

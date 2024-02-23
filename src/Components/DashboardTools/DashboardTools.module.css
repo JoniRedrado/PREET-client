@@ -28,3 +28,35 @@
     width: 100px;
     height: 100px;
   }
+
+  @media screen and (min-width: 1380px) {
+    .logo {
+      width: 150px; /* Ajusta el tamaño del logo en pantallas más grandes */
+      height: 150px;
+    }
+  
+    .logoContainer p {
+      font-size: 24px; /* Ajusta el tamaño del texto en pantallas más grandes */
+    }
+  }
+  
+  /* Media query para pantallas más pequeñas */
+  @media screen and (max-width: 767px) {
+    .icon {
+      font-size: 18px; /* Ajusta el tamaño del ícono en pantallas más pequeñas */
+    }
+  
+    .logoContainer {
+      margin-top: -15px; /* Ajusta el margen superior en pantallas más pequeñas */
+      margin-bottom: 15px; /* Ajusta el margen inferior en pantallas más pequeñas */
+    }
+  
+    .logo {
+      width: 80px; /* Ajusta el tamaño del logo en pantallas más pequeñas */
+      height: 80px;
+    }
+  
+    .logoContainer p {
+      font-size: 16px; /* Ajusta el tamaño del texto en pantallas más pequeñas */
+    }
+  }
