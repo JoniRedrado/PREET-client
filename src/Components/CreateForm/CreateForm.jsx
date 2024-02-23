@@ -56,15 +56,12 @@ const CreateForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    console.log("Submitting form...");
   
     const validationErrors = validation(formData, t);
-  
-    console.log("Validation errors:", validationErrors);
+
   
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-      console.log("Validation failed. Errors:", validationErrors);
       return;
     }
   
@@ -125,35 +122,68 @@ const CreateForm = () => {
       <h1 className={styles.title}>{t("CreateForm.title")}</h1>
       <form onSubmit={handleSubmit}>
         <div  className={styles.fieldContainer}>
-        <label>
-          Name
-        <input type="text" name="name" placeholder="Enter name" value={formData.name} onChange={handleChange} />
+        <div className={styles.inputContainer}>
+        <input 
+        type="text" 
+        name="name" 
+        placeholder="Enter name" 
+        value={formData.name} 
+        onChange={handleChange}
+        className={`${styles.input} ${
+          errors.name && styles.error
+        }`}
+        />
         {errors.name && (
                 <span className={styles.errors}>{errors.name}</span>
               )}
-        </label>
-        <label>Address
-        <input type="text" name="address" placeholder="Enter address" value={formData.address} onChange={handleChange} />
+        </div>
+        <div className={styles.inputContainer}>
+        <input 
+        type="text" 
+        name="address" 
+        placeholder="Enter address" 
+        value={formData.address} 
+        onChange={handleChange} 
+        className={`${styles.input} ${
+          errors.address && styles.error
+        }`}
+        />
         {errors.address && (
                 <span className={styles.errors}>{errors.address}</span>
               )}
-        </label>
-        <label>Address URL
-        <input type="text" name="address_url" placeholder="Enter address URL" value={formData.address_url} onChange={handleChange} />
+        </div>
+        <div className={styles.inputContainer}>
+        <input 
+        type="text" 
+        name="address_url" 
+        placeholder="Enter address URL" 
+        value={formData.address_url} 
+        onChange={handleChange} 
+        className={`${styles.input} ${
+          errors.address_url && styles.error
+        }`}
+        />
         {errors.address_url && (
                 <span className={styles.errors}>{errors.address_url}</span>
               )}
-        </label>
-        <label>Email
-        <input type="text" name="email" placeholder="Enter email" value={formData.email} onChange={handleChange} />
+        </div>
+        <div className={styles.inputContainer}>
+        <input 
+        type="text" 
+        name="email" 
+        placeholder="Enter email" 
+        value={formData.email} 
+        onChange={handleChange} 
+        className={`${styles.input} ${
+          errors.email && styles.error
+        }`}
+        />
         {errors.email && (
                 <span className={styles.errors}>{errors.email}</span>
               )}
-        </label>
         </div>
         
-        <div className={styles.fieldContainer}>
-        <label>Stars
+        <div className={styles.inputContainer}>
         <select 
           className={`${styles.starsSelect} ${
             errors.stars && styles.error
@@ -161,7 +191,7 @@ const CreateForm = () => {
           name="stars"
          value={formData.stars} 
          onChange={handleChange}>
-          <option value="" disabled>{t("CreateForm.optionSt")}</option>
+          <option value="" disabled>Stars</option>
           {[1, 2, 3, 4, 5].map((star) => (
             <option key={star} value={star}>
               {star}
@@ -171,11 +201,8 @@ const CreateForm = () => {
         {errors.stars && (
               <span className={styles.errors}>{errors.stars}</span>
             )}
-        </label>
         </div>
-        <div className={styles.fieldContainer}>
-        <label>
-          {t("CreateForm.country")}
+        <div className={styles.inputContainer}>
           <select
             className={`${styles.countrySelect} ${
               errors.countryId && styles.error
@@ -185,7 +212,7 @@ const CreateForm = () => {
             onChange={handleChange}
             >
              <option value="" disabled>
-               {t("CreateForm.optionCt")}
+               Country
              </option>
              {countries.map((country) => (
                <option key={country} value={country}>
@@ -196,7 +223,7 @@ const CreateForm = () => {
            {errors.countryId && (
               <span className={styles.errors}>{errors.countryId}</span>
             )}
-         </label>
+         </div>
          </div>
          <div className={styles.imageContainer}>
         <label>

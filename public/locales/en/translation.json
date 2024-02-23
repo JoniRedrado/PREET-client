@@ -275,7 +275,7 @@
     "net": "Net Income",
     "totalRevenue": "Total Revenue",
     "totalBookings": "Total Bookings",
-    "name": "name",
+    "name": "Name",
     "search": "Search",
     "hideHotels": "Hide Deleted Hotels",
     "showHotels": "Show Deleted Hotels",
@@ -290,4 +290,5 @@
     "swalErrorTitle": "Authentication Error",
     "swalErrorText": "You do not have administrator permissions"
   }
+  
 }

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import styles from "./CreateRooms.module.css"
 
 const roomsType = [
   'Estandar',
@@ -129,9 +130,10 @@ const CreateRooms = () => {
   };
 
   return (
-    <form  className="form" onSubmit={handleSubmit}>
+    <div className={styles.mainContainer}>
+<form  className={styles.form} onSubmit={handleSubmit}>
       <h1>{t("CreateRooms.title")}</h1>
-      <label>{t("CreateRooms.type")}</label>
+      <div className={styles.inputContainer}>
       <select name="type" value={formData.type} onChange={handleChange}>
         <option value="">{t("CreateRooms.selectType")}</option>
         {roomsType.map((type) => (
@@ -140,15 +142,20 @@ const CreateRooms = () => {
           </option>
         ))}
       </select>
-      <label>{t("CreateRooms.numeration")}</label>
+      </div >
+      <div className={styles.inputContainer}>
       <input type="text" name="numeration" placeholder={t("CreateRooms.numeration")} value={formData.numeration} onChange={handleChange} />
-      <label>{t("CreateRooms.price")}</label>
+      </div>
+      <div className={styles.inputContainer}>
       <input type="number" name="price" placeholder={t("CreateRooms.price")} value={formData.price} onChange={handleChange} />
-      <label>{t("CreateRooms.guest")}</label>
+      </div>
+      <div className={styles.inputContainer}>
       <input type="number" name="guest" placeholder={t("CreateRooms.guest")} value={formData.guest} onChange={handleChange} />
-      <label>{t("CreateRooms.description")}</label>
+      </div>
+      <div className={styles.inputContainer}>
       <input type="text" name="description" placeholder={t("CreateRooms.description")} value={formData.description} onChange={handleChange} />
-      <label>{t("CreateRooms.hotel")}</label>
+      </div>
+      <div className={styles.inputContainer}>
       <select value={formData.selectedHotelId} onChange={handleHotelChange}>
         <option value="">{t("CreateRooms.selectHotel")}</option>
         {hotels.map((hotel) => (
@@ -168,11 +175,16 @@ const CreateRooms = () => {
           <button onClick={handleImageRemove}>Remove Image</button>
         </div>
       )}
+      </div>
+      <div className={styles.inputContainer}>
       <label>{t("CreateRooms.image")}</label>
       <input type="file" accept="image/*" onChange={handleImageChange} />
       </div>
-      <button type="submit">{t("CreateRooms.title")}</button>
+      <div className={styles.sendContainer}>
+      <button type="submit" className={styles.button}>{t("CreateRooms.title")}</button>
+      </div>
     </form>
+    </div>
   );
 };
 

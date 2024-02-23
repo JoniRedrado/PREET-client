@@ -5,6 +5,7 @@ import Slider from "../../Components/Slider/Slider";
 import TrendingCountries from "../../Components/TrendingCountries/TrendingCountries";
 import { useDarkMode } from '../../DarkModeContext/DarkModeContext';
 import styles from "./Home.module.css"
+import SearchBar from "../../Components/SearchBar/SearchBar"
 
 function Home() {
   const dispatch = useDispatch();

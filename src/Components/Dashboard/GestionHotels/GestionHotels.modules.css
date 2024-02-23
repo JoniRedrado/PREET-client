@@ -4,12 +4,15 @@
   width: 100%;
   min-height: 100vh;
   justify-content: center;
+  margin: 10px;
+  gap: 10px;
 }
 
 .search-dashboard{
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   width: 100%;
-  margin-left: 10%;
 }
 
 .search-bar{
@@ -26,6 +29,7 @@
   height: 100%;
   padding-left: 10px;
   font-size: 16px;
+  border: 1px solid #ccc;
 }
 .search-button{
   display: flex;
@@ -67,59 +71,49 @@
   cursor: pointer;
 }
 
-.table-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centra horizontalmente la tabla */
-  margin-top: 20px; /* Espacio superior */
-  width: 100%;
-  margin-left: 10%;
-}
 
-/* Estilos para la tabla */
-.actual-table {
-  width: 100%;
-  overflow-x: auto; /* Habilita el desplazamiento horizontal si la tabla es más ancha que el contenedor */
-  transition: opacity 0.3s ease;
-}
+
 
 .table {
-  width: 100%;
+  width: 100% !important;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
   border-collapse: collapse;
 }
 
-/* Estilos para las celdas de la tabla */
+
 .table th,
 .table td {
   padding: 10px;
-  border: 1px solid #ddd; /* Borde de las celdas */
-  text-align: center; /* Alineación del texto al centro horizontalmente */
-  vertical-align: middle; /* Centra verticalmente el contenido */
+  border: 1px solid #ddd; 
+  text-align: center; 
+  vertical-align: middle; 
 }
 
-/* Estilos para las filas impares de la tabla */
+
 .table tbody tr:nth-child(odd) {
-  background-color: #f2f2f2; /* Color de fondo de las filas impares */
+  background-color: #f2f2f2;
 }
 .table tbody tr {
-  transition: opacity 0.3s ease; /* Transición de opacidad para suavizar el cambio de página */
+  transition: opacity 0.3s ease;
 }
 
-/* Estilos para la imagen de los hoteles */
+
 .imagen-hotel {
-  width: 150px; /* Ancho de la imagen */
-  height: 100px; /* Altura automática para mantener la proporción */
+  width: 150px; 
+  height: 100px; 
 }
 
-/* Estilos para los botones de paginación */
+
 .button-container {
   display: flex;
-  justify-content: center; /* Centra horizontalmente los botones */
-  margin-top: 20px; /* Espacio superior */
+  justify-content: center; 
+  margin-top: 20px; 
 }
 
 .button-container button {
-  margin: 0 5px; /* Espacio entre los botones */
+  margin: 0 5px;
 }
   
   
@@ -131,7 +125,7 @@
   margin-top: 20px;
 }
 
-/* Estilos para los botones de la paginación */
+
 .pagination-button {
   background-color: #01283F;
   color: #fff;
@@ -148,9 +142,27 @@
   background-color: #6093C0;
 }
 
-/* Estilos para el número de página */
+
 .pagination span {
   font-size: 18px;
   transition: color 0.3s ease;
   margin: 0 10px;
+}
+
+@media screen and (min-width: 1380px) {
+  .main-container {
+    margin: 20px;
+    gap: 20px;
+  }
+}
+
+/* Media query para pantallas pequeñas */
+@media screen and (max-width: 767px) {
+  .search-bar {
+    width: 100%;
+  }
+
+  .button1 {
+    width: 100%;
+  }
 }

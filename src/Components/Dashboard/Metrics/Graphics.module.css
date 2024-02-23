@@ -39,3 +39,29 @@
     font-weight: 600;
     margin-bottom: 10px;
 }
+
+/* Media query para pantallas grandes */
+@media screen and (min-width: 1380px) {
+    .graphics1,
+    .graphics2 {
+        width: 50%;
+    }
+
+    .graphicsDiv{
+        flex-wrap: wrap; /* Permite que los elementos se envuelvan a medida que el ancho de la pantalla cambia */
+        justify-content: center; /* Centra los elementos horizontalmente */
+    }
+}
+
+/* Media query para pantallas pequeñas */
+@media screen and (max-width: 767px) {
+    .graphics1,
+    .graphics2 {
+        width: 100%; /* Cambia el ancho a 100% para ocupar toda la pantalla en dispositivos móviles */
+    }
+
+    .graphicsDiv{
+        flex-wrap: wrap; /* Permite que los elementos se envuelvan a medida que el ancho de la pantalla cambia */
+        justify-content: center; /* Centra los elementos horizontalmente */
+    }
+}

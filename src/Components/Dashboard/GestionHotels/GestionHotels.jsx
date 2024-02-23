@@ -91,9 +91,6 @@ const GestionHotels = () => {
   const renderTables = () => {
     if (showDeletedHotels) {
       return (
-        <div className="table-container">
-          <div className="actual-table">
-                {showDeletedHotels && (
         <table className="table">
           <thead className="table-dark">
             <tr>
@@ -118,15 +115,11 @@ const GestionHotels = () => {
             ))}
           </tbody>
         </table>
-      )}
-        </div>
-        </div>
+
 
       )
     } else{
       return (
-        <div className="table-container">
-          <div className="actual-table">
           <table className="table">
         <thead className="table-dark">
           <tr>
@@ -158,8 +151,6 @@ const GestionHotels = () => {
           ))}
         </tbody>
       </table>
-          </div>
-        </div>
         
       )
     }

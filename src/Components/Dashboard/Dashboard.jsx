@@ -92,9 +92,6 @@ const Dashboard = () => {
 
         <div className={styles.headerContainer}>
           <div className={styles.menuContainer}>
-            <button className={styles.menuButton} onClick={handleMenu}>
-              <MdMenu className={styles.menuIcon} />
-            </button>
           </div>
           <div className={styles.nav}>
             <Header />

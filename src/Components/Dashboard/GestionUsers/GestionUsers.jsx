@@ -98,60 +98,38 @@ const GestionUsers = () => {
     }
   };
 
-  return(
-    <div className="table-container">
-      <div className=".search-dashboard">
-        {/* <NavBarDashboard/> */}
-        <div>
-          <input
-            type="text"
-            placeholder={t("dashboard.name")}
-            onChange={handleSearchInput}
-            name="name"
-            value={searchInput}
-          />
-          <button onClick={handleSearch}>{t("dashboard.search")}</button>
-        </div>
-      </div>
-
-      <Link to={"/dashboard"}>
-        <i className="bi bi-arrow-left-circle"></i>
-      </Link>
-      <button
-        onClick={handleShowDeletedUsers}
-        type="button"
-        className="btn btn-primary btn-lg"
-      >
-        {showDeletedUsers ? t("dashboard.hideUsers") : t("dashboard.showUsers")}
-      </button>
-      {showDeletedUsers && (
-        <table className="table">
-          <thead className="table-dark">
-            <tr>
-              <th>{t("registerValidation.name")}</th>
-              <th>{t("Register.lastName")}</th>
-              <th>{t("Register.email")}</th>
-              <th>{t("dashboard.action")}</th>
+  const renderContent = () => {
+    if (showDeletedUsers){
+      return (
+        <table className="table2">
+        <thead className="table-dark">
+          <tr>
+            <th>{t("registerValidation.name")}</th>
+            <th>{t("Register.lastName")}</th>
+            <th>{t("Register.email")}</th>
+            <th>{t("dashboard.action")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {usersDelete.map((deletedUser) => (
+            <tr key={deletedUser.id}>
+              <td>{deletedUser.name}</td>
+              <td>{deletedUser.last_name}</td>
+              <td>{deletedUser.email}</td>
+              <td>
+                <i
+                  onClick={() => restoreUser(deletedUser.id)}
+                  className="bi bi-arrow-counterclockwise"
+                ></i>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {usersDelete.map((deletedUser) => (
-              <tr key={deletedUser.id}>
-                <td>{deletedUser.name}</td>
-                <td>{deletedUser.last_name}</td>
-                <td>{deletedUser.email}</td>
-                <td>
-                  <i
-                    onClick={() => restoreUser(deletedUser.id)}
-                    className="bi bi-arrow-counterclockwise"
-                  ></i>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-      <table className="table">
+          ))}
+        </tbody>
+      </table>
+      )
+    } else {
+      return (
+<table className="table2">
         <thead className="table-dark">
           <tr>
             <th>{t("registerValidation.name")}</th>
@@ -178,15 +156,43 @@ const GestionUsers = () => {
             ))}
         </tbody>
       </table>
-      <div>
-        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
-          Previous
+      )
+    }
+  };
+ 
+  return(
+    <div className="table-container2">
+      <div className="header">
+        <div className="search-users">
+          <input
+            type="text"
+            placeholder={t("dashboard.name")}
+            onChange={handleSearchInput}
+            name="name"
+            value={searchInput}
+          />
+          <button onClick={handleSearch} className="button-users">{t("dashboard.search")}</button>
+        </div>
+        <div className="btn-deleted-container">
+        <button
+        onClick={handleShowDeletedUsers}
+        type="button"
+        className="button-users2"
+      >
+        {showDeletedUsers ? t("dashboard.hideUsers") : t("dashboard.showUsers")}
+      </button>
+        </div>
+      </div>
+        {renderContent()}
+      <div className="pagination">
+        <button onClick={handlePreviousPage} disabled={currentPage === 1} className="pagination-button">
+          Prev
         </button>
         <span>{currentPage}</span>
-        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages} className="pagination-button">
           Next
         </button>
-        </div>
+      </div>
     </div>
   )
 }
