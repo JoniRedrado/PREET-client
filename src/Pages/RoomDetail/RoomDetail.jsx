@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import { showModal } from "../../redux/actions";
@@ -9,17 +9,18 @@ import { useTranslation } from "react-i18next";
 import "./RoomDetail.styles.css";
 import { useNavigate } from "react-router-dom";
 
-const RoomDetail = ({ room, closeModal }) => {
-  const [isBooking, setIsBooking] = useState(false);
+const RoomDetail = ({ room }) => {
   const { darkMode } = useDarkMode();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const filters = useSelector((state) => state.submitFilters);
+  const globalCurrency = useSelector((state) => state.currency)
+  const [convertedPrice, setConvertedPrice] = useState(globalCurrency)
 
   const token = localStorage.getItem("token");
-  
+
   const handleBook = () => {
     if (!filters.startDate || !filters.endDate) {
       swal({
@@ -30,7 +31,6 @@ const RoomDetail = ({ room, closeModal }) => {
       });
       dispatch(showModal("roomDetail", false));
     } else {
-      setIsBooking(true);
       const bookingInfo = {
         roomId: room.id,
         user: localStorage.getItem("token"),
@@ -76,10 +76,29 @@ const RoomDetail = ({ room, closeModal }) => {
     }
   };
 
+  const currencyConverter = async (fromCurrency) => {
+    try {
+      const response = await axios.get(`https://openexchangerates.org/api/latest.json?app_id=${import.meta.env.VITE_CURRENCY_API}&base=USD`)
+    
+      const toCurrency = response.data.rates[globalCurrency]
+  
+      const result = Math.round(fromCurrency * toCurrency);
+
+      setConvertedPrice(result)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+      currencyConverter(room.price);
+  }, [globalCurrency]);
+
   if (!room) {
     return null; //Al cerrar el modal ocurría un error porque se establece selectedRoom
   } //como null en la const closeModal (Detail.jsx). Esto arregla el error.
   
+
   return (
     <div className={`card-room ${darkMode ? "darkMode" : ""}`}>
       <img
@@ -92,7 +111,7 @@ const RoomDetail = ({ room, closeModal }) => {
         <h1 className="card-title">{room.type}</h1>
         <p className="card-text">{room.description}</p>
         <p className="card-price">
-          {t("CreateRooms.price")} {room.price} $
+          {t("CreateRooms.price")} {globalCurrency} ${convertedPrice}
         </p>
         <button onClick={handleBook}>
           {t("Card.book")}

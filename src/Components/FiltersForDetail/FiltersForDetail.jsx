@@ -8,6 +8,7 @@ import searchValidation from "../../helpers/searchValidation";
 import swal from "sweetalert";
 
 import styles from "./FiltersForDetail.module.css";
+import axios from "axios";
 
 const FiltersForDetail = () => {
   const dispatch = useDispatch();
@@ -23,9 +24,32 @@ const FiltersForDetail = () => {
 
   const [filtersApplied, setFiltersApplied] = useState(false);
   const [errors, setErrors] = useState({});
-
+  
   const hotelDetail = useSelector((state) => state.hotelDetail);
   const filters = useSelector((state) => state.submitFilters) || defaultFilters;
+  const globalCurrency = useSelector((state) => state.currency)
+  const [convertedPrice, setConvertedPrice] = useState(1)
+
+  const currencyConverter = async (fromCurrency) => {
+
+    console.log("Currency from", globalCurrency);
+
+    try {
+      const response = await axios.get(`https://openexchangerates.org/api/latest.json?app_id=${import.meta.env.VITE_CURRENCY_API}&base=USD`)
+    
+      const toCurrency = response.data.rates[globalCurrency]
+  
+      console.log(toCurrency);
+
+      const result = Math.round(fromCurrency / toCurrency);
+
+      setConvertedPrice(result)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  console.log(convertedPrice);
 
   const handleFilters = (e) => {
     e.preventDefault()
@@ -37,29 +61,41 @@ const FiltersForDetail = () => {
     }));
   };
 
+  
   const getCurrentDate = () => {
     const now = new Date()
     const year = now.getFullYear()
     const month = now.getMonth() + 1
     const day = now.getDate()
-
+    
     const formattedMont = month < 10 ? `0${month}` : `${month}`
     const formattedDay = day < 10 ? `0${day}` : `${day}`
-
+    
     return `${year}-${formattedMont}-${formattedDay}`
   }
-
+  
   console.log(filters);
 
-  const applyFilters = (e) => {
+  const applyFilters = async (e) => {
 
     e.preventDefault()
 
+    const {name, value} = e.target
+    
     const errorsValidation = searchValidation(filters.startDate, filters.endDate, t)
-
+    
     if(Object.keys(errorsValidation).length === 0) {
-      dispatch(getDetail(id, filters));
-      setFiltersApplied(true);
+      
+        dispatch(filterParams({...filters, [name]: value}))
+
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: "",
+        }));
+
+        dispatch(getDetail(id, {...filters, [name]: convertedPrice}))
+        setFiltersApplied(true);
+
     } else {
       setErrors(errorsValidation)
     }
@@ -117,7 +153,7 @@ const FiltersForDetail = () => {
         </div>
 
         <div>
-          <p>{t("FiltersForD.price")}</p>
+          <p>{t("FiltersForD.price")} ({globalCurrency})</p>
           <div className={styles.inputContainer}>
             <input
               type="number"
@@ -126,7 +162,6 @@ const FiltersForDetail = () => {
               placeholder="min"
               step="10"
               min="0"
-              max="10000"
               value={filters.minPrice || ""}
               onChange={handleFilters}
               className={styles.input}
@@ -141,7 +176,6 @@ const FiltersForDetail = () => {
               placeholder="max"
               step="10"
               min="0"
-              max="10000"
               value={filters.maxPrice || ""}
               onChange={handleFilters}
               className={styles.input}

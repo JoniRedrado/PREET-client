@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { postFavorite, removeFavorite} from "../../redux/actions";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import styles from "./Card.module.css";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { useState, useEffect } from "react";
 import notFavorite from "../../assets/notFavorite.png";
 import Favorite from "../../assets/Favorite.png";
@@ -26,12 +27,13 @@ const Card = (props) => {
   })
   const [isMapOpen, setIsMapOpen] = useState(false);
   const token = localStorage.getItem("token");
+  const globalCurrency = useSelector((state) => state.currency)
+  const [convertedPrice, setConvertedPrice] = useState(null)
 
   useEffect(() => {
     axios
     .get(`${import.meta.env.VITE_BACK_URL}/feedback/hotel/${id}`)
     .then((response) =>{
-      console.log(response.data)
       setRanking({
         count: response.data.feedback.count,
         avarage:response.data.avgScore.avgScore
@@ -47,6 +49,12 @@ const Card = (props) => {
     // const isCurrentlyFavorite = favorites.some((favorite) => favorite.id === id);
     // setIsFavorite(isCurrentlyFavorite);
   }, []);
+
+  useEffect(() => {
+    if (rooms.length > 0) {
+      currencyConverter(rooms[0].price);
+    }
+  }, [rooms, globalCurrency]);
 
   const handleAddressClick = () => {
     setIsMapOpen(true);
@@ -78,6 +86,20 @@ const Card = (props) => {
     
     navigate(`/detail/${id}`);
   };
+
+  const currencyConverter = async (fromCurrency) => {
+    try {
+      const response = await axios.get(`https://openexchangerates.org/api/latest.json?app_id=${import.meta.env.VITE_CURRENCY_API}&base=USD`)
+    
+      const toCurrency = response.data.rates[globalCurrency]
+  
+      const result = Math.round(fromCurrency * toCurrency);
+
+      setConvertedPrice(result)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <div
@@ -145,7 +167,8 @@ const Card = (props) => {
           <div className={styles.priceContainer}>
             <p className={styles.priceText}>{t("Card.price")}</p>
             <p className={styles.priceNumber}>
-              ${rooms.length > 0 ? rooms[0].price : "N/A"}
+              {globalCurrency}
+              ${convertedPrice !== null ? convertedPrice : "N/A"}
             </p>
           </div>
           <button className={styles.button} onClick={handleClick}>

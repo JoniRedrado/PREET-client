@@ -37,7 +37,6 @@ const Cards = ({ hotels }) => {
           dataScroll={{index,
                        refCard, 
                        scrollToFirstCard}}
-
         />;
       })
       }
