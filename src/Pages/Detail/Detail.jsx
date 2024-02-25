@@ -58,7 +58,6 @@ const Detail = () => {
     axios
       .get(`${import.meta.env.VITE_BACK_URL}/feedback/hotel/${id}`)
       .then((response) => {
-        console.log(response.data.avgScore);
         setHotelAvgRanking(response.data.avgScore.avgScore);        
       })
       .catch((error) => {
@@ -109,7 +108,6 @@ const Detail = () => {
       roomId: validateUserVSHotel(hotel.id).roomId,
     });
   };
-  console.log(selectedRoom);
   const handleStarClick = (star) => {
     const newSelectedStars = [1, 2, 3, 4, 5].filter(
       (selectedStar) => selectedStar <= star
@@ -129,13 +127,8 @@ const Detail = () => {
 
   }
 
-  console.log(userReservations);
-  console.log(userVsHotel);
-  console.log(hotelInUserReviews);
-
   const validateUserVSHotel = (hotelId) => {
     const userHasHotel = userReservations.filter(reservation => reservation.room.hotel.id === hotelId)
-    console.log(userHasHotel);
     setUserVsHotel(userHasHotel)
   }
     
@@ -163,8 +156,6 @@ const Detail = () => {
     }
   };
 
-  console.log(hotel);
-
   useEffect(() => {
     dispatch(getUserReviews(token))
     getUserReservations();
@@ -173,7 +164,6 @@ const Detail = () => {
     setHotelInUserReviews([]))
   }, [dispatch, hotel.id, token]);
 
-  console.log(hotel);
   return (
     <motion.div
       className={`container-detail ${darkMode ? "darkMode" : ""}`}
@@ -251,8 +241,6 @@ const Detail = () => {
                 )}
               </select>
               <h2 className="reviews-title">{t("Detail.reviews")}</h2>
-              {console.log(hotelInUserReviews)}
-              {console.log(userVsHotel.length !== 0)}
               {userVsHotel.length !== 0 && hotelInUserReviews.length === 0 ? (
                 <button
                   className="container-detail-button"

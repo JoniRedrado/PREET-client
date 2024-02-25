@@ -30,7 +30,8 @@ import {
   DETAIL_FILTER_PARAMS,
   SET_SELECTED_OPTION,
   ADD_WEBSOCKET,
-  SET_WEBSOCKET
+  SET_WEBSOCKET,
+  SET_CURRENCY
 } from "./actions-types";
 
 export const getAllHotels = () => {
@@ -447,5 +448,12 @@ export const setSelectedOption = (option) => {
       type:SET_SELECTED_OPTION,
       payload:option,
     })
+  }
+}
+
+export const setCurrency = (option) => {
+  return {
+      type:SET_CURRENCY,
+      payload:option,
   }
 }

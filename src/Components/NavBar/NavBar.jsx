@@ -7,7 +7,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import { useDispatch } from "react-redux";
 import { FaUserPlus } from "react-icons/fa";
 import { BsLock } from "react-icons/bs";
-import { getAllHotels, resetCurrentPage, resetFiltersParams } from "../../redux/actions";
+import { getAllHotels, resetCurrentPage, resetFiltersParams, setCurrency } from "../../redux/actions";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { useState, useRef, Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,6 +15,7 @@ import "flag-icon-css/css/flag-icons.min.css";
 import style from "./NavBar.module.css";
 import { MdLanguage, MdSunny } from "react-icons/md";
 import { IoMdMoon } from "react-icons/io";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import axios from "axios";
 
 function NavBar({ heightNav }) {
@@ -62,15 +63,24 @@ function NavBar({ heightNav }) {
     },
   ];
 
-  const [showMenu, setShowMenu] = useState(false);
+  const currency = ["USD","EUR","COP", "ARS"];
+
+  const [showMenu, setShowMenu] = useState({
+    language: false,
+    currency: false
+  });
+  
   const dropdownRef = useRef(null);
 
-  const toggleMenu = () => {
-    setShowMenu(!showMenu);
+  const toggleMenu = (option) => {
+    setShowMenu((prevShowMenu) => ({
+      ...prevShowMenu,
+      [option]: !prevShowMenu[option],
+    }));
   };
 
   const closeMenu = () => {
-    setShowMenu(false);
+    setShowMenu({ language: false, currency: false });
   };
 
   const handleHomeButton = () => {
@@ -149,10 +159,10 @@ function NavBar({ heightNav }) {
                 </button>
               </div>
               <div ref={dropdownRef} onMouseLeave={closeMenu}>
-                <button className={style.btnLink} onClick={toggleMenu}>
+                <button className={style.btnLink} onClick={() => toggleMenu("language")}>
                   <MdLanguage className={style.icon}/>
                 </button>
-                {showMenu && (
+                {showMenu.language && (
                   <ul className={style.dropdownMenu}>
                     {locales.map(({ code, country_code }) => (
                       <li key={country_code}>
@@ -164,6 +174,27 @@ function NavBar({ heightNav }) {
                               closeMenu();
                             }}
                           ></span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              <div ref={dropdownRef} onMouseLeave={closeMenu}>
+                <button className={style.btnLink} onClick={() => toggleMenu("currency")}>
+                  <RiMoneyDollarCircleLine className={style.icon} />
+                </button>
+                {showMenu.currency && (
+                  <ul className={style.dropdownMenu}>
+                    {currency.map((currency_code) => (
+                      <li key={currency_code}>
+                        <button className={style.dropdownItem}>
+                          <span
+                            onClick={() => {
+                              dispatch(setCurrency(currency_code));
+                              closeMenu();
+                            }}
+                          >{currency_code}</span>
                         </button>
                       </li>
                     ))}

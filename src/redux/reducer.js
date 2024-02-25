@@ -28,7 +28,8 @@ import {
   DETAIL_FILTER_PARAMS,
   SET_SELECTED_OPTION,
   ADD_WEBSOCKET,
-  SET_WEBSOCKET
+  SET_WEBSOCKET,
+  SET_CURRENCY
 } from "./actions-types";
 
 let initialState = {
@@ -61,7 +62,8 @@ let initialState = {
     newChat: [],
     record: [],
     chat: [],
-  }
+  },
+  currency: "USD"
 };
 
 function rootReducer(state = initialState, action) {
@@ -286,6 +288,12 @@ function rootReducer(state = initialState, action) {
             record: action.payload.record,
             chat: action.payload.chat
           }
+        }
+
+      case SET_CURRENCY:
+        return{
+          ...state,
+          currency: action.payload
         }
 
     default:
