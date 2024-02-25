@@ -16,24 +16,29 @@ function CommentsInDetail() {
   const totalPages = Math.ceil(hotelComments.feedback?.count / commentsPerPage);
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACK_URL}/feedback/hotel/${id}?page=${currentPage}&limit=${commentsPerPage}`)
-      .then((response) => {
-        setHotelComments(response.data);        
-      })
-      .catch((error) => {
-        console.error("Error al obtener comentarios del hotel:", error);
-      });
+    const fetchdata = async () => {
+      await axios
+        .get(`${import.meta.env.VITE_BACK_URL}/feedback/hotel/${id}?page=${currentPage}&limit=${commentsPerPage}`)
+        .then((response) => {
+          setHotelComments(response.data);        
+        })
+        .catch((error) => {
+          console.error("Error al obtener comentarios del hotel:", error);
+        });
+    }
+
+    fetchdata()
   }, [currentPage]);
   
+  console.log(hotelComments);
   return (
     <div>
-      {hotelComments && hotelComments.feedback?.rows?.length > 0 ? (
+      {hotelComments && hotelComments.feedback?.rows.length > 0 ? (
         hotelComments.feedback.rows.map((comment) => (
           <div className={`${style.reviewsContainer} ${darkMode ? style.darkMode : ""}`} key={comment.id}>
             <div className={style.userInfo}>
-              <h2>{comment.user.name}</h2>
-              <p className={style.userNationality}>({comment.user.nationality})</p>
+              <h2>{comment.user && comment.user.name}</h2>
+              <p className={style.userNationality}>({comment.user && comment.user.nationality})</p>
               <div className={style.reviewScore}>{comment.score}⭐</div>
             </div>
             {
