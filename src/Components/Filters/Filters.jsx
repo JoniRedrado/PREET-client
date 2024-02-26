@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./Filters.module.css";
 import searchValidation from "../../helpers/searchValidation";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Filters = () => {
 
@@ -34,8 +35,35 @@ const Filters = () => {
   };
 
   const filters = useSelector((state) => state.submitFilters) || defaultFilters;
+  const globalCurrency = useSelector((state) => state.currency)
 
   const allCountries = useSelector((state) => state.countries);
+
+
+  const currencyConverter = async (value, name) => {
+
+    try {
+      const response = await axios.get(`https://openexchangerates.org/api/latest.json?app_id=${import.meta.env.VITE_CURRENCY_API}&base=USD`)
+      
+      const toCurrency = response.data.rates[globalCurrency]
+
+      const result = Math.round(value / toCurrency);
+
+      if (name === "minPrice") {
+          return { minPrice: result };
+        }
+
+      if (name === "maxPrice") {
+        return { maxPrice: result };
+      }
+      
+      return {};
+
+    } catch (error) {
+      console.error(error);
+      return {}
+    }
+  }
 
   const handleFilters = (e) => {
     e.preventDefault()
@@ -45,6 +73,29 @@ const Filters = () => {
       ...prevErrors,
       [name]: "",
     }));
+  };
+
+  const handlePriceFilter = async (e) => {
+    
+    const { name, value } = e.target;
+
+    try {
+      const convertedPrice = await currencyConverter(value, name)
+
+      if (convertedPrice && typeof convertedPrice === 'object') {
+        if (name === "minPrice") {
+          dispatch(filterParams({...filters, minPrice: convertedPrice.minPrice}))
+        }
+  
+        if (name === "maxPrice") {
+          dispatch(filterParams({...filters, maxPrice: convertedPrice.maxPrice}))
+        }
+      } else {
+        console.error("El resultado de currencyConverter no es válido:", convertedPrice)
+      }
+    } catch (error) {
+      console.error(error)
+    }
   };
 
   const handleReset = () => {
@@ -196,7 +247,7 @@ const Filters = () => {
         </div>
 
         <div className={styles.priceSelect}>
-          <p>{t("Filters.price")}</p>
+          <p>{t("Filters.price")} ({globalCurrency})</p>
           <div className={styles.inputContainer}>
             <input
               type="number"
@@ -205,9 +256,7 @@ const Filters = () => {
               placeholder="min"
               step="10"
               min="0"
-              max="10000"
-              value={filters.minPrice || ""}
-              onChange={handleFilters}
+              onBlur={handlePriceFilter}
               className={styles.input}
             />
           </div>
@@ -220,9 +269,7 @@ const Filters = () => {
               placeholder="max"
               step="10"
               min="0"
-              max="10000"
-              value={filters.maxPrice || ""}
-              onChange={handleFilters}
+              onBlur={handlePriceFilter}
               className={styles.input}
             />
           </div>
