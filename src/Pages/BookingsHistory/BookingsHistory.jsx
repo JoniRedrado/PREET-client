@@ -27,6 +27,8 @@ const BookingsHistory = () => {
     }
   };
 
+  console.log(userReservations);
+  
   const getUserReviews = async () => {
     try {
       const { data } = await axios.get(
@@ -61,7 +63,11 @@ const BookingsHistory = () => {
         <div className="dates">
           {userReservations.map((reservation) => {
             return (
-              <SingleBooking
+              <>
+              {console.log(reservation.pay)}
+              {reservation.pay !== 'Pending'
+                ? 
+                <SingleBooking
                 key={reservation.id}
                 bookingId={reservation.id}
                 hotelName={reservation.room.hotel.name}
@@ -74,7 +80,10 @@ const BookingsHistory = () => {
                 room={reservation.room.type}
                 roomId={reservation.roomId}
                 reviews={userReviews}
-              />
+                />
+                : ""
+              }
+              </>
             );
           })}
         </div>
