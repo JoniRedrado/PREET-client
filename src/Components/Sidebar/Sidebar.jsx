@@ -46,7 +46,6 @@ const Sidebar = () => {
     // const [name, setName] = useState('');
     // const [profilePicture, setProfilePicture] = useState('')
     const token = localStorage.getItem("token");
-    const rol = localStorage.getItem("rol");
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -58,6 +57,7 @@ const Sidebar = () => {
           },
         })
         .then((response) => {
+          console.log(response.data)
           setUserInfo({
             name:response.data.name,
             profilePicture: response.data.profile_picture,

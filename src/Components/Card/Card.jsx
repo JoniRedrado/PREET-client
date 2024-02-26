@@ -107,7 +107,13 @@ const Card = (props) => {
       ref={dataScroll.index === 0 ? dataScroll.refCard : null}
     >
       <div className={styles.cardImage}>
-        {token ? (
+        <img
+          src={image}
+          className={styles.mainImage}
+          alt="hotel"
+        />
+      </div>
+      {token ? (
           <div
             className={styles.favoriteIcon}
             onClick={handleFavoriteToggle}
@@ -121,12 +127,6 @@ const Card = (props) => {
         ) : (
           ""
         )}
-        <img
-          src={image}
-          className={styles.mainImage}
-          alt="hotel"
-        />
-      </div>
 
       <div className={styles.cardBody}>
         <div className={styles.cardTexts}>
@@ -134,7 +134,7 @@ const Card = (props) => {
             <h5 className={styles.cardTitle}>{name ? name : "N/A"}</h5>
             {ranking && (            
             <div className={styles.rankingDiv}>
-            <p className={styles.ranking}>{ranking.avarage} of 5</p>
+            <p className={styles.ranking}>{ranking.avarage.slice(0, 3)} of 5</p>
             <span className={styles.reviews}>({ranking.count} reviews)</span>
             </div>)}
           </div>
