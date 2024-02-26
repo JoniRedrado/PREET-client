@@ -2,14 +2,14 @@ import { useState, useEffect, Suspense } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-import {useDarkMode} from "../../DarkModeContext/DarkModeContext"
-
+import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
+import Profile from "../../assets/Profile.png";
 import style from "./CommentsInDetail.module.css";
 
 function CommentsInDetail() {
   const { id } = useParams();
   const { t } = useTranslation();
-  const {darkMode} = useDarkMode()
+  const { darkMode } = useDarkMode();
   const [hotelComments, setHotelComments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const commentsPerPage = 5;
@@ -18,34 +18,51 @@ function CommentsInDetail() {
   useEffect(() => {
     const fetchdata = async () => {
       await axios
-        .get(`${import.meta.env.VITE_BACK_URL}/feedback/hotel/${id}?page=${currentPage}&limit=${commentsPerPage}`)
+        .get(
+          `${
+            import.meta.env.VITE_BACK_URL
+          }/feedback/hotel/${id}?page=${currentPage}&limit=${commentsPerPage}`
+        )
         .then((response) => {
-          setHotelComments(response.data);        
+          setHotelComments(response.data);
         })
         .catch((error) => {
           console.error("Error al obtener comentarios del hotel:", error);
         });
-    }
+    };
 
-    fetchdata()
+    fetchdata();
   }, [currentPage]);
-  
+
   console.log(hotelComments);
   return (
     <div>
       {hotelComments && hotelComments.feedback?.rows.length > 0 ? (
         hotelComments.feedback.rows.map((comment) => (
-          <div className={`${style.reviewsContainer} ${darkMode ? style.darkMode : ""}`} key={comment.id}>
-            <div className={style.userInfo}>
-              <h2>{comment.user && comment.user.name}</h2>
-              <p className={style.userNationality}>({comment.user && comment.user.nationality})</p>
+          <div
+            className={`${style.reviewsContainer} ${
+              darkMode ? style.darkMode : ""
+            }`}
+            key={comment.id}
+          >
+            <div className={style.user}>
+              <div className={style.userImage}>
+                <img
+                  src={comment.user.profile_picture || Profile}
+                  alt="Profile Image"
+                />
+              </div>
+
+              <div className={style.userInfo}>
+                <h2>{comment.user && comment.user.name}</h2>
+                <p className={style.userNationality}>
+                  ({comment.user && comment.user.nationality})
+                </p>
+              </div>
+
               <div className={style.reviewScore}>{comment.score}⭐</div>
             </div>
-            {
-              comment.comment
-              ? <p>{comment.comment}</p>
-              : ""
-            }
+            {comment.comment ? <p>{comment.comment}</p> : ""}
           </div>
         ))
       ) : (
