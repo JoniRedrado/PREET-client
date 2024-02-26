@@ -65,3 +65,18 @@
         justify-content: center; /* Centra los elementos horizontalmente */
     }
 }
+.button{
+    color: white;
+    width: 100px;
+    height: 100%;
+    font-size: 15px;
+    font-weight: 600;
+    background-color:#022840;
+    border: none;
+    border-radius: 5px;
+    margin-top: 12px;
+}
+.button:hover{
+    cursor: pointer;
+    background-color: #6093C0;
+}

@@ -28,6 +28,8 @@
     "firebase": "^10.7.2",
     "flag-icon-css": "^4.1.7",
     "framer-motion": "^11.0.3",
+    "html2canvas": "^1.4.1",
+    "html2pdf.js": "^0.10.1",
     "i18next": "^23.9.0",
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-http-backend": "^2.4.3",
