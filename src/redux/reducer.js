@@ -29,7 +29,9 @@ import {
   SET_SELECTED_OPTION,
   ADD_WEBSOCKET,
   SET_WEBSOCKET,
-  SET_CURRENCY
+  SET_CURRENCY,
+  SET_HOTEL_ID,
+  SET_ROOM_ID
 } from "./actions-types";
 
 let initialState = {
@@ -63,7 +65,9 @@ let initialState = {
     record: [],
     chat: [],
   },
-  currency: "USD"
+  currency: "USD",
+  roomId: null,
+  hotelId:null,
 };
 
 function rootReducer(state = initialState, action) {
@@ -294,6 +298,18 @@ function rootReducer(state = initialState, action) {
         return{
           ...state,
           currency: action.payload
+        }
+
+      case SET_HOTEL_ID:
+        return{
+          ...state,
+          hotelId:action.payload
+        }
+
+      case SET_ROOM_ID:
+        return{
+          ...state,
+          roomId:action.payload
         }
 
     default:

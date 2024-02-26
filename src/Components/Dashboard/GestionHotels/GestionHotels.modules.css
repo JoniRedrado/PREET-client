@@ -7,6 +7,24 @@
   margin: 10px;
   gap: 10px;
 }
+.main-editable-hotel{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  margin: 10px;
+  gap: 10px;
+}
+
+
+.back-icon{
+  font-size: 40px;
+  color: #01283F;
+  cursor: pointer;
+}
+.back-icon:hover{
+  color: #6093C0;
+}
 
 .search-dashboard{
   display: flex;

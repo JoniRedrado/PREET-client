@@ -91,9 +91,9 @@ const Graphics = () => {
                     <BookingsChart startDate={startDate} endDate={endDate}/>
                     <RankingChart startDate={startDate} endDate={endDate}/>
                 </div>
-                <div>
-                    <button onClick={handleGeneratePDF} className={styles.button} >Generate PDF</button>
-                </div>
+            </div>
+            <div>
+                <button onClick={handleGeneratePDF} className={styles.button} >Generate PDF</button>
             </div>
         </div>
     );

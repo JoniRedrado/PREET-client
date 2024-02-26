@@ -48,7 +48,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/detail/:id" element={<Detail />} />
                 <Route path="/create" element={<CreatePage />} />
-                <Route path="/update/:id" element={<UpdatePage />} />
+                {/* <Route path="/update/:id" element={<UpdatePage />} /> */}
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/booked" element={<BookedSuccesfully />} />
                 <Route path="/search/" element={<SearchResult />} />
