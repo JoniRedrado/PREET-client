@@ -220,7 +220,7 @@
     "title": "Update Hotel",
     "name": "Name ",
     "address": "Address ",
-    "addressURL": "Address_url ",
+    "email": "Email ",
     "price": "Price ",
     "stars": "Stars",
     "country": "Country",
@@ -298,7 +298,8 @@
     "restore": "Restore",
     "selectType": "Select Type",
     "hotelName": "Hotel Name",
-    "action": "Action",
+    "delete": "Delete",
+    "update": "Modify",
     "swalErrorTitle": "Authentication Error",
     "swalErrorText": "You do not have administrator permissions"
   },

@@ -1,3 +1,12 @@
+.main-editable-room{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  margin: 10px;
+  gap: 10px;
+}
+
 .search-users select{
   width: 70%;
   border-radius: 8px;
@@ -34,6 +43,11 @@
 .table3 thead th {
   vertical-align: middle; 
   border-bottom: 2px solid #dee2e6;
+}
+.pagination-button.disabled {
+  background-color: #f0f0f0; /* Color de fondo gris para los botones deshabilitados */
+  color: #aaa; /* Color de texto gris para los botones deshabilitados */
+  cursor: not-allowed; /* Cambia el cursor a "no permitido" para indicar que el botón no es interactivo */
 }
 
 @media screen and (min-width: 1380px) {

@@ -12,11 +12,10 @@ import swal from "sweetalert";
 
 const UpdateForm = () => {
 
-  const { id } = useParams();
   const { t } = useTranslation();
   const countries = useSelector((state) => state.countries)
   const { darkMode } = useDarkMode();
-  const [loading, setLoading] = useState(false);
+  const id = useSelector((state) => state.hotelId) 
 
 
   const navigate = useNavigate();
@@ -133,6 +132,9 @@ const UpdateForm = () => {
     } catch (error) {
       console.error("Error updating room:", error);
     }
+    setTimeout(() => {
+      window.location.reload();
+    },2000)
   };
   
   return(
@@ -141,6 +143,7 @@ const UpdateForm = () => {
       <form onSubmit={handleSubmit} >
       <div  className={styles.fieldContainer}>
         <div className={styles.inputContainer}>
+        <span>{t("UpdateForm.name")}</span>
         <input 
         type="text" 
         name="name" 
@@ -151,6 +154,7 @@ const UpdateForm = () => {
         />
         </div>
         <div className={styles.inputContainer}>
+        <span>{t("UpdateForm.address")}</span>
         <input 
         type="text" 
         name="address" 
@@ -161,17 +165,7 @@ const UpdateForm = () => {
         />
         </div>
         <div className={styles.inputContainer}>
-        <input 
-        type="text" 
-        name="address_url" 
-        placeholder="Enter address URL" 
-        value={updateHotel.address_url} 
-        onChange={handleChange} 
-        className={styles.input}
-        />
-       
-        </div>
-        <div className={styles.inputContainer}>
+        <span>{t("UpdateForm.email")}</span>
         <input 
         type="text" 
         name="email" 
@@ -183,6 +177,7 @@ const UpdateForm = () => {
         </div>
         
         <div className={styles.inputContainer}>
+        <span>{t("UpdateForm.stars")}</span>
         <select 
           className={styles.starsSelect}
           name="stars"
@@ -197,6 +192,7 @@ const UpdateForm = () => {
         </select>
         </div>
         <div className={styles.inputContainer}>
+        <span>{t("UpdateForm.country")}</span>
           <select
             className={styles.countrySelect}
             name="countryId" 
@@ -225,9 +221,9 @@ const UpdateForm = () => {
           <label>{t("UpdateRooms.newImage")}</label>
           <input type="file" accept="image/*" onChange={handleImageChange} />
         </div>
-        <button type="submit">{t("UpdateRooms.update")}</button>
-     
-        
+        <div className={styles.buttonContainer}>
+          <button type="submit" className={styles.updateButton}>{t("UpdateRooms.update")}</button>
+        </div>  
       </form>
     </div>
   )

@@ -31,7 +31,9 @@ import {
   SET_SELECTED_OPTION,
   ADD_WEBSOCKET,
   SET_WEBSOCKET,
-  SET_CURRENCY
+  SET_CURRENCY,
+  SET_HOTEL_ID,
+  SET_ROOM_ID
 } from "./actions-types";
 
 export const getAllHotels = () => {
@@ -457,3 +459,21 @@ export const setCurrency = (option) => {
       payload:option,
   }
 }
+
+export const setHotelId = (id) => {
+  return function(dispatch){
+    dispatch({
+      type:SET_HOTEL_ID,
+      payload:id
+    })
+  }
+};
+
+export const setRoomId = (id) => {
+  return function(dispatch){
+    dispatch({
+      type:SET_ROOM_ID,
+      payload:id
+    })
+  }
+};

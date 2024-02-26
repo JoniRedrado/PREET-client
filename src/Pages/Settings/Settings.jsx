@@ -242,8 +242,8 @@ const Settings = () => {
               className={styles.select}
             >
               <option value="">{t("Settings.gendSelect")}</option>
-              <option value="male">{t("Settings.male")}</option>
-              <option value="female">{t("Settings.female")}</option>
+              <option value="Male">{t("Settings.male")}</option>
+              <option value="Female">{t("Settings.female")}</option>
             </select>
           ) : field === "phone_number" ? (
             <div className={styles.phoneInputContainer}>

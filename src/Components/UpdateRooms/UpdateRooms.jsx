@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import swal from "sweetalert";
+import { useSelector } from "react-redux"
 import "./UpdateRooms.modules.css";
 
 const roomsType = [
@@ -15,7 +16,7 @@ const roomsType = [
 ];
 
 const UpdateRooms = () => {
-  const { id } = useParams();
+  const id = useSelector((state) => state.roomId) 
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -132,7 +133,7 @@ const UpdateRooms = () => {
   };
 
   return (
-    <div className="main-container">
+    <div className="main-container-room">
       <form className="form" onSubmit={handleSubmit}>
         <h1 className="form-title">{t("UpdateRooms.title")}</h1>
         <div className="form-group">
@@ -147,7 +148,7 @@ const UpdateRooms = () => {
           </select>
         </div>
         <div className="form-group">
-          <label className="form-label1">{t("UpdateRooms.description")}</label>
+          <label className="form-label">{t("UpdateRooms.description")}</label>
           <textarea
             className="form-input1"
             type="text"
@@ -189,7 +190,9 @@ const UpdateRooms = () => {
           <label className="form-label">{t("UpdateRooms.newImage")}</label>
           <input className="form-input" type="file" accept="image/*" onChange={handleImageChange} />
         </div>
-        <button className="submit-btn" type="submit">{t("UpdateRooms.update")}</button>
+        <div className="button-container-room"> 
+          <button className="submit-btn" type="submit">{t("UpdateRooms.update")}</button>
+        </div>
       </form>
     </div>
   );

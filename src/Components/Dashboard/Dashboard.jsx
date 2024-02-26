@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Dashboard.module.css";
 import logo from "../../assets/Logo.svg";
 import { useSelector } from "react-redux";
-import { MdMenu } from "react-icons/md";
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext";
 import { useTranslation } from "react-i18next";
 import DashboardTools from "../DashboardTools/DashboardTools";
@@ -20,7 +19,6 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { darkMode } = useDarkMode();
   const { t } = useTranslation();
-  const [menuShow, setMenuShow] = useState(false);
   const selectedOption = useSelector((state) => state.selectedOption);
 
   const graphics = "Graphics";
@@ -30,9 +28,6 @@ const Dashboard = () => {
   const newHotel = "newHotel";
   const newRoom = "newRoom";
 
-  const handleMenu = () => {
-    setMenuShow(!menuShow);
-  };
 
   useEffect(() => {
     const checkAuth = async () => {
