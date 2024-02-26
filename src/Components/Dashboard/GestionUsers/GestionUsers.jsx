@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useEffect, useState, Suspense } from "react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { IoMdSkipBackward } from "react-icons/io";
+import { IoMdSkipForward } from "react-icons/io";
+import { IoCaretBackSharp } from "react-icons/io5";
+import { IoCaretForwardSharp } from "react-icons/io5";
 import "./GestionUsers.modules.css";
 
 const GestionUsers = () => {
@@ -74,6 +77,13 @@ const GestionUsers = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
+  };
+  const handleFirstPage = () => {
+    setCurrentPage(1);
+  };
+
+  const handleLastPage = () => {
+    setCurrentPage(totalPages);
   };
 
   const handleSearchInput = (event) => {
@@ -182,15 +192,21 @@ const GestionUsers = () => {
         </div>
       </div>
         {renderContent()}
-      <div className="pagination">
-        <button onClick={handlePreviousPage} disabled={currentPage === 1} className="pagination-button">
-          Prev
-        </button>
-        <span>{currentPage}</span>
-        <button onClick={handleNextPage} disabled={currentPage === totalPages} className="pagination-button">
-          Next
-        </button>
-      </div>
+        <div className="pagination">
+            <button onClick={handleFirstPage} disabled={currentPage === 1 || usersDelete.length === 0} className={`pagination-button ${currentPage === 1 || usersDelete.length === 0 ? "disabled" : ""}`}>
+              <IoMdSkipBackward className="icon-back"/>
+            </button>
+            <button onClick={handlePreviousPage} disabled={currentPage === 1 || usersDelete.length === 0} className={`pagination-button ${currentPage === 1 || usersDelete.length === 0 ? "disabled" : ""}`}>
+              < IoCaretBackSharp className="icon-back"/>
+            </button>
+            <span>{currentPage}</span>
+            <button onClick={handleNextPage} disabled={currentPage === totalPages || usersDelete.length === 0} className={`pagination-button ${currentPage === totalPages || usersDelete.length === 0 ? "disabled" : ""}`}>
+              <IoCaretForwardSharp className="icon-forward"/>
+            </button>
+            <button onClick={handleLastPage} disabled={currentPage === totalPages || usersDelete.length === 0} className={`pagination-button ${currentPage === totalPages || usersDelete.length === 0 ? "disabled" : ""}`}>
+              <IoMdSkipForward className="icon-forward"/>
+            </button>
+          </div>
     </div>
   );
 };

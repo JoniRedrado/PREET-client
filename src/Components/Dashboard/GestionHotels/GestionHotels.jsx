@@ -2,7 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { setHotelId } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
-import { IoArrowBackCircle, IoArrowForwardCircle } from "react-icons/io5";
+import { IoArrowBackCircle } from "react-icons/io5";
+import { IoMdSkipBackward } from "react-icons/io";
+import { IoMdSkipForward } from "react-icons/io";
+import { IoCaretBackSharp } from "react-icons/io5";
+import { IoCaretForwardSharp } from "react-icons/io5";
 import "./GestionHotels.modules.css";
 import UpdatePage from "../../../Pages/Update/UpdatePage";
 
@@ -165,18 +169,18 @@ const GestionHotels = () => {
             </tbody>
           </table>
           <div className="pagination">
-            <button onClick={handleFirstPage} disabled={currentPage === 1} className="pagination-button">
-              &#8810; First
+            <button onClick={handleFirstPage} disabled={currentPage === 1 || hotelDelete.length === 0} className={`pagination-button ${currentPage === 1 || hotelDelete.length === 0 ? "disabled" : ""}`}>
+              <IoMdSkipBackward className="icon-back"/>
             </button>
-            <button onClick={handlePreviousPage} disabled={currentPage === 1} className="pagination-button">
-              &#60; Prev
+            <button onClick={handlePreviousPage} disabled={currentPage === 1 || hotelDelete.length === 0} className={`pagination-button ${currentPage === 1 || hotelDelete.length === 0 ? "disabled" : ""}`}>
+              < IoCaretBackSharp className="icon-back"/>
             </button>
             <span>{currentPage}</span>
-            <button onClick={handleNextPage} disabled={currentPage === totalPages} className="pagination-button">
-              Next &#62;
+            <button onClick={handleNextPage} disabled={currentPage === totalPages || hotelDelete.length === 0} className={`pagination-button ${currentPage === totalPages || hotelDelete.length === 0 ? "disabled" : ""}`}>
+              <IoCaretForwardSharp className="icon-forward"/>
             </button>
-            <button onClick={handleLastPage} disabled={currentPage === totalPages} className="pagination-button">
-              Last &#8811;
+            <button onClick={handleLastPage} disabled={currentPage === totalPages || hotelDelete.length === 0} className={`pagination-button ${currentPage === totalPages || hotelDelete.length === 0 ? "disabled" : ""}`}>
+              <IoMdSkipForward className="icon-forward"/>
             </button>
           </div>
         </div>
@@ -240,18 +244,18 @@ const GestionHotels = () => {
             </tbody>
           </table>
           <div className="pagination">
-            <button onClick={handleFirstPage} disabled={currentPage === 1} className="pagination-button">
-              &#8810; First
+            <button onClick={handleFirstPage} disabled={currentPage === 1} className={`pagination-button ${currentPage === 1 ? "disabled" : ""}`}>
+              <IoMdSkipBackward className="icon-back"/>
             </button>
-            <button onClick={handlePreviousPage} disabled={currentPage === 1} className="pagination-button">
-              &#60; Prev
+            <button onClick={handlePreviousPage} disabled={currentPage === 1} className={`pagination-button ${currentPage === 1 ? "disabled" : ""}`}>
+              < IoCaretBackSharp className="icon-back"/>
             </button>
             <span>{currentPage}</span>
-            <button onClick={handleNextPage} disabled={currentPage === totalPages} className="pagination-button">
-              Next &#62;
+            <button onClick={handleNextPage} disabled={currentPage === totalPages} className={`pagination-button ${currentPage === totalPages ? "disabled" : ""}`}>
+              <IoCaretForwardSharp className="icon-forward"/>
             </button>
-            <button onClick={handleLastPage} disabled={currentPage === totalPages} className="pagination-button">
-              Last &#8811;
+            <button onClick={handleLastPage} disabled={currentPage === totalPages} className={`pagination-button ${currentPage === totalPages ? "disabled" : ""}`}>
+              <IoMdSkipForward className="icon-forward"/>
             </button>
           </div>
         </div>
