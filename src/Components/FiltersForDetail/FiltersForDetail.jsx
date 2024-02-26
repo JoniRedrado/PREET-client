@@ -28,28 +28,31 @@ const FiltersForDetail = () => {
   const hotelDetail = useSelector((state) => state.hotelDetail);
   const filters = useSelector((state) => state.submitFilters) || defaultFilters;
   const globalCurrency = useSelector((state) => state.currency)
-  const [convertedPrice, setConvertedPrice] = useState(1)
 
-  const currencyConverter = async (fromCurrency) => {
-
-    console.log("Currency from", globalCurrency);
+  const currencyConverter = async (value, name) => {
 
     try {
       const response = await axios.get(`https://openexchangerates.org/api/latest.json?app_id=${import.meta.env.VITE_CURRENCY_API}&base=USD`)
-    
+      
       const toCurrency = response.data.rates[globalCurrency]
-  
-      console.log(toCurrency);
 
-      const result = Math.round(fromCurrency / toCurrency);
+      const result = Math.round(value / toCurrency);
 
-      setConvertedPrice(result)
+      if (name === "minPrice") {
+          return { minPrice: result };
+        }
+
+      if (name === "maxPrice") {
+        return { maxPrice: result };
+      }
+      
+      return {};
+
     } catch (error) {
-      console.error(error)
+      console.error(error);
+      return {}
     }
   }
-
-  console.log(convertedPrice);
 
   const handleFilters = (e) => {
     e.preventDefault()
@@ -61,6 +64,28 @@ const FiltersForDetail = () => {
     }));
   };
 
+  const handlePriceFilter = async (e) => {
+    
+    const { name, value } = e.target;
+
+    try {
+      const convertedPrice = await currencyConverter(value, name)
+
+      if (convertedPrice && typeof convertedPrice === 'object') {
+        if (name === "minPrice") {
+          dispatch(filterParams({...filters, minPrice: convertedPrice.minPrice}))
+        }
+  
+        if (name === "maxPrice") {
+          dispatch(filterParams({...filters, maxPrice: convertedPrice.maxPrice}))
+        }
+      } else {
+        console.error("El resultado de currencyConverter no es válido:", convertedPrice)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  };
   
   const getCurrentDate = () => {
     const now = new Date()
@@ -73,8 +98,6 @@ const FiltersForDetail = () => {
     
     return `${year}-${formattedMont}-${formattedDay}`
   }
-  
-  console.log(filters);
 
   const applyFilters = async (e) => {
 
@@ -85,15 +108,13 @@ const FiltersForDetail = () => {
     const errorsValidation = searchValidation(filters.startDate, filters.endDate, t)
     
     if(Object.keys(errorsValidation).length === 0) {
-      
-        dispatch(filterParams({...filters, [name]: value}))
 
         setErrors((prevErrors) => ({
           ...prevErrors,
           [name]: "",
         }));
 
-        dispatch(getDetail(id, {...filters, [name]: convertedPrice}))
+        dispatch(getDetail(id, {...filters, [name]: value}))
         setFiltersApplied(true);
 
     } else {
@@ -161,9 +182,8 @@ const FiltersForDetail = () => {
               name="minPrice"
               placeholder="min"
               step="10"
-              min="0"
-              value={filters.minPrice || ""}
-              onChange={handleFilters}
+              min="0"              
+              onBlur={handlePriceFilter}
               className={styles.input}
             />
           </div>
@@ -176,8 +196,7 @@ const FiltersForDetail = () => {
               placeholder="max"
               step="10"
               min="0"
-              value={filters.maxPrice || ""}
-              onChange={handleFilters}
+              onBlur={handlePriceFilter}
               className={styles.input}
             />
           </div>
