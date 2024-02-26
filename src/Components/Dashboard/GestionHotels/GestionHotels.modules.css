@@ -141,19 +141,24 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  border-top: 1px solid rgb(180, 175, 175);
+  border-bottom: 1px solid rgb(180, 175, 175);
 }
 
 
 .pagination-button {
   background-color: #01283F;
   color: #fff;
-  padding: 10px 20px;
+  width: 30PX;
+  height: 30px;
   border: none;
-  border-radius: 4px;
+  border-radius: 50%;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   margin: 0 5px;
   transition: background-color 0.3s ease;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .pagination-button:hover {

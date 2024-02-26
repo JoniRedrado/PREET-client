@@ -45,9 +45,9 @@
   border-bottom: 2px solid #dee2e6;
 }
 .pagination-button.disabled {
-  background-color: #f0f0f0; /* Color de fondo gris para los botones deshabilitados */
-  color: #aaa; /* Color de texto gris para los botones deshabilitados */
-  cursor: not-allowed; /* Cambia el cursor a "no permitido" para indicar que el botón no es interactivo */
+  background-color: #f0f0f0; 
+  color: #aaa; 
+  cursor: not-allowed; 
 }
 
 @media screen and (min-width: 1380px) {
