@@ -16,7 +16,7 @@ const ChatBotMessage = ({ message, rol, moveScroll }) => {
                     {rol === 'user' ? <FaRegUser /> : <BsRobot />}
                 </IconContext.Provider>
             </div>
-            <div >
+            <div>
                 <span className={style.nameUser}>{rol === 'user' ? 'Yo: ' : 'PreetBot: '}</span>
                 <span className={style.message}>{message}</span>
             </div>

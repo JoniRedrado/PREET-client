@@ -34,6 +34,9 @@ const ChatBotWindow = ({setCloseWindow}) => {
         dispatch(addWebSocketData(data, 'bot'));
     });
 
+    socket?.on("error_Chat", (data) => {
+        console.log('Error chatBot: ' + data);
+    });
 
     const setCloseWindowAndSocket = () => {
         setCloseWindow();
