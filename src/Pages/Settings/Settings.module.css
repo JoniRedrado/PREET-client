@@ -172,8 +172,8 @@
 
 .imageContainer{
   background-color: #6093C0;
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
   display:flex;
   align-items: center;
   justify-content: center;
@@ -186,8 +186,9 @@
   font-size: 60px;
   font-weight: 500;
 }
-.picture{
-  width: 100%;
+.picture1{
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
 }
 
@@ -203,7 +204,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 40%;
+  width: 55%;
 }
 
 .inputDiv{
@@ -230,16 +231,21 @@
 }
 
 .noEditableDiv{
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-end;
+  gap: 10px;
 }
 
 .editableDiv{
   display: flex;
-  gap: 10px;
-  justify-content: flex-end;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
 }
 .editImage{
   padding: 10px 20px;
@@ -257,7 +263,7 @@
 }
 
 .imageButton{
-  padding: 10px 20px;
+  padding: 10px 26px;
   font-size: 16px;
   cursor: pointer;
   border: none;
@@ -269,4 +275,23 @@
 .imageButton:hover{
   background-color: #6093C0;
   cursor: pointer;
+}
+
+.picture{
+  width: 150px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.fieldContainer2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.fieldName{
+  font-size: 18px;
+  color: #555;
 }

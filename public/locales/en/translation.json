@@ -165,7 +165,8 @@
     "gender": "Gender",
     "phone": "Phone number",
     "nationality": "Nationality",
-    "addA": "Add a"
+    "addA": "Add a",
+    "profile_pic" : "Profile picture"
   },
   "Register": {
     "title": "Join PREET!",

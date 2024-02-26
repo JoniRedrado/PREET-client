@@ -6,7 +6,6 @@ import './GestionRooms.modules.css'
 
 const GestionRooms = () => {
   const { t } = useTranslation();
-  const [showItem, setShowItem] = useState(false)
   const [roomsData, setRoomsData] = useState([]);
   const [roomsDelete, setRoomsDelete] = useState([]);
   const [showDeletedRooms, setShowDeletedRooms] = useState(false);
@@ -25,9 +24,6 @@ const GestionRooms = () => {
     "Suite Presidencial",
   ];
 
-  const handleClick = () => {
-    setShowItem(!showItem)
-  }
   const getRooms = async () => {
     try {
       const { data } = await axios.get(
@@ -108,7 +104,7 @@ const GestionRooms = () => {
     setShowDeletedRooms(!showDeletedRooms);
     setCurrentPage(1);
   };  
-  
+
   const renderContent = () => {
     if (showDeletedRooms) {
       return (

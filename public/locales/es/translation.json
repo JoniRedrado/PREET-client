@@ -167,7 +167,8 @@
     "gender": "género",
     "phone": "teléfono",
     "nationality": "nacionalidad",
-    "addA": "Agregar"
+    "addA": "Agregar",
+    "profile_pic": "Foto de perfil"
   },
   "Register": {
     "title": "Únete a PREET!",
