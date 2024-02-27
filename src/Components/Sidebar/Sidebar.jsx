@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import logo from "../../assets/LogoAzulClaro.png"
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 
@@ -45,17 +45,15 @@ const Sidebar = () => {
     })
     // const [name, setName] = useState('');
     // const [profilePicture, setProfilePicture] = useState('')
-    const token = localStorage.getItem("token");
+    const token = useSelector((state => state.token));
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
+      const rol = localStorage.getItem("rol");
+      
       axios
-        .get(`${import.meta.env.VITE_BACK_URL}/users/profile`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .get(`${import.meta.env.VITE_BACK_URL}/users/profile`)
         .then((response) => {
           console.log(response.data)
           setUserInfo({
@@ -71,16 +69,16 @@ const Sidebar = () => {
     }, [token]);
 
     function logout(option) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("rol");
-        dispatch(showModal(option, false));
-        dispatch(userLog());
-        navigate("/");
-      }
+      localStorage.removeItem("token");
+      localStorage.removeItem("rol");
+      dispatch(showModal(option, false));
+      dispatch(userLog());
+      navigate("/");
+    }
 
     const handleDrawerOpen = () => {
-        setOpenDrawer(true);
-      };
+      setOpenDrawer(true);
+    };
     
     const handleDrawerClose = () => {
         setOpenDrawer(false);

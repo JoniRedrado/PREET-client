@@ -16,7 +16,7 @@ const UserFavorites = () => {
   const { t } = useTranslation();
   const favorites = useSelector((state) => state.userFavorites);
 
-  const token = localStorage.getItem('token')
+  const token = useSelector(state => state.token);
 
   const handleRemoveFavorite = (hotelId) => {
     dispatch(removeFavorite(hotelId)).then(() => {
@@ -34,8 +34,8 @@ const UserFavorites = () => {
   };
 
   useEffect(() => {
-    dispatch(userFavorites(token));
-  }, [dispatch]);
+    dispatch(userFavorites());
+  }, [token]);
 
   return (
     <div className="favorites-main-container">

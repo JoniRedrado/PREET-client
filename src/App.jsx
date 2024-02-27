@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Detail from "./Pages/Detail/Detail";
 import CreatePage from "./Pages/Create/CreatePage";
@@ -26,11 +26,32 @@ import NewRegister from "./Pages/NewRegister/NewRegister";
 import NewLogin from "./Pages/NewLogin/NewLogin";
 import Graphics from "./Components/Dashboard/Metrics/Graphics"
 import ChatBotBottom from "./Components/ChatBotBottom/ChatBotBottom";
+import { axiosInterceptorRequest } from "./Components/Auth/Auth";
+import { useDispatch, useSelector } from "react-redux";
+import { setToken } from "./redux/actions";
+import { useEffect } from "react";
 // import './App.css'
 
-function App() {
+axiosInterceptorRequest();
 
+function App() {
+  const token = useSelector((state) => state.token);
   const { darkMode } = useDarkMode();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    (async function(){
+      try{
+        const tokenState = await axios.get(`${import.meta.env.VITE_BACK_URL}/verify`);
+        if(tokenState.message === 'Token ok') dispatch(setToken(true));
+      }catch(error){
+        navigate('/');
+        console.log('token fail');
+      }
+    })();
+  }, [token]);
   
   return (
     <div className={`${styles.mainDiv} ${darkMode ? styles.darkMode : ''}`}>

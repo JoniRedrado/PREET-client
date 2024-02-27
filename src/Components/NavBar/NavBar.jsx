@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import template from "../../assets/Logo-White.svg";
 import template2 from "../../assets/Logo.svg";
 import Sidebar from "../Sidebar/Sidebar";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaUserPlus } from "react-icons/fa";
 import { BsLock } from "react-icons/bs";
 import { getAllHotels, resetCurrentPage, resetFiltersParams, setCurrency } from "../../redux/actions";
@@ -19,7 +19,7 @@ import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import axios from "axios";
 
 function NavBar({ heightNav }) {
-  const token = localStorage.getItem("token");
+  const token = useSelector((state) => state.token);
   const { darkMode, toggleDarkMode } = useDarkMode();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -34,11 +34,7 @@ function NavBar({ heightNav }) {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACK_URL}/users/profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(`${import.meta.env.VITE_BACK_URL}/users/profile`)
       .then((response) => {
         setUserInfo({
           name:response.data.name,
@@ -46,9 +42,8 @@ function NavBar({ heightNav }) {
           profilePicture: response.data.profile_picture,
         })
       })
-
       .catch((error) => {
-        console.error(error);
+        console.log(error.message);
       });
   }, [token]);
 
