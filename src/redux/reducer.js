@@ -27,6 +27,7 @@ import {
   REMOVE_FAVORITE,
   DETAIL_FILTER_PARAMS,
   SET_SELECTED_OPTION,
+  SET_WEBSOCKET_ITEM,
   ADD_WEBSOCKET,
   SET_WEBSOCKET,
   SET_CURRENCY,
@@ -274,14 +275,15 @@ function rootReducer(state = initialState, action) {
       }
 
     case ADD_WEBSOCKET:
-      const chatItem = state.webSocket.chatItem;
+      const chatItemAux = state.webSocket.chatItem;
 
       return{
         ...state,
         webSocket:{ 
           ...state.webSocket,
-          chat: chatItem === 2 ? [...state.webSocket.chat, action.payload] : [...state.webSocket.chat],
-          newChat: chatItem === 1 ? [...state.webSocket.newChat, action.payload] : [...state.webSocket.newChat]
+          chatItem: chatItemAux === 1 ? 2 : chatItemAux,
+          chat: chatItemAux == 1 ? [action.payload] : chatItemAux == 2 ? [...state.webSocket.chat, action.payload] : [...state.webSocket.chat],
+          //newChat: chatItemAux === 1 ? [...state.webSocket.newChat, action.payload] : [...state.webSocket.newChat]
         }
       }
     
@@ -293,6 +295,15 @@ function rootReducer(state = initialState, action) {
             chatItem:  action.payload.chat.length === 0 ? 1 : 2,
             record: action.payload.record,
             chat: action.payload.chat
+          }
+        }
+
+      case SET_WEBSOCKET_ITEM:
+        return{
+          ...state,
+          webSocket:{
+            ...state.webSocket,
+            chatItem: action.payload
           }
         }
 

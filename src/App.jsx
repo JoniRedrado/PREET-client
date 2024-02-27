@@ -30,6 +30,7 @@ import { axiosInterceptorRequest } from "./Components/Auth/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "./redux/actions";
 import { useEffect } from "react";
+import axios from "axios";
 // import './App.css'
 
 axiosInterceptorRequest();
@@ -44,11 +45,14 @@ function App() {
   useEffect(() => {
     (async function(){
       try{
-        const tokenState = await axios.get(`${import.meta.env.VITE_BACK_URL}/verify`);
-        if(tokenState.message === 'Token ok') dispatch(setToken(true));
+        const { data } = await axios.get(`${import.meta.env.VITE_BACK_URL}/verify`);
+        if(data.message === 'Token ok'){
+          console.log('token ok');
+          dispatch(setToken(true));
+        } 
       }catch(error){
         navigate('/');
-        console.log('token fail');
+        console.log('token fail:');
       }
     })();
   }, [token]);
