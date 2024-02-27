@@ -17,7 +17,9 @@ const ChatBotMessageHome = ({ socket }) => {
             </div>
             <div className={style.bottomDiv}>
                 <div className={style.bottomStyle}
-                     onClick={() => socket?.emit('chat_message', 'Inicia actividad chatBot')}>
+                     onClick={() => {
+                        socket?.emit('chat_message', 'Inicia actividad chatBot')
+                     }}>
                         Consulta general
                 </div>
                 <div className={style.bottomStyle}>Consulta sobre una reserva</div>

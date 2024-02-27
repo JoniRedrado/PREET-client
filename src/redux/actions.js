@@ -29,6 +29,7 @@ import {
   REMOVE_FAVORITE,
   DETAIL_FILTER_PARAMS,
   SET_SELECTED_OPTION,
+  SET_WEBSOCKET_ITEM,
   ADD_WEBSOCKET,
   SET_WEBSOCKET,
   SET_CURRENCY,
@@ -429,6 +430,13 @@ export const addWebSocketData = (message, rol) => {
 export const setWebSocketData = (data) => {
   return{
     type: SET_WEBSOCKET,
+    payload: data
+  }
+}
+
+export const setWebSocketItem = (data) => {
+  return{
+    type: SET_WEBSOCKET_ITEM,
     payload: data
   }
 }

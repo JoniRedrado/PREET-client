@@ -8,14 +8,14 @@ import { useState } from "react";
 const ChatBotInput = ({ sendData }) => {
     const [inputText, setInputText] = useState("");
 
-    const { chatItem, newChat } = useSelector((state) => state.webSocket);
+    const { chatItem, chat } = useSelector((state) => state.webSocket);
 
     const sendMessage = () => {
         sendData(inputText);
         setInputText("");
     }
 
-    const activate = chatItem && newChat?.length > 0;
+    const activate = chatItem && chat?.length > 0;
 
     return(<>
         <div className={style.divGeneral}>
