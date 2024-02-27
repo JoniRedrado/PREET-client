@@ -6,6 +6,8 @@ import {GoogleAuthProvider,
     } from "firebase/auth"
 
 import { loginFireBase } from '../Components/Auth/Auth';
+import { setToken } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 export const authContext = createContext()
 
@@ -17,8 +19,9 @@ export const useAuth = () => {
 }
 
 export function AuthProvider({children}){
-
     const [user, setUser] = useState(null)
+
+    const dispatch = useDispatch();
 
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, (currentUser) =>{
@@ -39,6 +42,7 @@ export function AuthProvider({children}){
             
             if(_tokenResponse){
                 const data = await loginFireBase(_tokenResponse);
+                dispatch(setToken(true));
                 setUser(user);
                 return data;
             }

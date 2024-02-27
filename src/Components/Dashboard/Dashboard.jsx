@@ -32,7 +32,7 @@ const Dashboard = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = useSelector((state => state.token));
         const rol = localStorage.getItem("rol");
 
         if (token && rol === "admin") {

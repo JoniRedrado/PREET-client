@@ -3,7 +3,10 @@ import ChatBotMessages from "../ChatBotMessages/ChatBotMessages";
 import ChatBotHeader from "../ChatBotHeader/ChatBotHeader";
 import ChatBotInput from "../ChatBotInput/ChatBotInput";
 import style from "./ChatBotWindow.module.css";
+import { setToken } from "../../redux/actions";
 import { useDispatch } from "react-redux";
+import axios from "axios";
+
 import io from "socket.io-client";
 
 const ChatBotWindow = ({setCloseWindow}) => {
@@ -25,13 +28,21 @@ const ChatBotWindow = ({setCloseWindow}) => {
     });
 
     socket?.on("set_Chats", (data) => {
-        //console.log(data);
         dispatch(setWebSocketData(data));
     });
 
     socket?.on("chat_message", (data) => {
-        //console.log(data);
-        dispatch(addWebSocketData(data, 'bot'));
+        if(data === 'Token Invalid'){
+            (async function () {
+                try{
+                  await axios.get(`${import.meta.env.VITE_BACK_URL}/verify`);
+                }catch(error){
+                  console.log('token fail');
+                }
+            })();
+        }else{
+            dispatch(addWebSocketData(data, 'bot'));
+        }
     });
 
     socket?.on("error_Chat", (data) => {

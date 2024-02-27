@@ -26,7 +26,7 @@ const Card = (props) => {
     avarage: ""
   })
   const [isMapOpen, setIsMapOpen] = useState(false);
-  const token = localStorage.getItem("token");
+  const token = useSelector((state) => state.token);
   const globalCurrency = useSelector((state) => state.currency)
   const [convertedPrice, setConvertedPrice] = useState(null)
 

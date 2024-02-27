@@ -12,12 +12,11 @@ const Header = () => {
   const darkMode = useDarkMode();
   const { t } = useTranslation();
 
-  const renderHeaderContent = () => {
-    
+  const renderHeaderContent = () => {   
     if (pathname === "/") {
       return (
         <header
-          className={`${styles.header1} ${darkMode ? styles.darkMode : ""}`}
+          className={`${styles.divHeader} ${darkMode.darkMode ? styles.darkMode : styles.header1}`}
         >
           <div className={styles.headerContainer}>
             <div className={styles.navbarContainer}>

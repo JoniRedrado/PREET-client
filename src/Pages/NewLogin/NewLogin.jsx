@@ -14,6 +14,8 @@ import image2 from "../../assets/slider2.jpg";
 import image3 from "../../assets/slider3.jpg";
 import image4 from "../../assets/slider4.jpg";
 import google from "../../assets/google.png";
+import { setToken } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 
 const images = [image1, image2, image3, image4];
 
@@ -26,12 +28,15 @@ const NewLogin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const dispatch = useDispatch();
+
   const handleLogin = async () => {
     try {
       const data = await login(email, password);
       if (!data || data.error) {
         setError(t("Login.error"));
       } else {
+        dispatch(setToken(true));
         navigate(data.rol === "admin" ? "/dashboard" : "/");
       }
     } catch (error) {

@@ -1,7 +1,7 @@
-import axios from "axios";
-import swal from "sweetalert";
 import { useTranslation } from "react-i18next";
 import { t } from "i18next";
+import axios from "axios";
+
 
 /*export async function login(email, password) {
   const { t } = useTranslation();
@@ -40,28 +40,39 @@ import { t } from "i18next";
     throw error;
   }
 }*/
+const saveTokenAndDataUser = (data) => {
+  const expirationDate = new Date();
+  expirationDate.setSeconds(expirationDate.getSeconds() + 7200); // 2 horas de expiración
+  
+  localStorage.setItem('expirationDate', expirationDate.getTime()); // Guardar la fecha de expiración en milisegundos
+  localStorage.setItem('rol', data.user.rol);
+  localStorage.setItem('token', data.token);
+
+  // Establecer temporizador para la alerta de expiración
+  const alertTime = new Date(expirationDate.getTime() - 60000); // Mostrar alerta 1 minuto antes de la expiración
+  
+  /*setTimeout(() => {
+    swal("Alerta", "Tu sesión está a punto de expirar. Por favor, cierra sesión si has terminado.", "warning");
+  }, alertTime.getTime() - Date.now());*/
+
+  setTimeout(async () => {
+    try{
+      await axios.get(`${import.meta.env.VITE_BACK_URL}/verify`);
+    }catch(error){
+      console.log('token fail');
+    }
+  }, alertTime.getTime() - Date.now() + 60000);
+}
+
 export async function login(email, password) {
   try {
       const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/users/login`, { email, password });
       if (response.status === 200 && response.data.token && response.data.user && response.data.user.rol) {
-          const expirationDate = new Date();
-          expirationDate.setSeconds(expirationDate.getSeconds() + 7200); // 2 horas de expiración
-          localStorage.setItem('token', response.data.token );
-          localStorage.setItem(expirationDate, expirationDate.getTime()); // Guardar la fecha de expiración en milisegundos
-
-          localStorage.setItem('rol', response.data.user.rol);
-
-          // Establecer temporizador para la alerta de expiración
-          const alertTime = new Date(expirationDate.getTime() - 60000); // Mostrar alerta 1 minuto antes de la expiración
-          setTimeout(() => {
-              swal("Alerta", "Tu sesión está a punto de expirar. Por favor, cierra sesión si has terminado.", "warning");
-          }, alertTime.getTime() - Date.now());
-
+          saveTokenAndDataUser(response.data);
           return { token: response.data.token, rol: response.data.user.rol };
       } else if (response.status === 200 && response.data.message) {
           return {message: response.data.message};
-      }
-       else {
+      }else {
           throw new Error(response.data.message || 'Error de inicio de sesión');
       }
   } catch (error) {
@@ -78,7 +89,7 @@ export async function loginFireBase({ email, firstName, lastName }) {
     );
 
     if (response.status === 200 && response.data.token) {
-      localStorage.setItem(`token`, response.data.token);
+      saveTokenAndDataUser(response.data);
 
       return { token: response.data.token };
     } else if (response.status === 200 && response.data.message) {
@@ -123,29 +134,17 @@ export  async function register({name, last_name, email, password, nationality})
 // }
 
 // Interceptar las solicitudes salientes y adjuntar el token JWT en el encabezado de autorización
-axios.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem(`token`);
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+export function axiosInterceptorRequest(){
+  axios.interceptors.request.use(
+    (config) => {
+      const token = localStorage.getItem(`token`);
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
     }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-// Manejar errores de autenticación, como credenciales incorrectas o tokens inválidos
-axios.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    if (error.response && error.response.status === 403) {
-      // Manejar el token inválido aquí
-      console.error(`Token inválido:`, error.response.data.error);
-    }
-    return Promise.reject(error);
-  }
-);
+  )
+}

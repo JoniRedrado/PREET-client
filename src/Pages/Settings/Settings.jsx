@@ -4,6 +4,7 @@ import axios from "axios";
 import { countries } from "countries-list";
 import { useTranslation } from "react-i18next";
 import styles from "./Settings.module.css";
+import { useSelector } from "react-redux";
 // import FileInput from "../../Components/FileInput/FileInput";
 import Avatar from "react-avatar-edit";
 
@@ -47,15 +48,11 @@ const Settings = () => {
     setPreview(null);
   };
 
-  const token = localStorage.getItem("token");
+  const token = useSelector(state => state.token);
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACK_URL}/users/profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(`${import.meta.env.VITE_BACK_URL}/users/profile`)
       .then((response) => {
         setUserInfo({
           name: response.data.name,
@@ -145,11 +142,7 @@ const Settings = () => {
     }
   
     axios
-      .put(`${import.meta.env.VITE_BACK_URL}/users/profile`, updatedUserInfo, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .put(`${import.meta.env.VITE_BACK_URL}/users/profile`, updatedUserInfo)
       .then((response) => {
         setUserInfo(updatedUserInfo);
         setEditableFields({

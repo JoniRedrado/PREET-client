@@ -33,7 +33,8 @@ import {
   SET_WEBSOCKET,
   SET_CURRENCY,
   SET_HOTEL_ID,
-  SET_ROOM_ID
+  SET_ROOM_ID,
+  SET_TOKEN
 } from "./actions-types";
 
 export const getAllHotels = () => {
@@ -282,17 +283,11 @@ export const getAllFavorites = () => {
   };
 };
 
-export const userFavorites = (token) => {
+export const userFavorites = () => {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BACK_URL}/favorites/user`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+        `${import.meta.env.VITE_BACK_URL}/favorites/user`);
 
       console.log(response.data.favorites);
       return dispatch({
@@ -305,17 +300,11 @@ export const userFavorites = (token) => {
   };
 };
 
-export const getUserReviews = (token) => {
+export const getUserReviews = () => {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BACK_URL}/feedback/user`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+        `${import.meta.env.VITE_BACK_URL}/feedback/user`);
 
       console.log(response.data);
       return dispatch({
@@ -457,6 +446,13 @@ export const setCurrency = (option) => {
   return {
       type:SET_CURRENCY,
       payload:option,
+  }
+}
+
+export const setToken = (value) => {
+  return{
+    type:SET_TOKEN,
+    payload:value
   }
 }
 

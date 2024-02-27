@@ -1,13 +1,16 @@
-.header1 {
+.divHeader{
   position: relative;
   height: 700px;
-  background: url("../../assets/header-background-light.jpg") top/cover no-repeat;
   color: #fff;
   display: flex;
   justify-content: center;
 }
 
-.header1.darkMode{
+.header1 {
+  background: url("../../assets/header-background-light.jpg") top/cover no-repeat;
+}
+
+.darkMode{
   background: url("../../assets/header-background-dark.jpg") top/cover no-repeat;
 }
 

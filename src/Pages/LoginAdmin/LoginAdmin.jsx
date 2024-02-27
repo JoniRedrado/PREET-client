@@ -1,11 +1,11 @@
-import { useState, Suspense } from "react";
-import { useDispatch } from "react-redux";
-import { showModal } from "../../redux/actions";
-import { login } from "../../Components/Auth/Auth";
+import { showModal, setToken } from "../../redux/actions";
 import { useAuth } from "../../context/authContext";
+import { login } from "../../Components/Auth/Auth";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import styles from "./LoginAdmin.module.css";
+import { useState, Suspense } from "react";
+import { useDispatch } from "react-redux";
 
 const LoginAdmin = () => {
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ const LoginAdmin = () => {
         setError("Invalid Email or Password");
       } else {
         if (data.rol === "admin") {
+          dispatch(setToken(true));
           navigate("/dashboard");
         } else {
           window.alert("tu usuario no es admin");

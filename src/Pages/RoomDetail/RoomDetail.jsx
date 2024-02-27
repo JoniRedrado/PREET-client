@@ -19,7 +19,7 @@ const RoomDetail = ({ room }) => {
   const globalCurrency = useSelector((state) => state.currency)
   const [convertedPrice, setConvertedPrice] = useState(globalCurrency)
 
-  const token = localStorage.getItem("token");
+  const token = useSelector(state => state.token);
 
   const handleBook = () => {
     if (!filters.startDate || !filters.endDate) {

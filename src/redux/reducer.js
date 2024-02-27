@@ -31,7 +31,8 @@ import {
   SET_WEBSOCKET,
   SET_CURRENCY,
   SET_HOTEL_ID,
-  SET_ROOM_ID
+  SET_ROOM_ID,
+  SET_TOKEN
 } from "./actions-types";
 
 let initialState = {
@@ -68,6 +69,7 @@ let initialState = {
   currency: "USD",
   roomId: null,
   hotelId:null,
+  token: false
 };
 
 function rootReducer(state = initialState, action) {
@@ -311,6 +313,12 @@ function rootReducer(state = initialState, action) {
           ...state,
           roomId:action.payload
         }
+
+        case SET_TOKEN:
+          return{
+            ...state,
+            token: action.payload
+          }
 
     default:
       return state;

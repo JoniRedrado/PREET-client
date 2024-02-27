@@ -16,7 +16,6 @@ import swal from "sweetalert";
 import "./detail.styles.css";
 
 const Detail = () => {
-  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const { darkMode } = useDarkMode();
   const { id } = useParams();
@@ -44,7 +43,8 @@ const Detail = () => {
   const modalRoomDetail = useSelector((state) => state.showModal.roomDetail);
   const modalPostReview = useSelector((state) => state.showModal.postReview);
   const filters = useSelector((state) => state.submitFilters);
-  const userReviews = useSelector((state) => state.userReviews) 
+  const userReviews = useSelector((state) => state.userReviews);
+  const token = useSelector((state) => state.token);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -157,7 +157,7 @@ const Detail = () => {
   };
 
   useEffect(() => {
-    dispatch(getUserReviews(token))
+    dispatch(getUserReviews())
     getUserReservations();
   
     return (() =>

@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 function Home() {
   const dispatch = useDispatch();
-  const token = localStorage.getItem("token");
+  const token = useSelector(state => state.token);
   const filteredHotels = useSelector((state) => state.filteredHotels);
   const currentPage = useSelector((state) => state.currentPage); 
   const userChanged = useSelector((state) => state.userChanged);
@@ -21,17 +21,13 @@ function Home() {
 
   useEffect(() => {
     axios
-    .get(`${import.meta.env.VITE_BACK_URL}/users/profile`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    .get(`${import.meta.env.VITE_BACK_URL}/users/profile`)
     .then((response) => {
       setUserName(response.data.name.charAt(0).toUpperCase() + response.data.name.slice(1))
     })
 
     .catch((error) => {
-      console.error(error);
+      console.log(error.message);
     });
 
     if (!filteredHotels.length) {
